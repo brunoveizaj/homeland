@@ -17,8 +17,6 @@ import com.homeland.requests.api.PersonRequest;
 import com.homeland.services.PersonService;
 
 
-
-//ladksjsfkhgf
 @RestController
 public class PersonApi {
 
