@@ -34,11 +34,18 @@ public class UserService {
 		return new Assembler().userListToDto(users);
 	}
 	
-	public UserDTO findUserByUsername(UserRequest req)
+	public UserDTO findUserById(Integer userId)
 	{
-		if(req == null || !StringUtil.isValid(req.getUsername())) return null;
+		if(userId == null) return null;
 		
-		req = new UserRequest(req.getUsername());
+		return new Assembler().toDto(userDAO.findById(userId));
+	}
+	
+	public UserDTO findUserByUsername(String username)
+	{
+		if(!StringUtil.isValid(username)) return null;
+		
+		UserRequest req = new UserRequest(username);
 		
 		List<UserDTO> users = searchUser(req);
 		
@@ -70,7 +77,7 @@ public class UserService {
 			throw new NoContentException("Plotesoni 'Rolin'");
 		}
 		
-		if(findUserByUsername(new UserRequest(dto.getUsername())) != null)
+		if(findUserByUsername(dto.getUsername()) != null)
 		{
 			throw new EntityExistsException("Perdoruesi ekziston");
 		}
@@ -113,7 +120,7 @@ public class UserService {
 		
 		User usr = usrList.get(0);
 		
-		if(usr != null && usr.getId() != dto.getId())
+		if(usr.getId() != dto.getId())
 		{
 			throw new EntityExistsException("Perdoruesi '"+dto.getUsername()+"' eshte i zene");
 		}
@@ -121,7 +128,7 @@ public class UserService {
 		User u = new DomainAssembler().toDomain(usr, dto);
 		u.setModifyTime(new Date());
 		u.setModifyUserId(userId);
-		
+				
 		return new Assembler().toDto(userDAO.update(u));
 		
 	}

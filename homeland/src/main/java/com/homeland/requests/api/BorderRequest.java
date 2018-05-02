@@ -5,6 +5,7 @@ public class BorderRequest {
 
 	
 	
+	
 	String event;
 	String nid;
 	String name;
@@ -102,6 +103,18 @@ public class BorderRequest {
 	}
 	
 
+	@Override
+	public String toString() {
+		return "BorderRequest [" + (event != null ? "event=" + event + ", " : "")
+				+ (nid != null ? "nid=" + nid + ", " : "") + (name != null ? "name=" + name + ", " : "")
+				+ (surname != null ? "surname=" + surname + ", " : "")
+				+ (fatherName != null ? "fatherName=" + fatherName + ", " : "")
+				+ (docNo != null ? "docNo=" + docNo + ", " : "") + (plate != null ? "plate=" + plate + ", " : "")
+				+ (vin != null ? "vin=" + vin + ", " : "") + (bcgId != null ? "bcgId=" + bcgId + ", " : "")
+				+ (from != null ? "from=" + from + ", " : "") + (to != null ? "to=" + to + ", " : "")
+				+ (firstResult != null ? "firstResult=" + firstResult + ", " : "")
+				+ (maxResult != null ? "maxResult=" + maxResult : "") + "]";
+	}
 	
 	
 	

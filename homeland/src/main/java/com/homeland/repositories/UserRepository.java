@@ -23,6 +23,12 @@ public class UserRepository {
 	@PersistenceContext
 	EntityManager em;
 	
+	
+	public User findById(Integer userId)
+	{
+		return em.find(User.class, userId);
+	}
+	
 	@SuppressWarnings("rawtypes")
 	public List<User> searchUser(UserSQL criterias)
 	{

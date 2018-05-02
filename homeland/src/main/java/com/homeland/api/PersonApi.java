@@ -3,11 +3,9 @@ package com.homeland.api;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +16,7 @@ import com.homeland.exceptions.NoContentException;
 import com.homeland.models.PersonRaportDTO;
 import com.homeland.requests.api.PersonRequest;
 import com.homeland.services.PersonService;
+import com.homeland.services.TokenService;
 
 
 @RestController
@@ -26,16 +25,15 @@ public class PersonApi {
 
 	@Autowired
 	PersonService personService;
+	@Autowired 
+	TokenService tokenService;
 	
 	@RequestMapping(value="/searchPerson", method=RequestMethod.GET, produces={"application/json"})
-	public ResponseEntity<?> searchPerson(@RequestHeader HttpHeaders httpHeaders,
-			//(value="Authorization",required=false) String token, 
-			PersonRequest request)
+	public ResponseEntity<?> searchPerson(@RequestHeader(value="Authorization",required=false) String token, PersonRequest request)
 	{
+		Integer userId = tokenService.getUserIdFromToken(token);
+		System.err.println("AUTH USER_ID: "+userId);
 		
-		//check Token validity 
-		
-		System.err.println("Headers: "+httpHeaders);
 		System.err.println(request);
 		
 		List<PersonDTO> list = personService.searchPerson(request);
@@ -51,10 +49,12 @@ public class PersonApi {
 	}
 	
 	@RequestMapping(value="/personRaport/{nid}", method=RequestMethod.GET, produces={"application/json"})
-	public ResponseEntity<?> personRaport(@RequestHeader HttpHeaders httpHeaders, @PathVariable String nid)
+	public ResponseEntity<?> personRaport(@RequestHeader(value="Authorization",required=false) String token, @PathVariable String nid)//@RequestHeader HttpHeaders httpHeaders
 	{
-		//check Token validity 
-		System.err.println("Headers: "+httpHeaders);
+		
+		Integer userId = tokenService.getUserIdFromToken(token);
+		System.err.println("AUTH USER_ID: "+userId);
+		
 		System.err.println("REQUEST nid="+nid);
 		
 		PersonRaportDTO raport = personService.getPersonRaport(nid);
@@ -65,12 +65,7 @@ public class PersonApi {
 	
 	
 	
-	@RequestMapping(value="/test", method=RequestMethod.POST)
-	public ResponseEntity<?>sendData(@RequestHeader HttpHeaders httpHeaders, @RequestBody String payload)
-	{
-		
-		return new ResponseEntity<>(HttpStatus.OK);
-	}
+	
 	
 	
 }

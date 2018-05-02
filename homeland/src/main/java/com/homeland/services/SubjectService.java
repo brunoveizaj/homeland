@@ -28,11 +28,11 @@ public class SubjectService {
 		return new Assembler().subjectListToDto(persons);
 	}
 	
-	public SubjectDTO searchSubjectByNipt(SubjectRequest req)
+	public SubjectDTO getSubjectByNipt(String nipt)
 	{
-		if(req == null || !StringUtil.isValid(req.getNipt())) return null;
+		if(!StringUtil.isValid(nipt)) return null;
 		
-		SubjectRequest request = new SubjectRequest(req.getNipt());
+		SubjectRequest request = new SubjectRequest(nipt);
 		SubjectSQL criterias = new RequestAssembler().apiToSql(request);
 		
 		List<Subject> persons = subjectDAO.searchSubject(criterias);
