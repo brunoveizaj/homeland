@@ -88,7 +88,7 @@ public class Card implements Serializable {
     @Column(name = "mother_name_sx")
     private String motherNameSx;
     @Column(name = "rid")
-    private long rid;
+    private Long rid;
 
     public Card() {
     }
@@ -329,11 +329,11 @@ public class Card implements Serializable {
 		this.motherNameSx = motherNameSx;
 	}
 
-	public long getRid() {
+	public Long getRid() {
 		return rid;
 	}
 
-	public void setRid(long rid) {
+	public void setRid(Long rid) {
 		this.rid = rid;
 	}
 

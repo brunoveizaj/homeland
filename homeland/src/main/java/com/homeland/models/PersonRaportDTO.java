@@ -1,5 +1,6 @@
 package com.homeland.models;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.homeland.dto.BorderDTO;
@@ -10,8 +11,9 @@ import com.homeland.dto.PersonDTO;
 import com.homeland.dto.PhoneDTO;
 import com.homeland.dto.TatimeDTO;
 
-public class PersonRaportDTO {
+public class PersonRaportDTO implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
 	
 	PersonDTO person;
 	List<PersonDTO> family;

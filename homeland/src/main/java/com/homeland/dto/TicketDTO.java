@@ -18,7 +18,7 @@ public class TicketDTO {
 	    private String violator;
 	    private String violatorNid;
 	    private String status;
-	    private long rid;
+	    private Long rid;
 	    
 	    
 	    
@@ -100,10 +100,10 @@ public class TicketDTO {
 		public void setStatus(String status) {
 			this.status = status;
 		}
-		public long getRid() {
+		public Long getRid() {
 			return rid;
 		}
-		public void setRid(long rid) {
+		public void setRid(Long rid) {
 			this.rid = rid;
 		}
 	

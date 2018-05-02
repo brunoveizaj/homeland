@@ -22,7 +22,7 @@ public class PassportDTO {
     private String gender;
     private String pob;
     private String address;
-    private long rid;
+    private Long rid;
     
     
     
@@ -129,10 +129,10 @@ public class PassportDTO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public long getRid() {
+	public Long getRid() {
 		return rid;
 	}
-	public void setRid(long rid) {
+	public void setRid(Long rid) {
 		this.rid = rid;
 	}
 	

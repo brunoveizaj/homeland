@@ -28,7 +28,7 @@ public class CardDTO {
     private String appartment;
     private String phoneOne;
     private String phoneTwo;
-    private long rid;
+    private Long rid;
     
     
     
@@ -177,10 +177,10 @@ public class CardDTO {
 	public void setPhoneTwo(String phoneTwo) {
 		this.phoneTwo = phoneTwo;
 	}
-	public long getRid() {
+	public Long getRid() {
 		return rid;
 	}
-	public void setRid(long rid) {
+	public void setRid(Long rid) {
 		this.rid = rid;
 	}	
 	

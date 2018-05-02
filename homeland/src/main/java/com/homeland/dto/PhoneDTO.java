@@ -16,7 +16,7 @@ public class PhoneDTO {
     private String phone;
     private String dataSource;
     private String regDate;
-    private long rid;
+    private Long rid;
     
     
 	public int getId() {
@@ -79,10 +79,10 @@ public class PhoneDTO {
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
-	public long getRid() {
+	public Long getRid() {
 		return rid;
 	}
-	public void setRid(long rid) {
+	public void setRid(Long rid) {
 		this.rid = rid;
 	}
 	

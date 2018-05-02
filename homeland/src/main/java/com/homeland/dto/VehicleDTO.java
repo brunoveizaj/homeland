@@ -19,7 +19,7 @@ public class VehicleDTO {
     private String usedFor;
     private String ownerNid;
     private String year;
-    private long rid;
+    private Long rid;
     
     
     
@@ -113,10 +113,10 @@ public class VehicleDTO {
 	public void setYear(String year) {
 		this.year = year;
 	}
-	public long getRid() {
+	public Long getRid() {
 		return rid;
 	}
-	public void setRid(long rid) {
+	public void setRid(Long rid) {
 		this.rid = rid;
 	}
 	

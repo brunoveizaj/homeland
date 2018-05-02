@@ -179,12 +179,24 @@ public class PersonRequest {
 
 	@Override
 	public String toString() {
-		return "PersonRequest [name=" + name + ", surname=" + surname + ", fatherName=" + fatherName + ", motherName="
-				+ motherName + ", nid=" + nid + ", maidenName=" + maidenName + ", dob=" + dob + ", gender=" + gender
-				+ ", pob=" + pob + ", region=" + region + ", municipality=" + municipality + ", unit=" + unit
-				+ ", fromAge=" + fromAge + ", toAge=" + toAge + ", familyId=" + familyId + ", firstResult="
-				+ firstResult + ", maxResult=" + maxResult + "]";
+		return "PersonRequest [" + (name != null ? "name=" + name + ", " : "")
+				+ (surname != null ? "surname=" + surname + ", " : "")
+				+ (fatherName != null ? "fatherName=" + fatherName + ", " : "")
+				+ (motherName != null ? "motherName=" + motherName + ", " : "")
+				+ (nid != null ? "nid=" + nid + ", " : "")
+				+ (maidenName != null ? "maidenName=" + maidenName + ", " : "")
+				+ (dob != null ? "dob=" + dob + ", " : "") + (gender != null ? "gender=" + gender + ", " : "")
+				+ (pob != null ? "pob=" + pob + ", " : "") + (region != null ? "region=" + region + ", " : "")
+				+ (municipality != null ? "municipality=" + municipality + ", " : "")
+				+ (unit != null ? "unit=" + unit + ", " : "") + (fromAge != null ? "fromAge=" + fromAge + ", " : "")
+				+ (toAge != null ? "toAge=" + toAge + ", " : "")
+				+ (familyId != null ? "familyId=" + familyId + ", " : "")
+				+ (firstResult != null ? "firstResult=" + firstResult + ", " : "")
+				+ (maxResult != null ? "maxResult=" + maxResult : "") + "]";
 	}
+
+	
+	
 
 
 

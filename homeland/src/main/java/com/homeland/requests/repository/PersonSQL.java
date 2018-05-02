@@ -148,6 +148,24 @@ public class PersonSQL {
 	public void setMaxResult(Integer maxResult) {
 		this.maxResult = maxResult;
 	}
+
+	@Override
+	public String toString() {
+		return "PersonSQL [" + (name != null ? "name=" + name + ", " : "")
+				+ (surname != null ? "surname=" + surname + ", " : "")
+				+ (fatherName != null ? "fatherName=" + fatherName + ", " : "")
+				+ (motherName != null ? "motherName=" + motherName + ", " : "")
+				+ (nid != null ? "nid=" + nid + ", " : "")
+				+ (maidenName != null ? "maidenName=" + maidenName + ", " : "")
+				+ (dob != null ? "dob=" + dob + ", " : "") + (gender != null ? "gender=" + gender + ", " : "")
+				+ (pob != null ? "pob=" + pob + ", " : "") + (region != null ? "region=" + region + ", " : "")
+				+ (municipality != null ? "municipality=" + municipality + ", " : "")
+				+ (unit != null ? "unit=" + unit + ", " : "") + (fromDob != null ? "fromDob=" + fromDob + ", " : "")
+				+ (toDob != null ? "toDob=" + toDob + ", " : "")
+				+ (familyId != null ? "familyId=" + familyId + ", " : "")
+				+ (firstResult != null ? "firstResult=" + firstResult + ", " : "")
+				+ (maxResult != null ? "maxResult=" + maxResult : "") + "]";
+	}
 	
 	
 	

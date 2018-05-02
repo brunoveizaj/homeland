@@ -9,7 +9,7 @@ public class PhotoDTO {
     private String idDoc;
     private byte[] photo;
 	String docType;
-	private long rid;
+	private Long rid;
 	
 	
 	public int getId() {
@@ -36,10 +36,10 @@ public class PhotoDTO {
 	public void setDocType(String docType) {
 		this.docType = docType;
 	}
-	public long getRid() {
+	public Long getRid() {
 		return rid;
 	}
-	public void setRid(long rid) {
+	public void setRid(Long rid) {
 		this.rid = rid;
 	}
 	

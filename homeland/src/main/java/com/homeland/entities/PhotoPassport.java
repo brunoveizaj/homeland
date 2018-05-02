@@ -35,7 +35,7 @@ public class PhotoPassport implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date inserted;
     @Column(name = "rid")
-    private long rid;
+    private Long rid;
     
     
 
@@ -74,11 +74,11 @@ public class PhotoPassport implements Serializable {
         this.inserted = inserted;
     }
 
-	public long getRid() {
+	public Long getRid() {
 		return rid;
 	}
 
-	public void setRid(long rid) {
+	public void setRid(Long rid) {
 		this.rid = rid;
 	}
 

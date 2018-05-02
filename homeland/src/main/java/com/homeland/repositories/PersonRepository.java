@@ -124,8 +124,7 @@ public class PersonRepository {
 		
 		
 		sql += order;
-		
-		
+				
 		Query q = em.createQuery(sql);
 		Iterator it = params.entrySet().iterator();
 		while(it.hasNext())

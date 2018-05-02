@@ -52,7 +52,7 @@ public class Phone implements Serializable {
     @Column(name = "reg_date")
     private String regDate;
     @Column(name = "rid")
-    private long rid;
+    private Long rid;
 
     public Phone() {
     }
@@ -149,11 +149,11 @@ public class Phone implements Serializable {
         this.regDate = regDate;
     }
 
-	public long getRid() {
+	public Long getRid() {
 		return rid;
 	}
 
-	public void setRid(long rid) {
+	public void setRid(Long rid) {
 		this.rid = rid;
 	}
 

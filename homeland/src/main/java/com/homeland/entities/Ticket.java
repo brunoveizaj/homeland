@@ -59,7 +59,7 @@ public class Ticket implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date inserted;
     @Column(name = "rid")
-    private long rid;
+    private Long rid;
 
     public Ticket() {
     }
@@ -180,11 +180,11 @@ public class Ticket implements Serializable {
         this.inserted = inserted;
     }
 
-	public long getRid() {
+	public Long getRid() {
 		return rid;
 	}
 
-	public void setRid(long rid) {
+	public void setRid(Long rid) {
 		this.rid = rid;
 	}
 

@@ -35,7 +35,7 @@ public class PhotoCard implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date insterted;
     @Column(name = "rid")
-    private long rid;
+    private Long rid;
 
     public PhotoCard() {
     }
@@ -78,14 +78,14 @@ public class PhotoCard implements Serializable {
 
 
 
-	public long getRid() {
+	public Long getRid() {
 		return rid;
 	}
 
 
 
 
-	public void setRid(long rid) {
+	public void setRid(Long rid) {
 		this.rid = rid;
 	}
 

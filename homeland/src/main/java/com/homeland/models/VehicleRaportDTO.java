@@ -1,13 +1,15 @@
 package com.homeland.models;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.homeland.dto.BorderDTO;
 import com.homeland.dto.TicketDTO;
 import com.homeland.dto.VehicleDTO;
 
-public class VehicleRaportDTO {
+public class VehicleRaportDTO implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
 	
 	VehicleDTO vehicle;
 	List<TicketDTO> tickets;
