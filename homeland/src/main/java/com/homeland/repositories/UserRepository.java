@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -27,6 +28,17 @@ public class UserRepository {
 	public User findById(Integer userId)
 	{
 		return em.find(User.class, userId);
+	}
+	
+	public User findByUsername(String uname)
+	{
+		try {
+		return (User)em.createQuery("FROM User u where upper(u.username)=:uname")
+				.setParameter("uname", uname.trim().toUpperCase())
+				.getSingleResult();
+		}catch (NoResultException e) {
+			return null;
+		}
 	}
 	
 	@SuppressWarnings("rawtypes")

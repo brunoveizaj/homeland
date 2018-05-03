@@ -44,11 +44,11 @@ public class Tatime implements Serializable {
     @Column(name = "profession")
     private String profession;
     @Column(name = "salary")
-    private double salary;
+    private Double salary;
     @Column(name = "year")
-    private int year;
+    private Integer year;
     @Column(name = "month")
-    private int month;
+    private Integer month;
 
     public Tatime() {
     }
@@ -129,27 +129,27 @@ public class Tatime implements Serializable {
         this.profession = profession;
     }
 
-    public double getSalary() {
+    public Double getSalary() {
         return salary;
     }
 
-    public void setSalary(double salary) {
+    public void setSalary(Double salary) {
         this.salary = salary;
     }
 
-    public int getYear() {
+    public Integer getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(Integer year) {
         this.year = year;
     }
 
-    public int getMonth() {
+    public Integer getMonth() {
         return month;
     }
 
-    public void setMonth(int month) {
+    public void setMonth(Integer month) {
         this.month = month;
     }
 

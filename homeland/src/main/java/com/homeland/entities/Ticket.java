@@ -40,7 +40,7 @@ public class Ticket implements Serializable {
     @Column(name = "officer")
     private String officer;
     @Column(name = "amount")
-    private double amount;
+    private Double amount;
     @Column(name = "plate")
     private String plate;
     @Column(name = "producer")
@@ -108,11 +108,11 @@ public class Ticket implements Serializable {
         this.officer = officer;
     }
 
-    public double getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 

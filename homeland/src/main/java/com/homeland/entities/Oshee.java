@@ -23,7 +23,7 @@ public class Oshee implements Serializable {
     @Column(name = "contract_no")
     private String contractNo;
     @Column(name = "family_id")
-    private long familyId;
+    private Long familyId;
     @Column(name = "family_relation")
     private String familyRelation;
     @Column(name = "nid")
@@ -69,10 +69,10 @@ public class Oshee implements Serializable {
 	public void setContractNo(String contractNo) {
 		this.contractNo = contractNo;
 	}
-	public long getFamilyId() {
+	public Long getFamilyId() {
 		return familyId;
 	}
-	public void setFamilyId(long familyId) {
+	public void setFamilyId(Long familyId) {
 		this.familyId = familyId;
 	}
 	public String getFamilyRelation() {
