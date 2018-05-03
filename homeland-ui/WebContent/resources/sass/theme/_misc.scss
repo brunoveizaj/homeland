@@ -1,0 +1,81 @@
+body {
+    .ui-progressbar {
+        border: 0 none;
+        background-color: $dividerColor;
+        
+        .ui-progressbar-value {
+            border: 0 none;
+            background: lighten($primaryColor,10%);   
+            margin: 0;
+        }
+        
+        .ui-progressbar-label {
+            margin-top: 0;
+            color: $textColor;
+        }
+    }
+    
+    .ui-galleria {
+        .ui-galleria-nav-prev {
+            @include icon_override("\f053");   
+            font-size: 18px;
+            color: $textSecondaryColor;
+            @include transition(color .3s);
+            
+            &:hover {
+                color: darken($textColor, 15%);
+            }
+        }
+        
+        .ui-galleria-nav-next {
+            @include icon_override("\f054"); 
+            font-size: 18px;   
+            color: $textSecondaryColor;
+            @include transition(color .3s);
+            
+            &:hover {
+                color: $textColor;
+            }
+        }
+    }
+    
+    .ui-log {
+        @include overlay-shadow();
+        
+        .ui-log-header {
+            padding: $headerPadding;
+            border: 0 none;
+            border-bottom: 1px solid $headerBorderColor;
+            
+            .ui-log-button {
+                display: inline-block;
+                position: static;
+                margin-right: 4px;
+                color: $headerIconColor;
+                padding: 2px;
+                
+                &.ui-state-hover {
+                    color: $headerIconHoverColor;
+                }
+                
+                &.ui-state-active {
+                    color: $primaryTextColor;
+                }
+                
+                &.ui-log-clear,
+                &.ui-log-all,
+                &.ui-log-info,
+                &.ui-log-warn,
+                &.ui-log-debug,
+                &.ui-log-error {
+                    top: auto;
+                    left: auto;
+                }
+            }
+        }
+        
+        .ui-log-content {
+            padding: $contentPadding;
+        }
+    }
+}

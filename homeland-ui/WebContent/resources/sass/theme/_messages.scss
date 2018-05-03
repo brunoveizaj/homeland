@@ -1,0 +1,189 @@
+body {
+    .ui-messages {
+        .ui-messages-info {
+            background-color: $infoMessageBgColor;
+            border-color: $infoMessageBgColor;
+            color: $infoMessageTextColor;
+            
+            .ui-messages-info-icon {
+                @include icon_override("\f05a");
+                font-size: 24px;
+                margin-top: -4px;
+                color: darken($infoMessageBgColor, 35%);
+            }
+            
+            .ui-messages-close {
+                color: $infoMessageTextColor;
+            }
+        }
+        
+        .ui-messages-warn {
+            background-color: $warnMessageBgColor;
+            border-color: $warnMessageBgColor;
+            color: $warnMessageTextColor;
+            
+            .ui-messages-warn-icon {
+                @include icon_override("\f071");
+                font-size: 24px;
+                margin-top: -4px;
+                color: darken($warnMessageBgColor, 35%);
+            }
+            
+            .ui-messages-close {
+                color: $warnMessageTextColor;
+            }
+        }
+        
+        .ui-messages-error {
+            background-color: $errorMessageBgColor;
+            border-color: $errorMessageBgColor;
+            color: $errorMessageTextColor;
+            
+            .ui-messages-error-icon {
+                @include icon_override("\f06a");
+                font-size: 24px;
+                margin-top: -4px;
+                color: darken($errorMessageBgColor, 15%);
+            }
+            
+            .ui-messages-close {
+                color: $errorMessageTextColor;
+            }
+        }
+        
+        .ui-messages-fatal {
+            background-color: $fatalMessageBgColor;
+            border-color: $fatalMessageBgColor;
+            color: $fatalMessageTextColor;
+            
+            .ui-messages-fatal-icon {
+                @include icon_override("\f06a");
+                font-size: 24px;
+                margin-top: -4px;
+                color: darken($fatalMessageBgColor, 35%);
+            }
+            
+            .ui-messages-close {
+                color: $fatalMessageTextColor;
+            }
+        }
+        
+        .ui-messages-close {
+            font-size: 16px;
+            @include transition(color .3s);
+        }
+    }
+    
+    .ui-message {
+
+        &.ui-message-info {
+            background-color: $infoMessageBgColor;
+            border-color: $infoMessageBgColor;
+            color: $infoMessageTextColor;
+            
+            .ui-message-info-icon {
+                @include icon_override("\f05a");
+                font-size: 16px;
+                margin-top: -1px;
+                color: darken($infoMessageBgColor, 35%);
+            }
+        }
+        
+        &.ui-message-warn {
+            background-color: $warnMessageBgColor;
+            border-color: $warnMessageBgColor;
+            color: $warnMessageTextColor;
+            
+            .ui-message-warn-icon {
+                @include icon_override("\f071");
+                font-size: 16px;
+                margin-top: -1px;
+                color: darken($warnMessageBgColor, 35%);
+            }
+        }
+        
+        &.ui-message-error {
+            background-color: $errorMessageBgColor;
+            border-color: $errorMessageBgColor;
+            color: $errorMessageTextColor;
+            
+            .ui-message-error-icon {
+                @include icon_override("\f06a");
+                font-size: 16px;
+                margin-top: -1px;
+                color: darken($errorMessageBgColor, 15%);
+            }
+        }
+        
+        &.ui-message-fatal {
+            background-color: $fatalMessageBgColor;
+            border-color: $fatalMessageBgColor;
+            color: $fatalMessageTextColor;
+            
+            .ui-message-fatal-icon {
+                @include icon_override("\f06a");
+                font-size: 16px;
+                margin-top: -1px;
+                color: darken($fatalMessageBgColor, 35%);
+            }
+        }
+    }
+    
+    .ui-growl {
+        top: 85px;
+        
+        .ui-growl-item-container {
+            @include opacity(.95);
+            @include overlay-shadow();
+            
+            &.ui-growl-info {
+                background-color: $infoMessageBgColor;
+                border-color: $infoMessageBgColor;
+                color: $infoMessageTextColor;
+                
+                .ui-growl-image {
+                    @include icon_override("\f05a");
+                    font-size: 36px;
+                    color: darken($infoMessageBgColor, 35%);
+                }
+            }  
+            
+            &.ui-growl-warn {
+                background-color: $warnMessageBgColor;
+                border-color: $warnMessageBgColor;
+                color: $warnMessageTextColor;
+                
+                .ui-growl-image {
+                    @include icon_override("\f071");
+                    font-size: 36px;
+                    color: darken($warnMessageBgColor, 35%);
+                }
+            }
+            
+            &.ui-growl-error {
+                background-color: $errorMessageBgColor;
+                border-color: $errorMessageBgColor;
+                color: $errorMessageTextColor;
+                
+                .ui-growl-image {
+                    @include icon_override("\f06a");
+                    font-size: 36px;
+                    color: darken($errorMessageBgColor, 15%);
+                }
+            }
+            
+            &.ui-growl-fatal {
+                background-color: $fatalMessageBgColor;
+                border-color: $fatalMessageBgColor;
+                color: $fatalMessageTextColor;
+                
+                .ui-growl-image {
+                    @include icon_override("\f06a");
+                    font-size: 36px;
+                    color: darken($fatalMessageBgColor, 35%);
+                }
+            }  
+        }
+    }
+    
+}

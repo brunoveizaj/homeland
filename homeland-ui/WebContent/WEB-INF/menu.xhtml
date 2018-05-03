@@ -1,0 +1,76 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pv="http://primefaces.org/paradise">
+    
+    <div class="layout-menu-wrapper #{guestPreferences.darkMenu ? 'layout-menu-dark' : null}">
+        <div class="nano">
+            <div class="nano-content sidebar-scroll-content">
+                <div class="layout-menu-container">
+                    <h:form id="menuform">
+                        <div class="mobile-search">
+                            <i class="fa fa-fw fa-search topbar-search-icon"></i>
+                            <input type="text" class="topbar-search" placeholder="Type your search here"/>
+                        </div>
+                        
+                        <pv:menu>
+                            <p:menuitem id="pm_dashboard" value="Dashboard" icon="fa fa-home"  />
+                            <p:submenu id="pm_menu" label="Menu Modes" icon="fa fa-cog">
+                                <p:menuitem id="pm_static_menu" value="Static Menu" icon="fa fa-bars" actionListener="#{guestPreferences.setOverlayMenu(false)}" ajax="false"/>
+                                <p:menuitem id="pm_overlay_menu" value="Overlay Menu" icon="fa fa-bars" actionListener="#{guestPreferences.setOverlayMenu(true)}" ajax="false"/>
+                                <p:menuitem id="pm_slim_menu" value="Slim Menu" icon="fa fa-bars" actionListener="#{guestPreferences.setSlimMenu(true)}" ajax="false"/>
+                                <p:menuitem id="pm_light_menu" value="Light Menu" icon="fa fa-sun-o" actionListener="#{guestPreferences.setDarkMenu(false)}" ajax="false"/>
+                                <p:menuitem id="pm_dark_menu" value="Dark Menu" icon="fa fa-moon-o" actionListener="#{guestPreferences.setDarkMenu(true)}" ajax="false"/>
+                            </p:submenu>
+                            <p:submenu id="pm_layout_colors" label="Layout Colors" icon="fa fa-dashboard">
+                                <p:submenu id="pm_layout_colors_flat" label="Flat" icon="fa fa-circle">
+                                    <p:menuitem id="pm_layout_default" value="Default" icon="fa fa-paint-brush" actionListener="#{guestPreferences.setLayout('default')}" ajax="false"/>
+                                    <p:menuitem id="pm_layout_blue" value="Blue" icon="fa fa-paint-brush" actionListener="#{guestPreferences.setLayout('blue')}" ajax="false"/>
+                                    <p:menuitem id="pm_layout_green" value="Green" icon="fa fa-paint-brush" actionListener="#{guestPreferences.setLayout('green')}" ajax="false"/>
+                                    <p:menuitem id="pm_layout_turquoise" value="Turquoise" icon="fa fa-paint-brush" actionListener="#{guestPreferences.setLayout('turquoise')}" ajax="false"/>
+                                    <p:menuitem id="pm_layout_purple" value="Purple" icon="fa fa-paint-brush" actionListener="#{guestPreferences.setLayout('purple')}" ajax="false"/>
+                                    <p:menuitem id="pm_layout_orange" value="Orange" icon="fa fa-paint-brush" actionListener="#{guestPreferences.setLayout('orange')}" ajax="false"/>
+                                    <p:menuitem id="pm_layout_deeppurple" value="Deep Purple" icon="fa fa-paint-brush" actionListener="#{guestPreferences.setLayout('deeppurple')}" ajax="false"/>
+                                    <p:menuitem id="pm_layout_lime" value="Lime" icon="fa fa-paint-brush" actionListener="#{guestPreferences.setLayout('lime')}" ajax="false"/>
+                                </p:submenu>
+                                <p:submenu id="pm_layout_colors_special" label="Special" icon="fa fa-fire">
+                                    <p:menuitem id="pm_layout_horizon" value="Horizon" icon="fa fa-paint-brush" actionListener="#{guestPreferences.setLayout('horizon')}" ajax="false"/>
+                                    <p:menuitem id="pm_layout_bliss" value="Bliss" icon="fa fa-paint-brush" actionListener="#{guestPreferences.setLayout('bliss')}" ajax="false"/>
+                                    <p:menuitem id="pm_layout_crimson" value="Crimson" icon="fa fa-paint-brush" actionListener="#{guestPreferences.setLayout('crimson')}" ajax="false"/>
+                                    <p:menuitem id="pm_layout_disco" value="Disco" icon="fa fa-paint-brush" actionListener="#{guestPreferences.setLayout('disco')}" ajax="false"/>
+                                    <p:menuitem id="pm_layout_sunset" value="Sunset" icon="fa fa-paint-brush" actionListener="#{guestPreferences.setLayout('sunset')}" ajax="false"/>
+                                    <p:menuitem id="pm_layout_deepsea" value="Deep Sea" icon="fa fa-paint-brush" actionListener="#{guestPreferences.setLayout('deepsea')}" ajax="false"/>
+                                    <p:menuitem id="pm_layout_opa" value="Opa" icon="fa fa-paint-brush" actionListener="#{guestPreferences.setLayout('opa')}" ajax="false"/>
+                                    <p:menuitem id="pm_layout_cheer" value="Cheer" icon="fa fa-paint-brush" actionListener="#{guestPreferences.setLayout('cheer')}" ajax="false"/>
+                                    <p:menuitem id="pm_layout_smoke" value="Smoke" icon="fa fa-paint-brush" actionListener="#{guestPreferences.setLayout('smoke')}" ajax="false"/>
+                                </p:submenu>
+                            </p:submenu>
+                            <p:submenu id="pm_theme_colors" label="Theme Colors" icon="fa fa-paint-brush">
+                                <p:menuitem id="pm_theme_blue" value="Blue Theme" icon="fa fa-paint-brush" actionListener="#{guestPreferences.setTheme('blue')}" ajax="false"/>
+                                <p:menuitem id="pm_theme_green" value="Green Theme" icon="fa fa-paint-brush" actionListener="#{guestPreferences.setTheme('green')}" ajax="false"/>
+                                <p:menuitem id="pm_theme_turquoise" value="Turquoise Theme" icon="fa fa-paint-brush" actionListener="#{guestPreferences.setTheme('turquoise')}" ajax="false"/>
+                                <p:menuitem id="pm_theme_purple" value="Purple Theme" icon="fa fa-paint-brush" actionListener="#{guestPreferences.setTheme('purple')}" ajax="false"/>
+                                <p:menuitem id="pm_theme_orange" value="Orange Theme" icon="fa fa-paint-brush" actionListener="#{guestPreferences.setTheme('orange')}" ajax="false"/>
+                                <p:menuitem id="pm_theme_deeppurple" value="Deep Purple Theme" icon="fa fa-paint-brush" actionListener="#{guestPreferences.setTheme('deeppurple')}" ajax="false"/>
+                                <p:menuitem id="pm_theme_lime" value="Lime Theme" icon="fa fa-paint-brush" actionListener="#{guestPreferences.setTheme('lime')}" ajax="false"/>
+                            </p:submenu>
+                            
+                            <p:submenu id="pm_default" label="Template Pages" icon="fa fa-life-saver">
+                                <p:menuitem id="pm_landing" value="Landing Page" icon="fa fa-globe" outcome="/landing" target="_blank" />
+                                <p:menuitem id="pm_login" value="Login Page" icon="fa fa-sign-in" outcome="/login" target="_blank" />
+                                <p:menuitem id="pm_error" value="Error Page" icon="fa fa-exclamation-circle" outcome="/error" target="_blank"/>
+                                <p:menuitem id="pm_404" value="404 Page" icon="fa fa-times" outcome="/404" target="_blank" />
+                                <p:menuitem id="pm_access" value="Access Denied Page" icon="fa fa-exclamation-triangle" outcome="/access" target="_blank"/>
+                            </p:submenu>
+                            
+                        </pv:menu>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</ui:composition>

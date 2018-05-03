@@ -1,0 +1,106 @@
+.login-body {
+    background: url("\#{resource['paradise-layout:images/login/bg-login.png']}");
+    background-size: cover;
+    height: auto;
+    
+    .login-panel {
+        width: 600px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        margin-top: 125px;
+        
+        .ui-g-12 {
+            padding: 15px 100px;
+            
+            &.logo-container {
+                padding: 50px 50px 25px 50px;
+                border-bottom: 8px solid #dee4e9;
+                margin-bottom: 20px;
+                
+                .logo {
+                    height: 50px;
+                }
+                
+                .login-icon {
+                    float: right;
+                    height: 50px;
+                }
+                
+                h2 {
+                    color: #7d8286;
+                    font-size: 16px;
+                    font-weight: 300;
+                    margin-top: 12px;
+                    margin-bottom: 0;
+                }
+            }
+            
+            &.chkbox-container {
+                .ui-g-12 {
+                    padding: 0;
+                }
+            }
+        }
+        
+        .rememberme-container {
+            text-align: right;
+            
+            .ui-chkbox {
+                vertical-align: middle;
+            }
+            
+            label {
+                display: inline-block;
+                vertical-align: middle;
+                margin: 0 4px 0 0;
+            }
+        }
+        
+        .input-wrapper {
+            position: relative;
+            i {
+                position: absolute;
+                color: #bdc3c9;
+                top: 5px;
+                right: 8px;
+                font-size: 16px;
+            }
+            
+            input {
+                padding-right: 22px;
+            }
+        }
+        
+        a {
+            color: $textColor;
+            @include transition(color .3s);
+            
+            &:hover {
+                color: $blue;
+            }
+        }
+                
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        button {
+            display: block;
+            margin-bottom: 20px;
+        }
+    }
+}
+
+@media (max-width: 640px) {
+    .login-body {
+        .login-panel {
+            margin-top: 100px;
+            width: 100%;;
+            
+            .ui-g-12 {
+                padding: 15px 50px;
+            }
+        }
+    }
+}

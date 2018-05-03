@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title>PrimeFaces Paradise</title>
+    </h:head>
+
+    <h:body styleClass="landing-body">
+        <div class="landing-wrapper">
+            <div id="header">
+                <div class="header-top">
+                    <p:graphicImage name="images/landing/logo-landing.png" library="paradise-layout" styleClass="logo"/>
+
+                    <ul class="landing-menu">
+                        <li>
+                            <a href="#home">Home</a>
+                        </li>
+                        <li>
+                            <a href="#features">Features</a>
+                        </li>
+                        <li>
+                            <a href="#statistics">Events</a>
+                        </li>
+                        <li>
+                            <a href="#pricing">Pricing</a>
+                        </li>
+                        <li>
+                            <a href="#video">Video</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="header-content">
+                    <h1>PrimeFaces Presents Paradise</h1>
+                    <h2 style="line-height: 1.5">Minimal and elegant responsive application template with
+                    a premium look for PrimeFaces components.</h2>
+                    <div>
+                        <p:button outcome="login" value="Learn More"/>
+                    </div>
+                </div>
+            </div>
+                        
+            <div id="features">
+                <div>
+                    <h1>FEATURES</h1>
+                    <div class="ui-g features-content">
+                        <div class="ui-g-12 ui-md-6 feature-left">
+                            <p:graphicImage name="images/landing/icon-responsivelayout.png" library="paradise-layout" />
+                            <h3>Responsive Layout</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 feature-right">
+                            <p:graphicImage name="images/landing/icon-moderndesign.png" library="paradise-layout" />
+                            <h3>Modern Design</h3>
+                            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 feature-left">
+                            <p:graphicImage name="images/landing/icon-welldocumented.png" library="paradise-layout" />
+                            <h3>Well Documented</h3>
+                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 feature-right">
+                            <p:graphicImage name="images/landing/icon-cleancode.png" library="paradise-layout" />
+                            <h3>Clean Code</h3>
+                            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="events">
+                <div>
+                    <h1>UPCOMING EVENTS</h1>
+                    <div class="ui-g">
+                        <div class="ui-g-12">
+                            <div class="event-box clearfix">
+                                <div class="event-box-image">
+                                    <p:graphicImage name="images/landing/event-image-1.png" library="paradise-layout" />
+                                    <span class="event-month">MAR</span>
+                                    <span class="event-date">16</span>
+                                </div>
+                                <div class="event-box-content">
+                                    <span class="event-type">WEBINAR</span>
+                                    <h3>How to Take Great Pictures</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius sodales magna sit amet maximus.</p>
+                                </div>
+                            </div>
+                            <div class="event-box clearfix">
+                                <div class="event-box-image">
+                                    <p:graphicImage name="images/landing/event-image-2.png" library="paradise-layout" />
+                                    <span class="event-month">MAR</span>
+                                    <span class="event-date">23</span>
+                                </div>
+                                <div class="event-box-content">
+                                    <span class="event-type">WEBINAR</span>
+                                    <h3>Top 10 Cities to Visit</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius sodales magna sit amet maximus.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="pricing">
+                <div>
+                    <h1>PRICING</h1>
+                    <div class="ui-g">
+                        <div class="ui-g-12 ui-md-4">
+                            <div class="price-type">
+                                <h3>BEGINNER</h3>
+                                <span class="price-for">For starters and side projects</span>
+                                <ul>
+                                    <li>Responsive</li>
+                                    <li>Push Messages</li>
+                                </ul>
+                                <span class="currency">$</span>
+                                <span class="price">5</span>
+                                <span class="term">/mo</span>
+                                <p:button outcome="/login" value="CHOOSE" styleClass="blue-btn raised-btn" />
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-4">
+                            <div class="price-type">
+                                <h3>PROFESSIONAL</h3>
+                                <span class="price-for">For professionals</span>
+                                <ul>
+                                    <li>Responsive</li>
+                                    <li>Push Messages</li>
+                                    <li>7/24 Support</li>
+                                    <li>Free Shipping</li>
+                                </ul>
+                                <span class="currency">$</span>
+                                <span class="price">10</span>
+                                <span class="term">/mo</span>
+                                <p:button outcome="/login" value="CHOOSE" styleClass="blue-btn raised-btn" />
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-4">
+                            <div class="price-type">
+                                <h3>ENTERPRISE</h3>
+                                <span class="price-for">For enterprise</span>
+                                <ul>
+                                    <li>Responsive</li>
+                                    <li>Push Messages</li>
+                                    <li>7/24 Support</li>
+                                    <li>Free Shipping</li>
+                                    <li>Unlimited Bandwidth</li>
+                                    <li>Unlimited Storage</li>
+                                </ul>
+                                <span class="currency">$</span>
+                                <span class="price">20</span>
+                                <span class="term">/mo</span>
+                                <p:button outcome="/login" value="CHOOSE" styleClass="blue-btn raised-btn" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="video">
+               <div>
+                   <div class="video-container">
+                       <h1>Video</h1>
+                       <iframe width="560" height="315" src="https://www.youtube.com/embed/eKQUP2el3zU" ></iframe>
+                   </div>
+               </div>
+           </div>
+            
+           <div id="footer">
+               <div>
+                   <ul class="landing-menu">
+                       <li>
+                           <a href="#home">Home</a>
+                       </li>
+                       <li>
+                           <a href="#features">Features</a>
+                       </li>
+                       <li>
+                           <a href="#statistics">Events</a>
+                       </li>
+                       <li>
+                           <a href="#pricing">Pricing</a>
+                       </li>
+                       <li>
+                           <a href="#video">Video</a>
+                       </li>
+                   </ul>
+                   <p:graphicImage name="images/logo-white.png" library="paradise-layout" />
+               </div>
+           </div>
+        </div>
+        
+        <h:outputStylesheet name="css/animate.css" library="paradise-layout" />
+        <h:outputStylesheet name="css/layout-#{guestPreferences.layout}.css" library="paradise-layout" />
+    </h:body>
+
+</html>

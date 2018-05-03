@@ -1,0 +1,221 @@
+body {
+    .ui-overlaypanel {
+        @include content-shadow();
+        
+        .ui-overlaypanel-close {
+            background-color: $primaryColor;
+            color: $primaryTextColor;
+            width: 22px;
+            height: 22px;
+            text-align: center;
+            line-height: 22px;
+            text-align: center;
+            font-size: $fontSize + 3;
+            
+            @include transition(background-color .3s);
+            
+            &.ui-state-hover {
+                color: $textColor;
+                background-color: $listItemHoverBgColor;
+            }
+
+            span {
+                display: inline-block;
+                font-size: inherit;
+                margin-top: -1px;
+                line-height: inherit;
+            }
+        }
+    }
+    
+    .ui-dialog {
+        @include content-shadow();
+        border: 0 none;
+        background-color: transparent;
+        
+        .ui-dialog-titlebar {
+            padding: $headerPadding;
+            
+            .ui-dialog-title {
+                margin: 0;
+                float: none;
+            }
+            
+            .ui-dialog-titlebar-icon {
+                color: $headerIconColor;
+                border: 0 none;
+                @include transition(color .3s);
+                padding: 0;
+                margin-left: 4px;
+                margin-top: 1px;
+                
+                &.ui-state-hover {
+                    color: $headerIconHoverColor;
+                }
+                
+                &.ui-dialog-titlebar-maximize  {
+                    position: relative;
+                    top: 1px;
+                    left: 2px;
+                }
+            }
+        }
+        
+        .ui-dialog-content {
+            background-color: $contentBgColor;
+            padding: $contentPadding;
+        }
+        
+        .ui-dialog-buttonpane {
+            padding: $headerPadding;
+            margin: 0;
+            text-align: right;
+            
+            button {
+                margin: 0 4px 0 0;
+            }
+        }
+        
+        &.ui-dialog-maximized {
+            top: 60px !important;
+        }
+        
+        &.ui-confirm-dialog {
+            .ui-dialog-content {
+                padding: 20px;
+                
+                > span {
+                    float: none;
+                    display: inline-block;
+                    vertical-align: middle;
+                    line-height: 1;
+                    margin: 0;
+                    
+                    &.ui-icon {
+                        margin-right: 4px;
+                        font-size: $fontSize + 3;
+                        width: $fontSize + 3;
+                        height: $fontSize + 3;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+        
+        .ui-resizable-handle {
+            display: none !important;
+        }
+    }
+    
+    .ui-tooltip {        
+        .ui-tooltip-text {
+            background-color: #393b3e;
+            @include overlay-shadow();
+        }
+        
+        &.ui-state-error {
+            border: 0 none;
+        }
+        
+        &.ui-tooltip-right {
+            .ui-tooltip-arrow {
+                border-right-color: #393b3e;
+            }
+        }
+        
+        &.ui-tooltip-left {
+            .ui-tooltip-arrow {
+                border-left-color: #393b3e;
+            }
+        }
+        
+        &.ui-tooltip-top {
+            .ui-tooltip-arrow {
+                border-top-color: #393b3e;
+            }
+        }
+        
+        &.ui-tooltip-bottom {
+            .ui-tooltip-arrow {
+                border-bottom-color: #393b3e;
+            }
+        }
+    }
+
+    .ui-sidebar {
+        .ui-sidebar-close {
+            &:hover {
+                padding: 1px;
+            }
+        }
+
+        .ui-button {
+            width: auto;
+        }
+    }
+    
+    .ui-lightbox {
+        @include content-shadow();
+        
+        .ui-lightbox-caption {
+            padding: $headerPadding;
+            
+            .ui-lightbox-caption-text {
+                color: $headerTextColor;
+                margin: 0;
+            }
+            
+            .ui-lightbox-close {
+                padding: 0;
+                color: $headerTextColor;
+                @include transition(color .3s);
+                
+                &.ui-state-hover {
+                    color: $primaryColor;
+                }
+            }
+        }
+        
+        .ui-lightbox-content-wrapper {
+            overflow: hidden;
+                      
+            .ui-lightbox-nav-left {
+                @include icon_override("\f053");
+                @include transition(all .3s);
+                font-size: 24px;
+                margin-left: 4px;
+                color: #ffffff;
+
+                &:hover {
+                    color: $primaryColor;
+                    @include scale(1.2);
+                }
+                
+                span {
+                    display: none;
+                }
+            }
+            
+            .ui-lightbox-nav-right {
+                @include icon_override("\f054");
+                @include transition(all .3s);
+                font-size: 24px;
+                margin-right: 4px;
+                color: #ffffff;
+                
+                &:hover {
+                    color: $primaryColor;
+                    @include scale(1.2);
+                }
+                
+                span {
+                    display: none;
+                }
+            }
+            
+            .ui-lightbox-content.ui-lightbox-loading + a {
+                display: none;
+            }
+        }
+    }
+}
