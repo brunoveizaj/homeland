@@ -5,6 +5,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       lang="en">
+      
+    
 
     <h:head>
         <f:facet name="first">
@@ -13,13 +15,17 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
             <meta name="apple-mobile-web-app-capable" content="yes" />
         </f:facet>
-        <title><ui:insert name="title">PrimeFaces Paradise</ui:insert></title>
+        <title><ui:insert name="title">Homeland</ui:insert></title>
         <h:outputScript name="js/nanoscroller.js" library="paradise-layout" />
         <h:outputScript name="js/layout.js" library="paradise-layout" />
         <ui:insert name="head"/>
     </h:head>
 
     <h:body>
+    <f:view>
+    
+    <ui:insert name="metadata"/>
+    
         <div class="layout-wrapper #{guestPreferences.slimMenu ? 'layout-menu-slim' : (guestPreferences.overlayMenu ? 'layout-menu-overlay' : 'layout-menu-static')}">
             <ui:include src="./topbar.xhtml" />
             
@@ -30,7 +36,7 @@
                     <ui:insert name="content"/>
                 </div>
                 
-                <ui:include src="./footer.xhtml" />
+                
             </div>        
         </div>
         
@@ -47,6 +53,7 @@
         <h:outputStylesheet name="css/nanoscroller.css" library="paradise-layout" />
         <h:outputStylesheet name="css/animate.css" library="paradise-layout" />
         <h:outputStylesheet name="css/layout-#{guestPreferences.layout}.css" library="paradise-layout" />
+        </f:view>
     </h:body>
 
 </html>
