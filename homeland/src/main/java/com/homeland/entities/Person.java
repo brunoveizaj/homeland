@@ -61,7 +61,7 @@ public class Person implements Serializable {
     @Column(name = "address")
     private String address;
     @Column(name = "family_id")
-    private long familyId;
+    private Long familyId;
     @Column(name = "family_row_id")
     private int familyRowId;
     @Column(name = "family_relation")
@@ -240,11 +240,11 @@ public class Person implements Serializable {
         this.address = address;
     }
 
-    public long getFamilyId() {
+    public Long getFamilyId() {
         return familyId;
     }
 
-    public void setFamilyId(long familyId) {
+    public void setFamilyId(Long familyId) {
         this.familyId = familyId;
     }
 
