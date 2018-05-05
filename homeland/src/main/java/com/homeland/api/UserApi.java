@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.homeland.dto.UserDTO;
 import com.homeland.exceptions.NoContentException;
+import com.homeland.models.UserToken;
 import com.homeland.requests.api.UserRequest;
 import com.homeland.services.TokenService;
 import com.homeland.services.UserService;
@@ -108,6 +110,19 @@ public class UserApi {
 		return new ResponseEntity<>(u,HttpStatus.OK);
 	}
 	
+	
+	@RequestMapping(value="/login", method=RequestMethod.GET, produces={"application/json"})
+	public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password)
+	{
+		System.err.println("UNAME: "+username);
+		
+		System.err.println("SECRET: "+password);
+				
+		UserToken ut = userService.login(username, password);
+		
+		return new ResponseEntity<>(ut,HttpStatus.OK);
+		
+	}
 	
 	
 	

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+    
+    <name>primefaces_paradise</name>
+    
+    <component>
+        <component-type>org.primefaces.component.ParadiseMenu</component-type>
+        <component-class>org.primefaces.paradise.component.ParadiseMenu</component-class>
+    </component>
+    
+    <render-kit>
+        <renderer>
+            <component-family>org.primefaces.component</component-family>
+            <renderer-type>org.primefaces.component.ParadiseMenuRenderer</renderer-type>
+            <renderer-class>org.primefaces.paradise.component.ParadiseMenuRenderer</renderer-class>
+        </renderer>
+    </render-kit>
+    
+    <application>      
+        <el-resolver>
+            org.primefaces.application.exceptionhandler.PrimeExceptionHandlerELResolver
+        </el-resolver>  
+        <!-- 
+        <factory>
+            <exception-handler-factory>
+                org.primefaces.application.exceptionhandler.PrimeExceptionHandlerFactory
+            </exception-handler-factory>
+        </factory>      
+        -->
+    </application>
+  
+</faces-config>

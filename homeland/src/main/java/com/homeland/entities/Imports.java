@@ -39,7 +39,7 @@ public class Imports implements Serializable {
     @Column(name = "data_source")
     private String dataSource;
     @Column(name = "total")
-    private int total;
+    private Integer total;
 
     public Imports() {
     }
@@ -80,11 +80,11 @@ public class Imports implements Serializable {
         this.dataSource = dataSource;
     }
 
-    public int getTotal() {
+    public Integer getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
+    public void setTotal(Integer total) {
         this.total = total;
     }
 

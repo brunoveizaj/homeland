@@ -1,0 +1,94 @@
+body {
+    .ui-widget,
+    .ui-widget .ui-widget {
+        font-family: $fontFamily;
+        text-decoration: none;
+    }
+
+    .ui-widget-content {
+        background-color: $contentBgColor;
+        border: 1px solid $contentBorderColor;
+    }
+    
+    .ui-widget-header {
+        background: $headerBgColor;
+        color: $headerTextColor;
+        border: 1px solid $headerBorderColor;
+        font-weight: bold;
+    }
+
+    .ui-state-default {
+
+    }
+
+    .ui-state-hover {
+
+    }
+
+    .ui-state-focus {
+
+    }
+
+    .ui-state-active, .ui-state-highlight {
+        background-color: $primaryColor;
+        color: $primaryTextColor;
+    }
+    
+    .ui-state-error, .ui-widget.ui-state-error {
+	    border: 1px solid $errorColor;
+    }
+    
+    .ui-icon {
+        width: $iconWidth;
+        font-size: $iconFontSize;
+    }
+
+    .ui-state-disabled {
+        opacity: .35;
+        filter: Alpha(Opacity=35);
+        background-image: none;
+    }
+
+    .ui-corner-all {
+        @include border-radius($borderRadius);
+    }
+
+    .ui-corner-top {
+        @include border-radius-top($borderRadius);
+    }
+
+    .ui-corner-bottom {
+        @include border-radius-bottom($borderRadius);
+    }
+
+    .ui-corner-left {
+        @include border-radius-left($borderRadius);
+    }
+
+    .ui-corner-right {
+        @include border-radius-right($borderRadius);
+    }
+
+    .ui-widget-overlay {
+        background-color: #424242;
+        @include opacity(.7);
+    }
+    
+    .ui-shadow {
+        //@include shadow();
+    }
+    
+    a {
+        color: darken($primaryColor,10%);
+        text-decoration: none;
+        
+        &:hover {
+            color: darken($primaryColor,5%);
+        }
+    }
+    
+    .ajax-loader {
+        font-size: 28px;
+        color: $primaryColor;
+    }
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title>PrimeFaces Paradise</title>
+    </h:head>
+
+    <h:body styleClass="login-body">
+        <h:form>
+            <div class="login-panel ui-fluid">
+                <div class="ui-g">
+                    <div class="ui-g-12 logo-container">
+                        <p:graphicImage name="images/logo-gray.png" library="paradise-layout" styleClass="logo" />
+                        <p:graphicImage name="images/login/icon-login.png" library="paradise-layout" styleClass="login-icon" />
+                        <h2>Welcome to Paradise</h2>
+                    </div>
+                    <div class="ui-g-12">
+                        <p:outputLabel for="username" value="Username" />
+                        <div class="input-wrapper">
+                            <p:inputText id="username" placeholder="Username" />
+                            <i class="fa fa-user" />
+                        </div>
+                    </div>
+                    <div class="ui-g-12">
+                        <p:outputLabel for="password" value="Password" />
+                        <div class="input-wrapper">
+                            <p:password id="password" placeholder="Password" feedback="false" />
+                            <i class="fa fa-lock" />
+                        </div>
+                    </div>
+                    <div class="ui-g-12 chkbox-container">
+                        <div class="ui-g-6 ui-md-6">
+                            <h:outputLink value="#">
+                                Forgot password?
+                            </h:outputLink>
+                        </div>
+                        <div class="ui-g-6 rememberme-container">
+                            <p:outputLabel for="remember-me" value="Remember Me"/>
+                            <p:selectBooleanCheckbox id="remember-me" />
+                        </div>
+                        
+                    </div>
+                    <div class="ui-g-12 button-container">
+                        <p:button outcome="/sec/main" value="Sign In" styleClass="blue-btn raised-btn"/>
+                    </div>
+                    
+                    <h:outputStylesheet name="css/layout-#{guestPreferences.layout}.css" library="paradise-layout" />
+                </div>
+            </div>
+        </h:form>
+    </h:body>
+
+</html>

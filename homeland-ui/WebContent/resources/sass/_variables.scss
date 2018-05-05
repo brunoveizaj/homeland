@@ -1,0 +1,87 @@
+/******************************/
+/*           Common           */
+/******************************/
+$fontFamily:"Roboto","Helvetica Neue",sans-serif;
+$fontSize:13px;
+$textColor:#757575;
+$textSecondaryColor:lighten($textColor,25%);
+$borderRadius:2px;
+$dividerColor:#dee4e9;
+
+/******************************/
+/*           Layout           */
+/******************************/
+$darkMenuTextColor:#ffffff;
+
+/******************************/
+/*           THEME            */
+/******************************/
+/* Icons */
+$iconFontSize:13px;
+$iconWidth:16px;
+
+/* Error */
+$errorColor:#e17576;
+
+/* Headers */
+$headerPadding:6px 12px;
+$headerBgColor:#ffffff;
+$headerTextColor:#757575;
+$headerHoverBgColor:#dee4e9;
+$headerBorderColor:#c7cdd1;
+$headerIconColor:#757575;
+$headerIconHoverColor:$primaryColor;
+
+/* Contents */
+$contentPadding:6px 12px;
+$contentBorderColor:#c7cdd1;
+$contentBgColor:#ffffff;
+
+/* Forms */
+$inputBgColor:#ffffff;
+$inputPadding:5px;
+$inputBorderColor:#bdc3c9;
+$inputHoverBorderColor:#979ca0;
+
+//groups
+$inputGroupBorderColor:#bdc3c9;
+$inputGroupBgColor:#ffffff;
+$inputGroupTextColor:$textColor;
+$inputGroupIconColor:$textSecondaryColor;
+$inputGroupAddonMinWidth:2*$fontSize;
+$checkboxWidth:16px;
+$checkboxHeight:16px;
+
+/* Buttons */
+$buttonTextColor:#ffffff;
+$toggleButtonBgColor:#c6cbcf;
+
+/* List Items */
+$listItemPadding:6px 12px;
+$listItemHoverBgColor:#dee4e9;
+$listItemHoverTextColor:#757575;
+
+/* Messages */
+$infoMessageBgColor:#a8c9e0;
+$infoMessageTextColor:#393b3e;
+$warnMessageBgColor:#f8eab9;
+$warnMessageTextColor:#393b3e;
+$errorMessageBgColor:#fac7c8;
+$errorMessageTextColor:#393b3e;
+$fatalMessageBgColor:#bdc3c9;
+$fatalMessageTextColor:#393b3e;
+
+/* Data */
+$paginatorBgColor:#ffffff;
+$paginatorHoverBgColor:#dee4e9;
+$datableEvenRowBgColor:#f6f8f9;
+$datatableHoverBgColor:#dee4e9;
+
+/* Predefined Colors */
+$blue:#3984b8;
+$orange:#f6ac2b;
+$purple:#7e8dcd;
+$pink:#e175a0;
+$turquoise:#39b8b6;
+$green:#3eb839;
+$red:#e17576;

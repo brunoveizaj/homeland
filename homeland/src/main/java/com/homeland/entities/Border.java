@@ -46,7 +46,7 @@ public class Border implements Serializable {
     @Column(name = "bcg_id")
     private String bcgId;
     @Column(name = "driver")
-    private int driver;
+    private Integer driver;
     @Column(name = "plate")
     private String plate;
     @Column(name = "nid")
@@ -134,11 +134,11 @@ public class Border implements Serializable {
         this.crossingGate = crossingGate;
     }
 
-    public int getDriver() {
+    public Integer getDriver() {
         return driver;
     }
 
-    public void setDriver(int driver) {
+    public void setDriver(Integer driver) {
         this.driver = driver;
     }
 

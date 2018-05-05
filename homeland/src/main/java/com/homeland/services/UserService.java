@@ -15,6 +15,7 @@ import com.homeland.entities.User;
 import com.homeland.exceptions.EntityExistsException;
 import com.homeland.exceptions.NoContentException;
 import com.homeland.exceptions.NotFoundException;
+import com.homeland.models.UserToken;
 import com.homeland.repositories.UserRepository;
 import com.homeland.requests.api.UserRequest;
 import com.homeland.requests.repository.UserSQL;
@@ -133,6 +134,32 @@ public class UserService {
 		
 	}
 	
+	
+	
+	public UserToken login(String username,String password)
+	{
+		
+		User u = userDAO.findByUsername(username);
+		
+		if(u == null) throw new NotFoundException("Perdoruesi nuk ekziston");
+		
+		if(u.getStatus() != IStatus.ACTIVE) 
+		{
+			throw new NotFoundException("Perdoruesi nuk eshte aktiv");
+		}
+		
+		if(!password.equals(u.getSecret()))
+		{
+			throw new NotFoundException("Fjalekalimi i gabuar");
+		}
+		
+		
+		
+		String token = "Bearer ......."; //generate token
+		
+		return new UserToken(new Assembler().toDto(u),token);
+		
+	}
 	
 	
 	

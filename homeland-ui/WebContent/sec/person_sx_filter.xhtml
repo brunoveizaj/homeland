@@ -1,0 +1,74 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:h="http://xmlns.jcp.org/jsf/html"
+				xmlns:f="http://xmlns.jcp.org/jsf/core"
+				xmlns:p="http://primefaces.org/ui">
+		
+
+	<h:form id="person_sx_filter_form">
+	
+	<h:panelGroup layout="block" id="sx_fragment" rendered="#{personSxBean.renderFilter}" >
+		<div class="ui-g ui-fluid">
+			<div class="ui-g-12">
+				<div class="card card-w-title">
+					<h1>Kërkim Personi</h1>
+					<div class="ui-g">
+						<div class="ui-g-12">
+								
+						</div>
+						
+						<div class="ui-g-12 ui-md-4">
+							<p:panelGrid layout="grid" columns="2" styleClass="ui-panelgrid-blank">
+								<p:commandButton value="Kërko" update="@form" action="#{personSxBean.search()}" icon="ui-icon-search" /> 
+							</p:panelGrid>
+						</div>
+						
+						<div class="ui-g-12">
+							<p:messages autoUpdate="true" showDetail="true" closable="true"/>	
+						</div>
+						
+				    </div>
+				</div>
+			</div>
+		</div>
+	</h:panelGroup>
+	
+	<h:panelGroup layout="block" id="sx_list" rendered="#{!personSxBean.renderFilter}" >
+		<div class="ui-g ui-fluid">
+			<div class="ui-g-12">
+				<div class="ui-g">
+					<div class="ui-g-6 ui-md-2">
+						<p:commandButton value="Mbrapa" action="#{personSxBean.renderFilter()}" update="@form" process="@this"
+						                 styleClass="red-btn" icon="fa fa-arrow-left" /> 
+					</div>
+					<div class="ui-g-6 ui-md-2">
+						<p:commandButton value="Kërkim i ri" action="#{personSxBean.clear()}" update="@form" process="@this"
+						                 styleClass="cyan-btn" icon="ui-icon-search" /> 
+					</div>
+				</div>
+			</div>
+			<div class="ui-g-12">
+				<p:dataTable value="#{personSxBean.persons}" var="p" paginatorAlwaysVisible="false" paginator="true" rows="20" rowIndexVar="r" 
+							 selectionMode="single" selection="#{personSxBean.person}" rowKey="#{p.id}" rowsPerPageTemplate="10,20,30,50" 
+							 reflow="true"> 
+				<p:ajax event="rowSelect" listener="#{personSxBean.personSelect()}" update=":main" >
+				<f:param name="nid" value="#{personSxBean.person.nid}"/>
+				</p:ajax>
+				
+				<p:column headerText="#">
+				      #{r+1}
+				</p:column>
+				
+				</p:dataTable>
+			</div>
+			
+		</div>
+	</h:panelGroup>
+	
+	
+		<p:commandButton value="GoToPersonWithNid" action="#{nav.navigate('person_view')}" update=":main">
+			<f:param name="nid" value="NIDIII"/>
+		</p:commandButton>
+	</h:form>
+	
+</ui:composition>

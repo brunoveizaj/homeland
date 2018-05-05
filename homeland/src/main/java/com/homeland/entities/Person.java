@@ -63,7 +63,7 @@ public class Person implements Serializable {
     @Column(name = "family_id")
     private Long familyId;
     @Column(name = "family_row_id")
-    private int familyRowId;
+    private Integer familyRowId;
     @Column(name = "family_relation")
     private String familyRelation;
     @Column(name = "name_sx")
@@ -248,11 +248,11 @@ public class Person implements Serializable {
         this.familyId = familyId;
     }
 
-    public int getFamilyRowId() {
+    public Integer getFamilyRowId() {
         return familyRowId;
     }
 
-    public void setFamilyRowId(int familyRowId) {
+    public void setFamilyRowId(Integer familyRowId) {
         this.familyRowId = familyRowId;
     }
 

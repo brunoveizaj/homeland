@@ -42,12 +42,12 @@ public class User implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdTime;
     @Column(name = "created_user_id")
-    private int createdUserId;
+    private Integer createdUserId;
     @Column(name = "modify_time")
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifyTime;
     @Column(name = "modify_user_id")
-    private int modifyUserId;
+    private Integer modifyUserId;
 
     public User() {
     }
@@ -104,11 +104,11 @@ public class User implements Serializable {
         this.createdTime = createdTime;
     }
 
-    public int getCreatedUserId() {
+    public Integer getCreatedUserId() {
         return createdUserId;
     }
 
-    public void setCreatedUserId(int createdUserId) {
+    public void setCreatedUserId(Integer createdUserId) {
         this.createdUserId = createdUserId;
     }
 
@@ -120,11 +120,11 @@ public class User implements Serializable {
         this.modifyTime = modifyTime;
     }
 
-    public int getModifyUserId() {
+    public Integer getModifyUserId() {
         return modifyUserId;
     }
 
-    public void setModifyUserId(int modifyUserId) {
+    public void setModifyUserId(Integer modifyUserId) {
         this.modifyUserId = modifyUserId;
     }
 
