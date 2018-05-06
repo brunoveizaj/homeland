@@ -8,7 +8,7 @@
 	
 	<h:form id="person_view_form">
 	<f:event type="preRenderComponent" listener="#{personViewBean.init()}" />
-		<h:outputText value="#{personViewBean.nid}" />
+		<h:outputText value="#{personViewBean}" />
 		<br/>
 		
 		<p:commandButton value="Back" action="#{nav.back()}" process="@this" update=":main"/>

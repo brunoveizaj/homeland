@@ -31,6 +31,7 @@ public class PersonApi {
 	@RequestMapping(value="/searchPerson", method=RequestMethod.GET, produces={"application/json"})
 	public ResponseEntity<?> searchPerson(@RequestHeader(value="Authorization",required=false) String token, PersonRequest request)
 	{
+		System.err.println("AUTH TOKEN: "+token);
 		Integer userId = tokenService.getUserIdFromToken(token);
 		System.err.println("AUTH USER_ID: "+userId);
 		
@@ -51,7 +52,7 @@ public class PersonApi {
 	@RequestMapping(value="/personRaport/{nid}", method=RequestMethod.GET, produces={"application/json"})
 	public ResponseEntity<?> personRaport(@RequestHeader(value="Authorization",required=false) String token, @PathVariable String nid)//@RequestHeader HttpHeaders httpHeaders
 	{
-		
+		System.err.println("AUTH TOKEN: "+token);
 		Integer userId = tokenService.getUserIdFromToken(token);
 		System.err.println("AUTH USER_ID: "+userId);
 		
