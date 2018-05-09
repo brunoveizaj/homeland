@@ -27,7 +27,7 @@
 			</div>
 			<div class="ui-g-12 ui-md-8">
 
-				<p:panel header="Gjeneralitetet">
+				<p:panel header="Gjeneralitetet" styleClass="blue-pnl">
 
 					<p:panelGrid layout="grid" columns="4"
 						columnClasses="bold,empty,bold,empty"
@@ -66,7 +66,7 @@
 							readonly="true" />
 						<p:outputLabel value="Adresa" />
 						<p:inputTextarea
-							value="#{personViewBean.person.unit}-#{personViewBean.person.qv}/#{personViewBean.person.fraction}-#{personViewBean.person.address}-#{personViewBean.person.street}-P:#{personViewBean.person.buildingNo}"
+							value="#{personViewBean.person.unit}-#{personViewBean.person.qv}/#{personViewBean.person.fraction}-#{personViewBean.person.address}-#{personViewBean.person.street}-P:#{personViewBean.person.building}"
 							readonly="true" />
 					</p:panelGrid>
 				</p:panel>
@@ -74,7 +74,7 @@
 			</div>
 
 			<div class="ui-g-12 ui-md-4">
-				<p:dataTable value="#{personViewBean.phones}" var="ph"
+				<p:dataTable value="#{personViewBean.phones}" var="ph" styleClass="blue-tbl"
 					rowIndexVar="r" paginator="true" paginatorAlwaysVisible="false"
 					rows="5" rowsPerPageTemplate="5,10,20" pageLinks="2" reflow="true"
 					emptyMessage="Nuk ka kontakte">
@@ -100,7 +100,7 @@
 
 
 			<div class="ui-g-12">
-				<p:dataTable value="#{personViewBean.family}" var="f"
+				<p:dataTable value="#{personViewBean.family}" var="f" styleClass="blue-tbl"
 					selection="#{personViewBean.familyMember}" selectionMode="single"
 					rowIndexVar="r" rowKey="#{f.id}" reflow="true">
 
@@ -145,7 +145,7 @@
 
 			<c:forEach items="#{personViewBean.cards}" var="idc">
 				<div class="ui-g-12">
-					<p:panel header="Karta Identiteti">
+					<p:panel header="Karta Identiteti" styleClass="blue-pnl">
 						<div class="ui-g">
 							<div class="ui-g-12 ui-md-2">
 								<p:graphicImage value="#{cardPhotoBean.image}" width="95%">
@@ -210,7 +210,7 @@
 
 			<c:forEach items="#{personViewBean.passports}" var="idp">
 				<div class="ui-g-12">
-					<p:panel header="Pasaporta Biometrike">
+					<p:panel header="Pasaporta Biometrike" styleClass="blue-pnl">
 						<div class="ui-g">
 
 							<div class="ui-g-12 ui-md-2">
@@ -274,7 +274,7 @@
 
 			<div class="ui-g-12">
 				<p:dataTable value="#{personViewBean.tatime}" var="t" rowIndexVar="r"
-					reflow="true" emptyMessage="I pa punë">
+					reflow="true" emptyMessage="I pa punë" styleClass="blue-tbl">
 
 				<f:facet name="header">
                     Punësimi
@@ -303,11 +303,53 @@
                 </p:column>
 				</p:dataTable>
 			</div>
+			
+			<div class="ui-g-12">
+				<p:dataTable value="#{personViewBean.borders}" var="b" rowIndexVar="r"
+					reflow="true" emptyMessage="Nuk ka hyrje-dalje" styleClass="blue-tbl">
+
+				<f:facet name="header">
+                    Hyrje - Dalje
+                </f:facet>
+				<p:column headerText="#">
+                    #{r+1}
+                </p:column>
+                <p:column headerText="Eventi">
+                    #{b.event}
+                </p:column>
+				<p:column headerText="Data">
+                    #{b.crossingDate}
+                </p:column>
+				<p:column headerText="Pika kufitare">
+					#{b.crossingGate}
+				</p:column>
+				<p:column headerText="Linja">
+                    #{b.travel}
+                </p:column>
+					<p:column headerText="Dokumenti">
+                    #{b.docNo} (b.docState)
+                </p:column>
+				<p:column headerText="Kategoria">
+                    #{b.citizenType}
+                </p:column>
+                <p:column headerText="Targa">
+                    #{b.plate}
+                </p:column>
+                <p:column headerText="Shofer">
+                    #{b.driver}
+                </p:column>
+                <p:column headerText="Qëlimi">
+                    #{b.purpose}
+                </p:column>
+				</p:dataTable>
+			</div>
+			
+			
 
 
 			<div class="ui-g-12">
-				<p:dataTable value="#{personBean.oshees}" var="o" rowIndexVar="r"
-					styleClass="blue-tbl" reflow="true" emptyMessage="Nuk ka kontratë">
+				<p:dataTable value="#{personViewBean.oshees}" var="o" rowIndexVar="r" styleClass="blue-tbl"
+					reflow="true" emptyMessage="Nuk ka kontratë">
 
 					<f:facet name="header">
                     OSHEE
@@ -353,7 +395,7 @@
 
 			<div class="ui-g-12">
 				<p:panel id="vehiclesPnl" header="Automjetet"
-					styleClass="yellow-pnl">
+					styleClass="blue-pnl">
 					<f:facet name="actions">
 						<p:commandLink action="#{personBean.loadVehicles()}"
 							update="vehiclesPnl"
@@ -395,7 +437,7 @@
 			</div>
 
 			<div class="ui-g-12">
-				<p:panel id="subsPnl" header="Subjektet" styleClass="yellow-pnl">
+				<p:panel id="subsPnl" header="Subjektet" styleClass="blue-pnl">
 					<f:facet name="actions">
 						<p:commandLink action="#{personBean.loadSubjects()}"
 							update="subsPnl"
@@ -436,8 +478,7 @@
 
 		</div>
 
-		<p:commandButton value="Back" action="#{nav.back()}" process="@this"
-			update=":main" />
+		
 
 	</h:form>
 

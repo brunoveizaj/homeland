@@ -1,0 +1,77 @@
+.ui-datatable table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: auto !important; 
+}
+
+/*
+.ui-datatable thead th, .ui-datatable tbody td, .ui-datatable tfoot td, .ui-datatable tfoot th{
+    font-size: 12px;
+}
+*/
+
+body .ui-datatable .ui-datatable-data > tr.ui-state-highlight.ui-state-hover {
+   background-color: #3984b8;
+}
+
+.ui-panel .ui-panel-content
+{
+	padding-bottom: 0 !important;
+}
+
+.no-border table tbody tr td, .no-border .ui-widget-content,.no-border table thead th,.no-border table tfoot td, .no-border table tfoot th
+{
+    border: 0 !important;
+}
+
+.ui-inputtext:disabled
+{
+    border-bottom:1px #aaaaaa solid !important;
+}
+.ui-inputtextarea:disabled
+{
+    border-bottom:1px #aaaaaa solid !important;
+}
+.ui-inputfield:disabled
+{
+    border-bottom:1px #aaaaaa solid !important;
+}
+
+
+.blue-tbl .ui-datatable .ui-datatable-header
+{
+    
+}
+
+
+.blue-pnl .ui-widget-header, .blue-tbl .ui-datatable-header
+{
+    color: #fff !important;
+    background-color: rgba(41,58,74,.95) !important;
+    border: 1px solid #293a4a;
+    font-size: 14px;
+}
+
+.blue-pnl .ui-panel
+{
+   // background-color: aliceblue !important;
+}
+
+.blue-pnl .ui-panel-titlebar-icon
+{
+    color: #fff !important;
+}
+
+.bold
+{
+    font-weight: bold;
+}
+
+.empty
+{
+
+}
+
+.topAlign{
+    vertical-align: top;
+}

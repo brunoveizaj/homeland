@@ -185,7 +185,7 @@ public class PersonViewBean implements Serializable {
 		}
 		
 		String nid = nav.getParam("nid");
-		System.out.println("VIEW PARAM # init() : NID="+nid);
+		System.out.println("NIDI nga params e nav : NID="+nid);
 		
 		loadPersonRaport(nid);
 		

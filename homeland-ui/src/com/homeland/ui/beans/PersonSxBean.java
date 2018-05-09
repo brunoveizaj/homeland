@@ -1,6 +1,7 @@
 package com.homeland.ui.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -9,6 +10,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import com.homeland.ui.criterias.PersonRequest;
+import com.homeland.ui.models.Param;
 import com.homeland.ui.models.PersonDTO;
 import com.homeland.ui.services.PersonService;
 import com.homeland.ui.utils.Messages;
@@ -73,8 +75,11 @@ public class PersonSxBean implements Serializable {
 	
 
 	public void personSelect()
-	{		
-		nav.navigate("person_view");
+	{	
+		List<Param> params = new ArrayList<>();
+		params.add(new Param("nid",person.getNid()));
+		nav.navigate("person_view",params);
+		
 	}
 	
 	
