@@ -1,19 +1,445 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-				xmlns:ui="http://java.sun.com/jsf/facelets"
-				xmlns:h="http://xmlns.jcp.org/jsf/html"
-				xmlns:f="http://xmlns.jcp.org/jsf/core"
-				xmlns:p="http://primefaces.org/ui">
-				
-	
-	
-	<h:form id="person_view_form">
-	<f:event type="preRenderComponent" listener="#{personViewBean.init()}" />
-		<h:outputText value="#{personViewBean}" />
-		<br/>
-		
-		<p:commandButton value="Back" action="#{nav.back()}" process="@this" update=":main"/>
-		
-	</h:form>
-	
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
-</ui:composition>	
+	<h:form id="person_view_form">
+		<f:event type="preRenderComponent" listener="#{personViewBean.init()}" />
+
+
+		<div class="ui-g ui-fluid">
+			<div class="ui-g-12">
+				<div class="ui-g">
+					<div class="ui-g-6 ui-md-2">
+						<p:commandButton value="Mbrapa" action="#{nav.back()}"
+							process="@this" update=":main" styleClass="red-btn"
+							icon="fa fa-arrow-left" />
+					</div>
+				</div>
+			</div>
+
+			<div class="ui-g-12">
+				<p:messages showDetail="true" closable="true">
+					<p:autoUpdate />
+				</p:messages>
+			</div>
+			<div class="ui-g-12 ui-md-8">
+
+				<p:panel header="Gjeneralitetet">
+
+					<p:panelGrid layout="grid" columns="4"
+						columnClasses="bold,empty,bold,empty"
+						styleClass="ui-panelgrid-blank">
+						<p:outputLabel value="Emri" />
+						<p:inputText value="#{personViewBean.person.name}" readonly="true" />
+						<p:outputLabel value="Mbiemri" />
+						<p:inputText value="#{personViewBean.person.surname}"
+							readonly="true" />
+						<p:outputLabel value="Atësia" />
+						<p:inputText value="#{personViewBean.person.fatherName}"
+							readonly="true" />
+						<p:outputLabel value="Mëmësia" />
+						<p:inputText value="#{personViewBean.person.motherName}"
+							readonly="true" />
+						<p:outputLabel value="Datëlindja" />
+						<p:inputText value="#{personViewBean.person.dob}" readonly="true" />
+						<p:outputLabel value="Gjinia" />
+						<p:inputText value="#{personViewBean.person.gender}"
+							readonly="true" />
+						<p:outputLabel value="Vendlindja" />
+						<p:inputText value="#{personViewBean.person.pob}" readonly="true" />
+						<p:outputLabel value="Mbiemri tjetër" />
+						<p:inputText value="#{personViewBean.person.maidenName}"
+							readonly="true" />
+						<p:outputLabel value="NID" />
+						<p:inputText value="#{personViewBean.person.nid}" readonly="true" />
+						<p:outputLabel value="Statusi Civil" />
+						<p:inputText value="#{personViewBean.person.civilStatus}"
+							readonly="true" />
+						<p:outputLabel value="Rrethi" />
+						<p:inputText value="#{personViewBean.person.region}"
+							readonly="true" />
+						<p:outputLabel value="Bashkia" />
+						<p:inputText value="#{personViewBean.person.municipality}"
+							readonly="true" />
+						<p:outputLabel value="Adresa" />
+						<p:inputTextarea
+							value="#{personViewBean.person.unit}-#{personViewBean.person.qv}/#{personViewBean.person.fraction}-#{personViewBean.person.address}-#{personViewBean.person.street}-P:#{personViewBean.person.buildingNo}"
+							readonly="true" />
+					</p:panelGrid>
+				</p:panel>
+
+			</div>
+
+			<div class="ui-g-12 ui-md-4">
+				<p:dataTable value="#{personViewBean.phones}" var="ph"
+					rowIndexVar="r" paginator="true" paginatorAlwaysVisible="false"
+					rows="5" rowsPerPageTemplate="5,10,20" pageLinks="2" reflow="true"
+					emptyMessage="Nuk ka kontakte">
+
+					<f:facet name="header">
+                    Telefona
+                </f:facet>
+					<p:column headerText="#">
+                    #{r+1}
+                </p:column>
+					<p:column headerText="Nr Telefonit">
+                    #{ph.telOne}
+                </p:column>
+					<p:column headerText="Burimi">
+                    #{ph.source}
+                </p:column>
+					<p:column headerText="Data">
+                    #{ph.regDate}
+                </p:column>
+
+				</p:dataTable>
+			</div>
+
+
+			<div class="ui-g-12">
+				<p:dataTable value="#{personViewBean.family}" var="f"
+					selection="#{personViewBean.familyMember}" selectionMode="single"
+					rowIndexVar="r" rowKey="#{f.id}" reflow="true">
+
+					<p:ajax event="rowSelect"
+						listener="#{personViewBean.onFamilySelect()}" update="@form" />
+
+					<f:facet name="header">
+                    Familja
+                </f:facet>
+					<p:column headerText="#">
+                    #{r+1}
+                </p:column>
+					<p:column headerText="NID">
+                    #{f.nid}
+                </p:column>
+					<p:column headerText="Emri">
+                    #{f.name} 
+                </p:column>
+					<p:column headerText="Atësia">
+                    #{f.fatherName}
+                </p:column>
+					<p:column headerText="Mbiemri">
+                    #{f.surname}
+                </p:column>
+					<p:column headerText="Datëlindja">
+                    #{f.dob}
+                </p:column>
+					<p:column headerText="Vendlindja">
+                    #{f.pob}
+                </p:column>
+					<p:column headerText="L.F">
+                    #{f.familyRelation}
+                </p:column>
+					<p:column headerText="Statusi">
+                    #{f.civilStatus}
+                </p:column>
+					<p:column headerText="Gjinia">
+                    #{f.gender}
+                </p:column>
+				</p:dataTable>
+			</div>
+
+			<c:forEach items="#{personViewBean.cards}" var="idc">
+				<div class="ui-g-12">
+					<p:panel header="Karta Identiteti">
+						<div class="ui-g">
+							<div class="ui-g-12 ui-md-2">
+								<p:graphicImage value="#{cardPhotoBean.image}" width="95%">
+									<f:param value="#{idc.idc}" name="idc" />
+								</p:graphicImage>
+							</div>
+							<div class="ui-g-12 ui-md-10">
+								<p:panelGrid layout="grid" columns="4"
+									columnClasses="bold,empty,bold,empty"
+									styleClass="ui-panelgrid-blank">
+									<p:outputLabel value="Emri" />
+									<p:inputText value="#{idc.name}" readonly="true" />
+									<p:outputLabel value="Mbiemri" />
+									<p:inputText value="#{idc.surname}" readonly="true" />
+
+									<p:outputLabel value="Atësia" />
+									<p:inputText value="#{idc.fatherName}" readonly="true" />
+									<p:outputLabel value="Mëmësia" />
+									<p:inputText value="#{idc.motherName}" readonly="true" />
+
+									<p:outputLabel value="Datëlindja" />
+									<p:inputText value="#{idc.dob}" readonly="true" />
+									<p:outputLabel value="Gjinia" />
+									<p:inputText value="#{idc.gender}" readonly="true" />
+
+									<p:outputLabel value="Shtetësia" />
+									<p:inputText value="#{idc.citizenship}" readonly="true" />
+									<p:outputLabel value="Kombësia" />
+									<p:inputText value="#{idc.nationality}" readonly="true" />
+
+									<p:outputLabel value="Vendlindja" />
+									<p:inputText value="#{idc.pob}" readonly="true" />
+									<p:outputLabel value="Qyteti" />
+									<p:inputText value="#{idc.city}" readonly="true" />
+
+									<p:outputLabel value="NID" />
+									<p:inputText value="#{idc.nid}" readonly="true" />
+									<p:outputLabel value="Nr Kartës" />
+									<p:inputText value="#{idc.idc}" readonly="true" />
+
+									<p:outputLabel value="Dt Lëshimit" />
+									<p:inputText value="#{idc.issueDate}" readonly="true" />
+									<p:outputLabel value="Skadenca" />
+									<p:inputText value="#{idc.expireDate}" readonly="true" />
+
+									<p:outputLabel value="Tel 1" />
+									<p:inputText value="#{idc.phoneOne}" readonly="true" />
+									<p:outputLabel value="Tel 2" />
+									<p:inputText value="#{idc.phoneTwo}" readonly="true" />
+
+									<p:outputLabel value="Adresa" />
+									<p:inputText
+										value="#{idc.street}/#{idc.building}/#{idc.appartment}"
+										readonly="true" />
+								</p:panelGrid>
+							</div>
+
+						</div>
+					</p:panel>
+				</div>
+			</c:forEach>
+
+			<c:forEach items="#{personViewBean.passports}" var="idp">
+				<div class="ui-g-12">
+					<p:panel header="Pasaporta Biometrike">
+						<div class="ui-g">
+
+							<div class="ui-g-12 ui-md-2">
+								<p:graphicImage value="#{passportPhotoBean.image}" width="95%">
+									<f:param value="#{idp.idp}" name="idp" />
+								</p:graphicImage>
+							</div>
+							<div class="ui-g-12 ui-md-10">
+								<p:panelGrid layout="grid" columns="4"
+									columnClasses="bold,empty,bold,empty"
+									styleClass="ui-panelgrid-blank">
+
+									<p:outputLabel value="Emri" />
+									<p:inputText value="#{idp.name}" readonly="true" />
+									<p:outputLabel value="Mbiemri" />
+									<p:inputText value="#{idp.surname}" readonly="true" />
+
+									<p:outputLabel value="Atësia" />
+									<p:inputText value="#{idp.fatherName}" readonly="true" />
+									<p:outputLabel value="Mëmësia" />
+									<p:inputText value="#{idp.motherName}" readonly="true" />
+
+									<p:outputLabel value="Datëlindja" />
+									<p:inputText value="#{idp.dob}" readonly="true" />
+									<p:outputLabel value="Gjinia" />
+									<p:inputText value="#{idp.gender}" readonly="true" />
+
+									<p:outputLabel value="Shtetësia" />
+									<p:inputText value="#{idp.citizenship}" readonly="true" />
+									<p:outputLabel value="Kombësia" />
+									<p:inputText value="#{idp.nationality}" readonly="true" />
+
+									<p:outputLabel value="Vendlindja" />
+									<p:inputText value="#{idp.pob}" readonly="true" />
+									<p:outputLabel value="NID" />
+									<p:inputText value="#{idp.nid}" readonly="true" />
+
+									<p:outputLabel value="Nr Pasaportës" />
+									<p:inputText value="#{idp.idp}" readonly="true" />
+									<p:outputLabel value="Tipi" />
+									<p:inputText value="#{idp.type}" readonly="true" />
+
+									<p:outputLabel value="Dt Lëshimit" />
+									<p:inputText value="#{idp.issueDate}" readonly="true" />
+									<p:outputLabel value="Skadenca" />
+									<p:inputText value="#{idp.expireDate}" readonly="true" />
+
+									<p:outputLabel value="Autoriteti Lëshues" />
+									<p:inputText value="#{idp.issueAuthority}" readonly="true" />
+									<p:outputLabel value="Adresa" />
+									<p:inputText value="#{idp.adress}" readonly="true" />
+
+								</p:panelGrid>
+							</div>
+
+						</div>
+					</p:panel>
+				</div>
+			</c:forEach>
+
+
+			<div class="ui-g-12">
+				<p:dataTable value="#{personViewBean.tatime}" var="t" rowIndexVar="r"
+					reflow="true" emptyMessage="I pa punë">
+
+				<f:facet name="header">
+                    Punësimi
+                </f:facet>
+					<p:column headerText="#">
+                    #{r+1}
+                </p:column>
+					<p:column headerText="NIPT">
+                    #{t.nipt}
+                </p:column>
+				<p:column headerText="Subjekti">
+					<p:commandLink value="#{t.subject}"
+							action="#{personBean.onNavSubjectSelect(t.nipt)}" />
+				</p:column>
+				<p:column headerText="Pozicioni">
+                    #{t.profession}
+                </p:column>
+					<p:column headerText="Paga">
+                    #{t.salary}
+                </p:column>
+					<p:column headerText="Viti">
+                    #{t.year}
+                </p:column>
+					<p:column headerText="Muaji">
+                    #{t.month}
+                </p:column>
+				</p:dataTable>
+			</div>
+
+
+			<div class="ui-g-12">
+				<p:dataTable value="#{personBean.oshees}" var="o" rowIndexVar="r"
+					styleClass="blue-tbl" reflow="true" emptyMessage="Nuk ka kontratë">
+
+					<f:facet name="header">
+                    OSHEE
+                </f:facet>
+					<p:column headerText="#">
+                    #{r+1}
+                </p:column>
+					<p:column headerText="Nr.Kontrate">
+                    #{o.contractNo}
+                </p:column>
+					<p:column headerText="Emri i Plotë">
+                    #{o.name} #{o.fatherName} #{o.surname}
+                </p:column>
+					<p:column headerText="Lidhja K/F">
+                    #{o.familyRelation}
+                </p:column>
+					<p:column headerText="Telefon">
+                    #{o.telOne} #{o.telTwo} #{o.telThree}
+                </p:column>
+					<p:column headerText="Bashkia">
+                    #{o.municipality}
+                </p:column>
+					<p:column headerText="Nj.Adm">
+                    #{o.admUnit}
+                </p:column>
+					<p:column headerText="Rruga">
+                    #{o.street}
+                </p:column>
+					<p:column headerText="Pall/Hyrje/App">
+                    #{o.buildingNo}/#{o.entranceNo}/#{o.appNo}
+                </p:column>
+
+					<p:column headerText="Kodi Postal">
+                    #{o.postalCode}
+                </p:column>
+					<p:column headerText="Koordinatat">
+                    #{o.lat},#{o.lng} 
+                </p:column>
+				</p:dataTable>
+			</div>
+
+
+
+			<div class="ui-g-12">
+				<p:panel id="vehiclesPnl" header="Automjetet"
+					styleClass="yellow-pnl">
+					<f:facet name="actions">
+						<p:commandLink action="#{personBean.loadVehicles()}"
+							update="vehiclesPnl"
+							styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default">
+							<h:outputText
+								styleClass="ui-icon ui-icon-#{personBean.openVehicles?'minusthick':'plusthick'}" />
+						</p:commandLink>
+					</f:facet>
+					<p:dataTable rendered="#{personBean.openVehicles}"
+						value="#{personBean.vehicles}" var="v" reflow="true"
+						emptyMessage="Nuk ka automjet">
+
+						<p:column headerText="#">
+                        #{r+1}
+                    </p:column>
+						<p:column headerText="Targa">
+                        #{v.plate}
+                    </p:column>
+						<p:column headerText="Shasia">
+                        #{v.vin}
+                    </p:column>
+						<p:column headerText="Pronari">
+                        #{v.owner}
+                    </p:column>
+						<p:column headerText="Prodhuesi">
+                        #{v.producer}
+                    </p:column>
+						<p:column headerText="Modeli">
+                        #{v.model} - #{v.capacity}
+                    </p:column>
+						<p:column headerText="Ngjyra">
+                        #{v.color}
+                    </p:column>
+						<p:column headerText="Adresa">
+                        #{v.address}
+                    </p:column>
+					</p:dataTable>
+				</p:panel>
+			</div>
+
+			<div class="ui-g-12">
+				<p:panel id="subsPnl" header="Subjektet" styleClass="yellow-pnl">
+					<f:facet name="actions">
+						<p:commandLink action="#{personBean.loadSubjects()}"
+							update="subsPnl"
+							styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default">
+							<h:outputText
+								styleClass="ui-icon ui-icon-#{personBean.openSubjects?'minusthick':'plusthick'}" />
+						</p:commandLink>
+					</f:facet>
+					<p:dataTable value="#{personBean.subjects}" var="s"
+						rendered="#{personBean.openSubjects}" reflow="true"
+						emptyMessage="Nuk zotëron ose administron ndonjë subjekt">
+
+						<p:column headerText="#">
+                        #{r+1}
+                    </p:column>
+						<p:column headerText="NIPT">
+                        #{s.nipt}
+                    </p:column>
+						<p:column headerText="Subjekti">
+							<p:commandLink value="#{s.name}"
+								action="#{personBean.onNavSubjectSelect(s.nipt)}" />
+						</p:column>
+						<p:column headerText="Administratori">
+                        #{s.administrators}
+                    </p:column>
+						<p:column headerText="Dt.Regj">
+                        #{s.regDate}
+                    </p:column>
+						<p:column headerText="Raport">
+							<h:outputLink target="_blank"
+								value="#{utilBean.corporatesDetail(s.nipt)}"
+								style="color: #ff6b6b">Stat.Subjekti</h:outputLink>
+						</p:column>
+
+					</p:dataTable>
+				</p:panel>
+			</div>
+
+		</div>
+
+		<p:commandButton value="Back" action="#{nav.back()}" process="@this"
+			update=":main" />
+
+	</h:form>
+
+
+</ui:composition>

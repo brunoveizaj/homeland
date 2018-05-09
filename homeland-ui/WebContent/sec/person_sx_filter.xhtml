@@ -1,74 +1,163 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-				xmlns:ui="http://java.sun.com/jsf/facelets"
-				xmlns:h="http://xmlns.jcp.org/jsf/html"
-				xmlns:f="http://xmlns.jcp.org/jsf/core"
-				xmlns:p="http://primefaces.org/ui">
-		
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
 
 	<h:form id="person_sx_filter_form">
-	
-	<h:panelGroup layout="block" id="sx_fragment" rendered="#{personSxBean.renderFilter}" >
-		<div class="ui-g ui-fluid">
-			<div class="ui-g-12">
-				<div class="card card-w-title">
-					<h1>Kërkim Personi</h1>
+
+		<h:panelGroup layout="block" id="sx_fragment"
+			rendered="#{personSxBean.renderFilter}">
+			<div class="ui-g ui-fluid">
+				<div class="ui-g-12">
+					<div class="card card-w-title">
+						<h1>Kërkim Personi</h1>
+						<div class="ui-g">
+							<div class="ui-g-12">
+
+								<p:panelGrid layout="grid" columns="4"
+									styleClass="ui-panelgrid-blank form-group">
+
+									<p:inputText placeholder="Emri"
+										value="#{personSxBean.request.name}" />
+									<p:inputText placeholder="Mbiemri"
+										value="#{personSxBean.request.surname}" />
+									<p:inputText placeholder="Atësia"
+										value="#{personSxBean.request.fatherName}" />
+									<p:inputText placeholder="Mëmësia"
+										value="#{personSxBean.request.motherName}" />
+
+									<p:inputText placeholder="NID"
+										value="#{personSxBean.request.nid}" />
+									<p:inputText placeholder="Mbiemri Vajzërisë"
+										value="#{personSxBean.request.maidenName}" />
+									<p:inputMask mask="99.99.9999" placeholder="Datëlindja"
+										value="#{personSxBean.request.dob}" />
+									<p:selectOneMenu placeholder="Gjinia"
+										value="#{personSxBean.request.gender}" autoWidth="false">
+										<f:selectItem itemValue="#{null}" itemLabel=" " />
+										<f:selectItem itemValue="M" itemLabel="M" />
+										<f:selectItem itemValue="F" itemLabel="F" />
+									</p:selectOneMenu>
+
+									<p:inputText placeholder="Vendlindja"
+										value="#{personSxBean.request.pob}" />
+									<p:inputText placeholder="Rrethi"
+										value="#{personSxBean.request.region}" />
+									<p:inputText placeholder="Bashkia"
+										value="#{personSxBean.request.municipality}" />
+									<p:inputText placeholder="Njësia"
+										value="#{personSxBean.request.unit}" />
+
+									<p:inputText placeholder="Nga Mosha"
+										value="#{personSxBean.request.fromAge}" />
+									<p:inputText placeholder="Në Moshën"
+										value="#{personSxBean.request.toAge}" />
+
+								</p:panelGrid>
+
+
+							</div>
+
+							<div class="ui-g-12 ui-md-4">
+								<p:panelGrid layout="grid" columns="2"
+									styleClass="ui-panelgrid-blank">
+									<p:commandButton value="Kërko" update="@form"
+										action="#{personSxBean.search()}" icon="ui-icon-search" />
+										<p:commandButton value="Pastro" update="@form"
+										action="#{personSxBean.clear()}" icon="ui-icon-trash" 
+										styleClass="red-btn"/>
+								</p:panelGrid>
+							</div>
+
+							<div class="ui-g-12">
+								<p:messages showDetail="true" closable="true" >
+									<p:autoUpdate />
+								</p:messages>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</h:panelGroup>
+
+		<h:panelGroup layout="block" id="sx_list"
+			rendered="#{!personSxBean.renderFilter}">
+			<div class="ui-g ui-fluid">
+				<div class="ui-g-12">
 					<div class="ui-g">
-						<div class="ui-g-12">
-								
+						<div class="ui-g-6 ui-md-2">
+							<p:commandButton value="Mbrapa"
+								action="#{personSxBean.renderFilter()}" update="@form"
+								process="@this" styleClass="red-btn" icon="fa fa-arrow-left" />
 						</div>
-						
-						<div class="ui-g-12 ui-md-4">
-							<p:panelGrid layout="grid" columns="2" styleClass="ui-panelgrid-blank">
-								<p:commandButton value="Kërko" update="@form" action="#{personSxBean.search()}" icon="ui-icon-search" /> 
-							</p:panelGrid>
+						<div class="ui-g-6 ui-md-2">
+							<p:commandButton value="Kërkim i ri"
+								action="#{personSxBean.clear()}" update="@form" process="@this"
+								styleClass="cyan-btn" icon="ui-icon-search" />
 						</div>
-						
-						<div class="ui-g-12">
-							<p:messages autoUpdate="true" showDetail="true" closable="true"/>	
-						</div>
-						
-				    </div>
-				</div>
-			</div>
-		</div>
-	</h:panelGroup>
-	
-	<h:panelGroup layout="block" id="sx_list" rendered="#{!personSxBean.renderFilter}" >
-		<div class="ui-g ui-fluid">
-			<div class="ui-g-12">
-				<div class="ui-g">
-					<div class="ui-g-6 ui-md-2">
-						<p:commandButton value="Mbrapa" action="#{personSxBean.renderFilter()}" update="@form" process="@this"
-						                 styleClass="red-btn" icon="fa fa-arrow-left" /> 
-					</div>
-					<div class="ui-g-6 ui-md-2">
-						<p:commandButton value="Kërkim i ri" action="#{personSxBean.clear()}" update="@form" process="@this"
-						                 styleClass="cyan-btn" icon="ui-icon-search" /> 
 					</div>
 				</div>
+				<div class="ui-g-12">
+					<p:dataTable value="#{personSxBean.persons}" var="p"
+						paginatorAlwaysVisible="false" paginator="true" rows="20"
+						rowIndexVar="r" selectionMode="single"
+						selection="#{personSxBean.person}" rowKey="#{p.id}"
+						rowsPerPageTemplate="10,20,30,50" reflow="true">
+						<p:ajax event="rowSelect"
+							listener="#{personSxBean.personSelect()}" update=":main">
+						</p:ajax>
+
+						<p:column headerText="#">
+                                    #{r+1}
+                                </p:column>
+						<p:column headerText="Emri" sortBy="#{p.name}"
+							filterBy="#{p.name}">
+                                    #{p.name}
+                                </p:column>
+						<p:column headerText="Mbiemri" sortBy="#{p.surname}"
+							filterBy="#{p.surname}">
+                                    #{p.surname}
+                                </p:column>
+						<p:column headerText="Atësia" sortBy="#{p.fatherName}"
+							filterBy="#{p.fatherName}">
+                                    #{p.fatherName}
+                                </p:column>
+						<p:column headerText="Mëmësia" sortBy="#{p.motherName}"
+							filterBy="#{p.motherName}">
+                                    #{p.motherName}
+                                </p:column>
+						<p:column headerText="Datëlindja" sortBy="#{p.dob}"
+							filterBy="#{p.dob}">
+                                    #{p.dob}
+                                </p:column>
+						<p:column headerText="Mbiemri V" sortBy="#{p.maidenName}"
+							filterBy="#{p.maidenName}">
+                                    #{p.maidenName}
+                                </p:column>
+						<p:column headerText="Vendlindja" sortBy="#{p.pob}"
+							filterBy="#{p.pob}">
+                                    #{p.pob}
+                                </p:column>
+						<p:column headerText="Rrethi" sortBy="#{p.region}"
+							filterBy="#{p.region}">
+                                    #{p.region}
+                                </p:column>
+						<p:column headerText="Bashkia" sortBy="#{p.municipality}"
+							filterBy="#{p.municipality}">
+                                    #{p.municipality}
+                                </p:column>
+
+					</p:dataTable>
+				</div>
+
 			</div>
-			<div class="ui-g-12">
-				<p:dataTable value="#{personSxBean.persons}" var="p" paginatorAlwaysVisible="false" paginator="true" rows="20" rowIndexVar="r" 
-							 selectionMode="single" selection="#{personSxBean.person}" rowKey="#{p.id}" rowsPerPageTemplate="10,20,30,50" 
-							 reflow="true"> 
-				<p:ajax event="rowSelect" listener="#{personSxBean.personSelect()}" update=":main" >
-				<f:param name="nid" value="#{personSxBean.person.nid}"/>
-				</p:ajax>
-				
-				<p:column headerText="#">
-				      #{r+1}
-				</p:column>
-				
-				</p:dataTable>
-			</div>
-			
-		</div>
-	</h:panelGroup>
-	
-	
-		<p:commandButton value="GoToPersonWithNid" action="#{nav.navigate('person_view')}" update=":main">
-			<f:param name="nid" value="NIDIII"/>
-		</p:commandButton>
+		</h:panelGroup>
+
+
+		
 	</h:form>
-	
+
 </ui:composition>

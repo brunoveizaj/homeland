@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.annotation.ManagedProperty;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import com.homeland.ui.criterias.PersonRequest;
@@ -19,12 +19,14 @@ public class PersonSxBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	@ManagedProperty("#{nav}")
+	@ManagedProperty(value="#{nav}")
 	NavigationBean nav;
 	
 	
 	PersonRequest request;	
+	
 	boolean renderFilter;
+	
 	List<PersonDTO> persons;
 	PersonDTO person;
 	
@@ -71,7 +73,7 @@ public class PersonSxBean implements Serializable {
 	
 
 	public void personSelect()
-	{
+	{		
 		nav.navigate("person_view");
 	}
 	

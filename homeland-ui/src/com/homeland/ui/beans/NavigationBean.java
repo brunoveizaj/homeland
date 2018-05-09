@@ -57,7 +57,7 @@ public class NavigationBean implements Serializable {
 	public void navigate(String to)
 	{
 		Map<String, String> reqParams = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-		//System.out.println("REQUEST PARAMETERS MAP: "+reqParams);
+		System.out.println("REQUEST PARAMETERS MAP: "+reqParams);
 		
 		List<Param> params = new ArrayList<>();
 		Iterator it = reqParams.entrySet().iterator();

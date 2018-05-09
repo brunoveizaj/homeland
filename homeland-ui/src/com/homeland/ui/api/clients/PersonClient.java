@@ -1,8 +1,6 @@
 package com.homeland.ui.api.clients;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -10,6 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -111,12 +110,10 @@ public class PersonClient {
 		ParameterizedTypeReference<List<PersonDTO>> typeRef = new ParameterizedTypeReference<List<PersonDTO>>() {};
 		
 		ResponseEntity<List<PersonDTO>> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, typeRef);
-		//ResponseEntity<PersonDTO[]> response = getForEntity(builder.toUriString(), PersonDTO[].class);
 		
 		if(response.getStatusCodeValue() == HttpCode.OK)
 		{
 			return response.getBody();
-			//return Arrays.asList(response.getBody());
 		}
 		
 		if(response.getStatusCodeValue() == HttpCode.SERVER_ERROR)
@@ -138,16 +135,21 @@ public class PersonClient {
 	
 	public PersonRaportDTO personRaport(String nid)
 	{
-	    final String BASE_URL = IApiClient.SERVER+"/api/person/personRaport/{nid}";
-	    
-	    Map<String, String> params = new HashMap<String, String>();
-	    params.put("nid", nid);
+	    final String BASE_URL = IApiClient.SERVER+"/api/person/personRaport/"+nid;
 	    
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(BASE_URL);
-		builder.build(nid);
 		System.err.println("API REQ PERSON:personRaport: "+builder.toUriString());
-		
+		/*
+		List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();        
+		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+		List<MediaType> suppMedias = new ArrayList<>();
+		suppMedias.add(MediaType.ALL);
+		converter.setSupportedMediaTypes(suppMedias);         
+		messageConverters.add(converter);  
+			*/	
 		RestTemplate restTemplate = new RestTemplate();
+		//restTemplate.setMessageConverters(messageConverters);  
+		
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
 		headers.set("Authorization", "Bearer "+"ckemi");
@@ -175,10 +177,10 @@ public class PersonClient {
 		PersonClient client = new PersonClient();
 		
 		PersonRequest req = new PersonRequest();
-		req.setName("Hasan");req.setSurname("Bylbyl");
+		req.setName("bruno");req.setSurname("veizaj");
 		
-	//	client.searchPerson(req);
-		client.personRaport("AA4567BB");
+		client.searchPerson(req);
+		client.personRaport("j00613072ts");
 		
 	}
 	
