@@ -102,13 +102,16 @@
 				</div>
 				<div class="ui-g-12">
 					<p:dataTable value="#{personSxBean.persons}" var="p"
-						paginatorAlwaysVisible="false" paginator="true" rows="20"
+						paginatorAlwaysVisible="true" paginator="true" rows="20"
 						rowIndexVar="r" selectionMode="single"
 						selection="#{personSxBean.person}" rowKey="#{p.id}"
 						rowsPerPageTemplate="10,20,30,50" reflow="true">
 						<p:ajax event="rowSelect"
 							listener="#{personSxBean.personSelect()}" update=":main">
 						</p:ajax>
+						<f:facet name="header">
+							Lista personave
+						</f:facet>
 						
 						<p:column headerText="#">
                                     #{r+1}

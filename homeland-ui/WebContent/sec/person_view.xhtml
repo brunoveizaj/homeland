@@ -14,7 +14,7 @@
 				<div class="ui-g">
 					<div class="ui-g-6 ui-md-2">
 						<p:commandButton value="Mbrapa" action="#{nav.back()}"
-							process="@this" update=":main" styleClass="red-btn"
+							process="@this" update=":main" styleClass="black-cl-btn"
 							icon="fa fa-arrow-left" />
 					</div>
 				</div>
@@ -437,7 +437,7 @@
 			</div>
 
 			<div class="ui-g-12">
-				<p:panel id="subsPnl" header="Subjektet" styleClass="blue-pnl">
+				<p:panel id="subsPnl" header="Subjektet" styleClass="ph">
 					<f:facet name="actions">
 						<p:commandLink action="#{personBean.loadSubjects()}"
 							update="subsPnl"

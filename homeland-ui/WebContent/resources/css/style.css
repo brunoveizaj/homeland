@@ -14,9 +14,23 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight.ui-state-hover {
    background-color: #3984b8;
 }
 
-.ui-panel .ui-panel-content
+body 
 {
+	color: #212121;
+}
+
+body .ui-datatable thead th {
+    color: #212121;
+}
+
+body .ui-panel .ui-panel-content
+{
+	/*
+	padding-top: 6px;
+    padding-right: 12px;
+    padding-left: 12px;
 	padding-bottom: 0 !important;
+	*/
 }
 
 .no-border table tbody tr td, .no-border .ui-widget-content,.no-border table thead th,.no-border table tfoot td, .no-border table tfoot th
@@ -37,7 +51,62 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight.ui-state-hover {
     border-bottom:1px #aaaaaa solid !important;
 }
 
+body .ui-widget-header
+{
+	background-color: #0e2031;
+	color: #fff !important;
+	font-size: 14px !important;
+	border: 1px solid #0e2031;
+	line-height: 25px;
+	
+}
+body .ui-panel-titlebar-icon
+{
+    color: #fff !important;
+}
 
+body .ui-paginator {
+    background-color: #2f4050;
+    line-height: 18px;
+}
+
+
+.green-cl-btn
+{
+	background-color: white;
+	color: black;
+	border: 2px solid #4caf50;
+}
+.green-cl-btn:hover
+{
+	background-color: #4caf50;
+	color:white;
+}
+
+.black-cl-btn
+{
+	background-color: white !important;
+	color: black !important;
+	border: 2px solid black !important;
+}
+.black-cl-btn:hover
+{
+	background-color: black !important;
+	color:white !important;
+}
+
+.black-cl-btn .ui-button.ui-button-text-icon-left .ui-icon {
+    //margin-top: -6px;
+    color: black;
+}
+
+
+.ph .ui-widget-header:hover
+{
+	background-color: #2d95da !important; //#2f4050;
+}
+
+/*
 .blue-tbl .ui-datatable .ui-datatable-header
 {
     
@@ -61,7 +130,7 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight.ui-state-hover {
 {
     color: #fff !important;
 }
-
+*/
 .bold
 {
     font-weight: bold;
