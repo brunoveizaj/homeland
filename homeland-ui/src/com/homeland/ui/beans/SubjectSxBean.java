@@ -1,6 +1,7 @@
 package com.homeland.ui.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -8,7 +9,9 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import com.homeland.ui.criterias.SubjectRequest;
+import com.homeland.ui.models.Param;
 import com.homeland.ui.models.SubjectDTO;
+import com.homeland.ui.services.SubjectService;
 
 @ManagedBean
 @ViewScoped
@@ -61,7 +64,8 @@ public class SubjectSxBean implements Serializable {
 	
 	public void search()
 	{
-		init();
+		this.subjects = new SubjectService().searchSubject(request);
+		this.subject = null;
 	}
 	
 	public void clear()
@@ -71,7 +75,9 @@ public class SubjectSxBean implements Serializable {
 	
 	public void onSubjectSelect()
 	{
-		
+		List<Param> params = new ArrayList<>();
+		params.add(new Param("nipt",subject.getNipt()));
+		nav.navigate("subject_view",params);
 	}
 	
 	
