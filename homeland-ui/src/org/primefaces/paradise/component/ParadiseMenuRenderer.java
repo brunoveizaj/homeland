@@ -213,7 +213,7 @@ public class ParadiseMenuRenderer extends BaseMenuRenderer {
             else {
                 writer.writeAttribute("href", "#", null);
 
-                @SuppressWarnings("deprecation")
+                //@SuppressWarnings("deprecation")
 				UIComponent form = ComponentUtils.findParentForm(context, menu);
                 if(form == null) {
                     throw new FacesException("MenuItem must be inside a form element");

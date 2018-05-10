@@ -85,22 +85,19 @@
 
 		<h:panelGroup layout="block" id="sx_list"
 			rendered="#{!personSxBean.renderFilter}">
-			<div class="ui-g ui-fluid">
-				<div class="ui-g-12">
-					<div class="ui-g">
+			<div class="ui-g ">
+
 						<div class="ui-g-6 ui-md-2">
 							<p:commandButton value="Mbrapa"
 								action="#{personSxBean.renderFilter()}" update="@form"
-								process="@this" styleClass="red-btn" icon="fa fa-arrow-left" />
+								process="@this" styleClass="black-cl-btn" icon="fa fa-arrow-left" />
 						</div>
 						<div class="ui-g-6 ui-md-2">
 							<p:commandButton value="Kërkim i ri"
 								action="#{personSxBean.clear()}" update="@form" process="@this"
-								styleClass="cyan-btn" icon="ui-icon-search" />
+								styleClass="gren-cl-btn" icon="ui-icon-search" />
 						</div>
-					</div>
-				</div>
-				<div class="ui-g-12">
+				<div class="ui-g-12 ui-fluid">
 					<p:dataTable value="#{personSxBean.persons}" var="p"
 						paginatorAlwaysVisible="true" paginator="true" rows="20"
 						rowIndexVar="r" selectionMode="single"
