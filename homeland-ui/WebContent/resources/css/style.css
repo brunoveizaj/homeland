@@ -53,7 +53,7 @@ body .ui-panel .ui-panel-content
 
 body .ui-widget-header
 {
-	background-color: #0e2031;
+	background-color: #00172e; //#2d6891;//#0e2031;
 	color: #fff !important;
 	font-size: 14px !important;
 	border: 1px solid #0e2031;
@@ -103,7 +103,7 @@ body .ui-paginator {
 
 .ph .ui-widget-header:hover
 {
-	background-color: #2d95da !important; //#2f4050;
+	background-color: #004a94 !important; // #3376a5;   #2d95da;    #2f4050;
 }
 
 /*

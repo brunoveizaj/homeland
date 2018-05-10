@@ -9,23 +9,22 @@
 		<f:event type="preRenderComponent" listener="#{personViewBean.init()}" />
 
 
-		<div class="ui-g ui-fluid">
-			<div class="ui-g-12">
-				<div class="ui-g">
-					<div class="ui-g-6 ui-md-2">
-						<p:commandButton value="Mbrapa" action="#{nav.back()}"
-							process="@this" update=":main" styleClass="black-cl-btn"
-							icon="fa fa-arrow-left" />
-					</div>
-				</div>
-			</div>
+		<div class="ui-g">
 
 			<div class="ui-g-12">
+				<p:commandButton action="#{nav.back()}" value="Mbrapa"
+					process="@this" update=":main" styleClass="black-cl-btn"
+					icon="fa fa-arrow-left" />
+			</div>
+
+
+			<div class="ui-g-12 ui-fluid">
 				<p:messages showDetail="true" closable="true">
 					<p:autoUpdate />
 				</p:messages>
 			</div>
-			<div class="ui-g-12 ui-md-8">
+
+			<div class="ui-g-12 ui-md-8 ui-fluid">
 
 				<p:panel header="Gjeneralitetet" styleClass="blue-pnl">
 
@@ -73,10 +72,11 @@
 
 			</div>
 
-			<div class="ui-g-12 ui-md-4">
-				<p:dataTable value="#{personViewBean.phones}" var="ph" styleClass="blue-tbl"
-					rowIndexVar="r" paginator="true" paginatorAlwaysVisible="false"
-					rows="5" rowsPerPageTemplate="5,10,20" pageLinks="2" reflow="true"
+			<div class="ui-g-12 ui-md-4 ui-fluid">
+				<p:dataTable value="#{personViewBean.phones}" var="ph"
+					styleClass="blue-tbl" rowIndexVar="r" paginator="true"
+					paginatorAlwaysVisible="false" rows="5"
+					rowsPerPageTemplate="5,10,20" pageLinks="2" reflow="true"
 					emptyMessage="Nuk ka kontakte">
 
 					<f:facet name="header">
@@ -99,10 +99,11 @@
 			</div>
 
 
-			<div class="ui-g-12">
-				<p:dataTable value="#{personViewBean.family}" var="f" styleClass="blue-tbl"
-					selection="#{personViewBean.familyMember}" selectionMode="single"
-					rowIndexVar="r" rowKey="#{f.id}" reflow="true">
+			<div class="ui-g-12 ui-fluid">
+				<p:dataTable value="#{personViewBean.family}" var="f"
+					styleClass="blue-tbl" selection="#{personViewBean.familyMember}"
+					selectionMode="single" rowIndexVar="r" rowKey="#{f.id}"
+					reflow="true">
 
 					<p:ajax event="rowSelect"
 						listener="#{personViewBean.onFamilySelect()}" update="@form" />
@@ -144,7 +145,7 @@
 			</div>
 
 			<c:forEach items="#{personViewBean.cards}" var="idc">
-				<div class="ui-g-12">
+				<div class="ui-g-12 ui-fluid">
 					<p:panel header="Karta Identiteti" styleClass="blue-pnl">
 						<div class="ui-g">
 							<div class="ui-g-12 ui-md-2">
@@ -209,7 +210,7 @@
 			</c:forEach>
 
 			<c:forEach items="#{personViewBean.passports}" var="idp">
-				<div class="ui-g-12">
+				<div class="ui-g-12 ui-fluid">
 					<p:panel header="Pasaporta Biometrike" styleClass="blue-pnl">
 						<div class="ui-g">
 
@@ -272,11 +273,12 @@
 			</c:forEach>
 
 
-			<div class="ui-g-12">
-				<p:dataTable value="#{personViewBean.tatime}" var="t" rowIndexVar="r"
-					reflow="true" emptyMessage="I pa punë" styleClass="blue-tbl">
+			<div class="ui-g-12 ui-fluid">
+				<p:dataTable value="#{personViewBean.tatime}" var="t"
+					rowIndexVar="r" reflow="true" emptyMessage="I pa punë"
+					styleClass="blue-tbl">
 
-				<f:facet name="header">
+					<f:facet name="header">
                     Punësimi
                 </f:facet>
 					<p:column headerText="#">
@@ -285,11 +287,11 @@
 					<p:column headerText="NIPT">
                     #{t.nipt}
                 </p:column>
-				<p:column headerText="Subjekti">
-					<p:commandLink value="#{t.subject}"
+					<p:column headerText="Subjekti">
+						<p:commandLink value="#{t.subject}"
 							action="#{personBean.onNavSubjectSelect(t.nipt)}" />
-				</p:column>
-				<p:column headerText="Pozicioni">
+					</p:column>
+					<p:column headerText="Pozicioni">
                     #{t.profession}
                 </p:column>
 					<p:column headerText="Paga">
@@ -303,53 +305,55 @@
                 </p:column>
 				</p:dataTable>
 			</div>
-			
-			<div class="ui-g-12">
-				<p:dataTable value="#{personViewBean.borders}" var="b" rowIndexVar="r"
-					reflow="true" emptyMessage="Nuk ka hyrje-dalje" styleClass="blue-tbl">
 
-				<f:facet name="header">
+			<div class="ui-g-12 ui-fluid">
+				<p:dataTable value="#{personViewBean.borders}" var="b"
+					rowIndexVar="r" reflow="true" emptyMessage="Nuk ka hyrje-dalje"
+					styleClass="blue-tbl">
+
+					<f:facet name="header">
                     Hyrje - Dalje
                 </f:facet>
-				<p:column headerText="#">
+					<p:column headerText="#">
                     #{r+1}
                 </p:column>
-                <p:column headerText="Eventi">
+					<p:column headerText="Eventi">
                     #{b.event}
                 </p:column>
-				<p:column headerText="Data">
+					<p:column headerText="Data">
                     #{b.crossingDate}
                 </p:column>
-				<p:column headerText="Pika kufitare">
+					<p:column headerText="Pika kufitare">
 					#{b.crossingGate}
 				</p:column>
-				<p:column headerText="Linja">
+					<p:column headerText="Linja">
                     #{b.travel}
                 </p:column>
 					<p:column headerText="Dokumenti">
                     #{b.docNo} (b.docState)
                 </p:column>
-				<p:column headerText="Kategoria">
+					<p:column headerText="Kategoria">
                     #{b.citizenType}
                 </p:column>
-                <p:column headerText="Targa">
+					<p:column headerText="Targa">
                     #{b.plate}
                 </p:column>
-                <p:column headerText="Shofer">
+					<p:column headerText="Shofer">
                     #{b.driver}
                 </p:column>
-                <p:column headerText="Qëlimi">
+					<p:column headerText="Qëlimi">
                     #{b.purpose}
                 </p:column>
 				</p:dataTable>
 			</div>
-			
-			
 
 
-			<div class="ui-g-12">
-				<p:dataTable value="#{personViewBean.oshees}" var="o" rowIndexVar="r" styleClass="blue-tbl"
-					reflow="true" emptyMessage="Nuk ka kontratë">
+
+
+			<div class="ui-g-12 ui-fluid">
+				<p:dataTable value="#{personViewBean.oshees}" var="o"
+					rowIndexVar="r" styleClass="blue-tbl" reflow="true"
+					emptyMessage="Nuk ka kontratë">
 
 					<f:facet name="header">
                     OSHEE
@@ -393,9 +397,8 @@
 
 
 
-			<div class="ui-g-12">
-				<p:panel id="vehiclesPnl" header="Automjetet"
-					styleClass="blue-pnl">
+			<div class="ui-g-12 ui-fluid">
+				<p:panel id="vehiclesPnl" header="Automjetet" styleClass="blue-pnl">
 					<f:facet name="actions">
 						<p:commandLink action="#{personBean.loadVehicles()}"
 							update="vehiclesPnl"
@@ -436,7 +439,7 @@
 				</p:panel>
 			</div>
 
-			<div class="ui-g-12">
+			<div class="ui-g-12 ui-fluid">
 				<p:panel id="subsPnl" header="Subjektet" styleClass="ph">
 					<f:facet name="actions">
 						<p:commandLink action="#{personBean.loadSubjects()}"
@@ -477,8 +480,6 @@
 			</div>
 
 		</div>
-
-		
 
 	</h:form>
 

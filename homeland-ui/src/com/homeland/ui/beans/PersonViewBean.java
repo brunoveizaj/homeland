@@ -221,7 +221,7 @@ public class PersonViewBean implements Serializable {
 		
 	}
 	
-	public void onFamilyMemberSelect()
+	public void onFamilySelect()
 	{
 		
 	}
