@@ -12,6 +12,9 @@ public class SubjectService {
 		return null;
 	}
 	
-	
+	public SubjectDTO getSubjectByNipt(String nipt)
+	{
+		return null;
+	}
 	
 }

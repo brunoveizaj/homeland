@@ -1,0 +1,95 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+	<h:form id="person_view_form">
+		<f:event type="preRenderComponent"
+			listener="#{subjectViewBean.init()}" />
+
+
+		<div class="ui-g">
+
+			<div class="ui-g-12">
+				<p:commandButton action="#{nav.back()}" value="Mbrapa"
+					process="@this" update=":main" styleClass="black-cl-btn"
+					icon="fa fa-arrow-left" />
+			</div>
+
+			<div class="ui-g-12 ui-fluid">
+				<p:messages showDetail="true" closable="true">
+					<p:autoUpdate />
+				</p:messages>
+			</div>
+
+			<div class="ui-g-12 ui-fluid">
+
+				<p:panel header="Të dhënat e subjektit" styleClass="blue-pnl">
+
+					<p:panelGrid columns="4" layout="grid"
+							styleClass="ui-panelgrid-blank">
+							
+							
+							
+					</p:panelGrid>
+
+				</p:panel>
+
+			</div>
+
+			<div class="ui-g-12 ui-fluid">
+				<p:panel header="Punonjësit">
+					<p:panelGrid layout="grid" styleClass="ui-panelgrid-blank">
+						<p:panelGrid columns="2" layout="grid"
+							styleClass="ui-panelgrid-blank">
+							<p:selectOneMenu placeholder="Viti">
+							</p:selectOneMenu>
+							<p:selectOneMenu placeholder="Muaji">
+							</p:selectOneMenu>
+						</p:panelGrid>
+						<p:dataTable value="#{subjectViewBean.tatimes}" var="t"
+							styleClass="blue-tbl" rowIndexVar="r" paginator="true"
+							paginatorAlwaysVisible="false" rows="5"
+							rowsPerPageTemplate="5,10,20" reflow="true"
+							emptyMessage="Nuk ka punonjës">
+
+							<f:facet name="header">
+                    Punonjësit
+                </f:facet>
+							<p:column headerText="#">
+                    #{r+1}
+                </p:column>
+							<p:column headerText="NID">
+                    #{t.nid}
+                </p:column>
+							<p:column headerText="Punonjësi">
+                    #{t.name} #{t.surname}
+                </p:column>
+							<p:column headerText="Datëlindja">
+                    #{t.dob}
+                </p:column>
+							<p:column headerText="Pozicioni">
+                    #{t.position}
+                </p:column>
+							<p:column headerText="Viti">
+                    #{t.year}
+                </p:column>
+							<p:column headerText="Muaji">
+                    #{t.month}
+                </p:column>
+
+						</p:dataTable>
+					</p:panelGrid>
+				</p:panel>
+			</div>
+
+
+
+		</div>
+
+	</h:form>
+
+
+</ui:composition>

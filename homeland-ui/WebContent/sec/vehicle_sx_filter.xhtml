@@ -1,0 +1,110 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui" >
+
+
+	<h:form id="vehicle_sx_filter_form">
+	
+	<div class="ui-g ui-fluid">
+				<div class="ui-g-12">
+					<div class="card card-w-title">
+						<h1>Kërkim Automjeti</h1>
+						<div class="ui-g">
+							<div class="ui-g-12">
+
+								<p:panelGrid layout="grid" columns="4"
+									styleClass="ui-panelgrid-blank form-group">
+
+									<p:inputText placeholder="Emri"
+										value="#{personSxBean.request.name}" />
+									<p:inputText placeholder="Mbiemri"
+										value="#{personSxBean.request.surname}" />
+									<p:inputText placeholder="Atësia"
+										value="#{personSxBean.request.fatherName}" />
+									<p:inputText placeholder="Mëmësia"
+										value="#{personSxBean.request.motherName}" />
+
+									<p:inputText placeholder="NID"
+										value="#{personSxBean.request.nid}" />
+									<p:inputText placeholder="Mbiemri Vajzërisë"
+										value="#{personSxBean.request.maidenName}" />
+									<p:inputMask mask="99.99.9999" placeholder="Datëlindja"
+										value="#{personSxBean.request.dob}" />
+									<p:selectOneMenu placeholder="Gjinia"
+										value="#{personSxBean.request.gender}" autoWidth="false">
+										<f:selectItem itemValue="#{null}" itemLabel=" " />
+										<f:selectItem itemValue="M" itemLabel="M" />
+										<f:selectItem itemValue="F" itemLabel="F" />
+									</p:selectOneMenu>
+
+								</p:panelGrid>
+
+
+							</div>
+
+							<div class="ui-g-12 ui-md-4">
+								<p:panelGrid layout="grid" columns="2"
+									styleClass="ui-panelgrid-blank">
+									<p:commandButton value="Kërko" update="@form"
+										action="#{vehicleSxBean.search()}" icon="ui-icon-search" />
+										<p:commandButton value="Pastro" update="@form"
+										action="#{vehicleSxBean.clear()}" icon="ui-icon-trash" 
+										styleClass="red-btn"/>
+								</p:panelGrid>
+							</div>
+
+							<div class="ui-g-12">
+								<p:messages showDetail="true" closable="true" >
+									<p:autoUpdate />
+								</p:messages>
+							</div>
+							
+							<div class="ui-g-12">
+								<p:dataTable value="#{vehicleSxBean.vehicles}" var="s" reflow="true" rowIndexVar="r"
+								 paginator="true" paginatorAlwaysVisible="false" rows="20" rowsPerPageTemplate="10,20,30,50"
+								 selection="#{subjectSxBean.subject}" selectionMode="single" rowKey="#{s.id}">
+								 
+								 <p:ajax event="rowSelect" listener="#{subjectSxBean.onSubjectSelect()}" update=":main" />
+									
+									<p:column headerText="#">
+										#{r+1}
+									</p:column>
+									<p:column headerText="Nipt">
+										#{s.nipt}
+									</p:column>
+									<p:column headerText="Subjekti">
+										#{s.name}
+									</p:column>
+									<p:column headerText="Aksioner">
+										#{s.actioners}
+									</p:column>
+									<p:column headerText="Administratori">
+										#{s.administrator}
+									</p:column>
+									<p:column headerText="Dt regj">
+										#{s.regDate}
+									</p:column>
+									<p:column headerText="Qyteti">
+										#{s.region}
+									</p:column>
+									<p:column headerText="Aktiviteti">
+										#{s.mainActivity}
+									</p:column>
+								</p:dataTable>
+							</div>
+							
+							
+
+						</div>
+					</div>
+				</div>
+			</div>
+	
+	
+	
+	</h:form>
+	
+	
+	</ui:composition>
