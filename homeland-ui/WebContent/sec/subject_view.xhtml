@@ -28,11 +28,59 @@
 
 				<p:panel header="Të dhënat e subjektit" styleClass="blue-pnl">
 
-					<p:panelGrid columns="4" layout="grid"
-							styleClass="ui-panelgrid-blank">
-							
-							
-							
+					<p:panelGrid layout="grid" columns="4"
+						columnClasses="bold,empty,bold,empty"
+						styleClass="ui-panelgrid-blank">
+						<p:outputLabel value="Emri Subjektit" />
+						<p:inputText value="#{subjectViewBean.subject.name}"
+							readonly="true" />
+						<p:outputLabel value="NIPT" />
+						<p:inputText value="#{subjectViewBean.subject.nipt}"
+							readonly="true" />
+
+						<p:outputLabel value="Administratori" />
+						<p:inputText value="#{subjectViewBean.subject.administrators}"
+							readonly="true" />
+						<p:outputLabel value="Forma Ligjore" />
+						<p:inputText value="#{subjectViewBean.subject.legalForm}"
+							readonly="true" />
+
+						<p:outputLabel value="Aksionerët" />
+						<p:inputText value="#{subjectViewBean.subject.actioners}"
+							readonly="true" />
+						<p:outputLabel value="Adresa" />
+						<p:inputText value="#{subjectViewBean.subject.address}"
+							readonly="true" />
+
+						<p:outputLabel value="Data Regjistrimit" />
+						<p:inputText value="#{subjectViewBean.subject.regDate}"
+							readonly="true" />
+						<p:outputLabel value="Rrethi" />
+						<p:inputText value="#{subjectViewBean.subject.region}"
+							readonly="true" />
+
+						<p:outputLabel value="Telefon" />
+						<p:inputText value="#{subjectViewBean.subject.phone}"
+							readonly="true" />
+						<p:outputLabel value="Email" />
+						<p:inputText value="#{subjectViewBean.subject.email}"
+							readonly="true" />
+
+						<p:outputLabel value="Aktiviteti" />
+						<p:inputText value="#{subjectViewBean.subject.mainActivity}"
+							readonly="true" />
+
+					</p:panelGrid>
+					<p:panelGrid layout="grid" columns="2"
+						columnClasses="ui-grid-col-3,ui-grid-col-9"
+						styleClass="ui-panelgrid-blank">
+						<p:outputLabel value="Përshkrimi" styleClass="bold" />
+						<p:inputTextarea value="#{subjectViewBean.subject.activity}"
+							readonly="true" />
+					</p:panelGrid>
+
+
+
 					</p:panelGrid>
 
 				</p:panel>
@@ -65,13 +113,19 @@
                     #{t.nid}
                 </p:column>
 							<p:column headerText="Punonjësi">
-                    #{t.name} #{t.surname}
-                </p:column>
+								<p:commandLink value="#{t.name} #{t.surname}" update=":main"
+									action="#{nav.navigate('person_view')}">
+									<f:param name="nid" value="#{t.nid}" />
+								</p:commandLink>
+							</p:column>
 							<p:column headerText="Datëlindja">
                     #{t.dob}
                 </p:column>
 							<p:column headerText="Pozicioni">
                     #{t.position}
+                </p:column>
+							<p:column headerText="Paga">
+                    #{t.salary}
                 </p:column>
 							<p:column headerText="Viti">
                     #{t.year}

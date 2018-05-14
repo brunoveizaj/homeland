@@ -87,15 +87,16 @@
 			rendered="#{!personSxBean.renderFilter}">
 			<div class="ui-g ">
 
-						<div class="ui-g-6 ui-md-2">
-							<p:commandButton value="Mbrapa"
+						<div class="ui-g-12 ui-md-2">
+						<h:panelGrid  columns="2">
+							<p:commandButton 
 								action="#{personSxBean.renderFilter()}" update="@form"
 								process="@this" styleClass="black-cl-btn" icon="fa fa-arrow-left" />
-						</div>
-						<div class="ui-g-6 ui-md-2">
-							<p:commandButton value="Kërkim i ri"
+
+							<p:commandButton 
 								action="#{personSxBean.clear()}" update="@form" process="@this"
 								styleClass="gren-cl-btn" icon="ui-icon-search" />
+						</h:panelGrid>
 						</div>
 				<div class="ui-g-12 ui-fluid">
 					<p:dataTable value="#{personSxBean.persons}" var="p"

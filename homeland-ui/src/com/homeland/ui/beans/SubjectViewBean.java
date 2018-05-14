@@ -29,6 +29,48 @@ public class SubjectViewBean implements Serializable {
 	Integer month;
 	
 	
+	public NavigationBean getNav() {
+		return nav;
+	}
+
+	public void setNav(NavigationBean nav) {
+		this.nav = nav;
+	}
+
+	public SubjectDTO getSubject() {
+		return subject;
+	}
+
+	public void setSubject(SubjectDTO subject) {
+		this.subject = subject;
+	}
+
+	public List<TatimeDTO> getTatimes() {
+		return tatimes;
+	}
+
+	public void setTatimes(List<TatimeDTO> tatimes) {
+		this.tatimes = tatimes;
+	}
+
+	public Integer getYear() {
+		return year;
+	}
+
+	public void setYear(Integer year) {
+		this.year = year;
+	}
+
+	public Integer getMonth() {
+		return month;
+	}
+
+	public void setMonth(Integer month) {
+		this.month = month;
+	}
+	
+	
+
 	public void init()
 	{
 		if(FacesContext.getCurrentInstance().isPostback())

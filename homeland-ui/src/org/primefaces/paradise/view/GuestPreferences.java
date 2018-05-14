@@ -27,7 +27,7 @@ public class GuestPreferences implements Serializable {
     
     private boolean slimMenu = false;
     
-    private boolean darkMenu = true;
+    private boolean darkMenu = false;
                 
 	public String getTheme() {		
 		return theme;
