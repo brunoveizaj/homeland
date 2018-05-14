@@ -1,6 +1,7 @@
 package com.homeland.ui.beans;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -8,9 +9,11 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import com.homeland.ui.criterias.TatimeRequest;
 import com.homeland.ui.models.SubjectDTO;
 import com.homeland.ui.models.TatimeDTO;
 import com.homeland.ui.services.SubjectService;
+import com.homeland.ui.services.TatimeService;
 
 @ManagedBean
 @ViewScoped
@@ -98,7 +101,18 @@ public class SubjectViewBean implements Serializable {
 	
 	public void loadEmployees()
 	{
-		this.tatimes = null; //get employees
+		if(year == null || month == null)
+		{
+			year = Calendar.getInstance().get(Calendar.YEAR);
+			month = Calendar.getInstance().get(Calendar.MONTH);// January = 0; na duhet previous month
+			if(month == 0) month = 12;
+		}
+		
+		TatimeRequest tr = new TatimeRequest();
+		tr.setNipt(subject.getNipt());
+		tr.setMonth(month);
+		tr.setYear(year);
+		this.tatimes = new TatimeService().searchTatime(tr); 
 	}
 	
 	

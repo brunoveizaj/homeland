@@ -8,6 +8,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import com.homeland.ui.criterias.SubjectRequest;
+import com.homeland.ui.criterias.VehicleRequest;
 import com.homeland.ui.models.BorderDTO;
 import com.homeland.ui.models.CardDTO;
 import com.homeland.ui.models.OsheeDTO;
@@ -19,6 +21,8 @@ import com.homeland.ui.models.SubjectDTO;
 import com.homeland.ui.models.TatimeDTO;
 import com.homeland.ui.models.VehicleDTO;
 import com.homeland.ui.services.PersonService;
+import com.homeland.ui.services.SubjectService;
+import com.homeland.ui.services.VehicleService;
 
 
 @ManagedBean
@@ -157,12 +161,6 @@ public class PersonViewBean implements Serializable {
 		this.vehicles = vehicles;
 	}
 
-	
-	
-	
-	
-	
-
 	public PersonDTO getFamilyMember() {
 		return familyMember;
 	}
@@ -199,6 +197,7 @@ public class PersonViewBean implements Serializable {
 		{
 			this.person = raport.getPerson();
 			this.family = raport.getFamily();
+			this.familyMember = person;
 			this.cards = raport.getCards();
 			this.passports = raport.getPassports();
 			this.tatime = raport.getTatime();
@@ -213,17 +212,22 @@ public class PersonViewBean implements Serializable {
 	
 	public void loadVehicles()
 	{
-		
+		VehicleRequest vr = new VehicleRequest();
+		vr.setName(person.getName());
+		vr.setSurname(person.getSurname());
+		this.vehicles = new VehicleService().searchVehicle(vr);
 	}
 	
 	public void loadSubjects()
 	{
-		
+		SubjectRequest sr = new SubjectRequest();
+		sr.setManagers(person.getName()+" "+person.getSurname());
+		this.subjects = new SubjectService().searchSubject(sr);
 	}
 	
 	public void onFamilySelect()
 	{
-		
+		loadPersonRaport(this.familyMember.getNid());
 	}
 	
 

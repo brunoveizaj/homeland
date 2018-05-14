@@ -32,6 +32,41 @@
 						columnClasses="bold,empty,bold,empty"
 						styleClass="ui-panelgrid-blank">
 						
+						<p:outputLabel value="Targa"/>
+						<p:inputText value="#{vehicleViewBean.vehicle.plate}" disabled="true"/>
+						<p:outputLabel value="Shasia"/>
+						<p:inputText value="#{vehicleViewBean.vehicle.vin}" disabled="true"/>
+						
+						<p:outputLabel value="Pronari"/>
+						<p:inputText value="#{vehicleViewBean.vehicle.owner}" disabled="true"/>
+						<p:outputLabel value="Nid pronari"/>
+						<p:inputText value="#{vehicleViewBean.vehicle.ownerNid}" disabled="true"/>
+						
+						<p:outputLabel value="Shteti"/>
+						<p:inputText value="#{vehicleViewBean.vehicle.state}" disabled="true"/>
+						<p:outputLabel value="Adresa"/>
+						<p:inputText value="#{vehicleViewBean.vehicle.address}" disabled="true"/>
+						
+						<p:outputLabel value="Prodhuesi"/>
+						<p:inputText value="#{vehicleViewBean.vehicle.producer}" disabled="true"/>
+						<p:outputLabel value="Modeli"/>
+						<p:inputText value="#{vehicleViewBean.vehicle.model}" disabled="true"/>
+						
+						<p:outputLabel value="Tipi"/>
+						<p:inputText value="#{vehicleViewBean.vehicle.type}" disabled="true"/>
+						<p:outputLabel value="Kapaciteti"/>
+						<p:inputText value="#{vehicleViewBean.vehicle.capacity}" disabled="true"/>
+						
+						<p:outputLabel value="Viti"/>
+						<p:inputText value="#{vehicleViewBean.vehicle.year}" disabled="true"/>
+						<p:outputLabel value="Ngjyra"/>
+						<p:inputText value="#{vehicleViewBean.vehicle.color}" disabled="true"/>
+						
+						<p:outputLabel value="Përdorimi"/>
+						<p:inputText value="#{vehicleViewBean.vehicle.usedFor}" disabled="true"/>
+						<p:outputLabel value="Leja qarkullimit"/>
+						<p:inputText value="#{vehicleViewBean.vehicle.drivingPermitNo}" disabled="true"/>
+						
 					</p:panelGrid>
 				</p:panel>
 
@@ -40,47 +75,38 @@
 			
 
 			<div class="ui-g-12 ui-fluid">
-				<p:dataTable value="#{personViewBean.family}" var="f"
-					styleClass="blue-tbl" selection="#{personViewBean.familyMember}"
-					selectionMode="single" rowIndexVar="r" rowKey="#{f.id}"
-					reflow="true">
-
-					<p:ajax event="rowSelect"
-						listener="#{personViewBean.onFamilySelect()}" update="@form" />
-
+				<p:dataTable value="#{vehicleViewBean.vehicleHistory}" var="h"
+					styleClass="blue-tbl"  rowIndexVar="r" reflow="true">
 				<f:facet name="header">
                     Historiku automjetit
                 </f:facet>
 					<p:column headerText="#">
-                    #{r+1}
-                </p:column>
-					<p:column headerText="NID">
-                    #{f.nid}
-                </p:column>
-					<p:column headerText="Emri">
-                    #{f.name} 
-                </p:column>
-					<p:column headerText="Atësia">
-                    #{f.fatherName}
-                </p:column>
-					<p:column headerText="Mbiemri">
-                    #{f.surname}
-                </p:column>
-					<p:column headerText="Datëlindja">
-                    #{f.dob}
-                </p:column>
-					<p:column headerText="Vendlindja">
-                    #{f.pob}
-                </p:column>
-					<p:column headerText="L.F">
-                    #{f.familyRelation}
-                </p:column>
-					<p:column headerText="Statusi">
-                    #{f.civilStatus}
-                </p:column>
-					<p:column headerText="Gjinia">
-                    #{f.gender}
-                </p:column>
+                            #{r+1}
+                        </p:column>
+								<p:column headerText="Targa" sortBy="#{v.plate}">
+                            #{h.plate}
+                        </p:column>
+								<p:column headerText="Shasia" sortBy="#{v.vin}">
+                            #{h.vin}
+                        </p:column>
+								<p:column headerText="Pronari" sortBy="#{v.owner}">
+                            #{h.owner}
+                        </p:column>
+								<p:column headerText="Adresa" sortBy="#{v.address}">
+                            #{h.address}
+                        </p:column>
+								<p:column headerText="Tipi" sortBy="#{v.type}">
+                            #{h.type}
+                        </p:column>
+								<p:column headerText="Prodhuesi" sortBy="#{v.producer}">
+                            #{h.producer}
+                        </p:column>
+								<p:column headerText="Modeli" sortBy="#{v.model}">
+                            #{h.model} #{h.capacity}
+                        </p:column>
+								<p:column headerText="Ngjyra" sortBy="#{v.color}">
+                            #{h.color}
+                        </p:column>
 				</p:dataTable>
 			</div>
 
@@ -88,8 +114,8 @@
 
 
 			<div class="ui-g-12 ui-fluid">
-				<p:dataTable value="#{personViewBean.tatime}" var="t"
-					rowIndexVar="r" reflow="true" emptyMessage="I pa punë"
+				<p:dataTable value="#{vehicleViewBean.tickets}" var="t"
+					rowIndexVar="r" reflow="true" emptyMessage="Nuk ka gjoba"
 					styleClass="blue-tbl">
 
 				<f:facet name="header">
@@ -98,7 +124,7 @@
 					<p:column headerText="#">
                     #{r+1}
                 </p:column>
-					<p:column headerText="NIPT">
+					<p:column headerText="Targa">
                     #{t.nipt}
                 </p:column>
 					<p:column headerText="Subjekti">
@@ -121,18 +147,23 @@
 			</div>
 
 			<div class="ui-g-12 ui-fluid">
-				<p:dataTable value="#{personViewBean.borders}" var="b"
+				<p:dataTable value="#{vehicleViewBean.borders}" var="b"
 					rowIndexVar="r" reflow="true" emptyMessage="Nuk ka hyrje-dalje"
 					styleClass="blue-tbl">
 
-					<f:facet name="header">
+				<f:facet name="header">
                     Hyrje - Dalje
                 </f:facet>
 					<p:column headerText="#">
                     #{r+1}
                 </p:column>
-					<p:column headerText="Eventi">
+				<p:column headerText="Eventi">
                     #{b.event}
+                </p:column>
+                <p:column headerText="Personi">
+	                <p:commandLink value="#{b.name} #{b.fatherName} #{b.surname}" action="#{nav.navigate('person_view')}" update=":main">
+	                   <f:param name="nid" value="#{b.nid}"/>
+	                </p:commandLink>
                 </p:column>
 					<p:column headerText="Data">
                     #{b.crossingDate}
@@ -140,16 +171,13 @@
 					<p:column headerText="Pika kufitare">
 					#{b.crossingGate}
 				</p:column>
-					<p:column headerText="Linja">
-                    #{b.travel}
-                </p:column>
 					<p:column headerText="Dokumenti">
-                    #{b.docNo} (b.docState)
+                    #{b.docNo} (#{b.docState})
                 </p:column>
 					<p:column headerText="Kategoria">
                     #{b.citizenType}
                 </p:column>
-					<p:column headerText="Targa">
+				<p:column headerText="Targa">
                     #{b.plate}
                 </p:column>
 					<p:column headerText="Shofer">
