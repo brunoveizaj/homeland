@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -19,7 +20,7 @@ public class SubjectSxBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	@ManagedProperty(value="{nav}")
+	@ManagedProperty(value="#{nav}")
 	NavigationBean nav;
 	
 	SubjectRequest request;
@@ -54,6 +55,11 @@ public class SubjectSxBean implements Serializable {
 		this.subject = subject;
 	}
 	
+	@PostConstruct
+	public void load()
+	{
+		init();
+	}
 	
 	private void init()
 	{

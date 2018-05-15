@@ -121,27 +121,32 @@
 				<f:facet name="header">
                     Gjobat
                 </f:facet>
-					<p:column headerText="#">
+				<p:column headerText="#">
                     #{r+1}
                 </p:column>
-					<p:column headerText="Targa">
-                    #{t.nipt}
+				<p:column headerText="Targa">
+                    #{t.plate}
                 </p:column>
-					<p:column headerText="Subjekti">
-						<p:commandLink value="#{t.subject}"
-							action="#{personBean.onNavSubjectSelect(t.nipt)}" />
-					</p:column>
-					<p:column headerText="Pozicioni">
-                    #{t.profession}
+				<p:column headerText="Nr serial">
+					#{t.serialNo}
+				</p:column>
+				<p:column headerText="Data">
+                    #{t.ticketDate}
                 </p:column>
-					<p:column headerText="Paga">
-                    #{t.salary}
+				<p:column headerText="Oficeri">
+                    #{t.officer}
                 </p:column>
-					<p:column headerText="Viti">
-                    #{t.year}
+				<p:column headerText="Vendi gjobës">
+                    #{t.ticketPlace}
                 </p:column>
-					<p:column headerText="Muaji">
-                    #{t.month}
+				<p:column headerText="Shkelësi">
+                    #{t.violator}
+                </p:column>
+                <p:column headerText="Vlera">
+                    #{t.amount}
+                </p:column>
+                <p:column headerText="Statusi">
+                    #{t.status}
                 </p:column>
 				</p:dataTable>
 			</div>
@@ -188,10 +193,6 @@
                 </p:column>
 				</p:dataTable>
 			</div>
-
-
-
-
 			
 		</div>
 
