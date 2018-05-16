@@ -24,6 +24,7 @@ public class BorderDTO {
 	    private String gender;
 	    private String pupose;
 	    private String event;
+	    private boolean foreign;
 	    
 	    
 	    
@@ -141,6 +142,12 @@ public class BorderDTO {
 		}
 		public void setBcgId(String bcgId) {
 			this.bcgId = bcgId;
+		}
+		public boolean isForeign() {
+			return foreign;
+		}
+		public void setForeign(boolean foreign) {
+			this.foreign = foreign;
 		}
 	    
 	    

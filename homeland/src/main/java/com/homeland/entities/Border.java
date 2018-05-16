@@ -67,6 +67,8 @@ public class Border implements Serializable {
     private String pupose;
     @Column(name = "event")
     private String event;
+    @Column(name = "foreign")
+    private Integer foreign;
     @Column(name = "inserted")
     @Temporal(TemporalType.TIMESTAMP)
     private Date inserted;
@@ -236,6 +238,14 @@ public class Border implements Serializable {
 
 	public void setBcgId(String bcgId) {
 		this.bcgId = bcgId;
+	}
+
+	public Integer getForeign() {
+		return foreign;
+	}
+
+	public void setForeign(Integer foreign) {
+		this.foreign = foreign;
 	}
 
     

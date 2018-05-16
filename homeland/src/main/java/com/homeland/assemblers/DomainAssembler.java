@@ -1,6 +1,7 @@
 package com.homeland.assemblers;
 
 
+import com.homeland.constants.IStatus;
 import com.homeland.dto.BorderDTO;
 import com.homeland.dto.UserDTO;
 import com.homeland.entities.Border;
@@ -42,6 +43,7 @@ public class DomainAssembler {
 		border.setSurname(dto.getSurname());
 		border.setTravel(dto.getTravel());
 		border.setBcgId(dto.getBcgId());
+		border.setForeign(dto.isForeign()?IStatus.ACTIVE:IStatus.NOT_ACTIVE);
 		
 		return border;
 		

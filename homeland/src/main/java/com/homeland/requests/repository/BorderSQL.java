@@ -17,6 +17,7 @@ public class BorderSQL {
 	String bcgId;
 	Date from;
 	Date to;
+	Integer foreign;
 	Integer firstResult;
 	Integer maxResult;
 	
@@ -103,6 +104,12 @@ public class BorderSQL {
 	public void setVin(String vin) {
 		if(StringUtil.isValid(vin))
 	    this.vin = vin.replace(" ", "").toUpperCase();
+	}
+	public Integer getForeign() {
+		return foreign;
+	}
+	public void setForeign(Integer foreign) {
+		this.foreign = foreign;
 	}
 	
 	

@@ -17,6 +17,7 @@ public class BorderRequest {
 	String bcgId;
 	String from;
 	String to;
+	Boolean foreign;
 	Integer firstResult;
 	Integer maxResult;
 	
@@ -101,8 +102,14 @@ public class BorderRequest {
 	public void setVin(String vin) {
 		this.vin = vin;
 	}
+	public Boolean getForeign() {
+		return foreign;
+	}
+	public void setForeign(Boolean foreign) {
+		this.foreign = foreign;
+	}
 	
-
+	
 	@Override
 	public String toString() {
 		return "BorderRequest [" + (event != null ? "event=" + event + ", " : "")

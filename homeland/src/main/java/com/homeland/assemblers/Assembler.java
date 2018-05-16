@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.homeland.constants.IDocument;
+import com.homeland.constants.IStatus;
 import com.homeland.dto.BorderDTO;
 import com.homeland.dto.CardDTO;
 import com.homeland.dto.ImportDTO;
@@ -114,6 +115,7 @@ public class Assembler {
 		dto.setSurname(border.getSurname());
 		dto.setTravel(border.getTravel());
 		dto.setBcgId(border.getBcgId());
+		dto.setForeign(border.getForeign() == IStatus.ACTIVE);
 		
 		
 		return dto;

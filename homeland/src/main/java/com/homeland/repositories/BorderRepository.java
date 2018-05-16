@@ -67,6 +67,12 @@ public class BorderRepository {
 			params.put("to", criterias.getTo());
 		}
 		
+		if(criterias.getForeign() != null)
+		{
+			sql += "AND b.foreign = :for ";
+			params.put("for", criterias.getForeign());
+		}
+		
 		if(StringUtil.isValid(criterias.getFatherName()))
 		{
 			sql += "AND b.fatherName LIKE :fn ";

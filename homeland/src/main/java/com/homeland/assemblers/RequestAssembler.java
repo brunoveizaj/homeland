@@ -1,5 +1,6 @@
 package com.homeland.assemblers;
 
+import com.homeland.constants.IStatus;
 import com.homeland.requests.api.BorderRequest;
 import com.homeland.requests.api.DocumentRequest;
 import com.homeland.requests.api.OsheeRequest;
@@ -255,6 +256,9 @@ public class RequestAssembler {
 			sql.setVin(req.getVin());
 			sql.setFirstResult(req.getFirstResult());
 			sql.setMaxResult(req.getMaxResult());
+			if(req.getForeign() != null) {
+				sql.setForeign((req.getForeign().booleanValue()?IStatus.ACTIVE:IStatus.NOT_ACTIVE));
+			}
 			
 		}
 		

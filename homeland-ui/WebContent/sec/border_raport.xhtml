@@ -1,0 +1,112 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<h:form id="border_raport_form">
+
+		<div class="ui-g ui-fluid">
+			<div class="ui-g-12">
+				<div class="card card-w-title">
+					<h1>Raporte Hyrje-Dalje</h1>
+					<div class="ui-g">
+						<div class="ui-g-12">
+							<p:panelGrid layout="grid" columns="4" 
+								styleClass="ui-panelgrid-blank form-group">
+
+								<p:inputText placeholder="NID"
+									value="#{borderBean.request.nid}" />
+								<p:inputText placeholder="Emri"
+									value="#{borderBean.request.name}" />
+								<p:inputText placeholder="Mbiemri"
+									value="#{borderBean.request.surname}" />
+								<p:inputText placeholder="Atësia"
+									value="#{borderBean.request.fatherName}" />
+									
+								<p:inputText placeholder="Nr Dokumenti"
+									value="#{borderBean.request.docNo}" />
+								<p:inputText placeholder="Targa"
+									value="#{borderBean.request.plate}" />
+								<p:selectOneMenu value="#{borderBean.request.bcgId}" placeholder="Pika kalimit">
+									<f:selectItem itemValue="#{null}" itemLabel=" "/>
+									<f:selectItems value="#{cacheBean.bcgList}" var="bcg" itemValue="#{bcg.value}" itemLabel="#{bcg.name}"/>
+								</p:selectOneMenu>
+								<p:selectOneMenu value="#{borderBean.request.foreign}" placeholder="Tipi">
+									<f:selectItem itemValue="#{null}" itemLabel=" "/>
+									<f:selectItem itemValue="false" itemLabel="Shqiptar"/>
+									<f:selectItem itemValue="true" itemLabel="I huaj"/>
+								</p:selectOneMenu>
+									 
+								<p:inputMask mask="99.99.9999" placeholder="Nga data"
+									value="#{borderBean.request.from}" />	
+								<p:inputMask mask="99.99.9999" placeholder="Në datën"
+									value="#{borderBean.request.to}" />	
+									
+								
+
+							</p:panelGrid>
+						</div>
+
+						<div class="ui-g-12 ui-md-4">
+							<p:panelGrid layout="grid" columns="2"
+								styleClass="ui-panelgrid-blank">
+								<p:commandButton value="Kërko" update="@form"
+									action="#{subjectSxBean.search()}" icon="ui-icon-search" />
+								<p:commandButton value="Pastro" update="@form"
+									action="#{subjectSxBean.clear()}" icon="ui-icon-trash"
+									styleClass="red-btn" />
+							</p:panelGrid>
+						</div>
+
+						<div class="ui-g-12">
+				<p:messages showDetail="true" closable="true">
+					<p:autoUpdate />
+				</p:messages>
+			</div>
+
+					</div>
+				</div>
+
+			</div>
+
+			
+
+			<div class="ui-g-12">
+				<p:dataTable value="#{borderBean.borders}" rendered="#{not empty borderBean.borders}" var="b" reflow="true"
+					rowIndexVar="r" paginator="true" paginatorAlwaysVisible="false"
+					rows="20" rowsPerPageTemplate="10,20,30,50">
+
+					<p:column headerText="#">
+										#{r+1}
+									</p:column>
+					<p:column headerText="Nipt">
+										#{s.nipt}
+									</p:column>
+					<p:column headerText="Subjekti">
+										#{s.name}
+									</p:column>
+					<p:column headerText="Aksioner">
+										#{s.actioners}
+									</p:column>
+					<p:column headerText="Administratori">
+										#{s.administrator}
+									</p:column>
+					<p:column headerText="Dt regj">
+										#{s.regDate}
+									</p:column>
+					<p:column headerText="Qyteti">
+										#{s.region}
+									</p:column>
+					<p:column headerText="Aktiviteti">
+										#{s.mainActivity}
+									</p:column>
+				</p:dataTable>
+			</div>
+
+		</div>
+
+	</h:form>
+
+</ui:composition>
