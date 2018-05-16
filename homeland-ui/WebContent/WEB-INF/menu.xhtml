@@ -13,16 +13,16 @@
                     <h:form id="menuform">                       
                         <pv:menu>
                         	    <p:menuitem id="pm_dashboard" value="Dashboard" icon="fa fa-home"  />
-                                <p:menuitem id="pm_persons" value="Personat" icon="fa fa-users" actionListener="#{nav.navigate('person_sx_filter')}" ajax="false"/>
-                                <p:menuitem id="pm_subjects" value="Subjektet" icon="fa fa-bars" actionListener="#{nav.navigate('subject_sx_filter')}" ajax="false"/>
-                                <p:menuitem id="pm_vehicles" value="Automjetet" icon="fa fa-bars" actionListener="#{nav.navigate('vehicle_sx_filter')}" ajax="false"/>
-                                <p:menuitem id="pm_phones" value="Telefonat" icon="fa fa-sun-o" actionListener="#{nav.navigate('phone_raport')}" ajax="false"/>
-                                <p:menuitem id="pm_border" value="Hyrje-Dalje" icon="fa fa-moon-o" actionListener="#{nav.navigate('border_raport')}" ajax="false"/>
-                                <p:menuitem id="pm_cards" value="Kartat" icon="fa fa-moon-o" actionListener="#{nav.navigate('card_raport')}" ajax="false"/>
-                                <p:menuitem id="pm_passport" value="Pasaportat" icon="fa fa-moon-o" actionListener="#{nav.navigate('passport_raport')}" ajax="false"/>
-                                <p:menuitem id="pm_tatime" value="Tatimet" icon="fa fa-moon-o" actionListener="#{nav.navigate('tatime_raport')}" ajax="false"/>
-                                <p:menuitem id="pm_users" value="Përdoruesit" icon="fa fa-moon-o" actionListener="#{nav.navigate('user_manager')}" ajax="false"/>
-                                <p:menuitem id="pm_logins" value="Logimet" icon="fa fa-moon-o" actionListener="#{nav.navigate('login_manager')}" ajax="false"/>
+                                <p:menuitem id="pm_persons" value="Personat" icon="fa fa-users" actionListener="#{menuBean.navigate('person_sx_filter')}" />
+                                <p:menuitem id="pm_subjects" value="Subjektet" icon="fa fa-bars" actionListener="#{menuBean.navigate('subject_sx_filter')}" />
+                                <p:menuitem id="pm_vehicles" value="Automjetet" icon="fa fa-bars" actionListener="#{menuBean.navigate('vehicle_sx_filter')}" />
+                                <p:menuitem id="pm_phones" value="Telefonat" icon="fa fa-sun-o" actionListener="#{menuBean.navigate('phone_raport')}" />
+                                <p:menuitem id="pm_border" value="Hyrje-Dalje" icon="fa fa-moon-o" actionListener="#{menuBean.navigate('border_raport')}" />
+                                <p:menuitem id="pm_cards" value="Kartat" icon="fa fa-moon-o" actionListener="#{menuBean.navigate('card_raport')}" />
+                                <p:menuitem id="pm_passport" value="Pasaportat" icon="fa fa-moon-o" actionListener="#{menuBean.navigate('passport_raport')}" />
+                                <p:menuitem id="pm_tatime" value="Tatimet" icon="fa fa-moon-o" actionListener="#{menuBean.navigate('tatime_raport')}" />
+                                <p:menuitem id="pm_users" value="Përdoruesit" icon="fa fa-moon-o" actionListener="#{menuBean.navigate('user_manager')}" />
+                                <p:menuitem id="pm_logins" value="Logimet" icon="fa fa-moon-o" actionListener="#{menuBean.navigate('login_manager')}" />
       
                         </pv:menu>
                     </h:form>

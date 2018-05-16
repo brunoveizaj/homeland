@@ -12,7 +12,16 @@
 				<div class="card card-w-title">
 					<h1>Raporte Hyrje-Dalje</h1>
 					<div class="ui-g">
+						
 						<div class="ui-g-12">
+							<p:selectOneRadio value="#{borderBean.request.event}">
+								<f:selectItem itemValue="#{constB.BORDER_ENTRY}" itemLabel="Hyrje"/>
+								<f:selectItem itemValue="#{constB.BORDER_EXIT}" itemLabel="Dalje"/>
+								<f:selectItem itemValue="#{null}" itemLabel="Hyrje-Dalje"/>
+							</p:selectOneRadio>
+						</div>
+						<div class="ui-g-12">
+						
 							<p:panelGrid layout="grid" columns="4" 
 								styleClass="ui-panelgrid-blank form-group">
 
@@ -30,11 +39,11 @@
 								<p:inputText placeholder="Targa"
 									value="#{borderBean.request.plate}" />
 								<p:selectOneMenu value="#{borderBean.request.bcgId}" placeholder="Pika kalimit">
-									<f:selectItem itemValue="#{null}" itemLabel=" "/>
+									<f:selectItem itemValue="#{null}" itemLabel="Pika kalimit"/>
 									<f:selectItems value="#{cacheBean.bcgList}" var="bcg" itemValue="#{bcg.value}" itemLabel="#{bcg.name}"/>
 								</p:selectOneMenu>
 								<p:selectOneMenu value="#{borderBean.request.foreign}" placeholder="Tipi">
-									<f:selectItem itemValue="#{null}" itemLabel=" "/>
+									<f:selectItem itemValue="#{null}" itemLabel="Tipi"/>
 									<f:selectItem itemValue="false" itemLabel="Shqiptar"/>
 									<f:selectItem itemValue="true" itemLabel="I huaj"/>
 								</p:selectOneMenu>
@@ -53,9 +62,9 @@
 							<p:panelGrid layout="grid" columns="2"
 								styleClass="ui-panelgrid-blank">
 								<p:commandButton value="Kërko" update="@form"
-									action="#{subjectSxBean.search()}" icon="ui-icon-search" />
+									action="#{borderBean.search()}" icon="ui-icon-search" />
 								<p:commandButton value="Pastro" update="@form"
-									action="#{subjectSxBean.clear()}" icon="ui-icon-trash"
+									action="#{borderBean.clear()}" icon="ui-icon-trash"
 									styleClass="red-btn" />
 							</p:panelGrid>
 						</div>
@@ -78,30 +87,54 @@
 					rowIndexVar="r" paginator="true" paginatorAlwaysVisible="false"
 					rows="20" rowsPerPageTemplate="10,20,30,50">
 
-					<p:column headerText="#">
-										#{r+1}
-									</p:column>
-					<p:column headerText="Nipt">
-										#{s.nipt}
-									</p:column>
-					<p:column headerText="Subjekti">
-										#{s.name}
-									</p:column>
-					<p:column headerText="Aksioner">
-										#{s.actioners}
-									</p:column>
-					<p:column headerText="Administratori">
-										#{s.administrator}
-									</p:column>
-					<p:column headerText="Dt regj">
-										#{s.regDate}
-									</p:column>
-					<p:column headerText="Qyteti">
-										#{s.region}
-									</p:column>
-					<p:column headerText="Aktiviteti">
-										#{s.mainActivity}
-									</p:column>
+				<p:column headerText="#">
+                    #{r+1}
+                </p:column>
+				<p:column headerText="Eventi" sortBy="#{b.event}">
+                    #{b.event}
+                </p:column>
+                <p:column headerText="Emri" sortBy="#{b.name}">
+                   <p:commandLink value="#{b.name}" action="#{nav.navigate('person_view')}" update=":main">
+                   	<f:param name="nid" value="#{b.nid}"/>
+                   </p:commandLink> 
+                </p:column>
+                <p:column headerText="Atësia" sortBy="#{b.fatherName}">
+                    #{b.fatherName}
+                </p:column>
+                <p:column headerText="Mbiemri" sortBy="#{b.surname}">
+                    <p:commandLink value="#{b.surname}" action="#{nav.navigate('person_view')}" update=":main">
+                   		<f:param name="nid" value="#{b.nid}"/>
+                   </p:commandLink> 
+                </p:column>
+                <p:column headerText="Gj" sortBy="#{b.gender}">
+                    #{b.gender}
+                </p:column>
+				<p:column headerText="Data" sortBy="#{b.crosingDate}">
+                    #{b.crossingDate}
+                </p:column>
+				<p:column headerText="Pika kufitare" sortBy="#{b.crossingGate}">
+					#{b.crossingGate}
+				</p:column>
+					<p:column headerText="Linja" sortBy="#{b.travel}">
+                    #{b.travel}
+                </p:column>
+					<p:column headerText="Dokumenti" sortBy="#{b.docNo}">
+                    #{b.docNo} (#{b.docState})
+                </p:column>
+					<p:column headerText="Kategoria" sortBy="#{b.citizenType}">
+                    #{b.citizenType}
+                </p:column>
+				<p:column headerText="Targa" sortBy="#{b.plate}">
+                    <p:commandLink value="#{b.name}" action="#{nav.navigate('vehicle_view')}" update=":main">
+                   	<f:param name="plate" value="#{b.plate}"/>
+                   </p:commandLink> 
+                </p:column>
+					<p:column headerText="Shofer" sortBy="#{b.driver}">
+                    #{b.driver}
+                </p:column>
+					<p:column headerText="Qëlimi" sortBy="#{b.purpose}">
+                    #{b.purpose}
+                </p:column>
 				</p:dataTable>
 			</div>
 

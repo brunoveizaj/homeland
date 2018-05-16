@@ -1,9 +1,11 @@
 package com.homeland.ui.models;
 
+import java.io.Serializable;
+
+public class PhoneDTO implements Serializable{
 
 
-
-public class PhoneDTO {
+	private static final long serialVersionUID = 1L;
 
 	
 	private int id;

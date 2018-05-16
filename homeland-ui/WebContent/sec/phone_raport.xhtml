@@ -1,0 +1,100 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<h:form id="phone_raport_form">
+
+		<div class="ui-g ui-fluid">
+			<div class="ui-g-12">
+				<div class="card card-w-title">
+					<h1>Kërko telefona</h1>
+					<div class="ui-g">
+						<div class="ui-g-12">
+
+							<p:panelGrid layout="grid" columns="4"
+								styleClass="ui-panelgrid-blank form-group">
+
+								<p:inputText placeholder="Nr telefonit"
+									value="#{phoneBean.request.phoneNo}" />
+								<p:inputText placeholder="Emri"
+									value="#{phoneBean.request.name}" />
+								<p:inputText placeholder="Mbiemri"
+									value="#{phoneBean.request.surname}" />
+								<p:inputText placeholder="Atësia"
+									value="#{phoneBean.request.fatherName}" />
+
+							</p:panelGrid>
+						</div>
+
+						<div class="ui-g-12 ui-md-4">
+							<p:panelGrid layout="grid" columns="2"
+								styleClass="ui-panelgrid-blank">
+								<p:commandButton value="Kërko" update="@form"
+									action="#{phoneBean.search()}" icon="ui-icon-search" />
+								<p:commandButton value="Pastro" update="@form"
+									action="#{phoneBean.clear()}" icon="ui-icon-trash"
+									styleClass="red-btn" />
+							</p:panelGrid>
+						</div>
+
+						<div class="ui-g-12">
+							<p:messages showDetail="true" closable="true">
+								<p:autoUpdate />
+							</p:messages>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
+
+
+			<div class="ui-g-12">
+				<p:dataTable value="#{phoneBean.phones}"
+					rendered="#{not empty phoneBean.phones}" var="p" reflow="true"
+					rowIndexVar="r" paginator="true" paginatorAlwaysVisible="false"
+					rows="20" rowsPerPageTemplate="10,20,30,50">
+
+					<p:column headerText="#">
+                    #{r+1}
+                </p:column>
+					<p:column headerText="Nr Tel" sortBy="#{p.phone}">
+                    #{p.phone}
+                </p:column>
+					<p:column headerText="Emri" sortBy="#{p.name}">
+						<p:commandLink disabled="#{p.nid == null}" value="#{p.name}"
+							action="#{nav.navigate('person_view')}" update=":main">
+							<f:param name="nid" value="#{p.nid}" />
+						</p:commandLink>
+					</p:column>
+					<p:column headerText="Atësia" sortBy="#{b.fatherName}">
+                    #{b.fatherName}
+                </p:column>
+					<p:column headerText="Mbiemri" sortBy="#{p.surname}">
+						<p:commandLink disabled="#{p.nid == null}" value="#{p.surname}"
+							action="#{nav.navigate('person_view')}" update=":main">
+							<f:param name="nid" value="#{p.nid}" />
+						</p:commandLink>
+					</p:column>
+					<p:column headerText="Datëlindja" sortBy="#{p.dob}">
+                    #{p.dob}
+                </p:column>
+					<p:column headerText="Data Regjistrimit" sortBy="#{p.regDate}">
+                    #{p.regDate}
+                </p:column>
+					<p:column headerText="Burimi" sortBy="#{p.dataSource}">
+					#{b.crossingGate}
+				</p:column>
+
+				</p:dataTable>
+			</div>
+
+		</div>
+
+	</h:form>
+
+</ui:composition>

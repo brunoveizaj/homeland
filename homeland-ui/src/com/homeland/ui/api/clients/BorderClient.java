@@ -88,6 +88,8 @@ public class BorderClient {
 			builder.queryParam("maxResult", req.getMaxResult());
 		}
 		
+		System.out.println(builder.toUriString());
+		
 		RestTemplate restTemplate = new RestTemplate();
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);

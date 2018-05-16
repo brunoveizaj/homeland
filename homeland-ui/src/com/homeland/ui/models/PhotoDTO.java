@@ -1,8 +1,11 @@
 package com.homeland.ui.models;
 
+import java.io.Serializable;
+
+public class PhotoDTO implements Serializable{
 
 
-public class PhotoDTO {
+	private static final long serialVersionUID = 1L;
 
 	
 	private int id;

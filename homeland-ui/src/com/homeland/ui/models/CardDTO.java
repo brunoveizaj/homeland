@@ -1,8 +1,11 @@
 package com.homeland.ui.models;
 
+import java.io.Serializable;
+
+public class CardDTO implements Serializable{
 
 
-public class CardDTO {
+	private static final long serialVersionUID = 1L;
 
 	private int id;
     private String idc;

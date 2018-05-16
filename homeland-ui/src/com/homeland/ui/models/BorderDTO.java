@@ -1,9 +1,11 @@
 package com.homeland.ui.models;
 
+import java.io.Serializable;
+
+public class BorderDTO implements Serializable{
 
 
-
-public class BorderDTO {
+	private static final long serialVersionUID = 1L;
 	
 	    private int id;
 	    private String docState;

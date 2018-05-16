@@ -6,6 +6,8 @@
     xmlns:p="http://primefaces.org/ui"
     xmlns:pa="http://primefaces.org/paradise">
 
+<h:form id="header_form">
+
     <div class="topbar">
         <h:link styleClass="topbar-logo">
             <p:graphicImage name="images/#{guestPreferences.layout == 'default' ? 'logo-black.png' : 'logo-white.png'}" style="border: 0px;" library="paradise-layout" />
@@ -16,7 +18,7 @@
         </a>
         
         <a href="#" id="user-display">
-            <span class="username">AAAA BBBBB</span>
+            <span class="username">#{loginBean.userToken.user.username}</span>
             <p:graphicImage name="images/avatar.png" library="paradise-layout" style="border: 0px;"/>
             <i class="fa fa-angle-down"></i>
         </a>
@@ -24,28 +26,20 @@
         
 
         <ul id="topbar-menu" class="fadeInDown animated">
-            <li>
-                <a href="#">
-                    <i class="topbar-icon fa fa-fw fa-user"></i>
-                    <span class="topbar-item-name">AAAA BBBB</span>
-                </a>
-                <ul>
+
                     <li role="menuitem">
-                        <a href="#">
+                        <p:commandLink >
                             <i class="fa fa-fw fa-user"></i>
                             <span>Profili</span>
-                        </a>
+                        </p:commandLink>
                     </li>
                     <li role="menuitem">
-                        <a href="#">
+                        <p:commandLink action="#{loginBean.logout()}">
                             <i class="fa fa-fw fa-sign-out"></i>
-                            <span>Logout</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            
+                            <span>Dil</span>
+                        </p:commandLink>
+                    </li>            
         </ul>
     </div>
-
+</h:form>
 </ui:composition>

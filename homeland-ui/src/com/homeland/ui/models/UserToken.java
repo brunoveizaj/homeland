@@ -1,7 +1,11 @@
 package com.homeland.ui.models;
 
+import java.io.Serializable;
 
-public class UserToken {
+public class UserToken implements Serializable{
+
+
+	private static final long serialVersionUID = 1L;
 
 	UserDTO user;
 	String token;

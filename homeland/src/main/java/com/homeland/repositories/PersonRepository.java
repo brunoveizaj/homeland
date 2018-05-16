@@ -57,7 +57,7 @@ public class PersonRepository {
 		
 		if(StringUtil.isValid(criterias.getMaidenName()))
 		{
-			sql += "AND p.maindenNameSx LIKE :maiden ";
+			sql += "AND p.maidenNameSx LIKE :maiden ";
 			params.put("maiden", criterias.getMaidenName());
 		}
 		

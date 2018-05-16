@@ -1,7 +1,13 @@
 package com.homeland.ui.models;
 
-public class Param {
+import java.io.Serializable;
 
+public class Param implements Serializable{
+
+
+	private static final long serialVersionUID = 1L;
+	
+	
 	String name;
 	String value;
 	

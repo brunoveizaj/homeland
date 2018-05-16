@@ -1,7 +1,11 @@
 package com.homeland.ui.models;
 
+import java.io.Serializable;
 
-public class OsheeDTO {
+public class OsheeDTO implements Serializable{
+
+
+	private static final long serialVersionUID = 1L;
 
 	private int id;
     private String contractNo;

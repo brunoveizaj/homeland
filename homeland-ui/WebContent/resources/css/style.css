@@ -73,14 +73,14 @@ body .ui-paginator {
 
 .green-cl-btn
 {
-	background-color: white;
-	color: black;
-	border: 2px solid #4caf50;
+	background-color: white !important;
+	color: #4caf50 !important;
+	border: 2px solid #4caf50 !important;
 }
 .green-cl-btn:hover
 {
-	background-color: #4caf50;
-	color:white;
+	background-color: #4caf50 !important;
+	color:white !important;
 }
 
 .black-cl-btn

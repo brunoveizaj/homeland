@@ -58,7 +58,7 @@ public class BorderRepository {
 		if(criterias.getFrom() != null)
 		{
 			sql += "AND b.crossingDate >= :from ";
-			params.put("from", criterias.getPlate());
+			params.put("from", criterias.getFrom());
 		}
 		
 		if(criterias.getTo() != null)

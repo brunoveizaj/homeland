@@ -1,8 +1,11 @@
 package com.homeland.ui.models;
 
+import java.io.Serializable;
+
+public class TicketDTO implements Serializable{
 
 
-public class TicketDTO {
+	private static final long serialVersionUID = 1L;
 
 	
 	    private int id;

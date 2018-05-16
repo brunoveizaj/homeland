@@ -67,7 +67,7 @@ public class Border implements Serializable {
     private String pupose;
     @Column(name = "event")
     private String event;
-    @Column(name = "foreign")
+    @Column(name = "is_foreign")
     private Integer foreign;
     @Column(name = "inserted")
     @Temporal(TemporalType.TIMESTAMP)
