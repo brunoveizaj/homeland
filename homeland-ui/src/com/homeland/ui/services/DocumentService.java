@@ -3,6 +3,7 @@ package com.homeland.ui.services;
 import java.util.List;
 
 import com.homeland.ui.api.clients.DocumentClient;
+import com.homeland.ui.constants.IDocument;
 import com.homeland.ui.criterias.DocumentRequest;
 import com.homeland.ui.criterias.PhotoRequest;
 import com.homeland.ui.models.CardDTO;
@@ -14,11 +15,13 @@ public class DocumentService {
 	
 	public List<CardDTO> searchCards(DocumentRequest req)
 	{
+		req.setDocType(IDocument.CARD);
 		return new DocumentClient().searchCards(req);
 	}
 	
 	public List<PassportDTO> searchPassports(DocumentRequest req)
 	{
+		req.setDocType(IDocument.PASSPORT);
 		return new DocumentClient().searchPassports(req);
 	}
 	

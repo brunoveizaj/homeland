@@ -1,0 +1,89 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<h:form id="card_raport_form">
+
+		<div class="ui-g ui-fluid">
+			<div class="ui-g-12">
+				<div class="card card-w-title">
+					<h1>Kërko Karta Identiteti</h1>
+					<div class="ui-g">
+
+						<div class="ui-g-12">
+						
+							<p:panelGrid layout="grid" columns="4" 
+								styleClass="ui-panelgrid-blank form-group">
+
+								
+								<p:inputText placeholder="Emri"
+									value="#{cardBean.request.name}" />
+								<p:inputText placeholder="Mbiemri"
+									value="#{cardBean.request.surname}" />
+								<p:inputText placeholder="Atësia"
+									value="#{borderBean.request.fatherName}" />
+								<p:inputText placeholder="Mëmësia"
+									value="#{cardBean.request.motherName}" />
+									
+								<p:inputText placeholder="NID"
+									value="#{cardBean.request.nid}" />
+								<p:inputText placeholder="Nr Dokumenti"
+									value="#{cardBean.request.idn}" />
+								<p:inputMask mask="99.99.9999" placeholder="Datëlindja"
+									value="#{cardBean.request.dob}" />	
+								<p:selectOneMenu placeholder="Gjinia"
+										value="#{cardBean.request.gender}" autoWidth="false">
+										<f:selectItem itemValue="#{null}" itemLabel="Gjinia" />
+										<f:selectItem itemValue="M" itemLabel="M" />
+										<f:selectItem itemValue="F" itemLabel="F" />
+								</p:selectOneMenu>
+								
+								<p:inputText placeholder="Nga mosha"
+									value="#{cardBean.request.fromAge}" />
+								<p:inputText placeholder="Në moshën"
+									value="#{cardBean.request.toAge}" />
+
+							</p:panelGrid>
+						</div>
+
+						<div class="ui-g-12 ui-md-4">
+							<p:panelGrid layout="grid" columns="2"
+								styleClass="ui-panelgrid-blank">
+								<p:commandButton value="Kërko" update="@form"
+									action="#{cardBean.search()}" icon="ui-icon-search" />
+								<p:commandButton value="Pastro" update="@form"
+									action="#{cardBean.clear()}" icon="ui-icon-trash"
+									styleClass="red-btn" />
+							</p:panelGrid>
+						</div>
+
+						<div class="ui-g-12">
+							<p:messages showDetail="true" closable="true">
+								<p:autoUpdate />
+							</p:messages>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
+			
+
+			<div class="ui-g-12">
+				<p:dataTable value="#{cardBean.cards}" rendered="#{not empty cardBean.cards}" var="c" reflow="true"
+					rowIndexVar="r" paginator="true" paginatorAlwaysVisible="false"
+					rows="20" rowsPerPageTemplate="10,20,30,50">
+
+				
+				</p:dataTable>
+			</div>
+
+		</div>
+
+	</h:form>
+
+</ui:composition>
