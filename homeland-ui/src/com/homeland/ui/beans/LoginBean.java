@@ -3,6 +3,7 @@ package com.homeland.ui.beans;
 import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.servlet.http.HttpSession;
 
@@ -21,6 +22,8 @@ public class LoginBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	@ManagedProperty(value="#{nav}")
+	NavigationBean nav;
 	
 	String username;
 	String password;
@@ -52,9 +55,15 @@ public class LoginBean implements Serializable {
 	public void setUserToken(UserToken userToken) {
 		this.userToken = userToken;
 	}
+	
+	public NavigationBean getNav() {
+		return nav;
+	}
 
-	
-	
+	public void setNav(NavigationBean nav) {
+		this.nav = nav;
+	}
+
 	public void login() {
 		
 		if(!StringUtil.isValid(username))
@@ -79,6 +88,7 @@ public class LoginBean implements Serializable {
 			
 			if(userToken != null)
 			{
+				nav.setActualPage("person_sx_filter");
 				Util.redirect("sec/main");
 			}
 			
