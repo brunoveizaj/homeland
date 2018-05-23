@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.homeland.dto.UserDTO;
+import com.homeland.exceptions.EntityExistsException;
 import com.homeland.exceptions.NoContentException;
+import com.homeland.exceptions.NotFoundException;
+import com.homeland.models.Principal;
 import com.homeland.models.UserToken;
 import com.homeland.requests.api.UserRequest;
 import com.homeland.services.TokenService;
@@ -32,18 +34,15 @@ public class UserApi {
 	
 	
 	@RequestMapping(value="/searchUser", method=RequestMethod.GET, produces={"application/json"})
-	public ResponseEntity<?> searchUser(@RequestHeader(value="Authorization",required=false) String token, UserRequest req)
+	public ResponseEntity<?> searchUser(@RequestHeader(value="Authorization") String token, UserRequest req)
 	{
 		Integer userId = tokenService.getUserIdFromToken(token);
-		System.err.println("AUTH USER_ID: "+userId);
-		
-		System.err.println(req);
-		
-		List<UserDTO> list = userService.searchUser(req);
+				
+		List<UserDTO> list = userService.searchUser(req,userId);
 		
 		if(list == null || list.isEmpty())
 		{
-			throw new NoContentException("Nuk ka te dhena");
+			return new ResponseEntity<>("Nuk ka te dhena",HttpStatus.NO_CONTENT);
 		}
 		
 		return new ResponseEntity<>(list,HttpStatus.OK);
@@ -51,18 +50,15 @@ public class UserApi {
 	}
 	
 	@RequestMapping(value="/uname/{username}", method=RequestMethod.GET, produces={"application/json"})
-	public ResponseEntity<?> getUserByUsername(@RequestHeader(value="Authorization",required=false) String token, @PathVariable String username)
+	public ResponseEntity<?> getUserByUsername(@RequestHeader(value="Authorization") String token, @PathVariable String username)
 	{
         Integer userId = tokenService.getUserIdFromToken(token);
-		System.err.println("AUTH USER_ID: "+userId);
 		
-		System.err.println(username);
-		
-		UserDTO user = userService.findUserByUsername(username);
+		UserDTO user = userService.findUserByUsername(username,userId);
 		
 		if(user == null)
 		{
-			throw new NoContentException("Nuk ka te dhena");
+			return new ResponseEntity<>("Nuk ka te dhena",HttpStatus.NO_CONTENT);
 		}
 		
 		return new ResponseEntity<>(user,HttpStatus.OK);
@@ -70,16 +66,15 @@ public class UserApi {
 	}
 	
 	@RequestMapping(value="/id/{userId}", method=RequestMethod.GET, produces={"application/json"})
-	public ResponseEntity<?> getUserByUsername(@RequestHeader(value="Authorization",required=false) String token, @PathVariable Integer userId)
+	public ResponseEntity<?> getUserByUsername(@RequestHeader(value="Authorization") String token, @PathVariable Integer userId)
 	{
 		Integer authUserId = tokenService.getUserIdFromToken(token);
-		System.err.println("AUTH USER_ID: "+authUserId);
 		
-		UserDTO user = userService.findUserById(userId);
+		UserDTO user = userService.findUserById(userId,authUserId);
 		
 		if(user == null)
 		{
-			throw new NoContentException("Nuk ka te dhena");
+			return new ResponseEntity<>("Nuk ka te dhena",HttpStatus.NO_CONTENT);
 		}
 		
 		return new ResponseEntity<>(user,HttpStatus.OK);
@@ -89,39 +84,45 @@ public class UserApi {
 	
 	
 	@RequestMapping(value="/register", method=RequestMethod.POST, produces={"application/json"})
-	public ResponseEntity<?>registerUser(@RequestHeader(value="Authorization",required=false) String token, @RequestBody UserDTO payload)
+	public ResponseEntity<?>registerUser(@RequestHeader(value="Authorization") String token, @RequestBody UserDTO payload)
 	{
-				
+		try {
 		Integer userId = tokenService.getUserIdFromToken(token);
 		
 		UserDTO u = userService.registerUser(payload, userId);
 		
 		return new ResponseEntity<>(u,HttpStatus.OK);
+		
+		}catch(NoContentException | EntityExistsException e) {
+			return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	@RequestMapping(value="/modify", method=RequestMethod.POST, produces={"application/json"})
-	public ResponseEntity<?>modifyUser(@RequestHeader(value="Authorization",required=false) String token, @RequestBody UserDTO payload)
+	public ResponseEntity<?>modifyUser(@RequestHeader(value="Authorization") String token, @RequestBody UserDTO payload)
 	{
 				
+		try {
 		Integer userId = tokenService.getUserIdFromToken(token);
 		
 		UserDTO u = userService.modifyUser(payload, userId);
 		
 		return new ResponseEntity<>(u,HttpStatus.OK);
+		}catch(NoContentException | EntityExistsException e) {
+			return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	
-	@RequestMapping(value="/login", method=RequestMethod.GET, produces={"application/json"})
-	public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password)
+	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json")
+	public ResponseEntity<?> login(@RequestBody Principal principal)
 	{
-		System.err.println("UNAME: "+username);
-		
-		System.err.println("SECRET: "+password);
-				
-		UserToken ut = userService.login(username, password);
-		
-		return new ResponseEntity<>(ut,HttpStatus.OK);
-		
+		try {
+		UserToken ut = userService.login(principal);
+		return new ResponseEntity<>(ut, HttpStatus.OK);
+		}catch(NotFoundException e) {
+			return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	

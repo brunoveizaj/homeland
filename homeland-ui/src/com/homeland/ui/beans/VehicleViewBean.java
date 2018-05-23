@@ -8,11 +8,13 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import com.homeland.ui.api.security.ApiException;
 import com.homeland.ui.models.BorderDTO;
 import com.homeland.ui.models.TicketDTO;
 import com.homeland.ui.models.VehicleDTO;
 import com.homeland.ui.models.VehicleRaportDTO;
 import com.homeland.ui.services.VehicleService;
+import com.homeland.ui.utils.Messages;
 
 @ManagedBean
 @ViewScoped
@@ -106,11 +108,15 @@ public class VehicleViewBean implements Serializable {
 	
 	public void loadVehicleRaport(String plate)
 	{
-		VehicleRaportDTO raport = new VehicleService().vehicleRaport(plate);
-		this.vehicle = raport.getVehicle();
-		this.tickets = raport.getTickets();
-		this.borders = raport.getBorders();
-		this.vehicleHistory = raport.getVehicleHistory();
+		try {
+			VehicleRaportDTO raport = new VehicleService().vehicleRaport(plate);
+			this.vehicle = raport.getVehicle();
+			this.tickets = raport.getTickets();
+			this.borders = raport.getBorders();
+			this.vehicleHistory = raport.getVehicleHistory();
+		}catch(ApiException a) {
+			Messages.throwFacesMessage(a.getMessage(), a.getSeverity());
+		}
 	}
 	
 

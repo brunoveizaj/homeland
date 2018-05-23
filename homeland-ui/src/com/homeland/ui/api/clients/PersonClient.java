@@ -12,13 +12,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.homeland.ui.api.security.ApiErrorHandler;
 import com.homeland.ui.constants.HttpCode;
 import com.homeland.ui.constants.IApiClient;
 import com.homeland.ui.criterias.PersonRequest;
-import com.homeland.ui.exceptions.ServerException;
 import com.homeland.ui.models.PersonDTO;
 import com.homeland.ui.models.PersonRaportDTO;
 import com.homeland.ui.utils.StringUtil;
+import com.homeland.ui.utils.Util;
 
 public class PersonClient {
 
@@ -100,12 +101,13 @@ public class PersonClient {
 		System.err.println("API REQ PERSON:searchPerson: "+builder.toUriString().toString());
 		
 		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.setErrorHandler(new ApiErrorHandler());
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);// cfare formati i do te dhenat
 		//headers.set("Content-Type", MediaType.APPLICATION_JSON_VALUE); eshte vetem kur dergon te dhena, tipi i te dhenave. tek get vetem merr
-		headers.set("Authorization", "Bearer "+"ckemi");
-		HttpEntity<?> entity = new HttpEntity<Object>(headers);
+		headers.set("Authorization", "Bearer "+Util.getToken());
+		HttpEntity<?> entity = new HttpEntity<>(headers);
 		
 		ParameterizedTypeReference<List<PersonDTO>> typeRef = new ParameterizedTypeReference<List<PersonDTO>>() {};
 		
@@ -115,19 +117,6 @@ public class PersonClient {
 		{
 			return response.getBody();
 		}
-		
-		if(response.getStatusCodeValue() == HttpCode.SERVER_ERROR)
-		{
-			throw new ServerException("Server Error");
-		}
-		
-		if(response.getStatusCodeValue() == HttpCode.NO_CONTENT)
-		{
-			System.err.println("API REQ PERSON:searchPerson NO CONTENT Body: "+response.getBody());
-			return null;
-		}
-		
-		
 		
 		return null;
 	}
@@ -148,24 +137,20 @@ public class PersonClient {
 		messageConverters.add(converter);  
 			*/	
 		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.setErrorHandler(new ApiErrorHandler());
 		//restTemplate.setMessageConverters(messageConverters);  
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
-		headers.set("Authorization", "Bearer "+"ckemi");
-		HttpEntity<?> entity = new HttpEntity<Object>(headers);
+		headers.set("Authorization", "Bearer "+Util.getToken());
+		HttpEntity<?> entity = new HttpEntity<>(headers);
 
 		ResponseEntity<PersonRaportDTO> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity,PersonRaportDTO.class);
 		
 		if(response.getStatusCodeValue() == HttpCode.OK)
 		{
 			return response.getBody();
-		}
-		
-		if(response.getStatusCodeValue() == HttpCode.SERVER_ERROR)
-		{
-			throw new ServerException("Server Error");
-		}
+		}		
 		
 		return null;
 		

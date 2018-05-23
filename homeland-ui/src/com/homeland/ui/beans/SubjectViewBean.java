@@ -9,11 +9,13 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import com.homeland.ui.api.security.ApiException;
 import com.homeland.ui.criterias.TatimeRequest;
 import com.homeland.ui.models.SubjectDTO;
 import com.homeland.ui.models.TatimeDTO;
 import com.homeland.ui.services.SubjectService;
 import com.homeland.ui.services.TatimeService;
+import com.homeland.ui.utils.Messages;
 
 @ManagedBean
 @ViewScoped
@@ -94,8 +96,12 @@ public class SubjectViewBean implements Serializable {
 	
 	public void loadSubjectRaport(String nipt)
 	{
-		this.subject = new SubjectService().getSubjectByNipt(nipt);
-		loadEmployees();
+		try {
+			this.subject = new SubjectService().getSubjectByNipt(nipt);
+			loadEmployees();
+		}catch(ApiException a) {
+			Messages.throwFacesMessage(a.getMessage(), a.getSeverity());
+		}
 		
 	}
 	
@@ -112,7 +118,11 @@ public class SubjectViewBean implements Serializable {
 		tr.setNipt(subject.getNipt());
 		tr.setMonth(month);
 		tr.setYear(year);
-		this.tatimes = new TatimeService().searchTatime(tr); 
+		try {
+			this.tatimes = new TatimeService().searchTatime(tr); 
+		}catch(ApiException a) {
+			Messages.throwFacesMessage(a.getMessage(), a.getSeverity());
+		}
 	}
 	
 	

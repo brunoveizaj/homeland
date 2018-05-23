@@ -22,7 +22,7 @@ public class PhoneService {
 	@Autowired
 	PhoneRepository phoneDAO;
 	
-	public List<PhoneDTO> searchPhone(PhoneRequest req)
+	public List<PhoneDTO> searchPhone(PhoneRequest req, Integer userId)
 	{
 		PhoneSQL criterias = new RequestAssembler().apiToSql(req);
 		List<Phone> phones = phoneDAO.searchPhone(criterias);
@@ -31,9 +31,9 @@ public class PhoneService {
 	
 	
 	@Async
-	public CompletableFuture<List<PhoneDTO>> searchAsyncPhone(PhoneRequest req)
+	public CompletableFuture<List<PhoneDTO>> searchAsyncPhone(PhoneRequest req, Integer userId)
 	{
-		return CompletableFuture.completedFuture(searchPhone(req));
+		return CompletableFuture.completedFuture(searchPhone(req,userId));
 	}
 	
 }

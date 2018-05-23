@@ -7,9 +7,11 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import com.homeland.ui.api.security.ApiException;
 import com.homeland.ui.criterias.PhoneRequest;
 import com.homeland.ui.models.PhoneDTO;
 import com.homeland.ui.services.PhoneService;
+import com.homeland.ui.utils.Messages;
 
 
 
@@ -61,7 +63,11 @@ public class PhoneBean implements Serializable {
 	
 	public void search()
 	{
-		this.phones = new PhoneService().searchPhone(request);
+		try {
+			this.phones = new PhoneService().searchPhone(request);
+		}catch(ApiException a) {
+			Messages.throwFacesMessage(a.getMessage(), a.getSeverity());
+		}
 	}
 
 }

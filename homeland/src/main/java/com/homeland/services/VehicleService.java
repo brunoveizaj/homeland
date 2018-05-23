@@ -37,14 +37,14 @@ public class VehicleService {
 	BorderService borderService;
 	
 	
-	public List<VehicleDTO> searchVehicle(VehicleRequest req)
+	public List<VehicleDTO> searchVehicle(VehicleRequest req, Integer userId)
 	{
 		VehicleSQL criterias = new RequestAssembler().apiToSql(req);
 		List<Vehicle> vehicles = vehicleDAO.searchVehicle(criterias);
 		return new Assembler().vehicleListToDto(vehicles);
 	}
 	
-	public VehicleDTO searchVehicleByPlate(VehicleRequest req)
+	public VehicleDTO searchVehicleByPlate(VehicleRequest req, Integer userId)
 	{
 		req = new VehicleRequest(req.getPlate());
 		VehicleSQL criterias = new RequestAssembler().apiToSql(req);
@@ -57,7 +57,7 @@ public class VehicleService {
 		return null;
 	}
 	
-	public List<TicketDTO> searchTicket(TicketRequest req)
+	public List<TicketDTO> searchTicket(TicketRequest req, Integer userId)
 	{
 		TicketSQL criterias = new RequestAssembler().apiToSql(req);
 		List<Ticket> tickets = ticketDAO.searchTicket(criterias);
@@ -65,43 +65,43 @@ public class VehicleService {
 	}
 	
 	@Async
-	public CompletableFuture<List<VehicleDTO>> searchAsyncVehicle(VehicleRequest req)
+	public CompletableFuture<List<VehicleDTO>> searchAsyncVehicle(VehicleRequest req, Integer userId)
 	{
-		return CompletableFuture.completedFuture(searchVehicle(req));
+		return CompletableFuture.completedFuture(searchVehicle(req,userId));
 	}
 	
 	@Async
-	public CompletableFuture<VehicleDTO> searchAsyncVehicleByPlate(VehicleRequest req)
+	public CompletableFuture<VehicleDTO> searchAsyncVehicleByPlate(VehicleRequest req, Integer userId)
 	{
-		return CompletableFuture.completedFuture(searchVehicleByPlate(req));
+		return CompletableFuture.completedFuture(searchVehicleByPlate(req,userId));
 	}
 	
 	@Async
-	public CompletableFuture<List<TicketDTO>> searchAsyncTicket(TicketRequest req)
+	public CompletableFuture<List<TicketDTO>> searchAsyncTicket(TicketRequest req, Integer userId)
 	{
-		return CompletableFuture.completedFuture(searchTicket(req));
+		return CompletableFuture.completedFuture(searchTicket(req,userId));
 	}
 	
 	
-	public VehicleRaportDTO getVehicleRaport(String plate)
+	public VehicleRaportDTO getVehicleRaport(String plate,Integer userId)
 	{
 		VehicleRaportDTO raport = new VehicleRaportDTO();
 		
-		VehicleDTO vehicle = searchVehicleByPlate(new VehicleRequest(plate));
+		VehicleDTO vehicle = searchVehicleByPlate(new VehicleRequest(plate),userId);
 		
 		if(vehicle == null) return null;
 		
 		VehicleRequest vr = new VehicleRequest();
 		vr.setVin(vehicle.getVin());
-		CompletableFuture<List<VehicleDTO>> history = searchAsyncVehicle(vr);
+		CompletableFuture<List<VehicleDTO>> history = searchAsyncVehicle(vr,userId);
 		
 		TicketRequest tr = new TicketRequest();
 		tr.setVin(vehicle.getVin());
-		CompletableFuture<List<TicketDTO>> tickets = searchAsyncTicket(tr);
+		CompletableFuture<List<TicketDTO>> tickets = searchAsyncTicket(tr,userId);
 		
 		BorderRequest br = new BorderRequest();
 		br.setVin(vehicle.getVin());
-		CompletableFuture<List<BorderDTO>> borders = borderService.searchAsyncEntryExit(br);
+		CompletableFuture<List<BorderDTO>> borders = borderService.searchAsyncEntryExit(br,userId);
 		
 		CompletableFuture.allOf(history,tickets,borders).join();
 		

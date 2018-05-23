@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import com.homeland.ui.api.security.ApiException;
 import com.homeland.ui.criterias.SubjectRequest;
 import com.homeland.ui.criterias.VehicleRequest;
 import com.homeland.ui.models.BorderDTO;
@@ -23,6 +24,7 @@ import com.homeland.ui.models.VehicleDTO;
 import com.homeland.ui.services.PersonService;
 import com.homeland.ui.services.SubjectService;
 import com.homeland.ui.services.VehicleService;
+import com.homeland.ui.utils.Messages;
 
 
 @ManagedBean
@@ -192,37 +194,49 @@ public class PersonViewBean implements Serializable {
 	
 	public void loadPersonRaport(String nid)
 	{
-		PersonRaportDTO raport = new PersonService().personRaport(nid);
-		if(raport != null)
-		{
-			this.person = raport.getPerson();
-			this.family = raport.getFamily();
-			this.familyMember = person;
-			this.cards = raport.getCards();
-			this.passports = raport.getPassports();
-			this.tatime = raport.getTatime();
-			this.phones = raport.getPhones();
-			this.borders = raport.getBorders();
-			this.oshees = raport.getOshees();
-			
-			this.vehicles = null;
-			this.subjects = null;
+		try {
+				PersonRaportDTO raport = new PersonService().personRaport(nid);
+				if(raport != null)
+				{
+					this.person = raport.getPerson();
+					this.family = raport.getFamily();
+					this.familyMember = person;
+					this.cards = raport.getCards();
+					this.passports = raport.getPassports();
+					this.tatime = raport.getTatime();
+					this.phones = raport.getPhones();
+					this.borders = raport.getBorders();
+					this.oshees = raport.getOshees();
+					
+					this.vehicles = null;
+					this.subjects = null;
+				}
+		}catch(ApiException a) {
+			Messages.throwFacesMessage(a.getMessage(), a.getSeverity());
 		}
 	}
 	
 	public void loadVehicles()
 	{
-		VehicleRequest vr = new VehicleRequest();
-		vr.setName(person.getName());
-		vr.setSurname(person.getSurname());
-		this.vehicles = new VehicleService().searchVehicle(vr);
+		try {
+			VehicleRequest vr = new VehicleRequest();
+			vr.setName(person.getName());
+			vr.setSurname(person.getSurname());
+			this.vehicles = new VehicleService().searchVehicle(vr);
+		}catch(ApiException a) {
+			Messages.throwFacesMessage(a.getMessage(), a.getSeverity());
+		}
 	}
 	
 	public void loadSubjects()
 	{
-		SubjectRequest sr = new SubjectRequest();
-		sr.setManagers(person.getName()+" "+person.getSurname());
-		this.subjects = new SubjectService().searchSubject(sr);
+		try {
+			SubjectRequest sr = new SubjectRequest();
+			sr.setManagers(person.getName()+" "+person.getSurname());
+			this.subjects = new SubjectService().searchSubject(sr);
+		}catch(ApiException a) {
+			Messages.throwFacesMessage(a.getMessage(), a.getSeverity());
+		}
 	}
 	
 	public void onFamilySelect()

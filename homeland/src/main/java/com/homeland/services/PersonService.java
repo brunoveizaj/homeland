@@ -49,14 +49,14 @@ public class PersonService {
 	OsheeService osheeService;
 	
 	
-	public List<PersonDTO> searchPerson(PersonRequest req)
+	public List<PersonDTO> searchPerson(PersonRequest req, Integer userId)
 	{
 		PersonSQL criterias = new RequestAssembler().apiToSql(req);
 		List<Person> persons = personDAO.searchPerson(criterias);
 		return new Assembler().personListToDto(persons);
 	}
 	
-	public PersonDTO searchPersonByNid(PersonRequest req)
+	public PersonDTO searchPersonByNid(PersonRequest req, Integer userId)
 	{
 		if(req == null || !StringUtil.isValid(req.getNid())) return null;
 		
@@ -74,7 +74,7 @@ public class PersonService {
 
 	}
 	
-	public List<PersonDTO> searchPersonByFamilyId(PersonRequest req)
+	public List<PersonDTO> searchPersonByFamilyId(PersonRequest req, Integer userId)
 	{
 		if(req == null || req.getFamilyId() == null) return null;
 		
@@ -86,24 +86,24 @@ public class PersonService {
 		return new Assembler().personListToDto(persons);
 	}
 	
-	public List<PersonDTO> searchPersonFamilyByNid(PersonRequest req)
+	public List<PersonDTO> searchPersonFamilyByNid(PersonRequest req, Integer userId)
 	{
 		if(req == null || !StringUtil.isValid(req.getNid())) return null;
 		
-		PersonDTO p = searchPersonByNid(req);
+		PersonDTO p = searchPersonByNid(req,userId);
 		if(p == null) return null;
 		
 		PersonRequest request = new PersonRequest(p.getFamilyId());
 		
-		return searchPersonByFamilyId(request);
+		return searchPersonByFamilyId(request,userId);
 
 	}
 	
 	
 	@Async
-	public CompletableFuture<List<PersonDTO>> searchAsyncPersonByFamilyId(PersonRequest req)
+	public CompletableFuture<List<PersonDTO>> searchAsyncPersonByFamilyId(PersonRequest req, Integer userId)
 	{
-		return CompletableFuture.completedFuture(searchPersonByFamilyId(req));
+		return CompletableFuture.completedFuture(searchPersonByFamilyId(req,userId));
 	}
 	
 	
@@ -113,42 +113,42 @@ public class PersonService {
 	
 	
 	
-	public PersonRaportDTO getPersonRaport(String nid)
+	public PersonRaportDTO getPersonRaport(String nid, Integer userId)
 	{
 		
 		PersonRaportDTO raport = new PersonRaportDTO();
 		
-		PersonDTO person = searchPersonByNid(new PersonRequest(nid));
+		PersonDTO person = searchPersonByNid(new PersonRequest(nid),userId);
 		if(person == null) return null;
 		
 		PersonRequest fr = new PersonRequest(person.getFamilyId());
-		CompletableFuture<List<PersonDTO>> family = searchAsyncPersonByFamilyId(fr);
+		CompletableFuture<List<PersonDTO>> family = searchAsyncPersonByFamilyId(fr,userId);
 		
 		PhoneRequest pr = new PhoneRequest();
 		pr.setNid(person.getNid());
-		CompletableFuture<List<PhoneDTO>> phones = phoneService.searchAsyncPhone(pr);
+		CompletableFuture<List<PhoneDTO>> phones = phoneService.searchAsyncPhone(pr,userId);
 		
 		DocumentRequest dr = new DocumentRequest();
 		dr.setNid(person.getNid());
 		dr.setDocType(IDocument.CARD);
-		CompletableFuture<List<CardDTO>> cards = documentService.searchAsyncCard(dr);
+		CompletableFuture<List<CardDTO>> cards = documentService.searchAsyncCard(dr,userId);
 		
 		dr = new DocumentRequest();
 		dr.setNid(person.getNid());
 		dr.setDocType(IDocument.PASSPORT);
-		CompletableFuture<List<PassportDTO>> passports = documentService.searchAsyncPassport(dr);
+		CompletableFuture<List<PassportDTO>> passports = documentService.searchAsyncPassport(dr,userId);
 		
 		BorderRequest br = new BorderRequest();
 		br.setNid(person.getNid());
-		CompletableFuture<List<BorderDTO>> borders = borderService.searchAsyncEntryExit(br);
+		CompletableFuture<List<BorderDTO>> borders = borderService.searchAsyncEntryExit(br,userId);
 		
 		TatimeRequest tr = new TatimeRequest();
 		tr.setNid(person.getNid());
-		CompletableFuture<List<TatimeDTO>> tatime = tatimeService.searchAsyncTatime(tr);
+		CompletableFuture<List<TatimeDTO>> tatime = tatimeService.searchAsyncTatime(tr,userId);
 		
 		OsheeRequest or = new OsheeRequest();
 		or.setFamilyId(person.getFamilyId());
-		CompletableFuture<List<OsheeDTO>> oshees = osheeService.searchAsyncOshee(or);
+		CompletableFuture<List<OsheeDTO>> oshees = osheeService.searchAsyncOshee(or,userId);
 		
 		CompletableFuture.allOf(family,phones,cards,passports,borders,tatime,oshees).join();
 

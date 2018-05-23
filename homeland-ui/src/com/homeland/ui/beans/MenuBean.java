@@ -25,14 +25,13 @@ public class MenuBean implements Serializable {
 	public NavigationBean getNav() {
 		return nav;
 	}
+	
 	public void setNav(NavigationBean nav) {
 		this.nav = nav;
 	}
 
-
-
-
-
+	
+	
 	public void navigate(String page)
 	{
 		nav.navigate(page);

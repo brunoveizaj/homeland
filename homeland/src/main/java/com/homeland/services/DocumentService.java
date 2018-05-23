@@ -34,21 +34,21 @@ public class DocumentService {
 	PassportRepository passportDAO;
 	
 	
-	public List<CardDTO> searchCard(DocumentRequest req)
+	public List<CardDTO> searchCard(DocumentRequest req, Integer userId)
 	{
 		DocumentSQL criterias = new RequestAssembler().apiToSql(req);
 		List<Card> cards = cardDAO.searchCard(criterias);
 		return new Assembler().cardListToDto(cards);
 	}
 	
-	public List<PassportDTO> searchPassport(DocumentRequest req)
+	public List<PassportDTO> searchPassport(DocumentRequest req, Integer userId)
 	{
 		DocumentSQL criterias = new RequestAssembler().apiToSql(req);
 		List<Passport> passports = passportDAO.searchPassport(criterias);
 		return new Assembler().passportListToDto(passports);
 	}
 	
-	public PhotoDTO getDocumentPhoto(PhotoRequest req)
+	public PhotoDTO getDocumentPhoto(PhotoRequest req, Integer userId)
 	{
 		PhotoSQL criterias = new RequestAssembler().apiToSql(req);
 		
@@ -78,15 +78,15 @@ public class DocumentService {
 	
 	
 	@Async
-	public CompletableFuture<List<CardDTO>> searchAsyncCard(DocumentRequest req)
+	public CompletableFuture<List<CardDTO>> searchAsyncCard(DocumentRequest req, Integer userId)
 	{
-		return CompletableFuture.completedFuture(searchCard(req));
+		return CompletableFuture.completedFuture(searchCard(req, userId));
 	}
 	
 	@Async
-	public CompletableFuture<List<PassportDTO>> searchAsyncPassport(DocumentRequest req)
+	public CompletableFuture<List<PassportDTO>> searchAsyncPassport(DocumentRequest req, Integer userId)
 	{
-		return CompletableFuture.completedFuture(searchPassport(req));
+		return CompletableFuture.completedFuture(searchPassport(req, userId));
 	}
 	
 	

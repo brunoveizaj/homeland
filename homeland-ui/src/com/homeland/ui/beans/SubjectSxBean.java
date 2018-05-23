@@ -9,10 +9,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
+import com.homeland.ui.api.security.ApiException;
 import com.homeland.ui.criterias.SubjectRequest;
 import com.homeland.ui.models.Param;
 import com.homeland.ui.models.SubjectDTO;
 import com.homeland.ui.services.SubjectService;
+import com.homeland.ui.utils.Messages;
 
 @ManagedBean
 @ViewScoped
@@ -70,7 +72,11 @@ public class SubjectSxBean implements Serializable {
 	
 	public void search()
 	{
-		this.subjects = new SubjectService().searchSubject(request);
+		try {
+			this.subjects = new SubjectService().searchSubject(request);
+		}catch(ApiException a) {
+			Messages.throwFacesMessage(a.getMessage(), a.getSeverity());
+		}
 		this.subject = null;
 	}
 	

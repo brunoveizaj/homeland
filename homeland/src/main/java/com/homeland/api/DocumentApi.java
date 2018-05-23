@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.homeland.dto.CardDTO;
 import com.homeland.dto.PassportDTO;
 import com.homeland.dto.PhotoDTO;
-import com.homeland.exceptions.NoContentException;
 import com.homeland.requests.api.DocumentRequest;
 import com.homeland.requests.api.PhotoRequest;
 import com.homeland.services.DocumentService;
@@ -30,19 +29,16 @@ public class DocumentApi {
 	TokenService tokenService;
 	
 	@RequestMapping(value="/searchCards", method=RequestMethod.GET, produces={"application/json"})
-	public ResponseEntity<?> searchCards(@RequestHeader(value="Authorization",required=false) String token, DocumentRequest request)
+	public ResponseEntity<?> searchCards(@RequestHeader(value="Authorization") String token, DocumentRequest request)
 	{
 		
-		Integer userId = tokenService.getUserIdFromToken(token);
-		System.err.println("AUTH USER_ID: "+userId);
+		Integer userId = tokenService.getUserIdFromToken(token);		
 		
-		System.err.println(request);
-		
-		List<CardDTO> list = documentService.searchCard(request);
+		List<CardDTO> list = documentService.searchCard(request,userId);
 		
 		if(list == null || list.isEmpty())
 		{
-			throw new NoContentException("Nuk ka te dhena");
+			return new ResponseEntity<>("Nuk ka te dhena",HttpStatus.NO_CONTENT);
 		}
 				
 		return new ResponseEntity<>(list,HttpStatus.OK);
@@ -50,18 +46,15 @@ public class DocumentApi {
 	}
 	
 	@RequestMapping(value="/searchPassports", method=RequestMethod.GET, produces={"application/json"})
-	public ResponseEntity<?> searchPassports(@RequestHeader(value="Authorization",required=false) String token, DocumentRequest request)
+	public ResponseEntity<?> searchPassports(@RequestHeader(value="Authorization") String token, DocumentRequest request)
 	{
 		Integer userId = tokenService.getUserIdFromToken(token);
-		System.err.println("AUTH USER_ID: "+userId);
 		
-		System.err.println(request);
-		
-		List<PassportDTO> list = documentService.searchPassport(request);
+		List<PassportDTO> list = documentService.searchPassport(request,userId);
 		
 		if(list == null || list.isEmpty())
 		{
-			throw new NoContentException("Nuk ka te dhena");
+			return new ResponseEntity<>("Nuk ka te dhena",HttpStatus.NO_CONTENT);
 		}
 				
 		return new ResponseEntity<>(list,HttpStatus.OK);
@@ -69,18 +62,15 @@ public class DocumentApi {
 	}
 	
 	@RequestMapping(value="/getDocumentPhoto", method=RequestMethod.GET, produces={"application/json"})
-	public ResponseEntity<?> getDocumentPhoto(@RequestHeader(value="Authorization",required=false) String token, PhotoRequest request)
+	public ResponseEntity<?> getDocumentPhoto(@RequestHeader(value="Authorization") String token, PhotoRequest request)
 	{
-		Integer userId = tokenService.getUserIdFromToken(token);
-		System.err.println("AUTH USER_ID: "+userId);
+		Integer userId = tokenService.getUserIdFromToken(token);		
 		
-		System.err.println(request);
-		
-		PhotoDTO photo = documentService.getDocumentPhoto(request);
+		PhotoDTO photo = documentService.getDocumentPhoto(request, userId);
 		
 		if(photo == null)
 		{
-			throw new NoContentException("Nuk ka te dhena");
+			return new ResponseEntity<>("Nuk ka te dhena",HttpStatus.NO_CONTENT);
 		}
 				
 		return new ResponseEntity<>(photo,HttpStatus.OK);

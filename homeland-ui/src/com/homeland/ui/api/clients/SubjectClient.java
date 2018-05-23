@@ -14,9 +14,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.homeland.ui.constants.HttpCode;
 import com.homeland.ui.constants.IApiClient;
 import com.homeland.ui.criterias.SubjectRequest;
-import com.homeland.ui.exceptions.ServerException;
 import com.homeland.ui.models.SubjectDTO;
 import com.homeland.ui.utils.StringUtil;
+import com.homeland.ui.utils.Util;
 
 public class SubjectClient {
 
@@ -29,19 +29,14 @@ public class SubjectClient {
 		RestTemplate restTemplate = new RestTemplate();		
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
-		headers.set("Authorization", "Bearer "+"ckemi");
-		HttpEntity<?> entity = new HttpEntity<Object>(headers);
+		headers.set("Authorization", "Bearer "+Util.getToken());
+		HttpEntity<?> entity = new HttpEntity<>(headers);
 
 		ResponseEntity<SubjectDTO> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity,SubjectDTO.class);
 		
 		if(response.getStatusCodeValue() == HttpCode.OK)
 		{
 			return response.getBody();
-		}
-		
-		if(response.getStatusCodeValue() == HttpCode.SERVER_ERROR)
-		{
-			throw new ServerException("Server Error");
 		}
 		
 		return null;
@@ -77,8 +72,8 @@ public class SubjectClient {
 		RestTemplate restTemplate = new RestTemplate();
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
-		headers.set("Authorization", "Bearer "+"ckemi");
-		HttpEntity<?> entity = new HttpEntity<Object>(headers);
+		headers.set("Authorization", "Bearer "+Util.getToken());
+		HttpEntity<?> entity = new HttpEntity<>(headers);
 		
 		ParameterizedTypeReference<List<SubjectDTO>> typeRef = new ParameterizedTypeReference<List<SubjectDTO>>() {};
 		
@@ -89,17 +84,6 @@ public class SubjectClient {
 			return response.getBody();
 		}
 		
-		if(response.getStatusCodeValue() == HttpCode.SERVER_ERROR)
-		{
-			throw new ServerException("Server Error");
-		}
-		
-		if(response.getStatusCodeValue() == HttpCode.NO_CONTENT)
-		{
-			System.err.println("API REQ SUBJECT:searchSubject NO CONTENT Body: "+response.getBody());
-			return null;
-		}
-				
 		return null;
 		
 	}

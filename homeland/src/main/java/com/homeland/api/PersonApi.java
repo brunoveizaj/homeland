@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.homeland.dto.PersonDTO;
-import com.homeland.exceptions.NoContentException;
 import com.homeland.models.PersonRaportDTO;
 import com.homeland.requests.api.PersonRequest;
 import com.homeland.services.PersonService;
@@ -29,20 +28,15 @@ public class PersonApi {
 	TokenService tokenService;
 	
 	@RequestMapping(value="/searchPerson", method=RequestMethod.GET, produces={"application/json"})
-	public ResponseEntity<?> searchPerson(@RequestHeader(value="Authorization",required=false) String token, PersonRequest request)
+	public ResponseEntity<?> searchPerson(@RequestHeader(value="Authorization") String token, PersonRequest request)
 	{
-		System.err.println("AUTH TOKEN: "+token);
 		Integer userId = tokenService.getUserIdFromToken(token);
-		System.err.println("AUTH USER_ID: "+userId);
-		
-		System.err.println(request);
-		
-		List<PersonDTO> list = personService.searchPerson(request);
+				
+		List<PersonDTO> list = personService.searchPerson(request,userId);
 		
 		if(list == null || list.isEmpty())
 		{
-			//return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-			throw new NoContentException("Nuk ka te dhena");
+			return new ResponseEntity<>("Nuk ka te dhena",HttpStatus.NO_CONTENT);
 		}
 				
 		return new ResponseEntity<>(list,HttpStatus.OK);
@@ -50,15 +44,11 @@ public class PersonApi {
 	}
 	
 	@RequestMapping(value="/personRaport/{nid}", method=RequestMethod.GET, produces={"application/json"})
-	public ResponseEntity<?> personRaport(@RequestHeader(value="Authorization",required=false) String token, @PathVariable String nid)//@RequestHeader HttpHeaders httpHeaders
+	public ResponseEntity<?> personRaport(@RequestHeader(value="Authorization") String token, @PathVariable String nid)//@RequestHeader HttpHeaders httpHeaders
 	{
-		System.err.println("AUTH TOKEN: "+token);
 		Integer userId = tokenService.getUserIdFromToken(token);
-		System.err.println("AUTH USER_ID: "+userId);
-		
-		System.err.println("REQUEST nid="+nid);
-		
-		PersonRaportDTO raport = personService.getPersonRaport(nid);
+				
+		PersonRaportDTO raport = personService.getPersonRaport(nid, userId);
 		
 		return new ResponseEntity<>(raport,HttpStatus.OK);
 		

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.homeland.dto.PhoneDTO;
-import com.homeland.exceptions.NoContentException;
 import com.homeland.requests.api.PhoneRequest;
 import com.homeland.services.PhoneService;
 import com.homeland.services.TokenService;
@@ -27,19 +26,16 @@ public class PhoneApi {
 	
 	
 	@RequestMapping(value="/searchPhone", method=RequestMethod.GET, produces={"application/json"})
-	public ResponseEntity<?> searchPhone(@RequestHeader(value="Authorization",required=false) String token, PhoneRequest req)
+	public ResponseEntity<?> searchPhone(@RequestHeader(value="Authorization") String token, PhoneRequest req)
 	{
 		
 		Integer userId = tokenService.getUserIdFromToken(token);
-		System.err.println("AUTH USER_ID: "+userId);
 		
-		System.err.println(req);
-		
-		List<PhoneDTO> list = phoneService.searchPhone(req);
+		List<PhoneDTO> list = phoneService.searchPhone(req,userId);
 		
 		if(list == null || list.isEmpty())
 		{
-			throw new NoContentException("Nuk ka te dhena");
+			return new ResponseEntity<>("Nuk ka te dhena",HttpStatus.NO_CONTENT);
 		}
 		
 		return new ResponseEntity<>(list,HttpStatus.OK);

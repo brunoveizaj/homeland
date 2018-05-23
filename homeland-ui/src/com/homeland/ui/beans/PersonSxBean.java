@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
+import com.homeland.ui.api.security.ApiException;
 import com.homeland.ui.criterias.PersonRequest;
 import com.homeland.ui.models.Param;
 import com.homeland.ui.models.PersonDTO;
@@ -105,17 +106,23 @@ public class PersonSxBean implements Serializable {
 
 	public void search()
 	{
-		this.persons = new PersonService().searchPerson(request);
+		try {
+			this.persons = new PersonService().searchPerson(request);
+			if(persons != null && !persons.isEmpty())
+			{
+				renderList();
+				
+			}
+			else
+			{
+				renderFilter();
+				Messages.throwFacesMessage("Nuk ka te dhena", 2);
+			}
+			
+		}catch(ApiException a) {
+			Messages.throwFacesMessage(a.getMessage(), a.getSeverity());
+		}
 		
-		if(persons!=null && !persons.isEmpty())
-		{
-			renderList();
-		}
-		else
-		{
-			renderFilter();
-			Messages.throwFacesMessage("Nuk u gjet asnje rezultat", 2);
-		}
 		
 	}
 	

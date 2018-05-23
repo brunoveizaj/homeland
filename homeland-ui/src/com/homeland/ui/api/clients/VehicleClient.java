@@ -15,11 +15,11 @@ import com.homeland.ui.constants.HttpCode;
 import com.homeland.ui.constants.IApiClient;
 import com.homeland.ui.criterias.TicketRequest;
 import com.homeland.ui.criterias.VehicleRequest;
-import com.homeland.ui.exceptions.ServerException;
 import com.homeland.ui.models.TicketDTO;
 import com.homeland.ui.models.VehicleDTO;
 import com.homeland.ui.models.VehicleRaportDTO;
 import com.homeland.ui.utils.StringUtil;
+import com.homeland.ui.utils.Util;
 
 public class VehicleClient {
 	
@@ -33,8 +33,8 @@ public class VehicleClient {
 		RestTemplate restTemplate = new RestTemplate();		
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
-		headers.set("Authorization", "Bearer "+"ckemi");
-		HttpEntity<?> entity = new HttpEntity<Object>(headers);
+		headers.set("Authorization", "Bearer "+Util.getToken());
+		HttpEntity<?> entity = new HttpEntity<>(headers);
 
 		ResponseEntity<VehicleRaportDTO> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity,VehicleRaportDTO.class);
 		
@@ -43,10 +43,6 @@ public class VehicleClient {
 			return response.getBody();
 		}
 		
-		if(response.getStatusCodeValue() == HttpCode.SERVER_ERROR)
-		{
-			throw new ServerException("Server Error");
-		}
 		
 		return null;
 	}
@@ -100,8 +96,8 @@ public class VehicleClient {
 		RestTemplate restTemplate = new RestTemplate();
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
-		headers.set("Authorization", "Bearer "+"ckemi");
-		HttpEntity<?> entity = new HttpEntity<Object>(headers);
+		headers.set("Authorization", "Bearer "+Util.getToken());
+		HttpEntity<?> entity = new HttpEntity<>(headers);
 		
 		ParameterizedTypeReference<List<VehicleDTO>> typeRef = new ParameterizedTypeReference<List<VehicleDTO>>() {};
 		
@@ -110,12 +106,7 @@ public class VehicleClient {
 		if(response.getStatusCodeValue() == HttpCode.OK)
 		{
 			return response.getBody();
-		}
-		
-		if(response.getStatusCodeValue() == HttpCode.SERVER_ERROR)
-		{
-			throw new ServerException("Server Error");
-		}
+		}	
 				
 		return null;
 		
@@ -160,8 +151,8 @@ public class VehicleClient {
 		RestTemplate restTemplate = new RestTemplate();
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
-		headers.set("Authorization", "Bearer "+"ckemi");
-		HttpEntity<?> entity = new HttpEntity<Object>(headers);
+		headers.set("Authorization", "Bearer "+Util.getToken());
+		HttpEntity<?> entity = new HttpEntity<>(headers);
 		
 		ParameterizedTypeReference<List<TicketDTO>> typeRef = new ParameterizedTypeReference<List<TicketDTO>>() {};
 		
@@ -170,11 +161,6 @@ public class VehicleClient {
 		if(response.getStatusCodeValue() == HttpCode.OK)
 		{
 			return response.getBody();
-		}
-		
-		if(response.getStatusCodeValue() == HttpCode.SERVER_ERROR)
-		{
-			throw new ServerException("Server Error");
 		}
 				
 		return null;

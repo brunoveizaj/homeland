@@ -17,6 +17,9 @@
 
     <h:body styleClass="login-body">
         <h:form>
+        <p:growl showDetail="true">
+        	<p:autoUpdate/>
+        </p:growl>
             <div class="login-panel ui-fluid">
                 <div class="ui-g">
                     <div class="ui-g-12 logo-container">
@@ -27,14 +30,14 @@
                     <div class="ui-g-12">
                         <p:outputLabel for="username" value="Username" />
                         <div class="input-wrapper">
-                            <p:inputText id="username" placeholder="Username" />
+                            <p:inputText id="username" value="#{loginBean.username}" placeholder="Username" />
                             <i class="fa fa-user" />
                         </div>
                     </div>
                     <div class="ui-g-12">
                         <p:outputLabel for="password" value="Password" />
                         <div class="input-wrapper">
-                            <p:password id="password" placeholder="Password" feedback="false" />
+                            <p:password id="password" value="#{loginBean.password}" placeholder="Password" feedback="false" />
                             <i class="fa fa-lock" />
                         </div>
                     </div>
@@ -51,7 +54,7 @@
                         
                     </div>
                     <div class="ui-g-12 button-container">
-                        <p:button outcome="/sec/main" value="Sign In" styleClass="blue-btn raised-btn"/>
+                        <p:commandButton action="#{loginBean.login()}" value="Hyr" styleClass="blue-btn raised-btn" update="@form"/>
                     </div>
                     
                     <h:outputStylesheet name="css/layout-#{guestPreferences.layout}.css" library="paradise-layout" />

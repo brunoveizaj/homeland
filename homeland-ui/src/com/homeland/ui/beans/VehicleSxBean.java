@@ -9,10 +9,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
+import com.homeland.ui.api.security.ApiException;
 import com.homeland.ui.criterias.VehicleRequest;
 import com.homeland.ui.models.Param;
 import com.homeland.ui.models.VehicleDTO;
 import com.homeland.ui.services.VehicleService;
+import com.homeland.ui.utils.Messages;
 
 @ManagedBean
 @ViewScoped
@@ -98,7 +100,11 @@ public class VehicleSxBean implements Serializable {
 	
 	public void search()
 	{
-		this.vehicles = new VehicleService().searchVehicle(request);
+		try {
+			this.vehicles = new VehicleService().searchVehicle(request);
+		}catch(ApiException a) {
+			Messages.throwFacesMessage(a.getMessage(), a.getSeverity());
+		}
 	}
 	
 	public void clear()

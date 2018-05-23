@@ -14,9 +14,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.homeland.ui.constants.HttpCode;
 import com.homeland.ui.constants.IApiClient;
 import com.homeland.ui.criterias.PhoneRequest;
-import com.homeland.ui.exceptions.ServerException;
 import com.homeland.ui.models.PhoneDTO;
 import com.homeland.ui.utils.StringUtil;
+import com.homeland.ui.utils.Util;
 
 public class PhoneClient {
 	
@@ -60,8 +60,8 @@ public class PhoneClient {
 		RestTemplate restTemplate = new RestTemplate();
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
-		headers.set("Authorization", "Bearer "+"ckemi");
-		HttpEntity<?> entity = new HttpEntity<Object>(headers);
+		headers.set("Authorization", "Bearer "+Util.getToken());
+		HttpEntity<?> entity = new HttpEntity<>(headers);
 		
 		ParameterizedTypeReference<List<PhoneDTO>> typeRef = new ParameterizedTypeReference<List<PhoneDTO>>() {};
 		
@@ -71,11 +71,7 @@ public class PhoneClient {
 		{
 			return response.getBody();
 		}
-		
-		if(response.getStatusCodeValue() == HttpCode.SERVER_ERROR)
-		{
-			throw new ServerException("Server Error");
-		}		
+				
 				
 		return null;
 	}

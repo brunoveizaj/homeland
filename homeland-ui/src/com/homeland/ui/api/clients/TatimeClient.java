@@ -14,9 +14,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.homeland.ui.constants.HttpCode;
 import com.homeland.ui.constants.IApiClient;
 import com.homeland.ui.criterias.TatimeRequest;
-import com.homeland.ui.exceptions.ServerException;
 import com.homeland.ui.models.TatimeDTO;
 import com.homeland.ui.utils.StringUtil;
+import com.homeland.ui.utils.Util;
 
 public class TatimeClient {
 
@@ -67,8 +67,8 @@ public class TatimeClient {
 		RestTemplate restTemplate = new RestTemplate();
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
-		headers.set("Authorization", "Bearer "+"ckemi");
-		HttpEntity<?> entity = new HttpEntity<Object>(headers);
+		headers.set("Authorization", "Bearer "+Util.getToken());
+		HttpEntity<?> entity = new HttpEntity<>(headers);
 		
 		ParameterizedTypeReference<List<TatimeDTO>> typeRef = new ParameterizedTypeReference<List<TatimeDTO>>() {};
 		
@@ -79,11 +79,6 @@ public class TatimeClient {
 			return response.getBody();
 		}
 		
-		if(response.getStatusCodeValue() == HttpCode.SERVER_ERROR)
-		{
-			throw new ServerException("Server Error");
-		}
-
 				
 		return null;
 	}

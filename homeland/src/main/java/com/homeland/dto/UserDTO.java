@@ -8,13 +8,12 @@ public class UserDTO {
 	private int id;
     private String username;
     private String secret;
-    private int status;
+    private Integer status;
     private String role;
     private String createdTime;
-    private int createdUserId;
+    private Integer createdUserId;
     private String modifyTime;
-    private int modifyUserId;
-    
+    private Integer modifyUserId;
     
     
 	public int getId() {
@@ -29,18 +28,16 @@ public class UserDTO {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
 	public String getSecret() {
 		return secret;
 	}
 	public void setSecret(String secret) {
 		this.secret = secret;
 	}
-	
-	public int getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 	public String getRole() {
@@ -55,10 +52,10 @@ public class UserDTO {
 	public void setCreatedTime(String createdTime) {
 		this.createdTime = createdTime;
 	}
-	public int getCreatedUserId() {
+	public Integer getCreatedUserId() {
 		return createdUserId;
 	}
-	public void setCreatedUserId(int createdUserId) {
+	public void setCreatedUserId(Integer createdUserId) {
 		this.createdUserId = createdUserId;
 	}
 	public String getModifyTime() {
@@ -67,16 +64,16 @@ public class UserDTO {
 	public void setModifyTime(String modifyTime) {
 		this.modifyTime = modifyTime;
 	}
-	public int getModifyUserId() {
+	public Integer getModifyUserId() {
 		return modifyUserId;
 	}
-	public void setModifyUserId(int modifyUserId) {
+	public void setModifyUserId(Integer modifyUserId) {
 		this.modifyUserId = modifyUserId;
 	}
-	
-	
     
     
+
+
     
 	
 	

@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.homeland.ui.api.security.ApiErrorHandler;
 import com.homeland.ui.constants.HttpCode;
 import com.homeland.ui.constants.IApiClient;
 import com.homeland.ui.criterias.DocumentRequest;
@@ -20,6 +21,7 @@ import com.homeland.ui.models.CardDTO;
 import com.homeland.ui.models.PassportDTO;
 import com.homeland.ui.models.PhotoDTO;
 import com.homeland.ui.utils.StringUtil;
+import com.homeland.ui.utils.Util;
 
 public class DocumentClient {
 
@@ -84,10 +86,12 @@ public class DocumentClient {
 		}
 		
 		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.setErrorHandler(new ApiErrorHandler());
+		
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
-		headers.set("Authorization", "Bearer "+"ckemi");
-		HttpEntity<?> entity = new HttpEntity<Object>(headers);
+		headers.set("Authorization", "Bearer "+Util.getToken());
+		HttpEntity<?> entity = new HttpEntity<>(headers);
 		
 		ParameterizedTypeReference<List<CardDTO>> typeRef = new ParameterizedTypeReference<List<CardDTO>>() {};
 		
@@ -166,10 +170,12 @@ public class DocumentClient {
 		}
 		
 		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.setErrorHandler(new ApiErrorHandler());
+		
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
-		headers.set("Authorization", "Bearer "+"ckemi");
-		HttpEntity<?> entity = new HttpEntity<Object>(headers);
+		headers.set("Authorization", "Bearer "+Util.getToken());
+		HttpEntity<?> entity = new HttpEntity<>(headers);
 		
 		ParameterizedTypeReference<List<PassportDTO>> typeRef = new ParameterizedTypeReference<List<PassportDTO>>() {};
 		
@@ -195,10 +201,12 @@ public class DocumentClient {
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(BASE_URL);
 		
 		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.setErrorHandler(new ApiErrorHandler());
+		
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
-		headers.set("Authorization", "Bearer "+"ckemi");
-		HttpEntity<?> entity = new HttpEntity<Object>(headers);
+		headers.set("Authorization", "Bearer "+Util.getToken());
+		HttpEntity<?> entity = new HttpEntity<>(headers);
 
 		ResponseEntity<PhotoDTO> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity,PhotoDTO.class);
 		

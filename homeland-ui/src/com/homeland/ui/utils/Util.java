@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.homeland.ui.beans.LoginBean;
+
 public class Util {
 
 	
@@ -38,6 +40,18 @@ public class Util {
         return (HttpServletResponse) FacesContext.
                 getCurrentInstance().
                 getExternalContext().getResponse();
+    }
+    
+    public static String getToken()
+    {
+    	HttpSession ses = getSession();
+    	LoginBean login = (LoginBean) ses.getAttribute("loginBean");
+		if(login != null && login.getUserToken() != null)
+		{
+			return login.getUserToken().getToken();
+		}
+		
+		return null;
     }
 
     /*

@@ -22,7 +22,7 @@ public class TatimeService {
 	TatimeRepository tatimeDAO;
 	
 	
-	public List<TatimeDTO> searchTatime(TatimeRequest req)
+	public List<TatimeDTO> searchTatime(TatimeRequest req, Integer userId)
 	{
 		TatimeSQL criterias = new RequestAssembler().apiToSql(req);
 		List<Tatime> tatime = tatimeDAO.searchTatime(criterias);
@@ -30,9 +30,9 @@ public class TatimeService {
 	}
 	
 	@Async
-	public CompletableFuture<List<TatimeDTO>> searchAsyncTatime(TatimeRequest req)
+	public CompletableFuture<List<TatimeDTO>> searchAsyncTatime(TatimeRequest req, Integer userId)
 	{
-		return CompletableFuture.completedFuture(searchTatime(req));
+		return CompletableFuture.completedFuture(searchTatime(req,userId));
 	}
 	
 }

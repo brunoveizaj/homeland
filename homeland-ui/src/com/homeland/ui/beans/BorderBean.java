@@ -7,9 +7,11 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import com.homeland.ui.api.security.ApiException;
 import com.homeland.ui.criterias.BorderRequest;
 import com.homeland.ui.models.BorderDTO;
 import com.homeland.ui.services.BorderService;
+import com.homeland.ui.utils.Messages;
 
 
 @ManagedBean
@@ -58,7 +60,11 @@ public class BorderBean implements Serializable {
 	
 	public void search()
 	{
-		this.borders = new BorderService().searchEntryExits(request);
+		try {
+			this.borders = new BorderService().searchEntryExits(request);
+		}catch(ApiException a) {
+			Messages.throwFacesMessage(a.getMessage(), a.getSeverity());
+		}
 	}
 	
 

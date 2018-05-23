@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.homeland.dto.SubjectDTO;
-import com.homeland.exceptions.NoContentException;
 import com.homeland.requests.api.SubjectRequest;
 import com.homeland.services.SubjectService;
 import com.homeland.services.TokenService;
@@ -30,18 +29,15 @@ public class SubjectApi {
 	
 	
 	@RequestMapping(value="/{nipt}", method=RequestMethod.GET, produces={"application/json"})
-	public ResponseEntity<?> getSubjectByNipt(@RequestHeader(value="Authorization",required=false) String token, @PathVariable String nipt)
+	public ResponseEntity<?> getSubjectByNipt(@RequestHeader(value="Authorization") String token, @PathVariable String nipt)
 	{
 		Integer userId = tokenService.getUserIdFromToken(token);
-		System.err.println("AUTH USER_ID: "+userId);
-		
-		System.err.println(nipt);
-		
-		SubjectDTO subject = subjectService.getSubjectByNipt(nipt);
+				
+		SubjectDTO subject = subjectService.getSubjectByNipt(nipt,userId);
 		
 		if(subject == null)
 		{
-			throw new NoContentException("Nuk ka te dhena");
+			return new ResponseEntity<>("Nuk ka te dhena",HttpStatus.NO_CONTENT);
 		}
 		
 		return new ResponseEntity<>(subject,HttpStatus.OK);
@@ -49,18 +45,15 @@ public class SubjectApi {
 	}
 	
 	@RequestMapping(value="/searchSubject", method=RequestMethod.GET, produces={"application/json"})
-	public ResponseEntity<?> searchSubject(@RequestHeader(value="Authorization",required=false) String token, SubjectRequest req)
+	public ResponseEntity<?> searchSubject(@RequestHeader(value="Authorization") String token, SubjectRequest req)
 	{
 		Integer userId = tokenService.getUserIdFromToken(token);
-		System.err.println("AUTH USER_ID: "+userId);
-		
-		System.err.println(req);
-		
-		List<SubjectDTO> list = subjectService.searchSubject(req);
+				
+		List<SubjectDTO> list = subjectService.searchSubject(req,userId);
 		
 		if(list == null || list.isEmpty())
 		{
-			throw new NoContentException("Nuk ka te dhena");
+			return new ResponseEntity<>("Nuk ka te dhena",HttpStatus.NO_CONTENT);
 		}
 		
 		return new ResponseEntity<>(list,HttpStatus.OK);

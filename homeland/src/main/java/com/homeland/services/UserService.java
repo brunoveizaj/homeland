@@ -15,6 +15,7 @@ import com.homeland.entities.User;
 import com.homeland.exceptions.EntityExistsException;
 import com.homeland.exceptions.NoContentException;
 import com.homeland.exceptions.NotFoundException;
+import com.homeland.models.Principal;
 import com.homeland.models.UserToken;
 import com.homeland.repositories.UserRepository;
 import com.homeland.requests.api.UserRequest;
@@ -26,29 +27,30 @@ public class UserService {
 
 	@Autowired
 	UserRepository userDAO;
+	@Autowired
+	TokenService tokenService;
 	
-	
-	public List<UserDTO> searchUser(UserRequest req)
+	public List<UserDTO> searchUser(UserRequest req, Integer userId)
 	{
 		UserSQL criterias = new RequestAssembler().apiToSql(req);
 		List<User> users = userDAO.searchUser(criterias);
 		return new Assembler().userListToDto(users);
 	}
 	
-	public UserDTO findUserById(Integer userId)
+	public UserDTO findUserById(Integer userId, Integer authUserId)
 	{
 		if(userId == null) return null;
 		
 		return new Assembler().toDto(userDAO.findById(userId));
 	}
 	
-	public UserDTO findUserByUsername(String username)
+	public UserDTO findUserByUsername(String username, Integer userId)
 	{
 		if(!StringUtil.isValid(username)) return null;
 		
 		UserRequest req = new UserRequest(username);
 		
-		List<UserDTO> users = searchUser(req);
+		List<UserDTO> users = searchUser(req, userId);
 		
 		if(users!=null && !users.isEmpty())
 		{
@@ -78,7 +80,7 @@ public class UserService {
 			throw new NoContentException("Plotesoni 'Rolin'");
 		}
 		
-		if(findUserByUsername(dto.getUsername()) != null)
+		if(findUserByUsername(dto.getUsername(),userId) != null)
 		{
 			throw new EntityExistsException("Perdoruesi ekziston");
 		}
@@ -136,8 +138,11 @@ public class UserService {
 	
 	
 	
-	public UserToken login(String username,String password)
+	public UserToken login(Principal principal)
 	{
+		String username = principal.getUsername();
+		String password = principal.getPassword();
+		
 		
 		User u = userDAO.findByUsername(username);
 		
@@ -155,7 +160,7 @@ public class UserService {
 		
 		
 		
-		String token = "Bearer ......."; //generate token
+		String token = tokenService.generateToken(new Assembler().toDto(u));
 		
 		return new UserToken(new Assembler().toDto(u),token);
 		

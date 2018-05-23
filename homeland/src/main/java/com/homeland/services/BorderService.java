@@ -22,7 +22,7 @@ public class BorderService {
 	@Autowired
 	BorderRepository borderDAO;
 	
-	public List<BorderDTO> searchEntryExit(BorderRequest req)
+	public List<BorderDTO> searchEntryExit(BorderRequest req, Integer userId)
 	{
 		BorderSQL criterias = new RequestAssembler().apiToSql(req);
 		List<Border> borders = borderDAO.searchEntryExit(criterias);
@@ -31,9 +31,9 @@ public class BorderService {
 	
 	
 	@Async
-	public CompletableFuture<List<BorderDTO>> searchAsyncEntryExit(BorderRequest req)
+	public CompletableFuture<List<BorderDTO>> searchAsyncEntryExit(BorderRequest req, Integer userId)
 	{
-		return CompletableFuture.completedFuture(searchEntryExit(req));
+		return CompletableFuture.completedFuture(searchEntryExit(req, userId));
 	}
 	
 	

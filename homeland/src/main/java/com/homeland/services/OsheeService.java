@@ -22,7 +22,7 @@ public class OsheeService {
 	@Autowired
 	OsheeRepository osheeDAO;
 	
-	public List<OsheeDTO> searchOshee(OsheeRequest req)
+	public List<OsheeDTO> searchOshee(OsheeRequest req, Integer userId)
 	{
 		OsheeSQL criterias = new RequestAssembler().apiToSql(req);
 		List<Oshee> oshees = osheeDAO.searchOshee(criterias);
@@ -31,9 +31,9 @@ public class OsheeService {
 	
 	
 	@Async
-	public CompletableFuture<List<OsheeDTO>> searchAsyncOshee(OsheeRequest req)
+	public CompletableFuture<List<OsheeDTO>> searchAsyncOshee(OsheeRequest req, Integer userId)
 	{
-		return CompletableFuture.completedFuture(searchOshee(req));
+		return CompletableFuture.completedFuture(searchOshee(req,userId));
 	}
 	
 	

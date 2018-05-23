@@ -21,14 +21,14 @@ public class SubjectService {
 	@Autowired
 	SubjectRepository subjectDAO;
 	
-	public List<SubjectDTO> searchSubject(SubjectRequest req)
+	public List<SubjectDTO> searchSubject(SubjectRequest req, Integer userId)
 	{
 		SubjectSQL criterias = new RequestAssembler().apiToSql(req);
 		List<Subject> persons = subjectDAO.searchSubject(criterias);
 		return new Assembler().subjectListToDto(persons);
 	}
 	
-	public SubjectDTO getSubjectByNipt(String nipt)
+	public SubjectDTO getSubjectByNipt(String nipt, Integer userId)
 	{
 		if(!StringUtil.isValid(nipt)) return null;
 		
