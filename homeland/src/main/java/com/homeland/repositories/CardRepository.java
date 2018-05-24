@@ -26,6 +26,29 @@ public class CardRepository {
 	EntityManager em;
 	
 	
+	public Card create(Card card)
+	{
+		em.persist(card);
+		em.flush();
+		return card;
+	}
+	
+	public Card update(Card card)
+	{
+		return em.merge(card);
+	}
+	
+	public PhotoCard create(PhotoCard pcard)
+	{
+		em.persist(pcard);
+		em.flush();
+		return pcard;
+	}
+	
+	public PhotoCard update(PhotoCard pcard)
+	{
+		return em.merge(pcard);
+	}
 	
 	@SuppressWarnings("rawtypes")
 	public List<Card> searchCard(DocumentSQL criterias)

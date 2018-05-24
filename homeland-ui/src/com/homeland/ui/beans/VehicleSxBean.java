@@ -102,8 +102,13 @@ public class VehicleSxBean implements Serializable {
 	{
 		try {
 			this.vehicles = new VehicleService().searchVehicle(request);
+			if(vehicles == null || vehicles.isEmpty())
+			{
+				Messages.throwFacesMessage("Nuk u gjet asnje automjet", 2);
+			}
 		}catch(ApiException a) {
 			Messages.throwFacesMessage(a.getMessage(), a.getSeverity());
+			this.vehicles = null;
 		}
 	}
 	

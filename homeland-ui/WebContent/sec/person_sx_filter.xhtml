@@ -85,17 +85,17 @@
 
 		<h:panelGroup layout="block" id="sx_list"
 			rendered="#{!personSxBean.renderFilter}">
-			<div class="ui-g ">
+			<div class="ui-g ui-fluid">
 
-						<div class="ui-g-12 ui-md-2">
+						<div class="ui-g-12 ui-md-3">
 						<h:panelGrid  columns="2">
-							<p:commandButton title="Mbrapa"
+							<p:commandButton value="Mbrapa"
 								action="#{personSxBean.renderFilter()}" update="@form"
-								process="@this" styleClass="black-cl-btn" icon="fa fa-arrow-left" />
+								process="@this" styleClass="green-btn" icon="fa fa-arrow-left" />
 
-							<p:commandButton title="Kërkim i ri"
+							<p:commandButton value="Kërkim i ri"
 								action="#{personSxBean.clear()}" update="@form" process="@this"
-								styleClass="green-cl-btn" icon="ui-icon-search" />
+								styleClass="purple-btn" icon="ui-icon-search" />
 						</h:panelGrid>
 						</div>
 				<div class="ui-g-12 ui-fluid">
@@ -114,40 +114,31 @@
 						<p:column headerText="#">
                                     #{r+1}
                                 </p:column>
-						<p:column headerText="Emri" sortBy="#{p.name}"
-							filterBy="#{p.name}">
+						<p:column headerText="Emri" sortBy="#{p.name}">
                                     #{p.name}
                                 </p:column>
-						<p:column headerText="Mbiemri" sortBy="#{p.surname}"
-							filterBy="#{p.surname}">
+						<p:column headerText="Mbiemri" sortBy="#{p.surname}">
                                     #{p.surname}
                                 </p:column>
-						<p:column headerText="Atësia" sortBy="#{p.fatherName}"
-							filterBy="#{p.fatherName}">
+						<p:column headerText="Atësia" sortBy="#{p.fatherName}">
                                     #{p.fatherName}
                                 </p:column>
-						<p:column headerText="Mëmësia" sortBy="#{p.motherName}"
-							filterBy="#{p.motherName}">
+						<p:column headerText="Mëmësia" sortBy="#{p.motherName}">
                                     #{p.motherName}
                                 </p:column>
-						<p:column headerText="Datëlindja" sortBy="#{p.dob}"
-							filterBy="#{p.dob}">
+						<p:column headerText="Datëlindja" sortBy="#{p.dob}">
                                     #{p.dob}
                                 </p:column>
-						<p:column headerText="Mbiemri V" sortBy="#{p.maidenName}"
-							filterBy="#{p.maidenName}">
+						<p:column headerText="Mbiemri V" sortBy="#{p.maidenName}">
                                     #{p.maidenName}
                                 </p:column>
-						<p:column headerText="Vendlindja" sortBy="#{p.pob}"
-							filterBy="#{p.pob}">
+						<p:column headerText="Vendlindja" sortBy="#{p.pob}">
                                     #{p.pob}
                                 </p:column>
-						<p:column headerText="Rrethi" sortBy="#{p.region}"
-							filterBy="#{p.region}">
+						<p:column headerText="Rrethi" sortBy="#{p.region}">
                                     #{p.region}
                                 </p:column>
-						<p:column headerText="Bashkia" sortBy="#{p.municipality}"
-							filterBy="#{p.municipality}">
+						<p:column headerText="Bashkia" sortBy="#{p.municipality}">
                                     #{p.municipality}
                                 </p:column>
 

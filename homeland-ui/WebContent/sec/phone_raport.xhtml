@@ -59,35 +59,38 @@
 					rowIndexVar="r" paginator="true" paginatorAlwaysVisible="false"
 					rows="20" rowsPerPageTemplate="10,20,30,50">
 
-					<p:column headerText="#">
+				<p:column headerText="#">
                     #{r+1}
                 </p:column>
-					<p:column headerText="Nr Tel" sortBy="#{p.phone}">
+				<p:column headerText="Nr Tel" sortBy="#{p.phone}">
                     #{p.phone}
                 </p:column>
-					<p:column headerText="Emri" sortBy="#{p.name}">
+				<p:column headerText="Emri" sortBy="#{p.name}">
 						<p:commandLink disabled="#{p.nid == null}" value="#{p.name}"
 							action="#{nav.navigate('person_view')}" update=":main">
 							<f:param name="nid" value="#{p.nid}" />
 						</p:commandLink>
-					</p:column>
-					<p:column headerText="Atësia" sortBy="#{b.fatherName}">
-                    #{b.fatherName}
+				</p:column>
+				<p:column headerText="Atësia" sortBy="#{p.fatherName}">
+                    #{p.fatherName}
                 </p:column>
-					<p:column headerText="Mbiemri" sortBy="#{p.surname}">
+				<p:column headerText="Mbiemri" sortBy="#{p.surname}">
 						<p:commandLink disabled="#{p.nid == null}" value="#{p.surname}"
 							action="#{nav.navigate('person_view')}" update=":main">
 							<f:param name="nid" value="#{p.nid}" />
 						</p:commandLink>
-					</p:column>
-					<p:column headerText="Datëlindja" sortBy="#{p.dob}">
+				</p:column>
+				<p:column headerText="Datëlindja" sortBy="#{p.dob}">
                     #{p.dob}
                 </p:column>
-					<p:column headerText="Data Regjistrimit" sortBy="#{p.regDate}">
+                <p:column headerText="Nid" sortBy="#{p.nid}">
+                    #{p.nid}
+                </p:column>
+				<p:column headerText="Data Regjistrimit" sortBy="#{p.regDate}">
                     #{p.regDate}
                 </p:column>
-					<p:column headerText="Burimi" sortBy="#{p.dataSource}">
-					#{b.crossingGate}
+				<p:column headerText="Burimi" sortBy="#{p.dataSource}">
+					#{p.dataSource}
 				</p:column>
 
 				</p:dataTable>

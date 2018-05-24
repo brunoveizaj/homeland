@@ -28,13 +28,13 @@ public class ApiErrorHandler implements ResponseErrorHandler {
     	   InputStream is = response.getBody();
     	   message = StringUtil.toString(is);
     	}
-    	
+    	    	
     	throw new ApiException(message,severity);
     }
 
     @Override
     public boolean hasError(ClientHttpResponse response) throws IOException {
-    	
+    	    	
     	HttpStatus.Series series = response.getStatusCode().series();
         return (HttpStatus.Series.CLIENT_ERROR.equals(series)
                 || HttpStatus.Series.SERVER_ERROR.equals(series));

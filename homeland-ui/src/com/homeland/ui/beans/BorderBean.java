@@ -62,8 +62,13 @@ public class BorderBean implements Serializable {
 	{
 		try {
 			this.borders = new BorderService().searchEntryExits(request);
+			if(borders == null || borders.isEmpty())
+			{
+				Messages.throwFacesMessage("Nuk ka HYRJE-DALJE", 2);
+			}
 		}catch(ApiException a) {
 			Messages.throwFacesMessage(a.getMessage(), a.getSeverity());
+			this.borders = null;
 		}
 	}
 	

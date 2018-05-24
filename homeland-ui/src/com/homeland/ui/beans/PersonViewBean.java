@@ -223,8 +223,13 @@ public class PersonViewBean implements Serializable {
 			vr.setName(person.getName());
 			vr.setSurname(person.getSurname());
 			this.vehicles = new VehicleService().searchVehicle(vr);
+			if(vehicles == null || vehicles.isEmpty())
+			{
+				Messages.throwFacesMessage("Nuk ka automjete", 2);
+			}
 		}catch(ApiException a) {
 			Messages.throwFacesMessage(a.getMessage(), a.getSeverity());
+			this.vehicles = null;
 		}
 	}
 	
@@ -234,8 +239,13 @@ public class PersonViewBean implements Serializable {
 			SubjectRequest sr = new SubjectRequest();
 			sr.setManagers(person.getName()+" "+person.getSurname());
 			this.subjects = new SubjectService().searchSubject(sr);
+			if(subjects == null || subjects.isEmpty())
+			{
+				Messages.throwFacesMessage("Nuk ka subjekte", 2);
+			}
 		}catch(ApiException a) {
 			Messages.throwFacesMessage(a.getMessage(), a.getSeverity());
+			this.subjects = null;
 		}
 	}
 	

@@ -74,8 +74,13 @@ public class SubjectSxBean implements Serializable {
 	{
 		try {
 			this.subjects = new SubjectService().searchSubject(request);
+			if(subjects == null || subjects.isEmpty())
+			{
+				Messages.throwFacesMessage("Nuk u gjet asnje subjekt", 2);
+			}
 		}catch(ApiException a) {
 			Messages.throwFacesMessage(a.getMessage(), a.getSeverity());
+			this.subjects = null;
 		}
 		this.subject = null;
 	}

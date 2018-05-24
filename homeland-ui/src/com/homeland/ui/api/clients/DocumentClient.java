@@ -16,7 +16,6 @@ import com.homeland.ui.constants.HttpCode;
 import com.homeland.ui.constants.IApiClient;
 import com.homeland.ui.criterias.DocumentRequest;
 import com.homeland.ui.criterias.PhotoRequest;
-import com.homeland.ui.exceptions.ServerException;
 import com.homeland.ui.models.CardDTO;
 import com.homeland.ui.models.PassportDTO;
 import com.homeland.ui.models.PhotoDTO;
@@ -99,13 +98,9 @@ public class DocumentClient {
 		
 		if(response.getStatusCodeValue() == HttpCode.OK)
 		{
+			System.out.println("SX Card HTTP code OK");
 			return response.getBody();
 		}
-		
-		if(response.getStatusCodeValue() == HttpCode.SERVER_ERROR)
-		{
-			throw new ServerException("Server Error");
-		}		
 				
 		return null;
 		
@@ -185,12 +180,7 @@ public class DocumentClient {
 		{
 			return response.getBody();
 		}
-		
-		if(response.getStatusCodeValue() == HttpCode.SERVER_ERROR)
-		{
-			throw new ServerException("Server Error");
-		}		
-				
+	
 		return null;
 		
 	}
@@ -214,12 +204,7 @@ public class DocumentClient {
 		{
 			return response.getBody();
 		}
-		
-		if(response.getStatusCodeValue() == HttpCode.SERVER_ERROR)
-		{
-			throw new ServerException("Server Error");
-		}
-		
+
 		return null;
 	}
 	

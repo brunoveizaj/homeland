@@ -1,0 +1,162 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<h:form id="card_raport_form">
+
+		<div class="ui-g ui-fluid">
+			<div class="ui-g-12">
+				<div class="card card-w-title">
+					<h1>Kërkim Karta Identiteti</h1>
+					<div class="ui-g">
+						
+						<div class="ui-g-12">
+						
+							<p:panelGrid layout="grid" columns="4"
+									styleClass="ui-panelgrid-blank form-group">
+
+									<p:inputText placeholder="Emri"
+										value="#{cardBean.request.name}" />
+									<p:inputText placeholder="Mbiemri"
+										value="#{cardBean.request.surname}" />
+									<p:inputText placeholder="Atësia"
+										value="#{cardBean.request.fatherName}" />
+									<p:inputText placeholder="Mëmësia"
+										value="#{cardBean.request.motherName}" />
+
+									<p:inputText placeholder="NID"
+										value="#{cardBean.request.nid}" />
+									<p:inputText placeholder="Nr Dokumentit"
+										value="#{cardBean.request.idn}" />
+									<p:inputMask mask="99.99.9999" placeholder="Datëlindja"
+										value="#{cardBean.request.dob}" />
+									<p:selectOneMenu placeholder="Gjinia"
+										value="#{cardBean.request.gender}" autoWidth="false">
+										<f:selectItem itemValue="#{null}" itemLabel="Gjinia" />
+										<f:selectItem itemValue="M" itemLabel="M" />
+										<f:selectItem itemValue="F" itemLabel="F" />
+									</p:selectOneMenu>
+
+									<p:inputText placeholder="Nga Mosha"
+										value="#{cardBean.request.fromAge}" />
+									<p:inputText placeholder="Në Moshën"
+										value="#{cardBean.request.toAge}" />
+
+								</p:panelGrid>
+						</div>
+
+						<div class="ui-g-12 ui-md-4">
+							<p:panelGrid layout="grid" columns="2"
+								styleClass="ui-panelgrid-blank">
+								<p:commandButton value="Kërko" update="@form"
+									action="#{cardBean.search()}" icon="ui-icon-search" />
+								<p:commandButton value="Pastro" update="@form"
+									action="#{cardBean.clear()}" icon="ui-icon-trash"
+									styleClass="red-btn" />
+							</p:panelGrid>
+						</div>
+
+			<div class="ui-g-12">
+				<p:messages showDetail="true" closable="true">
+					<p:autoUpdate />
+				</p:messages>
+			</div>
+
+					</div>
+				</div>
+
+			</div>
+
+			
+
+			<div class="ui-g-12">
+				<p:dataTable value="#{cardBean.cards}" rendered="#{not empty cardBean.cards}" var="c" reflow="true"
+					rowIndexVar="r" paginator="true" paginatorAlwaysVisible="false"
+					selection="#{cardBean.selectedCard}" selectionMode="single" rowKey="#{c.id}"
+					rows="20" rowsPerPageTemplate="10,20,30,50">
+					<p:ajax event="rowSelect" update="card_details" />
+
+				<p:column headerText="#">#{r+1}</p:column>
+                <p:column headerText="Nr dok">#{c.idn}</p:column>
+                <p:column headerText="Nid">#{c.nid}</p:column>
+                <p:column headerText="Emri">#{c.name}</p:column>
+                <p:column headerText="Atësia">#{c.fatherName}</p:column>
+                <p:column headerText="Mbiemri">#{c.surname}</p:column>
+                <p:column headerText="Datëlindja">#{c.dob}</p:column>
+                <p:column headerText="Gjinia">#{c.idn}</p:column>
+                <p:column headerText="Vendlindja">#{c.pob}</p:column>
+				
+				</p:dataTable>
+			</div>
+			
+			<h:panelGroup id="card_details" layout="block" rendered="#{cardBean.selectedCard != null}"> 
+			<div class="ui-g-12">
+				<p:panel header="Të dhënat e Kartës">
+					<div class="ui-g">
+						<div class="ui-g-12 ui-md-2">
+							<p:graphicImage value="#{photoBean.cardImage}" width="95%">
+								<f:param name="idc" value="#{cardBean.selectedCard.idc}"/>
+							</p:graphicImage>
+						</div>
+						<div class="ui-g-12 ui-md-10">
+						
+							<p:panelGrid layout="grid" columns="4" columnClasses="bold,empty,bold,empty" styleClass="ui-panelgrid-blank">
+                                   
+                                    <p:outputLabel value="Emri" />
+                                    <p:inputText value="#{cardBean.selectedCard.name}" readonly="true"/>
+                                    <p:outputLabel value="Mbiemri" />
+                                    <p:inputText value="#{cardBean.selectedCard.surname}" readonly="true"/>
+                                    
+                                    <p:outputLabel value="Atësia" />
+                                    <p:inputText value="#{cardBean.selectedCard.fatherName}" readonly="true"/>
+                                    <p:outputLabel value="Mëmësia" />
+                                    <p:inputText value="#{cardBean.selectedCard.motherName}" readonly="true"/>
+
+                                    <p:outputLabel value="Datëlindja" />
+                                    <p:inputText value="#{cardBean.selectedCard.dob}" readonly="true"/>
+                                    <p:outputLabel value="Gjinia" />
+                                    <p:inputText value="#{cardBean.selectedCard.gender}" readonly="true"/>
+
+                                    <p:outputLabel value="Shtetësia" />
+                                    <p:inputText value="#{cardBean.selectedCard.citizenship}" readonly="true"/>
+                                    <p:outputLabel value="Kombësia" />
+                                    <p:inputText value="#{cardBean.selectedCard.nationality}" readonly="true"/>
+
+                                    <p:outputLabel value="Vendlindja" />
+                                    <p:inputText value="#{cardBean.selectedCard.pob}" readonly="true"/>
+                                    <p:outputLabel value="Qyteti" />
+                                    <p:inputText value="#{cardBean.selectedCard.city}" readonly="true"/>
+
+                                    <p:outputLabel value="NID" />
+                                    <p:inputText value="#{cardBean.selectedCard.nid}" readonly="true"/>
+                                    <p:outputLabel value="Nr Kartës" />
+                                    <p:inputText value="#{cardBean.selectedCard.idc}" readonly="true"/>
+
+                                    <p:outputLabel value="Dt Lëshimit" />
+                                    <p:inputText value="#{cardBean.selectedCard.issueDate}" readonly="true"/>
+                                    <p:outputLabel value="Skadenca" />
+                                    <p:inputText value="#{cardBean.selectedCard.expireDate}" readonly="true"/>
+
+                                    <p:outputLabel value="Tel 1" />
+                                    <p:inputText value="#{cardBean.selectedCard.phoneOne}" readonly="true"/>
+                                    <p:outputLabel value="Tel 2" />
+                                    <p:inputText value="#{cardBean.selectedCard.phoneTwo}" readonly="true"/>
+
+                                    <p:outputLabel value="Adresa" />
+                                    <p:inputText value="#{cardBean.selectedCard.street}/#{cardBean.selectedCard.building}/#{cardBean.selectedCard.appartment}" 
+                                                 readonly="true"/>
+                                </p:panelGrid>	
+							
+						</div>
+					</div>
+				</p:panel>
+			</div>
+			</h:panelGroup>
+		</div>
+
+	</h:form>
+
+</ui:composition>

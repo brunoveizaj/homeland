@@ -116,7 +116,7 @@ public class PersonSxBean implements Serializable {
 			else
 			{
 				renderFilter();
-				Messages.throwFacesMessage("Nuk ka te dhena", 2);
+				Messages.throwFacesMessage("Nuk u gjend asnje person", 2);
 			}
 			
 		}catch(ApiException a) {

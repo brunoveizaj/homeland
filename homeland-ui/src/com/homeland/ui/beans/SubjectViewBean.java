@@ -120,8 +120,13 @@ public class SubjectViewBean implements Serializable {
 		tr.setYear(year);
 		try {
 			this.tatimes = new TatimeService().searchTatime(tr); 
+			if(tatimes == null || tatimes.isEmpty())
+			{
+				Messages.throwFacesMessage("Nuk ka listëpagesa per periudhen: "+month+"/"+year, 2);
+			}
 		}catch(ApiException a) {
 			Messages.throwFacesMessage(a.getMessage(), a.getSeverity());
+			this.tatimes = null;
 		}
 	}
 	
