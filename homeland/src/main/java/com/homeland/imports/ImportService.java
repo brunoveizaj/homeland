@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.homeland.assemblers.Assembler;
 import com.homeland.dto.CardDTO;
 import com.homeland.dto.ImportDTO;
+import com.homeland.dto.PhotoDTO;
 import com.homeland.entities.Card;
 import com.homeland.entities.Imports;
 import com.homeland.entities.Passport;
@@ -111,6 +112,18 @@ public class ImportService {
 		cardDAO.create(c);
 	}
 	
+	@Transactional
+	public void registerPhotoCard(PhotoDTO dto)
+	{
+		PhotoCard p = new PhotoCard();
+		
+		p.setRid((long)dto.getId());
+		p.setIdc(dto.getIdDoc());
+		p.setInsterted(Calendar.getInstance().getTime());
+		p.setPhoto(dto.getPhoto());
+		
+		cardDAO.create(p);
+	}
 	
 	
 }
