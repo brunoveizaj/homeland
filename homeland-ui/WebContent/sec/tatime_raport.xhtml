@@ -1,0 +1,117 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<h:form id="tatime_raport_form">
+
+		<div class="ui-g ui-fluid">
+			<div class="ui-g-12">
+				<div class="card card-w-title">
+					<h1>Kërko listëpagesa</h1>
+					<div class="ui-g">
+						<div class="ui-g-12">
+
+							<p:panelGrid layout="grid" columns="4"
+								styleClass="ui-panelgrid-blank form-group">
+
+								<p:inputText placeholder="NID"
+									value="#{tatimeBean.request.nid}" />
+								<p:inputText placeholder="Emri"
+									value="#{tatimeBean.request.name}" />
+								<p:inputText placeholder="Mbiemri"
+									value="#{tatimeBean.request.surname}" />
+								<p:inputText placeholder="Subjekti"
+									value="#{tatimeBean.request.subject}" />
+									
+								<p:inputText placeholder="NIPT"
+									value="#{tatimeBean.request.nipt}" />
+								<p:inputText placeholder="Viti"
+									value="#{tatimeBean.request.year}" />
+								<p:inputText placeholder="Muaji"
+									value="#{tatimeBean.request.month}" />
+								
+
+							</p:panelGrid>
+						</div>
+
+						<div class="ui-g-12 ui-md-4">
+							<p:panelGrid layout="grid" columns="2"
+								styleClass="ui-panelgrid-blank">
+								<p:commandButton value="Kërko" update="@form"
+									action="#{tatimeBean.search()}" icon="ui-icon-search" />
+								<p:commandButton value="Pastro" update="@form"
+									action="#{tatimeBean.clear()}" icon="ui-icon-trash"
+									styleClass="red-btn" />
+							</p:panelGrid>
+						</div>
+
+						<div class="ui-g-12">
+							<p:messages showDetail="true" closable="true">
+								<p:autoUpdate />
+							</p:messages>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
+
+
+			<div class="ui-g-12">
+				<p:dataTable value="#{tatimeBean.tatimes}"
+					rendered="#{not empty tatimeBean.tatimes}" var="t" reflow="true"
+					rowIndexVar="r" paginator="true" paginatorAlwaysVisible="false"
+					rows="20" rowsPerPageTemplate="10,20,30,50">
+
+				<p:column headerText="#">
+                    #{r+1}
+                </p:column>
+				<p:column headerText="NID">
+                    #{t.nid}
+                </p:column>
+                <p:column headerText="Emri" sortBy="#{t.name}">
+                   <p:commandLink value="#{t.name}"
+							action="#{nav.navigate('person_view')}" >
+							<f:param name="nid" value="#{t.nid}" />
+					</p:commandLink>
+                </p:column>
+                <p:column headerText="Mbiemri" sortBy="#{t.surname}">
+                    <p:commandLink value="#{t.surname}"
+							action="#{nav.navigate('person_view')}" >
+							<f:param name="nid" value="#{t.nid}" />
+					</p:commandLink>
+                </p:column>       
+                <p:column headerText="NIPT" sortBy="#{t.nipt}">
+                    #{t.nipt}
+                </p:column>         
+				<p:column headerText="Subjekti" sortBy="#{t.subject}">
+					<p:commandLink value="#{t.subject}"
+							action="#{nav.navigate('subject_view')}" >
+							<f:param name="nipt" value="#{t.nipt}" />
+					</p:commandLink>
+				</p:column>
+				<p:column headerText="Profesioni" sortBy="#{t.profession}">
+                    #{t.profession}
+                </p:column>
+				<p:column headerText="Paga" sortBy="#{t.salary}">
+                    #{t.salary}
+                </p:column>
+				<p:column headerText="Viti" sortBy="#{t.year}">
+                    #{t.year}
+                </p:column>
+				<p:column headerText="Muaji" sortBy="#{t.month}">
+                    #{t.month}
+                </p:column>
+
+				</p:dataTable>
+			</div>
+
+		</div>
+
+	</h:form>
+
+</ui:composition>

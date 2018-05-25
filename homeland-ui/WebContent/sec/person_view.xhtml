@@ -281,26 +281,26 @@
 					<f:facet name="header">
                     Punësimi
                 </f:facet>
-					<p:column headerText="#">
+				<p:column headerText="#">
                     #{r+1}
                 </p:column>
 					<p:column headerText="NIPT">
                     #{t.nipt}
                 </p:column>
-					<p:column headerText="Subjekti">
+				<p:column headerText="Subjekti">
 						<p:commandLink value="#{t.subject}"
 							action="#{personBean.onNavSubjectSelect(t.nipt)}" />
-					</p:column>
-					<p:column headerText="Pozicioni">
+				</p:column>
+				<p:column headerText="Pozicioni">
                     #{t.profession}
                 </p:column>
-					<p:column headerText="Paga">
+				<p:column headerText="Paga">
                     #{t.salary}
                 </p:column>
-					<p:column headerText="Viti">
+				<p:column headerText="Viti">
                     #{t.year}
                 </p:column>
-					<p:column headerText="Muaji">
+				<p:column headerText="Muaji">
                     #{t.month}
                 </p:column>
 				</p:dataTable>
