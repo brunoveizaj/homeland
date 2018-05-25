@@ -430,6 +430,7 @@ public class Assembler {
 		dto.setRole(entity.getRole());
 		dto.setStatus(entity.getStatus());
 		dto.setUsername(entity.getUsername());
+		dto.setSecret(entity.getSecret());
 		
 		
 		return dto;

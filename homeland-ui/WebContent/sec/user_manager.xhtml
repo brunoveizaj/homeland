@@ -5,39 +5,61 @@
 	xmlns:p="http://primefaces.org/ui">
 
 
-	<h:form id="phone_raport_form">
+	<h:form id="users_form">
 
 		<div class="ui-g ui-fluid">
 			<div class="ui-g-12">
 				<div class="card card-w-title">
 					<h1>Menaxho përdoruesit</h1>
 					<div class="ui-g">
-						<div class="ui-g-12">
+						<div class="ui-g-12 ui-md-6">
 
-							<p:panelGrid layout="grid" columns="4"
+							<p:panelGrid layout="grid" columns="2"
 								styleClass="ui-panelgrid-blank form-group">
 
-								<p:inputText placeholder="Nr telefonit"
-									value="#{phoneBean.request.phoneNo}" />
-								<p:inputText placeholder="Emri"
-									value="#{phoneBean.request.name}" />
-								<p:inputText placeholder="Mbiemri"
-									value="#{phoneBean.request.surname}" />
-								<p:inputText placeholder="Atësia"
-									value="#{phoneBean.request.fatherName}" />
+								<p:outputLabel value="Përdoruesi" />
+								<p:inputText placeholder="Përdoruesi"
+									value="#{userBean.user.username}" />
+
+								<p:outputLabel value="Fjalëkalimi" />
+								<p:inputText placeholder="Fjalëkalimi"
+									value="#{userBean.user.secret}" />
+
+								<p:outputLabel value="Roli" />
+								<p:selectOneMenu value="#{userBean.user.role}">
+									<f:selectItem itemValue="O" itemLabel="Operator" />
+									<f:selectItem itemValue="A" itemLabel="Administrator" />
+								</p:selectOneMenu>
+
+								<p:outputLabel value="Statusi" />
+								<p:selectOneMenu value="#{userBean.user.status}">
+									<f:selectItem itemValue="#{constB.ACTIVE}" itemLabel="Aktiv" />
+									<f:selectItem itemValue="#{constB.NOT_ACTIVE}"
+										itemLabel="Jo Aktiv" />
+								</p:selectOneMenu>
 
 							</p:panelGrid>
 						</div>
 
-						<div class="ui-g-12 ui-md-4">
-							<p:panelGrid layout="grid" columns="2"
-								styleClass="ui-panelgrid-blank">
-								<p:commandButton value="Kërko" update="@form" styleClass="green-btn"
-									action="#{phoneBean.search()}" icon="ui-icon-search" />
-								<p:commandButton value="Pastro" update="@form"
-									action="#{phoneBean.clear()}" icon="ui-icon-trash"
-									styleClass="red-btn" />
-							</p:panelGrid>
+						<div class="ui-g-12 ui-g-nopad">
+							<div class="ui-g ui-g-nopad">
+								<div class="ui-g-12 ui-md-3">
+									<p:panelGrid layout="grid" columns="2"
+										styleClass="ui-panelgrid-blank">
+										<p:commandButton value="Regjistro"
+											rendered="#{userBean.user.id == 0}" update="@form"
+											styleClass="green-btn" action="#{userBean.register()}"
+											icon="ui-icon-search" />
+										<p:commandButton value="Modifiko"
+											rendered="#{userBean.user.id gt 0}" update="@form"
+											styleClass="blue-btn" action="#{userBean.modify()}"
+											icon="ui-icon-search" />
+										<p:commandButton value="Pastro" update="@form"
+											action="#{userBean.clear()}" icon="ui-icon-trash"
+											styleClass="red-btn" />
+									</p:panelGrid>
+								</div>
+							</div>
 						</div>
 
 						<div class="ui-g-12">
@@ -54,44 +76,33 @@
 
 
 			<div class="ui-g-12">
-				<p:dataTable value="#{phoneBean.phones}"
-					rendered="#{not empty phoneBean.phones}" var="p" reflow="true"
+				<p:dataTable value="#{userBean.users}" var="u" reflow="true"
 					rowIndexVar="r" paginator="true" paginatorAlwaysVisible="false"
-					rows="20" rowsPerPageTemplate="10,20,30,50">
-
+					selection="#{userBean.selectedUser}" selectionMode="single"
+					rowKey="#{u.id}" rows="20" rowsPerPageTemplate="10,20,30,50">
+				
+				<p:ajax event="rowSelect" listener="#{userBean.onUserSelect()}" update="@form"/>	
+					
+				<f:facet name="header">Lista e përdoruesëve</f:facet>
+					
 				<p:column headerText="#">
                     #{r+1}
                 </p:column>
-				<p:column headerText="Nr Tel" sortBy="#{p.phone}">
-                    #{p.phone}
+					<p:column headerText="Username">
+                    #{u.username}
                 </p:column>
-				<p:column headerText="Emri" sortBy="#{p.name}">
-						<p:commandLink disabled="#{p.nid == null}" value="#{p.name}"
-							action="#{nav.navigate('person_view')}" update=":main">
-							<f:param name="nid" value="#{p.nid}" />
-						</p:commandLink>
-				</p:column>
-				<p:column headerText="Atësia" sortBy="#{p.fatherName}">
-                    #{p.fatherName}
+					<p:column headerText="Roli">
+                    #{u.role}
                 </p:column>
-				<p:column headerText="Mbiemri" sortBy="#{p.surname}">
-						<p:commandLink disabled="#{p.nid == null}" value="#{p.surname}"
-							action="#{nav.navigate('person_view')}" update=":main">
-							<f:param name="nid" value="#{p.nid}" />
-						</p:commandLink>
-				</p:column>
-				<p:column headerText="Datëlindja" sortBy="#{p.dob}">
-                    #{p.dob}
+					<p:column headerText="Statusi">
+                    #{u.status==1?'Aktiv':'Jo Aktiv'}
                 </p:column>
-                <p:column headerText="Nid" sortBy="#{p.nid}">
-                    #{p.nid}
+					<p:column headerText="Dt regj">
+                    #{u.createdTime}
                 </p:column>
-				<p:column headerText="Data Regjistrimit" sortBy="#{p.regDate}">
-                    #{p.regDate}
+					<p:column headerText="Dt mod">
+                    #{u.modifyTime}
                 </p:column>
-				<p:column headerText="Burimi" sortBy="#{p.dataSource}">
-					#{p.dataSource}
-				</p:column>
 
 				</p:dataTable>
 			</div>

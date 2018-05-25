@@ -94,7 +94,7 @@ public class UserApi {
 		return new ResponseEntity<>(u,HttpStatus.OK);
 		
 		}catch(NoContentException | EntityExistsException e) {
-			return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	

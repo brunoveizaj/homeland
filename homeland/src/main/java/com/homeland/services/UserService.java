@@ -3,6 +3,8 @@ package com.homeland.services;
 import java.util.Date;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,6 +62,7 @@ public class UserService {
 		return null;
 	}
 	
+	@Transactional
 	public UserDTO registerUser(UserDTO dto,Integer userId)
 	{
 		
@@ -94,6 +97,7 @@ public class UserService {
 		
 	}
 	
+	@Transactional
 	public UserDTO modifyUser(UserDTO dto,Integer userId)
 	{
 		
@@ -137,7 +141,7 @@ public class UserService {
 	}
 	
 	
-	
+	@Transactional
 	public UserToken login(Principal principal)
 	{
 		String username = principal.getUsername();
