@@ -25,7 +25,19 @@ public class PassportRepository {
 		@PersistenceContext
 		EntityManager em;
 		
+		public Passport create(Passport p)
+		{
+			em.persist(p);
+			em.flush();
+			return p;
+		}
 		
+		public PhotoPassport create(PhotoPassport p)
+		{
+			em.persist(p);
+			em.flush();
+			return p;
+		}
 		
 		@SuppressWarnings("rawtypes")
 		public List<Passport> searchPassport(DocumentSQL criterias)

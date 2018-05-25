@@ -23,6 +23,15 @@ public class VehicleRepository {
 	EntityManager em;
 	
 	
+	public Vehicle create(Vehicle v)
+	{
+		em.persist(v);
+		em.flush();
+		return v;
+	}
+	
+	
+	
 	@SuppressWarnings("rawtypes")
 	public List<Vehicle> searchVehicle(VehicleSQL criterias)
 	{

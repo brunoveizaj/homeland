@@ -24,7 +24,12 @@ public class PhoneRepository {
 	@PersistenceContext
 	EntityManager em;
 	
-	
+	public Phone create(Phone p)
+	{
+		em.persist(p);
+		em.flush();
+		return p;
+	}
 	
 	@SuppressWarnings("rawtypes")
 	public List<Phone> searchPhone(PhoneSQL criterias)

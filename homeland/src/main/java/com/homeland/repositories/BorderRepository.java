@@ -23,6 +23,15 @@ public class BorderRepository {
 	EntityManager em;
 	
 	
+	public Border create(Border b)
+	{
+		em.persist(b);
+		em.flush();
+		return b;
+	}
+	
+	
+	
 	@SuppressWarnings("rawtypes")
 	public List<Border> searchEntryExit(BorderSQL criterias)
 	{

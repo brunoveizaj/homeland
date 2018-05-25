@@ -23,6 +23,16 @@ public class TicketRepository {
 	@PersistenceContext
 	EntityManager em;
 	
+	
+	public Ticket create(Ticket t)
+	{
+		em.persist(t);
+		em.flush();
+		return t;
+	}
+	
+	
+	
 	@SuppressWarnings("rawtypes")
 	public List<Ticket> searchTicket(TicketSQL criterias)
 	{
