@@ -63,7 +63,7 @@
 							<div class="ui-g-12 ui-md-4">
 								<p:panelGrid layout="grid" columns="2"
 									styleClass="ui-panelgrid-blank">
-									<p:commandButton value="Kërko" update="@form"
+									<p:commandButton value="Kërko" update="@form" styleClass="green-btn"
 										action="#{personSxBean.search()}" icon="ui-icon-search" />
 										<p:commandButton value="Pastro" update="@form"
 										action="#{personSxBean.clear()}" icon="ui-icon-trash" 
@@ -91,11 +91,11 @@
 						<h:panelGrid  columns="2">
 							<p:commandButton value="Mbrapa"
 								action="#{personSxBean.renderFilter()}" update="@form"
-								process="@this" styleClass="green-btn" icon="fa fa-arrow-left" />
+								process="@this" styleClass="orange-btn" icon="fa fa-arrow-left" />
 
 							<p:commandButton value="Kërkim i ri"
 								action="#{personSxBean.clear()}" update="@form" process="@this"
-								styleClass="purple-btn" icon="ui-icon-search" />
+								styleClass="blue-btn" icon="ui-icon-search" />
 						</h:panelGrid>
 						</div>
 				<div class="ui-g-12 ui-fluid">

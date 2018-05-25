@@ -97,9 +97,7 @@ public class PersonClient {
 		{
 			builder.queryParam("maxResult", req.getMaxResult());
 		}
-		
-		System.err.println("API REQ PERSON:searchPerson: "+builder.toUriString().toString());
-		
+				
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.setErrorHandler(new ApiErrorHandler());
 		
@@ -153,19 +151,6 @@ public class PersonClient {
 		}		
 		
 		return null;
-		
-	}
-	
-	
-	public static void main(String[] args)
-	{
-		PersonClient client = new PersonClient();
-		
-		PersonRequest req = new PersonRequest();
-		req.setName("bruno");req.setSurname("veizaj");
-		
-		client.searchPerson(req);
-		client.personRaport("j00613072ts");
 		
 	}
 	

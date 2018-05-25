@@ -34,9 +34,7 @@ public class RequestAssembler {
 		PersonSQL sql = new PersonSQL();
 				
 		if(req != null)
-		{
-			System.err.println("ASSEMBLER: req "+req);
-			
+		{			
 			sql.setDob(DateUtil.toReverseDate(req.getDob()));
 			sql.setFamilyId(req.getFamilyId());
 			sql.setFatherName(req.getFatherName());
@@ -61,9 +59,7 @@ public class RequestAssembler {
 			sql.setFirstResult(req.getFirstResult());
 			sql.setMaxResult(req.getMaxResult());
 		}
-		
-		System.err.println("ASSEMBLER SQL: "+sql);
-		
+				
 		return sql;
 	}
 	
