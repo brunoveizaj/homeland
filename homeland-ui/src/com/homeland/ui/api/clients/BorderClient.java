@@ -21,7 +21,7 @@ import com.homeland.ui.utils.StringUtil;
 import com.homeland.ui.utils.Util;
 
 public class BorderClient {
-
+//
 	
 	public List<BorderDTO> searchEntryExits(BorderRequest req)
 	{
