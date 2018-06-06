@@ -12,54 +12,41 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
             <meta name="apple-mobile-web-app-capable" content="yes" />
         </f:facet>
-        <title>PrimeFaces Paradise</title>
+        <title>Homeland</title>
     </h:head>
 
-    <h:body styleClass="login-body">
+    <h:body style="background-color: #f1eeee">
         <h:form>
         <p:growl showDetail="true">
         	<p:autoUpdate/>
         </p:growl>
-            <div class="login-panel ui-fluid">
+        <div class="ui-g">
+        <div class="ui-g-12 ui-md-5"/>
+        <div class="ui-g-12 ui-md-2">
+            <div class="card card-w-title ui-fluid">
+            <h1 >Homeland</h1>
                 <div class="ui-g">
-                    <div class="ui-g-12 logo-container">
-                        <p:graphicImage name="images/logo-gray.png" library="paradise-layout" styleClass="logo" />
-                        <p:graphicImage name="images/login/icon-login.png" library="paradise-layout" styleClass="login-icon" />
-                        <h2>Welcome to Paradise</h2>
-                    </div>
+                
                     <div class="ui-g-12">
                         <p:outputLabel for="username" value="Username" />
-                        <div class="input-wrapper">
-                            <p:inputText id="username" value="#{loginBean.username}" placeholder="Username" />
-                            <i class="fa fa-user" />
-                        </div>
+                            <p:inputText id="username" value="#{loginBean.username}" style="line-height: 22px; border-radius: 8px;margin: 5px;padding 5px;"  placeholder="Username" />
                     </div>
                     <div class="ui-g-12">
                         <p:outputLabel for="password" value="Password" />
-                        <div class="input-wrapper">
-                            <p:password id="password" value="#{loginBean.password}" placeholder="Password" feedback="false" />
-                            <i class="fa fa-lock" />
-                        </div>
+                            <p:password id="password" value="#{loginBean.password}" style="line-height: 22px; border-radius: 8px;margin: 5px;padding 5px;" placeholder="Password" feedback="false" />
                     </div>
-                    <div class="ui-g-12 chkbox-container">
-                        <div class="ui-g-6 ui-md-6">
-                            <h:outputLink value="#">
-                                Forgot password?
-                            </h:outputLink>
-                        </div>
-                        <div class="ui-g-6 rememberme-container">
-                            <p:outputLabel for="remember-me" value="Remember Me"/>
-                            <p:selectBooleanCheckbox id="remember-me" />
-                        </div>
-                        
-                    </div>
+
                     <div class="ui-g-12 button-container">
-                        <p:commandButton action="#{loginBean.login()}" value="Hyr" styleClass="blue-btn raised-btn" update="@form"/>
+                        <p:commandButton action="#{loginBean.login()}" value="Hyr" 
+                        style="height: 40px; border-radius: 8px; background-color: #337ab7; font-size: 16px; margin: 5px;padding 5px;"
+                         update="@form"/>
                     </div>
                     
                     <h:outputStylesheet name="css/layout-#{guestPreferences.layout}.css" library="paradise-layout" />
                 </div>
             </div>
+           </div>
+           </div>
         </h:form>
     </h:body>
 
