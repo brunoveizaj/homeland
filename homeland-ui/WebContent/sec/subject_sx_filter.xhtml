@@ -29,11 +29,11 @@
 						<div class="ui-g-12 ui-md-4">
 							<p:panelGrid layout="grid" columns="2"
 								styleClass="ui-panelgrid-blank">
-								<p:commandButton value="Kërko" update="@form" styleClass="green-btn"
+								<p:commandButton value="Kërko" update="@form" styleClass="blue-btn"
 									action="#{subjectSxBean.search()}" icon="ui-icon-search" />
 								<p:commandButton value="Pastro" update="@form"
 									action="#{subjectSxBean.clear()}" icon="ui-icon-trash"
-									styleClass="red-btn" />
+									styleClass="green-btn" />
 							</p:panelGrid>
 						</div>
 
@@ -73,7 +73,7 @@
 										#{s.actioners}
 									</p:column>
 					<p:column headerText="Administratori">
-										#{s.administrator}
+										#{s.administrators}
 									</p:column>
 					<p:column headerText="Dt regj">
 										#{s.regDate}

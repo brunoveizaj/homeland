@@ -79,63 +79,53 @@
 							readonly="true" />
 					</p:panelGrid>
 
-
-
-					</p:panelGrid>
-
 				</p:panel>
 
 			</div>
 
-			<div class="ui-g-12 ui-fluid">
+			<div class="ui-g-12 ">
 				<p:panel header="Punonjësit">
-					<p:panelGrid layout="grid" styleClass="ui-panelgrid-blank">
-						<p:panelGrid columns="2" layout="grid"
-							styleClass="ui-panelgrid-blank">
-							<p:selectOneMenu placeholder="Viti">
-							</p:selectOneMenu>
-							<p:selectOneMenu placeholder="Muaji">
-							</p:selectOneMenu>
-						</p:panelGrid>
-						<p:dataTable value="#{subjectViewBean.tatimes}" var="t"
-							styleClass="blue-tbl" rowIndexVar="r" paginator="true"
-							paginatorAlwaysVisible="false" rows="5"
-							rowsPerPageTemplate="5,10,20" reflow="true"
-							emptyMessage="Nuk ka punonjës">
 
-							<f:facet name="header">
+					<p:dataTable value="#{subjectViewBean.tatimes}" var="t"
+						styleClass="blue-tbl" rowIndexVar="r" paginator="true"
+						paginatorAlwaysVisible="false" rows="5"
+						rowsPerPageTemplate="5,10,20" reflow="true"
+						emptyMessage="Nuk ka punonjës">
+
+						<f:facet name="header">
                     Punonjësit
                 </f:facet>
-							<p:column headerText="#">
+						<p:column headerText="#">
                     #{r+1}
                 </p:column>
-							<p:column headerText="NID">
+						<p:column headerText="NID">
                     #{t.nid}
                 </p:column>
-							<p:column headerText="Punonjësi">
-								<p:commandLink value="#{t.name} #{t.surname}" update=":main"
-									action="#{nav.navigate('person_view')}">
-									<f:param name="nid" value="#{t.nid}" />
-								</p:commandLink>
-							</p:column>
-							<p:column headerText="Datëlindja">
+						<p:column headerText="Punonjësi">
+							<p:commandLink value="#{t.name} #{t.surname}" update=":main"
+								action="#{nav.navigate('person_view')}">
+								<f:param name="nid" value="#{t.nid}" />
+							</p:commandLink>
+						</p:column>
+						<p:column headerText="Datëlindja">
                     #{t.dob}
                 </p:column>
-							<p:column headerText="Pozicioni">
+						<p:column headerText="Pozicioni">
                     #{t.position}
                 </p:column>
-							<p:column headerText="Paga">
+						<p:column headerText="Paga">
                     #{t.salary}
                 </p:column>
-							<p:column headerText="Viti">
+						<p:column headerText="Viti">
                     #{t.year}
                 </p:column>
-							<p:column headerText="Muaji">
+						<p:column headerText="Muaji">
                     #{t.month}
                 </p:column>
 
-						</p:dataTable>
-					</p:panelGrid>
+					</p:dataTable>
+
+
 				</p:panel>
 			</div>
 

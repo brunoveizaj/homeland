@@ -7,7 +7,7 @@
 
 	<h:form id="card_raport_form">
 
-		<div class="ui-g ui-fluid">
+		<div id="main_cnt" class="ui-g ui-fluid">
 			<div class="ui-g-12">
 				<div class="card card-w-title">
 					<h1>Kërkim Karta Identiteti</h1>
@@ -51,11 +51,11 @@
 						<div class="ui-g-12 ui-md-4">
 							<p:panelGrid layout="grid" columns="2"
 								styleClass="ui-panelgrid-blank">
-								<p:commandButton value="Kërko" update="@form" styleClass="green-btn"
+								<p:commandButton value="Kërko" update="@form" styleClass="blue-btn"
 									action="#{cardBean.search()}" icon="ui-icon-search" />
 								<p:commandButton value="Pastro" update="@form"
 									action="#{cardBean.clear()}" icon="ui-icon-trash"
-									styleClass="red-btn" />
+									styleClass="green-btn" />
 							</p:panelGrid>
 						</div>
 
@@ -73,28 +73,28 @@
 			
 
 			<div class="ui-g-12">
-				<p:dataTable value="#{cardBean.cards}" rendered="#{not empty cardBean.cards}" var="c" reflow="true"
+				<p:dataTable id="card_tbl" value="#{cardBean.cards}" rendered="#{not empty cardBean.cards}" var="c" reflow="true"
 					rowIndexVar="r" paginator="true" paginatorAlwaysVisible="false"
 					selection="#{cardBean.selectedCard}" selectionMode="single" rowKey="#{c.id}"
 					rows="20" rowsPerPageTemplate="10,20,30,50">
-					<p:ajax event="rowSelect" update="card_details" />
+					<p:ajax event="rowSelect" update="card_raport_form:card_details" />
 
 				<p:column headerText="#">#{r+1}</p:column>
-                <p:column headerText="Nr dok">#{c.idn}</p:column>
+                <p:column headerText="Nr dok">#{c.idc}</p:column>
                 <p:column headerText="Nid">#{c.nid}</p:column>
                 <p:column headerText="Emri">#{c.name}</p:column>
                 <p:column headerText="Atësia">#{c.fatherName}</p:column>
                 <p:column headerText="Mbiemri">#{c.surname}</p:column>
                 <p:column headerText="Datëlindja">#{c.dob}</p:column>
-                <p:column headerText="Gjinia">#{c.idn}</p:column>
+                <p:column headerText="Gjinia">#{c.gender}</p:column>
                 <p:column headerText="Vendlindja">#{c.pob}</p:column>
 				
 				</p:dataTable>
 			</div>
 			
-			<h:panelGroup id="card_details" layout="block" rendered="#{cardBean.selectedCard != null}"> 
-			<div class="ui-g-12">
-				<p:panel header="Të dhënat e Kartës">
+			<div class="ui-g-12 ">
+			<h:panelGroup layout="block" id="card_details">
+				<p:panel header="Të dhënat e Kartës" rendered="#{cardBean.selectedCard != null}">
 					<div class="ui-g">
 						<div class="ui-g-12 ui-md-2">
 							<p:graphicImage value="#{photoBean.cardImage}" width="95%">
@@ -153,8 +153,8 @@
 						</div>
 					</div>
 				</p:panel>
+				</h:panelGroup>
 			</div>
-			</h:panelGroup>
 		</div>
 
 	</h:form>

@@ -29,6 +29,7 @@ import com.homeland.repositories.BorderRepository;
 import com.homeland.repositories.CardRepository;
 import com.homeland.repositories.ImportRepository;
 import com.homeland.repositories.PassportRepository;
+import com.homeland.repositories.PhoneRepository;
 import com.homeland.repositories.TicketRepository;
 import com.homeland.repositories.VehicleRepository;
 import com.homeland.utils.DateUtil;
@@ -50,6 +51,8 @@ public class ImportService {
 	TicketRepository ticketDAO;
 	@Autowired
 	BorderRepository borderDAO;
+	@Autowired
+	PhoneRepository phoneDAO;
 	
 	
 	@Transactional
@@ -204,6 +207,8 @@ public class ImportService {
 		p.setRegDate(dto.getRegDate());
 		p.setRid((long)dto.getId());
 		p.setSurname(StringUtil.formatSQ(dto.getSurname()));
+		
+		phoneDAO.create(p);
 	}
 	
 	

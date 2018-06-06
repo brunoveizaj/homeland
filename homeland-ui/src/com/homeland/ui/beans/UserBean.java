@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import com.homeland.ui.api.security.ApiException;
+import com.homeland.ui.constants.IStatus;
 import com.homeland.ui.models.UserDTO;
 import com.homeland.ui.services.UserService;
 import com.homeland.ui.utils.Messages;
@@ -67,6 +68,7 @@ public class UserBean implements Serializable {
 	private void init()
 	{
 		this.user = new UserDTO();
+		user.setStatus(IStatus.ACTIVE);
 		this.selectedUser = null;
 		this.users = new UserService().loadUsers();
 	}

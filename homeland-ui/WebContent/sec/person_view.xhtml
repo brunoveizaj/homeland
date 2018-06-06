@@ -8,7 +8,7 @@
 	<h:form id="person_view_form">
 		<f:event type="preRenderComponent" listener="#{personViewBean.init()}" />
 
-
+<h:panelGroup layout="block" id="person_data" > 
 		<div class="ui-g">
 
 			<div class="ui-g-12">
@@ -86,10 +86,10 @@
                     #{r+1}
                 </p:column>
 					<p:column headerText="Nr Telefonit">
-                    #{ph.telOne}
+                    #{ph.phone}
                 </p:column>
 					<p:column headerText="Burimi">
-                    #{ph.source}
+                    #{ph.dataSource}
                 </p:column>
 					<p:column headerText="Data">
                     #{ph.regDate}
@@ -106,7 +106,7 @@
 					reflow="true">
 
 					<p:ajax event="rowSelect"
-						listener="#{personViewBean.onFamilySelect()}" update="@form" />
+						listener="#{personViewBean.onFamilySelect()}" update="person_view_form:person_data" />
 
 					<f:facet name="header">
                     Familja
@@ -262,7 +262,7 @@
 									<p:outputLabel value="Autoriteti Lëshues" />
 									<p:inputText value="#{idp.issueAuthority}" readonly="true" />
 									<p:outputLabel value="Adresa" />
-									<p:inputText value="#{idp.adress}" readonly="true" />
+									<p:inputText value="#{idp.address}" readonly="true" />
 
 								</p:panelGrid>
 							</div>
@@ -351,7 +351,7 @@
 
 
 			<div class="ui-g-12 ui-fluid">
-				<p:dataTable value="#{personViewBean.oshees}" var="o"
+				<p:dataTable value="#{personViewBean.oshees}" var="o" 
 					rowIndexVar="r" styleClass="blue-tbl" reflow="true"
 					emptyMessage="Nuk ka kontratë">
 
@@ -400,15 +400,15 @@
 			<div class="ui-g-12 ui-fluid">
 				<p:panel id="vehiclesPnl" header="Automjetet" styleClass="blue-pnl">
 					<f:facet name="actions">
-						<p:commandLink action="#{personBean.loadVehicles()}"
+						<p:commandLink action="#{personViewBean.loadVehicles()}"
 							update="vehiclesPnl"
 							styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default">
 							<h:outputText
-								styleClass="ui-icon ui-icon-#{personBean.openVehicles?'minusthick':'plusthick'}" />
+								styleClass="ui-icon ui-icon-#{personBean.openSubjects?'minusthick':'plusthick'}" />
 						</p:commandLink>
 					</f:facet>
-					<p:dataTable rendered="#{personBean.openVehicles}"
-						value="#{personBean.vehicles}" var="v" reflow="true"
+					<p:dataTable rendered="#{not empty personViewBean.vehicles}"
+						value="#{personViewBean.vehicles}" var="v" reflow="true"
 						emptyMessage="Nuk ka automjet">
 
 						<p:column headerText="#">
@@ -437,20 +437,21 @@
                     </p:column>
 					</p:dataTable>
 				</p:panel>
+				<p:messages showDetail="true" closable="true"/>
 			</div>
 
 			<div class="ui-g-12 ui-fluid">
 				<p:panel id="subsPnl" header="Subjektet" styleClass="ph">
 					<f:facet name="actions">
-						<p:commandLink action="#{personBean.loadSubjects()}"
+						<p:commandLink action="#{personViewBean.loadSubjects()}"
 							update="subsPnl"
 							styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default">
 							<h:outputText
 								styleClass="ui-icon ui-icon-#{personBean.openSubjects?'minusthick':'plusthick'}" />
 						</p:commandLink>
 					</f:facet>
-					<p:dataTable value="#{personBean.subjects}" var="s"
-						rendered="#{personBean.openSubjects}" reflow="true"
+					<p:dataTable value="#{personViewBean.subjects}" var="s"
+						reflow="true" rendered="#{not empty personViewBean.subjects}"
 						emptyMessage="Nuk zotëron ose administron ndonjë subjekt">
 
 						<p:column headerText="#">
@@ -476,11 +477,12 @@
 						</p:column>
 
 					</p:dataTable>
+					<p:messages showDetail="true" closable="true"/>
 				</p:panel>
 			</div>
 
 		</div>
-
+</h:panelGroup>
 	</h:form>
 
 

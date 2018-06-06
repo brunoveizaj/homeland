@@ -51,11 +51,11 @@
 						<div class="ui-g-12 ui-md-4">
 							<p:panelGrid layout="grid" columns="2"
 								styleClass="ui-panelgrid-blank">
-								<p:commandButton value="Kërko" update="@form" styleClass="green-btn"
+								<p:commandButton value="Kërko" update="@form" styleClass="blue-btn"
 									action="#{passportBean.search()}" icon="ui-icon-search" />
 								<p:commandButton value="Pastro" update="@form"
 									action="#{passportBean.clear()}" icon="ui-icon-trash"
-									styleClass="red-btn" />
+									styleClass="green-btn" />
 							</p:panelGrid>
 						</div>
 
@@ -77,24 +77,25 @@
 					rowIndexVar="r" paginator="true" paginatorAlwaysVisible="false"
 					selection="#{passportBean.selectedPassport}" selectionMode="single" rowKey="#{p.id}"
 					rows="20" rowsPerPageTemplate="10,20,30,50">
-					<p:ajax event="rowSelect" update="passport_details" />
+					<p:ajax event="rowSelect" update="passport_raport_form:passport_details" />
 
 				<p:column headerText="#">#{r+1}</p:column>
-                <p:column headerText="Nr dok">#{p.idn}</p:column>
+                <p:column headerText="Nr dok">#{p.idp}</p:column>
                 <p:column headerText="Nid">#{p.nid}</p:column>
                 <p:column headerText="Emri">#{p.name}</p:column>
                 <p:column headerText="Atësia">#{p.fatherName}</p:column>
                 <p:column headerText="Mbiemri">#{p.surname}</p:column>
                 <p:column headerText="Datëlindja">#{p.dob}</p:column>
-                <p:column headerText="Gjinia">#{p.idn}</p:column>
+                <p:column headerText="Gjinia">#{p.gender}</p:column>
                 <p:column headerText="Vendlindja">#{p.pob}</p:column>
 				
 				</p:dataTable>
 			</div>
 			
-			<h:panelGroup id="passport_details" layout="block" rendered="#{passportBean.selectedPassport != null}"> 
+			
 			<div class="ui-g-12">
-				<p:panel header="Të dhënat e Kartës">
+			<h:panelGroup id="passport_details" layout="block" > 
+				<p:panel header="Të dhënat e Kartës" rendered="#{passportBean.selectedPassport != null}">
 					<div class="ui-g">
 						<div class="ui-g-12 ui-md-2">
 							<p:graphicImage value="#{photoBean.passportImage}" width="95%">
@@ -106,50 +107,51 @@
 							<p:panelGrid layout="grid" columns="4" columnClasses="bold,empty,bold,empty" styleClass="ui-panelgrid-blank">
                                    
                                     <p:outputLabel value="Emri" />
-                                    <p:inputText value="#{passportBean.passport.name}" readonly="true"/>
+                                    <p:inputText value="#{passportBean.selectedPassport.name}" readonly="true"/>
                                     <p:outputLabel value="Mbiemri" />
-                                    <p:inputText value="#{passportBean.passport.surname}" readonly="true"/>
+                                    <p:inputText value="#{passportBean.selectedPassport.surname}" readonly="true"/>
                                     
                                     <p:outputLabel value="Atësia" />
-                                    <p:inputText value="#{passportBean.passport.fatherName}" readonly="true"/>
+                                    <p:inputText value="#{passportBean.selectedPassport.fatherName}" readonly="true"/>
                                     <p:outputLabel value="Mëmësia" />
-                                    <p:inputText value="#{passportBean.passport.motherName}" readonly="true"/>
+                                    <p:inputText value="#{passportBean.selectedPassport.motherName}" readonly="true"/>
 
                                     <p:outputLabel value="Datëlindja" />
-                                    <p:inputText value="#{passportBean.passport.dob}" readonly="true"/>
+                                    <p:inputText value="#{passportBean.selectedPassport.dob}" readonly="true"/>
                                     <p:outputLabel value="Gjinia" />
-                                    <p:inputText value="#{passportBean.passport.gender}" readonly="true"/>
+                                    <p:inputText value="#{passportBean.selectedPassport.gender}" readonly="true"/>
 
                                     <p:outputLabel value="Shtetësia" />
-                                    <p:inputText value="#{passportBean.passport.citizenship}" readonly="true"/>
+                                    <p:inputText value="#{passportBean.selectedPassport.citizenship}" readonly="true"/>
                                     <p:outputLabel value="Kombësia" />
-                                    <p:inputText value="#{passportBean.passport.nationality}" readonly="true"/>
+                                    <p:inputText value="#{passportBean.selectedPassport.nationality}" readonly="true"/>
 
                                     <p:outputLabel value="Vendlindja" />
-                                    <p:inputText value="#{passportBean.passport.pob}" readonly="true"/>
+                                    <p:inputText value="#{passportBean.selectedPassport.pob}" readonly="true"/>
                                     <p:outputLabel value="Adresa" />
-                                    <p:inputText value="#{passportBean.passport.adress}" 
+                                    <p:inputText value="#{passportBean.selectedPassport.address}" 
                                                  readonly="true"/>
 
                                     <p:outputLabel value="NID" />
-                                    <p:inputText value="#{passportBean.passport.nid}" readonly="true"/>
+                                    <p:inputText value="#{passportBean.selectedPassport.nid}" readonly="true"/>
                                     <p:outputLabel value="Nr Kartës" />
-                                    <p:inputText value="#{passportBean.passport.idp}" readonly="true"/>
+                                    <p:inputText value="#{passportBean.selectedPassport.idp}" readonly="true"/>
 
                                     <p:outputLabel value="Dt Lëshimit" />
-                                    <p:inputText value="#{passportBean.passport.issueDate}" readonly="true"/>
+                                    <p:inputText value="#{passportBean.selectedPassport.issueDate}" readonly="true"/>
                                     <p:outputLabel value="Skadenca" />
-                                    <p:inputText value="#{passportBean.passport.expireDate}" readonly="true"/>
+                                    <p:inputText value="#{passportBean.selectedPassport.expireDate}" readonly="true"/>
 
                                     <p:outputLabel value="Tipi" />
-                                    <p:inputText value="#{passportBean.passport.type}" readonly="true"/>
+                                    <p:inputText value="#{passportBean.selectedPassport.type}" readonly="true"/>
                                 </p:panelGrid>	
 							
 						</div>
 					</div>
 				</p:panel>
+				</h:panelGroup>
 			</div>
-			</h:panelGroup>
+			
 		</div>
 
 	</h:form>

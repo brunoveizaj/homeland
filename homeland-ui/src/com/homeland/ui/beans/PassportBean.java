@@ -75,7 +75,7 @@ public class PassportBean implements Serializable{
 			this.passports = new DocumentService().searchPassports(request);
 			if(passports == null || passports.isEmpty())
 			{
-				Messages.throwFacesMessage("Nuk u gjet asnje karte", 2);
+				Messages.throwFacesMessage("Nuk u gjet asnje pasaporte", 2);
 			}
 		}catch(ApiException a)
 		{
