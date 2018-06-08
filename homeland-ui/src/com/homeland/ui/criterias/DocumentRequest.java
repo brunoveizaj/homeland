@@ -13,7 +13,7 @@ public class DocumentRequest {
 	Integer fromAge;
 	Integer toAge;
 	Integer firstResult;
-	Integer maxResult;
+	Integer maxResult = 1000;
 	String docType;
 	
 	public DocumentRequest() {}

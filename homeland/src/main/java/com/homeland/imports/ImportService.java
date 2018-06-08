@@ -32,6 +32,7 @@ import com.homeland.repositories.PassportRepository;
 import com.homeland.repositories.PhoneRepository;
 import com.homeland.repositories.TicketRepository;
 import com.homeland.repositories.VehicleRepository;
+import com.homeland.utils.CalculatorUtil;
 import com.homeland.utils.DateUtil;
 import com.homeland.utils.StringUtil;
 
@@ -173,7 +174,7 @@ public class ImportService {
 		p.setRid((long)dto.getId());
 		p.setIdc(dto.getIdDoc());
 		p.setInsterted(Calendar.getInstance().getTime());
-		p.setPhoto(dto.getPhoto());
+		p.setPhoto(CalculatorUtil.decodeBASE64(dto.getPhoto()));
 		
 		cardDAO.create(p);
 	}
@@ -186,7 +187,7 @@ public class ImportService {
 		p.setRid((long)dto.getId());
 		p.setIdp(dto.getIdDoc());
 		p.setInserted(Calendar.getInstance().getTime());
-		p.setPhoto(dto.getPhoto());
+		p.setPhoto(CalculatorUtil.decodeBASE64(dto.getPhoto()));
 		
 		passportDAO.create(p);
 	}

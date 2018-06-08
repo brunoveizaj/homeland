@@ -10,7 +10,7 @@ public class PhotoDTO implements Serializable{
 	
 	private int id;
     private String idDoc;
-    private byte[] photo;
+    private String photo;
 	String docType;
 	private Long rid;
 	
@@ -27,10 +27,10 @@ public class PhotoDTO implements Serializable{
 	public void setIdDoc(String idDoc) {
 		this.idDoc = idDoc;
 	}
-	public byte[] getPhoto() {
+	public String getPhoto() {
 		return photo;
 	}
-	public void setPhoto(byte[] photo) {
+	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
 	public String getDocType() {

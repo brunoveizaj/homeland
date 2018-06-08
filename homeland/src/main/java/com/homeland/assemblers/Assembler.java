@@ -32,6 +32,7 @@ import com.homeland.entities.Tatime;
 import com.homeland.entities.Ticket;
 import com.homeland.entities.User;
 import com.homeland.entities.Vehicle;
+import com.homeland.utils.CalculatorUtil;
 import com.homeland.utils.DateUtil;
 
 public class Assembler {
@@ -146,7 +147,7 @@ public class Assembler {
 		PhotoDTO p = new PhotoDTO();
 		p.setId(photo.getId());
 		p.setIdDoc(photo.getIdc());
-		p.setPhoto(photo.getPhoto());
+		p.setPhoto(CalculatorUtil.encodeBASE64(photo.getPhoto()));
 		p.setDocType(IDocument.CARD);
 		p.setRid(photo.getRid());
 		
@@ -160,7 +161,7 @@ public class Assembler {
 		PhotoDTO p = new PhotoDTO();
 		p.setId(photo.getId());
 		p.setIdDoc(photo.getIdp());
-		p.setPhoto(photo.getPhoto());
+		p.setPhoto(CalculatorUtil.encodeBASE64(photo.getPhoto()));
 		p.setDocType(IDocument.PASSPORT);
 		
 		return p;
@@ -561,6 +562,9 @@ public class Assembler {
 		dto.setPhoneThree(entity.getPhoneThree());
 		dto.setPostalCode(entity.getPostalCode());
 		dto.setStreet(entity.getStreet());
+		dto.setName(entity.getName());
+		dto.setSurname(entity.getSurname());
+		dto.setFatherName(entity.getFatherName());
 				
 		return dto;
 		

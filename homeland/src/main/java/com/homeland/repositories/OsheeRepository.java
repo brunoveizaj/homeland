@@ -29,7 +29,7 @@ public class OsheeRepository {
 	public List<Oshee> searchOshee(OsheeSQL criterias)
 	{
 		HashMap<String,Object> params = new HashMap<>();
-		String sql = "FROM Oshee o WHERE 1=1 ";
+		String sql = "SELECT new com.homeland.entities.Oshee(o,p.name,p.surname,p.fatherName) FROM Oshee o LEFT JOIN Person p on o.nid=p.nid WHERE 1=1 ";
 		String order = "ORDER BY o.contractNo ";
 		
 		if(StringUtil.isValid(criterias.getContractNo()))

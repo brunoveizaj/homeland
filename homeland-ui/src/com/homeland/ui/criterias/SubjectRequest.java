@@ -7,7 +7,7 @@ public class SubjectRequest {
 	String name;
 	String managers;
 	Integer firstResult;
-	Integer maxResult;
+	Integer maxResult = 1000;
 	
     public SubjectRequest() {}
 	

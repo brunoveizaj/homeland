@@ -19,7 +19,7 @@ public class BorderRequest {
 	String to;
 	Boolean foreign;
 	Integer firstResult;
-	Integer maxResult;
+	Integer maxResult = 10000;
 	
 	
 	

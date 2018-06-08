@@ -9,7 +9,7 @@ public class PhoneRequest {
 	String fatherName;
 	String phoneNo;
 	Integer firstResult;
-	Integer maxResult;
+	Integer maxResult = 1000;
 	
 	
 	public String getNid() {

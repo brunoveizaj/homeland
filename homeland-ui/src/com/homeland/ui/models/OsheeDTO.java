@@ -12,6 +12,9 @@ public class OsheeDTO implements Serializable{
     private long familyId;
     private String familyRelation;
     private String nid;
+    private String name;
+    private String surname;
+    private String fatherName;
     private String phoneOne;
     private String phoneTwo;
     private String phoneThree;
@@ -134,6 +137,24 @@ public class OsheeDTO implements Serializable{
 	}
 	public void setGeoZ(String geoZ) {
 		this.geoZ = geoZ;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getSurname() {
+		return surname;
+	}
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+	public String getFatherName() {
+		return fatherName;
+	}
+	public void setFatherName(String fatherName) {
+		this.fatherName = fatherName;
 	}
 	
 	

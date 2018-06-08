@@ -16,6 +16,7 @@ import com.homeland.ui.constants.IDocument;
 import com.homeland.ui.criterias.PhotoRequest;
 import com.homeland.ui.models.PhotoDTO;
 import com.homeland.ui.services.DocumentService;
+import com.homeland.ui.utils.CalculatorUtil;
 import com.homeland.ui.utils.PhotoUtil;
 
 @ManagedBean
@@ -38,11 +39,11 @@ public class PhotoBean {
 		byte[] imgByte;
 		if(image == null)
 		{
-			imgByte = null;
+			imgByte = Base64.getDecoder().decode(PhotoUtil.NO_IMAGE);
 		}
 		else
 		{
-			imgByte = image.getPhoto();
+			imgByte = CalculatorUtil.decodeBASE64(image.getPhoto());
 		}
 		try {
 			return new DefaultStreamedContent(new ByteArrayInputStream(imgByte));
@@ -71,7 +72,7 @@ public class PhotoBean {
 		}
 		else
 		{
-			imgByte = Base64.getDecoder().decode(PhotoUtil.NO_IMAGE);
+			imgByte = CalculatorUtil.decodeBASE64(image.getPhoto());
 		}
 		try {
 			return new DefaultStreamedContent(new ByteArrayInputStream(imgByte));

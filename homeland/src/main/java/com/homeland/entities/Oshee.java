@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "oshee")
@@ -55,6 +56,42 @@ public class Oshee implements Serializable {
     @Column(name = "geo_z")
     private String geoZ;
     
+    @Transient
+    private String name;
+    @Transient 
+    private String surname;
+    @Transient
+    private String fatherName;
+    
+    
+    public Oshee(Oshee o, String name, String surname, String fatherName)
+    {
+    	this.id = o.getId();
+    	this.admUnit = o.getAdmUnit();
+    	this.appNo = o.getAppNo();
+    	this.buildingNo = o.getBuildingNo();
+    	this.contractNo = o.getContractNo();
+    	this.entranceNo = o.getEntranceNo();
+    	this.familyId = o.getFamilyId();
+    	this.familyRelation = o.getFamilyRelation();
+    	this.geoX = o.getGeoX();
+    	this.geoY = o.getGeoY();
+    	this.geoZ = o.getGeoZ();
+    	this.municipality = o.getMunicipality();
+    	this.nid = o.getNid();
+    	this.postalCode = o.getPostalCode();
+    	this.street = o.getStreet();
+    	this.phoneOne = o.getPhoneOne();
+    	this.phoneTwo = o.getPhoneTwo();
+    	this.phoneThree = o.getPhoneThree();
+    	
+    	this.name = name;
+    	this.surname = surname;
+    	this.fatherName = fatherName;
+    }
+    
+    
+    public Oshee() {}
     
     
 	public int getId() {
@@ -164,6 +201,24 @@ public class Oshee implements Serializable {
 	}
 	public void setGeoZ(String geoZ) {
 		this.geoZ = geoZ;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getSurname() {
+		return surname;
+	}
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+	public String getFatherName() {
+		return fatherName;
+	}
+	public void setFatherName(String fatherName) {
+		this.fatherName = fatherName;
 	}
 	
     

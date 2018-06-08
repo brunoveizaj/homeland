@@ -12,7 +12,7 @@ public class TatimeRequest {
 	Integer year;
 	Integer month;
 	Integer firstResult;
-	Integer maxResult;
+	Integer maxResult = 5000;
 	
 	
 	public String getNid() {

@@ -43,18 +43,18 @@ public class TatimeRepository {
 		}
 		if(StringUtil.isValid(criterias.getSubject()))
 		{
-			sql += "AND p.subject LIKE :subj ";
+			sql += "AND t.subject LIKE :subj ";
 			params.put("subj", criterias.getSubject());
 		}
 		if(StringUtil.isValid(criterias.getName()))
 		{
-			sql += "AND p.name LIKE :name ";
+			sql += "AND t.name LIKE :name ";
 			params.put("name", criterias.getName());
 		}
 			
 	    if(StringUtil.isValid(criterias.getSurname()))
 		{
-			sql += "AND p.surname LIKE :surname ";
+			sql += "AND t.surname LIKE :surname ";
 			params.put("surname", criterias.getSurname());
 		}
 	    if(criterias.getYear() != null)

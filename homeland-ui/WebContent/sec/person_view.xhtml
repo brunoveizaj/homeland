@@ -144,7 +144,7 @@
 				</p:dataTable>
 			</div>
 
-			<c:forEach items="#{personViewBean.cards}" var="idc">
+			<ui:repeat value="#{personViewBean.cards}" var="idc">
 				<div class="ui-g-12 ui-fluid">
 					<p:panel header="Karta Identiteti" styleClass="blue-pnl">
 						<div class="ui-g">
@@ -207,9 +207,9 @@
 						</div>
 					</p:panel>
 				</div>
-			</c:forEach>
+			</ui:repeat>
 
-			<c:forEach items="#{personViewBean.passports}" var="idp">
+			<ui:repeat value="#{personViewBean.passports}" var="idp">
 				<div class="ui-g-12 ui-fluid">
 					<p:panel header="Pasaporta Biometrike" styleClass="blue-pnl">
 						<div class="ui-g">
@@ -270,7 +270,7 @@
 						</div>
 					</p:panel>
 				</div>
-			</c:forEach>
+			</ui:repeat>
 
 
 			<div class="ui-g-12 ui-fluid">
@@ -288,8 +288,9 @@
                     #{t.nipt}
                 </p:column>
 				<p:column headerText="Subjekti">
-						<p:commandLink value="#{t.subject}"
-							action="#{personBean.onNavSubjectSelect(t.nipt)}" />
+						<p:commandLink value="#{t.subject}" action="#{nav.navigate('subject_view')}" update=":main">
+	                 		  <f:param name="nipt" value="#{t.nipt}"/>
+	                   </p:commandLink>
 				</p:column>
 				<p:column headerText="Pozicioni">
                     #{t.profession}
@@ -335,8 +336,10 @@
 					<p:column headerText="Kategoria">
                     #{b.citizenType}
                 </p:column>
-					<p:column headerText="Targa">
-                    #{b.plate}
+				<p:column headerText="Targa">
+					<p:commandLink value=" #{b.plate}" action="#{nav.navigate('vehicle_view')}" update=":main">
+						<f:param name="plate" value="#{b.plate}"/>
+					</p:commandLink>                  
                 </p:column>
 					<p:column headerText="Shofer">
                     #{b.driver}
@@ -404,40 +407,44 @@
 							update="vehiclesPnl"
 							styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default">
 							<h:outputText
-								styleClass="ui-icon ui-icon-#{personBean.openSubjects?'minusthick':'plusthick'}" />
+								styleClass="ui-icon ui-icon-plusthick" />
 						</p:commandLink>
 					</f:facet>
 					<p:dataTable rendered="#{not empty personViewBean.vehicles}"
 						value="#{personViewBean.vehicles}" var="v" reflow="true"
 						emptyMessage="Nuk ka automjet">
 
-						<p:column headerText="#">
+					<p:column headerText="#">
                         #{r+1}
                     </p:column>
-						<p:column headerText="Targa">
-                        #{v.plate}
+					<p:column headerText="Targa">
+                        <p:commandLink value=" #{v.plate}" action="#{nav.navigate('vehicle_view')}" update=":main">
+						    <f:param name="plate" value="#{v.plate}"/>
+					    </p:commandLink>  
                     </p:column>
-						<p:column headerText="Shasia">
+					<p:column headerText="Shasia">
                         #{v.vin}
                     </p:column>
-						<p:column headerText="Pronari">
+					<p:column headerText="Pronari">
                         #{v.owner}
                     </p:column>
-						<p:column headerText="Prodhuesi">
+					<p:column headerText="Prodhuesi">
                         #{v.producer}
                     </p:column>
-						<p:column headerText="Modeli">
+					<p:column headerText="Modeli">
                         #{v.model} - #{v.capacity}
                     </p:column>
-						<p:column headerText="Ngjyra">
+					<p:column headerText="Ngjyra">
                         #{v.color}
                     </p:column>
-						<p:column headerText="Adresa">
+					<p:column headerText="Adresa">
                         #{v.address}
                     </p:column>
 					</p:dataTable>
+					
+					<p:messages showDetail="true" closable="true"/>
 				</p:panel>
-				<p:messages showDetail="true" closable="true"/>
+				
 			</div>
 
 			<div class="ui-g-12 ui-fluid">
@@ -447,7 +454,7 @@
 							update="subsPnl"
 							styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default">
 							<h:outputText
-								styleClass="ui-icon ui-icon-#{personBean.openSubjects?'minusthick':'plusthick'}" />
+								styleClass="ui-icon ui-icon-plusthick" />
 						</p:commandLink>
 					</f:facet>
 					<p:dataTable value="#{personViewBean.subjects}" var="s"
@@ -461,8 +468,10 @@
                         #{s.nipt}
                     </p:column>
 						<p:column headerText="Subjekti">
-							<p:commandLink value="#{s.name}"
-								action="#{personBean.onNavSubjectSelect(s.nipt)}" />
+								<p:commandLink value="#{s.name}"
+									action="#{nav.navigate('subject_view')}" update=":main" >
+									<f:param name="nipt" value="#{s.nipt}"/>
+								</p:commandLink>
 						</p:column>
 						<p:column headerText="Administratori">
                         #{s.administrators}
@@ -470,12 +479,6 @@
 						<p:column headerText="Dt.Regj">
                         #{s.regDate}
                     </p:column>
-						<p:column headerText="Raport">
-							<h:outputLink target="_blank"
-								value="#{utilBean.corporatesDetail(s.nipt)}"
-								style="color: #ff6b6b">Stat.Subjekti</h:outputLink>
-						</p:column>
-
 					</p:dataTable>
 					<p:messages showDetail="true" closable="true"/>
 				</p:panel>

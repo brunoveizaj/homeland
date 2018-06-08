@@ -12,7 +12,7 @@ public class VehicleRequest {
 	String model;
 	String color;
 	Integer firstResult;
-	Integer maxResult;
+	Integer maxResult = 5000;
 	
 	public VehicleRequest() {}
 	

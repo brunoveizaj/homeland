@@ -18,7 +18,7 @@ public class PersonRequest {
 	Integer toAge;
 	Long familyId;
 	Integer firstResult;
-	Integer maxResult;
+	Integer maxResult = 1000;
 	
 	
 	public PersonRequest() {
