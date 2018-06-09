@@ -1,5 +1,7 @@
 package com.homeland.repositories;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -34,5 +36,17 @@ public class ImportRepository {
 	{
 		return (Long) em.createQuery("SELECT MAX(t.rid) FROM "+T.getName()+" t").getSingleResult();
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Imports> getLastImports(Integer limit)
+	{
+		return em.createQuery("FROM Imports i ORDER BY i.id DESC")
+				.setMaxResults(limit).getResultList();
+	}
+	
+	
+	
+	
+	
 	
 }
