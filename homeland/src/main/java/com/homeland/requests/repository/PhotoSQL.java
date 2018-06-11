@@ -27,7 +27,7 @@ public class PhotoSQL {
 		return idn;
 	}
 	public void setIdn(String idn) {
-		this.idn = StringUtil.formatSQ(idn);
+		this.idn = idn;
 	}
 	public String getDocType() {
 		return docType;

@@ -507,7 +507,7 @@ public class Assembler {
 		dto.setDrivingPermitNo(entity.getDrivingPermitNo());
 		dto.setId(entity.getId());
 		dto.setModel(entity.getModel());
-		dto.setOwner(entity.getModel());
+		dto.setOwner(entity.getOwner());
 		dto.setOwnerNid(entity.getOwnerNid());
 		dto.setPlate(entity.getPlate());
 		dto.setProducer(entity.getProducer());

@@ -23,6 +23,8 @@ import com.homeland.requests.api.DocumentRequest;
 import com.homeland.requests.api.PhotoRequest;
 import com.homeland.requests.repository.DocumentSQL;
 import com.homeland.requests.repository.PhotoSQL;
+import com.homeland.utils.CalculatorUtil;
+import com.homeland.utils.StringUtil;
 
 @Service
 public class DocumentService {
@@ -50,7 +52,18 @@ public class DocumentService {
 	
 	public PhotoDTO getDocumentPhoto(PhotoRequest req, Integer userId)
 	{
+		
+		
 		PhotoSQL criterias = new RequestAssembler().apiToSql(req);
+		
+		String idn = criterias.getIdn();
+		
+		if(StringUtil.isValid(idn))
+		{
+			idn = idn.toUpperCase();
+			idn = CalculatorUtil.enca(idn);
+			criterias.setIdn(idn);
+		}
 		
 		if(req.getDocType().equals(IDocument.CARD))
 		{
