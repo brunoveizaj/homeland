@@ -16,6 +16,12 @@ public class MysqlDAO {
 			sendPhotoCards();
 		}).start();
 	}
+	
+	public void sendAsyncPhotoPassport() {
+		new Thread(() -> {
+			sendPhotoPassports();
+		}).start();
+	}
 
 	public void sendPhotoCards() {
 		Connection con = null;
@@ -55,5 +61,51 @@ public class MysqlDAO {
 			}
 		}
 	}
+	
+	
+	public void sendPhotoPassports() {
+		Connection con = null;
+		PostgresClient pg = new PostgresClient();
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bailiff?useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin", "root", "bv13061990");
+			Statement stmt = con.createStatement();
+
+			long START_ID = pg.getLastRid("PP");
+			int cnt = 0;
+			while (cnt <= 4000000) {
+				ResultSet rs = stmt
+						.executeQuery("select * from photo_passport where ID>" + START_ID + " order by ID limit 100");
+
+				while (rs.next()) {
+					PhotoDTO dto = new PhotoDTO();
+					dto.setId(rs.getInt("ID"));
+					dto.setIdDoc(rs.getString("IDP"));
+					dto.setPhoto(CalculatorUtil.encodeBASE64(rs.getBytes("PHOTO")));
+
+					pg.sendPhotoPassport(dto);
+					START_ID = dto.getId();
+					cnt++;
+				}
+			}
+
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	
 
 }

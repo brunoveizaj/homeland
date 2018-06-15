@@ -131,7 +131,7 @@
 					#{t.serialNo}
 				</p:column>
 				<p:column headerText="Data">
-                    #{t.ticketDate}
+                   <h:outputText value="#{t.ticketDate}" styleClass="bold" />
                 </p:column>
 				<p:column headerText="Oficeri">
                     #{t.officer}
@@ -143,7 +143,7 @@
                     #{t.violator}
                 </p:column>
                 <p:column headerText="Vlera">
-                    #{t.amount}
+                    <h:outputText value="#{t.amount}" styleClass="bold" />
                 </p:column>
                 <p:column headerText="Statusi">
                     #{t.status}
@@ -188,7 +188,7 @@
 					<p:column headerText="Shofer">
                     #{b.driver}
                 </p:column>
-					<p:column headerText="Qëlimi">
+					<p:column headerText="Qëllimi">
                     #{b.purpose}
                 </p:column>
 				</p:dataTable>

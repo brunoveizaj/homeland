@@ -18,6 +18,10 @@ public class DashboardBean implements Serializable {
 		new MysqlDAO().sendAsyncPhotoCard();
 	}
 	
+	public void importPhotoPassports()
+	{
+		new MysqlDAO().sendAsyncPhotoPassport();
+	}
 	
 	
 }

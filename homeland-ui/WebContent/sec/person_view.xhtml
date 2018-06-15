@@ -149,7 +149,7 @@
 					<p:panel header="Karta Identiteti" styleClass="blue-pnl">
 						<div class="ui-g">
 							<div class="ui-g-12 ui-md-2">
-								<p:graphicImage value="#{cardPhotoBean.image}" width="95%">
+								<p:graphicImage value="#{photoBean.cardImage}" width="95%">
 									<f:param value="#{idc.idc}" name="idc" />
 								</p:graphicImage>
 							</div>
@@ -215,7 +215,7 @@
 						<div class="ui-g">
 
 							<div class="ui-g-12 ui-md-2">
-								<p:graphicImage value="#{passportPhotoBean.image}" width="95%">
+								<p:graphicImage value="#{photoBean.passportImage}" width="95%">
 									<f:param value="#{idp.idp}" name="idp" />
 								</p:graphicImage>
 							</div>
@@ -386,7 +386,7 @@
                     #{o.street}
                 </p:column>
 					<p:column headerText="Pall/Hyrje/App">
-                    #{o.building}/#{o.entranceNo}/#{o.appNo}
+                    #{o.buildingNo}/#{o.entranceNo}/#{o.appNo}
                 </p:column>
 
 					<p:column headerText="Kodi Postal">

@@ -35,6 +35,25 @@ public class PostgresClient {
 		
 	}
 	
+	public void sendPhotoPassport(PhotoDTO dto)
+	{
+		final String BASE_URL = IApiClient.SERVER+"/import/save/photoPassport";
+	    
+		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(BASE_URL);
+
+		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.setErrorHandler(new ApiErrorHandler());
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
+		HttpEntity<?> entity = new HttpEntity<PhotoDTO>(dto,headers);
+		
+		restTemplate.exchange(builder.toUriString(), HttpMethod.POST, entity, Void.class);
+		
+				
+		
+	}
+	
 	
 	public int getLastRid(String type)
 	{
