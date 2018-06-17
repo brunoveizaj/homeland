@@ -4,6 +4,7 @@ import com.homeland.utils.StringUtil;
 
 public class PhotoSQL {
 
+	
 	String nid;
 	String idn;
 	String docType;
@@ -60,6 +61,14 @@ public class PhotoSQL {
 		this.maxResult = maxResult;
 	}
 	
+	@Override
+	public String toString() {
+		return "PhotoSQL [" + (nid != null ? "nid=" + nid + ", " : "") + (idn != null ? "idn=" + idn + ", " : "")
+				+ (docType != null ? "docType=" + docType + ", " : "")
+				+ (firstResult != null ? "firstResult=" + firstResult + ", " : "")
+				+ (maxResult != null ? "maxResult=" + maxResult : "") + "]";
+	}
+
 	
 	
 }

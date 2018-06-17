@@ -52,9 +52,11 @@ public class DocumentService {
 	
 	public PhotoDTO getDocumentPhoto(PhotoRequest req, Integer userId)
 	{
-		
+		System.out.println(req);
 		
 		PhotoSQL criterias = new RequestAssembler().apiToSql(req);
+		
+		System.out.println(req);
 		
 		String idn = criterias.getIdn();
 		

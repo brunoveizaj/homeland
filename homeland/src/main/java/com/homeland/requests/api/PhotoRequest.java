@@ -57,6 +57,16 @@ public class PhotoRequest {
 	public void setMaxResult(Integer maxResult) {
 		this.maxResult = maxResult;
 	}
+
+	@Override
+	public String toString() {
+		return "PhotoRequest [" + (nid != null ? "nid=" + nid + ", " : "") + (idn != null ? "idn=" + idn + ", " : "")
+				+ (docType != null ? "docType=" + docType + ", " : "")
+				+ (firstResult != null ? "firstResult=" + firstResult + ", " : "")
+				+ (maxResult != null ? "maxResult=" + maxResult : "") + "]";
+	}
+	
+	
 	
 	
 }

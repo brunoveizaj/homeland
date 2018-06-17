@@ -64,9 +64,11 @@ public class DocumentApi {
 	@RequestMapping(value="/getDocumentPhoto", method=RequestMethod.GET, produces={"application/json"})
 	public ResponseEntity<?> getDocumentPhoto(@RequestHeader(value="Authorization") String token, PhotoRequest request)
 	{
+		System.out.println("API: "+request);
 		Integer userId = tokenService.getUserIdFromToken(token);		
 		
 		PhotoDTO photo = documentService.getDocumentPhoto(request, userId);
+		
 		
 		if(photo == null)
 		{

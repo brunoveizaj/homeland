@@ -190,6 +190,28 @@ public class DocumentClient {
 		final String BASE_URL = IApiClient.SERVER+"/api/document/getDocumentPhoto";
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(BASE_URL);
 		
+		if(StringUtil.isValid(req.getNid()))
+		{
+			builder.queryParam("nid", req.getNid());
+		}
+		if(StringUtil.isValid(req.getIdn()))
+		{
+			builder.queryParam("idn", req.getIdn());
+		}
+		if(StringUtil.isValid(req.getDocType()))
+		{
+			builder.queryParam("docType", req.getDocType());
+		}
+		if(req.getFirstResult() != null)
+		{
+			builder.queryParam("firstResult", req.getFirstResult());
+		}
+		if(req.getMaxResult() != null)
+		{
+			builder.queryParam("maxResult", req.getMaxResult());
+		}
+		
+		
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.setErrorHandler(new ApiErrorHandler());
 		
