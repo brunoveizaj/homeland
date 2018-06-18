@@ -1,5 +1,6 @@
 package com.homeland.repositories;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -54,7 +55,7 @@ public class BorderRepository {
 		
 		if(StringUtil.isValid(criterias.getEvent()))
 		{
-			sql += "AND b.docNo=:event ";
+			sql += "AND b.event=:event ";
 			params.put("event", criterias.getEvent());
 		}
 		
@@ -142,6 +143,18 @@ public class BorderRepository {
 		return q.getResultList();
 		
 	}
+	
+	
+	public Date lastDate(String event,boolean foreign)
+	{
+		return (Date)em.createQuery("SELECT MAX(b.crossingDate) FROM Border b where b.event=:event and b.foreign=:for")
+				.setParameter("event", event)
+				.setParameter("for", foreign)
+				.getSingleResult();
+	}
+	
+	
+	
 	
 
 }

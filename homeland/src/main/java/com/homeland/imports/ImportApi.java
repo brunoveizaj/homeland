@@ -1,5 +1,7 @@
 package com.homeland.imports;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import com.homeland.dto.PhoneDTO;
 import com.homeland.dto.PhotoDTO;
 import com.homeland.dto.TicketDTO;
 import com.homeland.dto.VehicleDTO;
+import com.homeland.utils.DateUtil;
 
 
 @RestController
@@ -40,6 +43,22 @@ public class ImportApi {
 		return new ResponseEntity<>(i,HttpStatus.OK);
 	}
 	
+	@RequestMapping(value="/lastBorderDate/{type}/{foreign}", method=RequestMethod.GET, produces={"application/json"})
+	public ResponseEntity<?> lastBorderDate(@PathVariable(name="type") String type, @PathVariable(name="foreign") boolean foreign)
+	{
+		String dtStr = null;
+		
+		Date date = service.getLastBorderDate(type, foreign);
+		if(date == null) {
+		 dtStr = "01.01.2017";
+		}
+		else {
+		 dtStr = DateUtil.formatDate(date);
+		}
+		
+		return new ResponseEntity<>(dtStr,HttpStatus.OK);
+	}
+	
 	@RequestMapping(value="/lastRid/{type}", method=RequestMethod.GET, produces={"application/json"})
 	public ResponseEntity<?> getLastRid(@PathVariable(name="type") String type)
 	{
@@ -49,6 +68,10 @@ public class ImportApi {
 		
 		return new ResponseEntity<>(rid,HttpStatus.OK);
 	}
+	
+	
+	
+	
 	
 	@RequestMapping(value="/save/card", method=RequestMethod.POST, produces={"application/json"})
 	public ResponseEntity<?> saveCard(@RequestBody CardDTO dto)

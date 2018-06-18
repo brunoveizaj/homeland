@@ -1,6 +1,7 @@
 package com.homeland.imports;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -90,13 +91,21 @@ public class ImportService {
 		else if(type.equals(Type.PHONE)) c = Phone.class;
 		else if(type.equals(Type.VEHICLE)) c = Vehicle.class;
 		else if(type.equals(Type.TICKET)) c = Ticket.class;
-		//else if(type.equals(Type.BORDER)) c = Border.class;
 		else if(type.equals(Type.PHOTO_CARD)) c = PhotoCard.class;
 		else if(type.equals(Type.PHOTO_PASSPORT)) c = PhotoPassport.class;
 		
 		return importDAO.getLastRid(c);
 		
 	}
+	
+	
+	public Date getLastBorderDate(String event,boolean foreigner)
+	{
+		return borderDAO.lastDate(event, foreigner);
+	}
+	
+	
+	
 	
 	@Transactional
 	public void registerCard(CardDTO dto)
