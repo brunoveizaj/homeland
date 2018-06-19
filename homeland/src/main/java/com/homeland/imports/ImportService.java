@@ -26,6 +26,7 @@ import com.homeland.entities.PhotoCard;
 import com.homeland.entities.PhotoPassport;
 import com.homeland.entities.Ticket;
 import com.homeland.entities.Vehicle;
+import com.homeland.models.BorderList;
 import com.homeland.repositories.BorderRepository;
 import com.homeland.repositories.CardRepository;
 import com.homeland.repositories.ImportRepository;
@@ -102,6 +103,11 @@ public class ImportService {
 	public Date getLastBorderDate(String event,boolean foreigner)
 	{
 		return borderDAO.lastDate(event, foreigner);
+	}
+	
+	public Date getFirstBorderDate(String event,boolean foreigner)
+	{
+		return borderDAO.firstDate(event, foreigner);
 	}
 	
 	
@@ -297,6 +303,18 @@ public class ImportService {
 		b.setTravel(dto.getTravel());
 		
 		borderDAO.create(b);
+		
+	}
+	
+	@Transactional
+	public void registerBorder(BorderList list)
+	{
+		if(list != null && list.getBorders() != null && !list.getBorders().isEmpty())
+		{
+			for(BorderDTO dto : list.getBorders()) {
+					registerBorder(dto);
+			}
+		}
 		
 	}
 	

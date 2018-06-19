@@ -19,6 +19,7 @@ import com.homeland.dto.PhoneDTO;
 import com.homeland.dto.PhotoDTO;
 import com.homeland.dto.TicketDTO;
 import com.homeland.dto.VehicleDTO;
+import com.homeland.models.BorderList;
 import com.homeland.utils.DateUtil;
 
 
@@ -51,6 +52,22 @@ public class ImportApi {
 		Date date = service.getLastBorderDate(type, foreign);
 		if(date == null) {
 		 dtStr = "01.01.2017";
+		}
+		else {
+		 dtStr = DateUtil.formatDate(date);
+		}
+		
+		return new ResponseEntity<>(dtStr,HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/firstBorderDate/{type}/{foreign}", method=RequestMethod.GET, produces={"application/json"})
+	public ResponseEntity<?> firstBorderDate(@PathVariable(name="type") String type, @PathVariable(name="foreign") boolean foreign)
+	{
+		String dtStr = null;
+		
+		Date date = service.getFirstBorderDate(type, foreign);
+		if(date == null) {
+		 dtStr = "02.01.2017";
 		}
 		else {
 		 dtStr = DateUtil.formatDate(date);
@@ -125,6 +142,13 @@ public class ImportApi {
 	
 	@RequestMapping(value="/save/border", method=RequestMethod.POST, produces={"application/json"})
 	public ResponseEntity<?> saveVehicle(@RequestBody BorderDTO dto)
+	{
+		service.registerBorder(dto);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/save/borderList", method=RequestMethod.POST, produces={"application/json"})
+	public ResponseEntity<?> saveVehicle(@RequestBody BorderList dto)
 	{
 		service.registerBorder(dto);
 		return new ResponseEntity<>(HttpStatus.OK);

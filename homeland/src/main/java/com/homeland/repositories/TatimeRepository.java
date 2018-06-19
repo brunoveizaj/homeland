@@ -12,6 +12,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import com.homeland.entities.Tatime;
+import com.homeland.models.MonthYear;
 import com.homeland.requests.repository.TatimeSQL;
 import com.homeland.utils.StringUtil;
 
@@ -114,6 +115,20 @@ public class TatimeRepository {
 		return q.getResultList();
 		
 	}
+	
+	
+	public List<MonthYear> getTatimeMonthYears()
+	{
+		return em.createQuery("SELECT DISTINCT new "+MonthYear.class.getName()+"(t.month,t.year) FROM Tatime t ORDER BY t.year desc,t.month desc")
+				.getResultList();
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

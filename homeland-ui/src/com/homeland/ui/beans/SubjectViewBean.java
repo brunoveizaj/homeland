@@ -7,15 +7,16 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 
 import com.homeland.ui.api.security.ApiException;
 import com.homeland.ui.criterias.TatimeRequest;
+import com.homeland.ui.models.MonthYear;
 import com.homeland.ui.models.SubjectDTO;
 import com.homeland.ui.models.TatimeDTO;
 import com.homeland.ui.services.SubjectService;
 import com.homeland.ui.services.TatimeService;
 import com.homeland.ui.utils.Messages;
+import com.homeland.ui.utils.StringUtil;
 
 @ManagedBean
 @ViewScoped
@@ -32,6 +33,9 @@ public class SubjectViewBean implements Serializable {
 	
 	Integer year;
 	Integer month;
+	
+	List<MonthYear> monthYears;
+	String selectedYearMonth;
 	
 	
 	public NavigationBean getNav() {
@@ -73,25 +77,27 @@ public class SubjectViewBean implements Serializable {
 	public void setMonth(Integer month) {
 		this.month = month;
 	}
-	
-	
+
+	public List<MonthYear> getMonthYears() {
+		return monthYears;
+	}
+
+	public void setMonthYears(List<MonthYear> monthYears) {
+		this.monthYears = monthYears;
+	}
+
+	public String getSelectedYearMonth() {
+		return selectedYearMonth;
+	}
+
+	public void setSelectedYearMonth(String selectedYearMonth) {
+		this.selectedYearMonth = selectedYearMonth;
+	}
 
 	public void init()
 	{
-		if(FacesContext.getCurrentInstance().isPostback())
-		{
-			System.out.println("POSTBACKKKKK");
-		}
-		else
-		{
-			System.out.println("NOOOOOOO    POSTBACKKKKK");
-		}
-		
-		String nipt = nav.getParam("nipt");
-		System.out.println("Niptiii nga params e nav : NIPT="+nipt);
-		
+		String nipt = nav.getParam("nipt");		
 		loadSubjectRaport(nipt);
-		
 	}
 	
 	public void loadSubjectRaport(String nipt)
@@ -107,11 +113,27 @@ public class SubjectViewBean implements Serializable {
 	
 	public void loadEmployees()
 	{
+		
+		this.monthYears = new TatimeService().getTatimeMonthYears();
+		
+		if(StringUtil.isValid(selectedYearMonth))
+		{
+			this.year = Integer.valueOf(selectedYearMonth.substring(0, 4));
+			this.month = Integer.valueOf(selectedYearMonth.substring(5));
+		}
+		
 		if(year == null || month == null)
 		{
-			year = Calendar.getInstance().get(Calendar.YEAR);
-			month = Calendar.getInstance().get(Calendar.MONTH);// January = 0; na duhet previous month
-			if(month == 0) month = 12;
+			if(monthYears == null || monthYears.isEmpty()) {
+				year = Calendar.getInstance().get(Calendar.YEAR);
+				month = Calendar.getInstance().get(Calendar.MONTH);// January = 0; na duhet previous month
+				if(month == 0) month = 12;
+			}
+			else
+			{
+				this.year = monthYears.get(0).getYear();
+				this.month = monthYears.get(0).getMonth();
+			}
 		}
 		
 		TatimeRequest tr = new TatimeRequest();
@@ -129,6 +151,9 @@ public class SubjectViewBean implements Serializable {
 			this.tatimes = null;
 		}
 	}
+	
+	
+	
 	
 	
 

@@ -45,6 +45,9 @@ public class SubjectClient {
 	
 	public List<SubjectDTO> searchSubject(SubjectRequest req)
 	{
+		
+		System.err.println(req);
+		
 		final String BASE_URL = IApiClient.SERVER+"/api/subject/searchSubject";		
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(BASE_URL);
 		
@@ -68,6 +71,8 @@ public class SubjectClient {
 		{
 			builder.queryParam("maxResult", req.getMaxResult());
 		}
+		
+		
 		
 		RestTemplate restTemplate = new RestTemplate();
 		HttpHeaders headers = new HttpHeaders();

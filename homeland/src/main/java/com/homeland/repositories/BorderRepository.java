@@ -149,10 +149,17 @@ public class BorderRepository {
 	{
 		return (Date)em.createQuery("SELECT MAX(b.crossingDate) FROM Border b where b.event=:event and b.foreign=:for")
 				.setParameter("event", event)
-				.setParameter("for", foreign)
+				.setParameter("for", (foreign?1:0))
 				.getSingleResult();
 	}
 	
+	public Date firstDate(String event,boolean foreign)
+	{
+		return (Date)em.createQuery("SELECT MIN(b.crossingDate) FROM Border b where b.event=:event and b.foreign=:for")
+				.setParameter("event", event)
+				.setParameter("for", (foreign?1:0))
+				.getSingleResult();
+	}
 	
 	
 	

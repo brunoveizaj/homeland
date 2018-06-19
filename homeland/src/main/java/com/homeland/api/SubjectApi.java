@@ -47,6 +47,10 @@ public class SubjectApi {
 	@RequestMapping(value="/searchSubject", method=RequestMethod.GET, produces={"application/json"})
 	public ResponseEntity<?> searchSubject(@RequestHeader(value="Authorization") String token, SubjectRequest req)
 	{
+		
+		
+		System.err.println(req);
+		
 		Integer userId = tokenService.getUserIdFromToken(token);
 				
 		List<SubjectDTO> list = subjectService.searchSubject(req,userId);

@@ -11,6 +11,7 @@ import com.homeland.assemblers.Assembler;
 import com.homeland.assemblers.RequestAssembler;
 import com.homeland.dto.TatimeDTO;
 import com.homeland.entities.Tatime;
+import com.homeland.models.MonthYear;
 import com.homeland.repositories.TatimeRepository;
 import com.homeland.requests.api.TatimeRequest;
 import com.homeland.requests.repository.TatimeSQL;
@@ -34,5 +35,14 @@ public class TatimeService {
 	{
 		return CompletableFuture.completedFuture(searchTatime(req,userId));
 	}
+	
+	
+	
+	public List<MonthYear> getTatimeMonthYears()
+	{
+		return tatimeDAO.getTatimeMonthYears();
+	}
+	
+	
 	
 }
