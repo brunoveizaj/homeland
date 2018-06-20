@@ -40,7 +40,7 @@
 									value="#{borderBean.request.plate}" />
 								<p:selectOneMenu value="#{borderBean.request.bcgId}" placeholder="Pika kalimit">
 									<f:selectItem itemValue="#{null}" itemLabel="Pika kalimit"/>
-									<f:selectItems value="#{cacheBean.bcgList}" var="bcg" itemValue="#{bcg.value}" itemLabel="#{bcg.name}"/>
+									
 								</p:selectOneMenu>
 								<p:selectOneMenu value="#{borderBean.request.foreign}" placeholder="Tipi">
 									<f:selectItem itemValue="#{null}" itemLabel="Tipi"/>
@@ -110,7 +110,7 @@
                     #{b.gender}
                 </p:column>
 				<p:column headerText="Data" sortBy="#{b.crosingDate}">
-                    #{b.crossingDate}
+                    <h:outputText value="#{b.crossingDate}" styleClass="bold" />
                 </p:column>
 				<p:column headerText="Pika kufitare" sortBy="#{b.crossingGate}">
 					#{b.crossingGate}
@@ -125,7 +125,7 @@
                     #{b.citizenType}
                 </p:column>
 				<p:column headerText="Targa" sortBy="#{b.plate}">
-                    <p:commandLink value="#{b.name}" action="#{nav.navigate('vehicle_view')}" update=":main">
+                    <p:commandLink value="#{b.plate}" action="#{nav.navigate('vehicle_view')}" update=":main">
                    	<f:param name="plate" value="#{b.plate}"/>
                    </p:commandLink> 
                 </p:column>
@@ -133,7 +133,7 @@
                     #{b.driver}
                 </p:column>
 					<p:column headerText="Qëlimi" sortBy="#{b.purpose}">
-                    #{b.purpose}
+                    #{b.pupose}
                 </p:column>
 				</p:dataTable>
 			</div>

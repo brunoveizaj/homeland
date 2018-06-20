@@ -171,7 +171,7 @@
 	                </p:commandLink>
                 </p:column>
 					<p:column headerText="Data">
-                    #{b.crossingDate}
+                   <h:outputText value="#{b.crossingDate}" styleClass="bold" />
                 </p:column>
 					<p:column headerText="Pika kufitare">
 					#{b.crossingGate}
@@ -183,13 +183,13 @@
                     #{b.citizenType}
                 </p:column>
 				<p:column headerText="Targa">
-                    #{b.plate}
+                    <h:outputText value="#{b.plate}" styleClass="bold" />
                 </p:column>
 					<p:column headerText="Shofer">
                     #{b.driver}
                 </p:column>
 					<p:column headerText="Qëllimi">
-                    #{b.purpose}
+                    #{b.pupose}
                 </p:column>
 				</p:dataTable>
 			</div>

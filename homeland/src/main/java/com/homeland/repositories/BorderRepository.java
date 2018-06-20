@@ -73,7 +73,7 @@ public class BorderRepository {
 		
 		if(criterias.getTo() != null)
 		{
-			sql += "AND b.crossingDate >= :to ";
+			sql += "AND b.crossingDate <= :to ";
 			params.put("to", criterias.getTo());
 		}
 		

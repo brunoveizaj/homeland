@@ -10,7 +10,6 @@ import javax.faces.bean.ViewScoped;
 
 import com.homeland.ui.api.security.ApiException;
 import com.homeland.ui.criterias.TatimeRequest;
-import com.homeland.ui.models.MonthYear;
 import com.homeland.ui.models.SubjectDTO;
 import com.homeland.ui.models.TatimeDTO;
 import com.homeland.ui.services.SubjectService;
@@ -28,13 +27,16 @@ public class SubjectViewBean implements Serializable {
 	@ManagedProperty("#{nav}")
 	NavigationBean nav;
 	
+	@ManagedProperty("#{cacheBean}")
+	CacheBean cache;
+	
 	SubjectDTO subject;
 	List<TatimeDTO> tatimes;
 	
 	Integer year;
 	Integer month;
 	
-	List<MonthYear> monthYears;
+	
 	String selectedYearMonth;
 	
 	
@@ -78,12 +80,12 @@ public class SubjectViewBean implements Serializable {
 		this.month = month;
 	}
 
-	public List<MonthYear> getMonthYears() {
-		return monthYears;
+	public CacheBean getCache() {
+		return cache;
 	}
 
-	public void setMonthYears(List<MonthYear> monthYears) {
-		this.monthYears = monthYears;
+	public void setCache(CacheBean cache) {
+		this.cache = cache;
 	}
 
 	public String getSelectedYearMonth() {
@@ -96,7 +98,8 @@ public class SubjectViewBean implements Serializable {
 
 	public void init()
 	{
-		String nipt = nav.getParam("nipt");		
+		String nipt = nav.getParam("nipt");	
+		
 		loadSubjectRaport(nipt);
 	}
 	
@@ -114,8 +117,6 @@ public class SubjectViewBean implements Serializable {
 	public void loadEmployees()
 	{
 		
-		this.monthYears = new TatimeService().getTatimeMonthYears();
-		
 		if(StringUtil.isValid(selectedYearMonth))
 		{
 			this.year = Integer.valueOf(selectedYearMonth.substring(0, 4));
@@ -124,15 +125,15 @@ public class SubjectViewBean implements Serializable {
 		
 		if(year == null || month == null)
 		{
-			if(monthYears == null || monthYears.isEmpty()) {
+			if(cache.getMonthYears() == null || cache.getMonthYears().isEmpty()) {
 				year = Calendar.getInstance().get(Calendar.YEAR);
 				month = Calendar.getInstance().get(Calendar.MONTH);// January = 0; na duhet previous month
 				if(month == 0) month = 12;
 			}
 			else
 			{
-				this.year = monthYears.get(0).getYear();
-				this.month = monthYears.get(0).getMonth();
+				this.year = cache.getMonthYears().get(0).getYear();
+				this.month = cache.getMonthYears().get(0).getMonth();
 			}
 		}
 		

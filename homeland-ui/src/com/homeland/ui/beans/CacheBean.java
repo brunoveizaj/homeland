@@ -1,5 +1,45 @@
 package com.homeland.ui.beans;
 
-public class CacheBean {
+import java.io.Serializable;
+import java.util.List;
+
+import javax.faces.bean.ManagedBean;
+
+import com.homeland.ui.models.MonthYear;
+import com.homeland.ui.services.TatimeService;
+
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ApplicationScoped;
+
+
+@ManagedBean
+@ApplicationScoped
+public class CacheBean implements Serializable {
+
+	
+	private static final long serialVersionUID = 1L;
+	
+	List<MonthYear> monthYears;
+
+	
+	public List<MonthYear> getMonthYears() {
+		return monthYears;
+	}
+	public void setMonthYears(List<MonthYear> monthYears) {
+		this.monthYears = monthYears;
+	}
+
+
+
+
+
+
+	@PostConstruct
+	public void load()
+	{
+		this.monthYears = new TatimeService().getTatimeMonthYears();
+	}
+	
+	
 
 }

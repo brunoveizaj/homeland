@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,8 +27,8 @@ public class BorderApi {
 	TokenService tokenService;
 	
 	
-	@RequestMapping(value="/searchEntryExit", method=RequestMethod.GET, produces={"application/json"})
-	public ResponseEntity<?> searchEntryExit(@RequestHeader(value="Authorization") String token, BorderRequest request)
+	@RequestMapping(value="/searchEntryExit", method=RequestMethod.POST, produces={"application/json"})
+	public ResponseEntity<?> searchEntryExit(@RequestHeader(value="Authorization") String token,@RequestBody BorderRequest request)
 	{
 		
 		Integer userId = tokenService.getUserIdFromToken(token);

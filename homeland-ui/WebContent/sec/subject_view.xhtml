@@ -95,7 +95,7 @@
                     Punonjësit për periudhën: 
                     <p:selectOneMenu value="#{subjectViewBean.selectedYearMonth}" placeholder="Periudha" >
 							<p:ajax listener="#{subjectViewBean.loadEmployees()}" update="emp"/>
-							<f:selectItems value="#{subjectViewBean.monthYears}" var="my" itemLabel="#{my.year}-#{my.month}" itemValue="#{my.full()}"/>
+							<f:selectItems value="#{cacheBean.monthYears}" var="my" itemLabel="#{my.year}-#{my.month}" itemValue="#{my.full()}"/>
 					</p:selectOneMenu>
                 </f:facet>
                 
