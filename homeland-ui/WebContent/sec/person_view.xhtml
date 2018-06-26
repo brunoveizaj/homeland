@@ -318,10 +318,10 @@
 					<p:column headerText="#">
                     #{r+1}
                 </p:column>
-					<p:column headerText="Eventi">
-                    #{b.event}
+				<p:column headerText="Eventi">
+                    <h:outputText value="#{b.event}" styleClass="#{formatBean.formatBCE(b.event)}"/>
                 </p:column>
-					<p:column headerText="Data">
+				<p:column headerText="Data">
                    <h:outputText value="#{b.crossingDate}" styleClass="bold" />
                 </p:column>
 					<p:column headerText="Pika kufitare">

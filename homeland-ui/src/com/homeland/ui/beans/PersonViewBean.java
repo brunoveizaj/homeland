@@ -6,7 +6,6 @@ import java.util.List;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 
 import com.homeland.ui.api.security.ApiException;
 import com.homeland.ui.criterias.SubjectRequest;
@@ -174,21 +173,9 @@ public class PersonViewBean implements Serializable {
 
 
 	public void init()
-	{
-		if(FacesContext.getCurrentInstance().isPostback())
-		{
-			System.out.println("POSTBACKKKKK");
-		}
-		else
-		{
-			System.out.println("NOOOOOOO    POSTBACKKKKK");
-		}
-		
-		String nid = nav.getParam("nid");
-		System.out.println("NIDI nga params e nav : NID="+nid);
-		
-		loadPersonRaport(nid);
-		
+	{		
+		String nid = nav.getParam("nid");		
+		loadPersonRaport(nid);	
 	}
 	
 	

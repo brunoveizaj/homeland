@@ -6,7 +6,6 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 
 import com.homeland.ui.api.security.ApiException;
 import com.homeland.ui.models.BorderDTO;
@@ -89,20 +88,8 @@ public class VehicleViewBean implements Serializable {
 
 	public void init()
 	{
-		if(FacesContext.getCurrentInstance().isPostback())
-		{
-			System.out.println("POSTBACKKKKK");
-		}
-		else
-		{
-			System.out.println("NOOOOOOO    POSTBACKKKKK");
-		}
-		
 		String plate = nav.getParam("plate");
-		System.out.println("PLATE nga params e nav : PLATE="+plate);
-		
 		loadVehicleRaport(plate);
-		
 	}
 	
 	

@@ -163,7 +163,7 @@
                     #{r+1}
                 </p:column>
 				<p:column headerText="Eventi">
-                    #{b.event}
+                    <h:outputText value="#{b.event}" styleClass="#{formatBean.formatBCE(b.event)}"/>
                 </p:column>
                 <p:column headerText="Personi">
 	                <p:commandLink value="#{b.name} #{b.fatherName} #{b.surname}" action="#{nav.navigate('person_view')}" update=":main">

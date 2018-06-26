@@ -91,7 +91,7 @@
                     #{r+1}
                 </p:column>
 				<p:column headerText="Eventi" sortBy="#{b.event}">
-                    #{b.event}
+                    <h:outputText value="#{b.event}" styleClass="#{formatBean.formatBCE(b.event)}"/>
                 </p:column>
                 <p:column headerText="Emri" sortBy="#{b.name}">
                    <p:commandLink value="#{b.name}" action="#{nav.navigate('person_view')}" update=":main">

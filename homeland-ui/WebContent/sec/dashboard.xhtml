@@ -126,13 +126,14 @@
 				<div class="ui-g ui-fluid">
 				
 					<div class="ui-g-12 ui-md-6">
-						<p:dataTable>
+						<p:dataTable value="#{dashboardBean.imports}" var="i" rowIndexVar="r" paginator="true" paginatorAlwaysVisible="false"
+						rows="10" rowsPerPageTemplate="5,10,20,50">
 							<f:facet name="header">Importimet</f:facet>
-							<p:column headerText="#"></p:column>
-							<p:column headerText="Tipi"></p:column>
-							<p:column headerText="Fillimi"></p:column>
-							<p:column headerText="Mbarimi"></p:column>
-							<p:column headerText="Sasia"></p:column>
+							<p:column headerText="#">#{r+1}</p:column>
+							<p:column headerText="Tipi"><h:outputText value="#{i.dataSource}" styleClass="bold"/></p:column>
+							<p:column headerText="Fillimi">#{i.startTime}</p:column>
+							<p:column headerText="Mbarimi">#{i.endTime}</p:column>
+							<p:column headerText="Sasia">#{i.total}</p:column>
 						</p:dataTable>
 					</div>
 					

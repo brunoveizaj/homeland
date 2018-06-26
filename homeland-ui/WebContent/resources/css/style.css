@@ -144,3 +144,20 @@ body .ui-paginator {
 .topAlign{
     vertical-align: top;
 }
+
+.green-lbl{
+	color:white;
+	background-color: #3eb839;
+	border-radius: 4px;
+	padding: 2px;	
+}
+
+.red-lbl{
+	color:white;
+	background-color: #ff1300;
+	border-radius: 4px;
+	padding: 2px;	
+}
+
+
+

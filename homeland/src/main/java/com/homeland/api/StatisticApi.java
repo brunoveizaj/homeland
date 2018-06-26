@@ -23,18 +23,15 @@ public class StatisticApi {
 	@Autowired
 	StatisticService statService;
 	
-	@RequestMapping(value="/lastImports/{limit}", method=RequestMethod.GET, produces={"application/json"})
-	public ResponseEntity<?> lastImports(@RequestHeader(value="Authorization") String token, @PathVariable(name="limit") Integer limit)
+	@RequestMapping(value="/listImports/{limit}", method=RequestMethod.GET, produces={"application/json"})
+	public ResponseEntity<?> getListImports(@PathVariable(name="limit") Integer limit)
 	{
 		List<ImportDTO> list = statService.getLastImports(limit);
-		
 		if(list == null || list.isEmpty())
 		{
 			return new ResponseEntity<>("Nuk ka te dhena",HttpStatus.NO_CONTENT);
 		}
-		
 		return new ResponseEntity<>(list,HttpStatus.OK);
-		
 	}
 	
 	

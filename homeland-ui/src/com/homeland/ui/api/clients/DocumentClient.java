@@ -44,7 +44,6 @@ public class DocumentClient {
 		
 		if(response.getStatusCodeValue() == HttpCode.OK)
 		{
-			System.out.println("SX Card HTTP code OK");
 			return response.getBody();
 		}
 				
