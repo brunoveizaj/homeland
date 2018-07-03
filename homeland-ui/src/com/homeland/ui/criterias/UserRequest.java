@@ -1,6 +1,11 @@
 package com.homeland.ui.criterias;
 
-public class UserRequest {
+import java.io.Serializable;
+
+public class UserRequest implements Serializable{
+
+
+	private static final long serialVersionUID = 1L;
 
 	String username;
 	String role;

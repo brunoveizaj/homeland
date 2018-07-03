@@ -1,6 +1,11 @@
 package com.homeland.ui.models;
 
-public class Principal {
+import java.io.Serializable;
+
+public class Principal implements Serializable{
+
+
+	private static final long serialVersionUID = 1L;
 
 	String username;
 	String password;

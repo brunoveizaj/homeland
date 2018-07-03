@@ -1,6 +1,11 @@
 package com.homeland.ui.models;
 
-public class EntityCounter {
+import java.io.Serializable;
+
+public class EntityCounter implements Serializable{
+
+
+	private static final long serialVersionUID = 1L;
 
 	Class<?> T;
 	long totalCnt;

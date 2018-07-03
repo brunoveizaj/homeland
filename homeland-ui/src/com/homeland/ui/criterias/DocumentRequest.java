@@ -1,6 +1,11 @@
 package com.homeland.ui.criterias;
 
-public class DocumentRequest {
+import java.io.Serializable;
+
+public class DocumentRequest implements Serializable{
+
+
+	private static final long serialVersionUID = 1L;
 
 	String idn;
 	String name;

@@ -1,11 +1,15 @@
 package com.homeland.ui.models;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.homeland.ui.constants.IDate;
 
-public class LoginDTO {
+public class LoginDTO implements Serializable{
+
+
+	private static final long serialVersionUID = 1L;
 
 	
 	private int id;

@@ -1,6 +1,11 @@
 package com.homeland.ui.criterias;
 
-public class SubjectRequest {
+import java.io.Serializable;
+
+public class SubjectRequest implements Serializable{
+
+
+	private static final long serialVersionUID = 1L;
 
 	
 	String nipt;

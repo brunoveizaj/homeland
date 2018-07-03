@@ -1,6 +1,11 @@
 package com.homeland.ui.models;
 
-public class BorderGateDTO {
+import java.io.Serializable;
+
+public class BorderGateDTO implements Serializable{
+
+
+	private static final long serialVersionUID = 1L;
 
 	
 	int id;

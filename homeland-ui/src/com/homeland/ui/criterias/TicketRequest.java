@@ -1,6 +1,11 @@
 package com.homeland.ui.criterias;
 
-public class TicketRequest {
+import java.io.Serializable;
+
+public class TicketRequest implements Serializable{
+
+
+	private static final long serialVersionUID = 1L;
 
 	
 	String plate;
