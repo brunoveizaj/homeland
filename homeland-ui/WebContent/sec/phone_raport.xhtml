@@ -66,7 +66,7 @@
                     #{p.phone}
                 </p:column>
 				<p:column headerText="Emri" sortBy="#{p.name}">
-						<p:commandLink disabled="#{p.nid == null}" value="#{p.name}"
+						<p:commandLink disabled="#{formatBean.validString(p.nid) eq false}" value="#{p.name}"
 							action="#{nav.navigate('person_view')}" update=":main">
 							<f:param name="nid" value="#{p.nid}" />
 						</p:commandLink>
@@ -75,7 +75,7 @@
                     #{p.fatherName}
                 </p:column>
 				<p:column headerText="Mbiemri" sortBy="#{p.surname}">
-						<p:commandLink disabled="#{p.nid == null}" value="#{p.surname}"
+						<p:commandLink disabled="#{formatBean.validString(p.nid) eq false}" value="#{p.surname}"
 							action="#{nav.navigate('person_view')}" update=":main">
 							<f:param name="nid" value="#{p.nid}" />
 						</p:commandLink>

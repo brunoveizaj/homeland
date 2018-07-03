@@ -15,6 +15,7 @@ import com.homeland.ui.api.security.ApiErrorHandler;
 import com.homeland.ui.constants.HttpCode;
 import com.homeland.ui.constants.IApiClient;
 import com.homeland.ui.models.ImportDTO;
+import com.homeland.ui.models.LoginDTO;
 
 public class StatisticClient {
 
@@ -46,6 +47,32 @@ public class StatisticClient {
 		return null;
 	}
 	
+	
+	public List<LoginDTO> logins(Integer limit)
+	{
+		if(limit==null) limit = 50;
+		final String BASE_URL = IApiClient.SERVER+"/api/statistic/logins/"+limit;		
+		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(BASE_URL);
+		
+		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.setErrorHandler(new ApiErrorHandler());
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
+		//headers.set("Authorization", "Bearer "+Util.getToken());
+		HttpEntity<?> entity = new HttpEntity<>(headers);
+		
+		ParameterizedTypeReference<List<LoginDTO>> typeRef = new ParameterizedTypeReference<List<LoginDTO>>() {};
+		
+		ResponseEntity<List<LoginDTO>> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, typeRef);
+		
+		if(response.getStatusCodeValue() == HttpCode.OK)
+		{
+			return response.getBody();
+		}
+				
+		return null;
+	}
 	
 	
 	

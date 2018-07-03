@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 
+import com.homeland.ui.models.BorderGateDTO;
 import com.homeland.ui.models.MonthYear;
+import com.homeland.ui.services.BorderService;
 import com.homeland.ui.services.TatimeService;
 
 import javax.annotation.PostConstruct;
@@ -20,8 +22,15 @@ public class CacheBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	List<MonthYear> monthYears;
+	List<BorderGateDTO> gates;
 
 	
+	public List<BorderGateDTO> getGates() {
+		return gates;
+	}
+	public void setGates(List<BorderGateDTO> gates) {
+		this.gates = gates;
+	}
 	public List<MonthYear> getMonthYears() {
 		return monthYears;
 	}
@@ -38,6 +47,7 @@ public class CacheBean implements Serializable {
 	public void load()
 	{
 		this.monthYears = new TatimeService().getTatimeMonthYears();
+		this.gates = new BorderService().loadGates();
 	}
 	
 	

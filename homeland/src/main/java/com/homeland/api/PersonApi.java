@@ -1,5 +1,6 @@
 package com.homeland.api;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class PersonApi {
 	public ResponseEntity<?> searchPerson(@RequestHeader(value="Authorization") String token,@RequestBody PersonRequest request)
 	{
 		Integer userId = tokenService.getUserIdFromToken(token);
-				
+						
 		List<PersonDTO> list = personService.searchPerson(request,userId);
 		
 		if(list == null || list.isEmpty())
@@ -48,6 +49,8 @@ public class PersonApi {
 	public ResponseEntity<?> personRaport(@RequestHeader(value="Authorization") String token, @PathVariable String nid)//@RequestHeader HttpHeaders httpHeaders
 	{
 		Integer userId = tokenService.getUserIdFromToken(token);
+		
+		System.out.println(Calendar.getInstance().getTime()+" ["+userId+"] "+nid);
 				
 		PersonRaportDTO raport = personService.getPersonRaport(nid, userId);
 		

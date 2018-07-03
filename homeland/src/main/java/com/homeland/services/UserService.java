@@ -1,5 +1,6 @@
 package com.homeland.services;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import com.homeland.assemblers.DomainAssembler;
 import com.homeland.assemblers.RequestAssembler;
 import com.homeland.constants.IStatus;
 import com.homeland.dto.UserDTO;
+import com.homeland.entities.Login;
 import com.homeland.entities.User;
 import com.homeland.exceptions.EntityExistsException;
 import com.homeland.exceptions.NoContentException;
@@ -165,6 +167,16 @@ public class UserService {
 		
 		
 		String token = tokenService.generateToken(new Assembler().toDto(u));
+		
+		Login login = new Login();
+		login.setBrowser(principal.getBrowser());
+		login.setIp(principal.getIp());
+		login.setLoginTime(Calendar.getInstance().getTime());
+		login.setToken(token);
+		login.setUserId(u.getId());
+		login.setUsername(u.getUsername());
+		
+		userDAO.create(login);
 		
 		return new UserToken(new Assembler().toDto(u),token);
 		

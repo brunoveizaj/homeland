@@ -97,10 +97,12 @@ public class VehicleViewBean implements Serializable {
 	{
 		try {
 			VehicleRaportDTO raport = new VehicleService().vehicleRaport(plate);
-			this.vehicle = raport.getVehicle();
-			this.tickets = raport.getTickets();
-			this.borders = raport.getBorders();
-			this.vehicleHistory = raport.getVehicleHistory();
+			if(raport != null) {
+				this.vehicle = raport.getVehicle();
+				this.tickets = raport.getTickets();
+				this.borders = raport.getBorders();
+				this.vehicleHistory = raport.getVehicleHistory();
+			}
 		}catch(ApiException a) {
 			Messages.throwFacesMessage(a.getMessage(), a.getSeverity());
 		}

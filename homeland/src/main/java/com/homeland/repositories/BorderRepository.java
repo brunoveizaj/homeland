@@ -13,6 +13,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import com.homeland.entities.Border;
+import com.homeland.entities.BorderGate;
 import com.homeland.requests.repository.BorderSQL;
 import com.homeland.utils.StringUtil;
 
@@ -43,7 +44,7 @@ public class BorderRepository {
 		
 		if(StringUtil.isValid(criterias.getBcgId()))
 		{
-			sql += "AND b.bcgId=:bcgid ";
+			sql += "AND b.crossingGate=:bcgid ";
 			params.put("bcgid", criterias.getBcgId());
 		}
 		
@@ -161,6 +162,11 @@ public class BorderRepository {
 				.getSingleResult();
 	}
 	
+	
+	public List<BorderGate> loadGates()
+	{
+		return em.createQuery("FROM BorderGate bg").getResultList();
+	}
 	
 	
 

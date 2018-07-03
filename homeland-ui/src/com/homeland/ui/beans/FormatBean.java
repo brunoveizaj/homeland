@@ -6,6 +6,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 import com.homeland.ui.constants.IBorder;
+import com.homeland.ui.utils.StringUtil;
 
 @ManagedBean
 @RequestScoped
@@ -16,9 +17,12 @@ public class FormatBean implements Serializable {
 	
 	public String formatBCE(String event)
 	{
-		return event.equals(IBorder.ENTRY)?"green-lbl":"red-lbl";
+		return event.equals(IBorder.ENTRY)?"green-row":"red-row";
 	}
 	
-	
+	public boolean validString(String value)
+	{
+		return StringUtil.isValid(value);
+	}
 
 }

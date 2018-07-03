@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.homeland.dto.BorderDTO;
+import com.homeland.dto.BorderGateDTO;
 import com.homeland.requests.api.BorderRequest;
 import com.homeland.services.BorderService;
 import com.homeland.services.TokenService;
@@ -35,6 +36,24 @@ public class BorderApi {
 				
 		List<BorderDTO> list = borderService.searchEntryExit(request, userId);
 		
+		System.out.println(request);
+		
+		if(list == null || list.isEmpty())
+		{
+			return new ResponseEntity<>("Nuk ka te dhena",HttpStatus.NO_CONTENT);
+		}
+				
+		return new ResponseEntity<>(list,HttpStatus.OK);
+		
+	}
+	
+	
+	@RequestMapping(value="/listGates", method=RequestMethod.GET, produces={"application/json"})
+	public ResponseEntity<?> loadGates()
+	{
+						
+		List<BorderGateDTO> list = borderService.loadGates();
+				
 		if(list == null || list.isEmpty())
 		{
 			return new ResponseEntity<>("Nuk ka te dhena",HttpStatus.NO_CONTENT);

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.homeland.assemblers.Assembler;
 import com.homeland.assemblers.RequestAssembler;
 import com.homeland.dto.BorderDTO;
+import com.homeland.dto.BorderGateDTO;
 import com.homeland.entities.Border;
 import com.homeland.repositories.BorderRepository;
 import com.homeland.requests.api.BorderRequest;
@@ -27,6 +28,11 @@ public class BorderService {
 		BorderSQL criterias = new RequestAssembler().apiToSql(req);
 		List<Border> borders = borderDAO.searchEntryExit(criterias);
 		return new Assembler().borderListToDto(borders);		
+	}
+	
+	public List<BorderGateDTO> loadGates()
+	{
+		return new Assembler().borderGateListToDto(borderDAO.loadGates());
 	}
 	
 	

@@ -17,6 +17,7 @@ import com.homeland.ui.constants.IApiClient;
 import com.homeland.ui.criterias.BorderRequest;
 import com.homeland.ui.exceptions.ServerException;
 import com.homeland.ui.models.BorderDTO;
+import com.homeland.ui.models.BorderGateDTO;
 import com.homeland.ui.utils.Util;
 
 public class BorderClient {
@@ -52,6 +53,33 @@ public class BorderClient {
 		return null;
 	}
 	
+	public List<BorderGateDTO> loadGates()
+	{
+		final String BASE_URL = IApiClient.SERVER+"/api/border/listGates";		
+		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(BASE_URL);
 	
+		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.setErrorHandler(new ApiErrorHandler());
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
+		HttpEntity<?> entity = new HttpEntity<>(headers);
+		
+		ParameterizedTypeReference<List<BorderGateDTO>> typeRef = new ParameterizedTypeReference<List<BorderGateDTO>>() {};
+		
+		ResponseEntity<List<BorderGateDTO>> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, typeRef);
+		
+		if(response.getStatusCodeValue() == HttpCode.OK)
+		{
+			return response.getBody();
+		}
+		
+		if(response.getStatusCodeValue() == HttpCode.SERVER_ERROR)
+		{
+			throw new ServerException("Server Error");
+		}		
+				
+		return null;
+	}
 	
 }

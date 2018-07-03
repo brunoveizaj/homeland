@@ -55,7 +55,6 @@ public class PersonClient {
 	    final String BASE_URL = IApiClient.SERVER+"/api/person/personRaport/"+nid;
 	    
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(BASE_URL);
-		System.err.println("API REQ PERSON:personRaport: "+builder.toUriString());
 		/*
 		List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();        
 		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();

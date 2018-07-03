@@ -310,7 +310,8 @@
 			<div class="ui-g-12 ui-fluid">
 				<p:dataTable value="#{personViewBean.borders}" var="b"
 					rowIndexVar="r" reflow="true" emptyMessage="Nuk ka hyrje-dalje"
-					styleClass="blue-tbl">
+					rowStyleClass="#{formatBean.formatBCE(b.event)}"
+					styleClass="blue-tbl" paginator="true" paginatorAlwaysVisible="false" rows="10" rowsPerPageTemplate="5,10,20,30,100">
 
 					<f:facet name="header">
                     Hyrje - Dalje
@@ -319,7 +320,7 @@
                     #{r+1}
                 </p:column>
 				<p:column headerText="Eventi">
-                    <h:outputText value="#{b.event}" styleClass="#{formatBean.formatBCE(b.event)}"/>
+                    <h:outputText value="#{b.event}" />
                 </p:column>
 				<p:column headerText="Data">
                    <h:outputText value="#{b.crossingDate}" styleClass="bold" />

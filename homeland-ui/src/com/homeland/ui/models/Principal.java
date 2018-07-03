@@ -4,6 +4,9 @@ public class Principal {
 
 	String username;
 	String password;
+	String browser;
+	String ip;
+	
 	
 	
 	public String getUsername() {
@@ -18,5 +21,20 @@ public class Principal {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public String getBrowser() {
+		return browser;
+	}
+	public void setBrowser(String browser) {
+		this.browser = browser;
+	}
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+
+	
 	
 }

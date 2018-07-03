@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.homeland.assemblers.Assembler;
 import com.homeland.dto.ImportDTO;
+import com.homeland.dto.LoginDTO;
 import com.homeland.entities.Card;
 import com.homeland.entities.Person;
 import com.homeland.models.EntityCounter;
@@ -27,10 +28,17 @@ public class StatisticService {
 	StatisticRepository statDAO;
 	
 	
+	
 	public List<ImportDTO> getLastImports(Integer limit)
 	{
 		return new Assembler().importsListToDto(importDAO.getLastImports(limit));
 	}
+	
+	public List<LoginDTO> logins(Integer limit)
+	{
+		return new Assembler().loginListToDto(statDAO.listLogins(limit));
+	}
+	
 	
 	public Long countAll(Class<?> T)
 	{

@@ -6,8 +6,10 @@ import java.util.List;
 import com.homeland.constants.IDocument;
 import com.homeland.constants.IStatus;
 import com.homeland.dto.BorderDTO;
+import com.homeland.dto.BorderGateDTO;
 import com.homeland.dto.CardDTO;
 import com.homeland.dto.ImportDTO;
+import com.homeland.dto.LoginDTO;
 import com.homeland.dto.OsheeDTO;
 import com.homeland.dto.PassportDTO;
 import com.homeland.dto.PersonDTO;
@@ -19,8 +21,10 @@ import com.homeland.dto.TicketDTO;
 import com.homeland.dto.UserDTO;
 import com.homeland.dto.VehicleDTO;
 import com.homeland.entities.Border;
+import com.homeland.entities.BorderGate;
 import com.homeland.entities.Card;
 import com.homeland.entities.Imports;
+import com.homeland.entities.Login;
 import com.homeland.entities.Oshee;
 import com.homeland.entities.Passport;
 import com.homeland.entities.Person;
@@ -585,6 +589,67 @@ public class Assembler {
 		
 	}
 	
+	public LoginDTO toDto(Login l)
+	{
+		if(l == null) return null;
+		
+		LoginDTO dto = new LoginDTO();
+		
+		dto.setBrowser(l.getBrowser());
+		dto.setId(l.getId());
+		dto.setIp(l.getIp());
+		dto.setLoginTime(l.getLoginTime());
+		dto.setLogoutTime(l.getLogoutTime());
+		dto.setToken(l.getToken());
+		dto.setUserId(l.getUserId());
+		dto.setUsername(l.getUsername());
+		
+		return dto;
+		
+	}
+	
+	public List<LoginDTO> loginListToDto(List<Login> data)
+	{
+		if(data == null || data.isEmpty()) return null;
+		
+		List<LoginDTO> list = new ArrayList<>();
+		
+		for(Login i : data)
+		{
+			list.add(toDto(i));
+		}
+		
+		return list;
+		
+	}
+	
+	
+	public BorderGateDTO toDto(BorderGate e)
+	{
+		if(e == null) return null;
+		
+		BorderGateDTO dto = new BorderGateDTO();
+		dto.setId(e.getId());
+		dto.setName(e.getName());
+		
+		return dto;
+	}
+	
+	
+	public List<BorderGateDTO> borderGateListToDto(List<BorderGate> data)
+	{
+		if(data == null || data.isEmpty()) return null;
+		
+		List<BorderGateDTO> list = new ArrayList<>();
+		
+		for(BorderGate i : data)
+		{
+			list.add(toDto(i));
+		}
+		
+		return list;
+		
+	}
 	
 	
 	

@@ -81,6 +81,8 @@ public class LoginBean implements Serializable {
 		Principal principal = new Principal();
 		principal.setUsername(username);
 		principal.setPassword(password);
+		principal.setBrowser(Util.getBrowser());
+		principal.setIp(Util.getAuthenticatedUserIp());
 		
 		try {
 			

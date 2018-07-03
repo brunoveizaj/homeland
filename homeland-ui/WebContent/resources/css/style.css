@@ -146,18 +146,25 @@ body .ui-paginator {
 }
 
 .green-lbl{
-	color:white;
-	background-color: #3eb839;
-	border-radius: 4px;
-	padding: 2px;	
+	color:white !important;
+	background-color: #3eb839 !important;
+	border-radius: 4px !important;
+	padding: 2px !important;	
 }
 
 .red-lbl{
-	color:white;
-	background-color: #ff1300;
-	border-radius: 4px;
-	padding: 2px;	
+	color:white !important;
+	background-color: #ff1300 !important;
+	border-radius: 4px !important;
+	padding: 2px !important;	
 }
 
+.red-row
+{
+	background-color: #ff00006e !important;
+}
 
-
+.green-row
+{
+	background-color: #90e89b !important;
+}

@@ -39,8 +39,8 @@
 								<p:inputText placeholder="Targa"
 									value="#{borderBean.request.plate}" />
 								<p:selectOneMenu value="#{borderBean.request.bcgId}" placeholder="Pika kalimit">
-									<f:selectItem itemValue="#{null}" itemLabel="Pika kalimit"/>
-									
+									<f:selectItem itemValue="#{null}" itemLabel="Pika kalimit" />
+									<f:selectItems value="#{cacheBean.gates}" var="g" itemLabel="#{g.name}" itemValue="#{g.name}" />
 								</p:selectOneMenu>
 								<p:selectOneMenu value="#{borderBean.request.foreign}" placeholder="Tipi">
 									<f:selectItem itemValue="#{null}" itemLabel="Tipi"/>
@@ -84,6 +84,7 @@
 
 			<div class="ui-g-12">
 				<p:dataTable value="#{borderBean.borders}" rendered="#{not empty borderBean.borders}" var="b" reflow="true"
+				    rowStyleClass="#{formatBean.formatBCE(b.event)}"
 					rowIndexVar="r" paginator="true" paginatorAlwaysVisible="false"
 					rows="20" rowsPerPageTemplate="10,20,30,50">
 
@@ -91,7 +92,7 @@
                     #{r+1}
                 </p:column>
 				<p:column headerText="Eventi" sortBy="#{b.event}">
-                    <h:outputText value="#{b.event}" styleClass="#{formatBean.formatBCE(b.event)}"/>
+                    <h:outputText value="#{b.event}" />
                 </p:column>
                 <p:column headerText="Emri" sortBy="#{b.name}">
                    <p:commandLink value="#{b.name}" action="#{nav.navigate('person_view')}" update=":main">

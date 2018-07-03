@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import com.homeland.ui.models.ImportDTO;
+import com.homeland.ui.models.LoginDTO;
 import com.homeland.ui.services.StatisticService;
 
 
@@ -19,6 +20,7 @@ public class DashboardBean implements Serializable {
 
 	
 	List<ImportDTO> imports;
+	List<LoginDTO> logins; 
 	
 	
 	
@@ -30,11 +32,22 @@ public class DashboardBean implements Serializable {
 		this.imports = imports;
 	}
 
+	public List<LoginDTO> getLogins() {
+		return logins;
+	}
+
+	public void setLogins(List<LoginDTO> logins) {
+		this.logins = logins;
+	}
+	
+	
+	
 
 	@PostConstruct
 	public void load()
 	{
-		this.imports = new StatisticService().listImports(10);
+		this.imports = new StatisticService().listImports(40);
+		this.logins = new StatisticService().logins(40);
 	}
 	
 	
