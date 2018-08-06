@@ -107,6 +107,11 @@ public class SubjectViewBean implements Serializable {
 	{
 		try {
 			this.subject = new SubjectService().getSubjectByNipt(nipt);
+			if(subject == null)
+			{
+				subject = new SubjectDTO();
+				subject .setNipt(nipt);
+			}
 			loadEmployees();
 		}catch(ApiException a) {
 			Messages.throwFacesMessage(a.getMessage(), a.getSeverity());
