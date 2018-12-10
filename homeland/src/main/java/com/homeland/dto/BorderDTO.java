@@ -1,9 +1,5 @@
 package com.homeland.dto;
 
-import java.util.Calendar;
-import java.util.Date;
-
-import com.homeland.utils.DateUtil;
 
 
 public class BorderDTO {
@@ -12,6 +8,7 @@ public class BorderDTO {
 	    private String docState;
 	    private String docNo;
 	    private String crossingDate;
+	    private String timsRecordDate;
 	    private String citizenType;
 	    private String travel;
 	    private String crossingGate;
@@ -152,28 +149,15 @@ public class BorderDTO {
 		public void setForeign(boolean foreign) {
 			this.foreign = foreign;
 		}
-	    
-	    
-		public static void main(String args[])
-	    {
-	    	String lastDate = "05.07.2018";
-	    	Date date = DateUtil.toDate(lastDate);
-			date = DateUtil.addDaysToDate(date, 1);
-			
-			Calendar cal = Calendar.getInstance();
-			cal.set(Calendar.HOUR_OF_DAY, 0);
-			cal.set(Calendar.MINUTE, 0);
-			cal.set(Calendar.SECOND, 0);
-			cal.set(Calendar.MILLISECOND, 0);
-			
-			System.out.println(cal.getTime());
-			
-			System.out.println(date.getTime());
-			System.out.println(cal.getTimeInMillis());
-			
-			System.out.println(date.before(cal.getTime()));
-	    }
-	    
+		public String getTimsRecordDate() {
+			return timsRecordDate;
+		}
+		public void setTimsRecordDate(String timsRecordDate) {
+			this.timsRecordDate = timsRecordDate;
+		}
+		
+		
+		
 	    
 	
 	

@@ -13,7 +13,7 @@ public class StringUtil {
 	{		
 		if(isValid(value))
 		{			
-			return value.trim().toUpperCase().replace("Ë","E").replace("Ç", "C");
+			return value.trim().toUpperCase().replace("Ë","E").replace("Ç", "C").replace("\\", "");
 		}
 		return null;
 	}

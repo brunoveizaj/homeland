@@ -1,5 +1,6 @@
 package com.homeland.repositories;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -99,6 +100,15 @@ public class TicketRepository {
 		
 		return q.getResultList();
 	}
+	
+	
+	public Date lastDate()
+	{
+		return (Date)em.createQuery("SELECT MAX(t.timsRecDate) FROM Ticket t")
+				.getSingleResult();
+	}
+	
+	
 	
 	
 }

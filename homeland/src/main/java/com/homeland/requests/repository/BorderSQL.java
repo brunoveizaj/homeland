@@ -73,7 +73,7 @@ public class BorderSQL {
 	}
 	public void setBcgId(String bcgId) {
 		if(StringUtil.isValid(bcgId))
-		this.bcgId = bcgId.replace(" ", "").toUpperCase();
+		this.bcgId = bcgId.trim().toUpperCase();
 	}
 	public Date getFrom() {
 		return from;

@@ -70,7 +70,7 @@ public class PersonRepository {
 		if(StringUtil.isValid(criterias.getMunicipality()))
 		{
 			sql += "AND p.municipality LIKE :municip ";
-			params.put("minicip", criterias.getMunicipality());
+			params.put("municip", criterias.getMunicipality());
 		}
 		
 		if(StringUtil.isValid(criterias.getName()))

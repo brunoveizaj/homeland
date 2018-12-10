@@ -103,6 +103,7 @@ public class Assembler {
 		
 		dto.setCitizenType(border.getCitizenType());
 		dto.setCrossingDate(DateUtil.formatTimestamp(border.getCrossingDate()));
+		dto.setTimsRecordDate(DateUtil.formatTimestamp(border.getTimsRecordDate()));
 		dto.setCrossingGate(border.getCrossingGate());
 		dto.setDob(border.getDob());
 		dto.setDocNo(border.getDocNo());
