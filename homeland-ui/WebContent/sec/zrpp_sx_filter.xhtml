@@ -1,0 +1,125 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<h:form id="zrpp_sx_filter_form">
+
+		<div class="ui-g ui-fluid">
+			<div class="ui-g-12">
+				<div class="card card-w-title">
+					<h1>Kërkim Pasurie</h1>
+					<div class="ui-g">
+						<div class="ui-g-12">
+							<p:outputLabel value="Plotëso të paktën dy fusha" style="color: #2196F3; font-weight: bold"/>
+						</div>
+						<div class="ui-g-12">
+
+							<p:panelGrid layout="grid" columns="4"
+								styleClass="ui-panelgrid-blank form-group">
+
+								<p:inputText placeholder="Zona Kadastrale"
+									value="#{zrppSxBean.request.zk}" />
+								<p:inputText placeholder="Volumi"
+									value="#{zrppSxBean.request.vol}" />
+								<p:inputText placeholder="Faqja"
+									value="#{zrppSxBean.request.page}" />
+								<p:inputText placeholder="Nr Pasurisë"
+									value="#{zrppSxBean.request.propertyNo}" />
+								<p:inputText placeholder="Rrethi"
+									value="#{zrppSxBean.request.region}" />
+								<p:inputText placeholder="Qyteti"
+									value="#{zrppSxBean.request.city}" />
+								<p:inputText placeholder="Rruga"
+									value="#{zrppSxBean.request.street}" />								
+
+							</p:panelGrid>
+
+						</div>
+						<div class="ui-g-12">
+							<p:outputLabel value="Kërkim vetëm me Emër dhe Mbiemër" style="color: #2196F3; font-weight: bold"/>
+						</div>
+						<div class="ui-g-12">
+							<p:panelGrid layout="grid" columns="4"
+								styleClass="ui-panelgrid-blank form-group">
+
+								<p:inputText placeholder="Emri"
+									value="#{zrppSxBean.request.name}" />
+								<p:inputText placeholder="Mbiemri"
+									value="#{zrppSxBean.request.surname}" />															
+							</p:panelGrid>
+
+						</div>
+
+						<div class="ui-g-12 ui-md-4">
+							<p:panelGrid layout="grid" columns="2"
+								styleClass="ui-panelgrid-blank">
+								<p:commandButton value="Kërko" update="@form" styleClass="blue-btn"
+									action="#{zrppSxBean.search()}" icon="ui-icon-search" />
+								<p:commandButton value="Pastro" update="@form"
+									action="#{zrppSxBean.clear()}" icon="ui-icon-trash"
+									styleClass="green-btn" />
+							</p:panelGrid>
+						</div>
+
+						<div class="ui-g-12">
+							<p:messages showDetail="true" closable="true">
+								<p:autoUpdate />
+							</p:messages>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			
+			<div class="ui-g-12">
+							<p:dataTable value="#{zrppSxBean.properties}"
+								rendered="#{zrppSxBean.properties != null}" var="p"
+								paginatorAlwaysVisible="false" paginator="true" rows="20"
+								rowIndexVar="r" selectionMode="single"
+								selection="#{zrppSxBean.property}" rowKey="#{p.propertyId}"
+								rowsPerPageTemplate="10,20,30,50" reflow="true"
+								emptyMessage="Nuk u gjënd asnjë pronë">
+								<p:ajax event="rowSelect"
+									listener="#{zrppSxBean.onPropertySelect()}" update=":main" />
+						<p:column headerText="#">
+                            #{r+1}
+                        </p:column>
+								<p:column headerText="Zk/Vol/Fq" >
+                            #{p.zk}/#{p.volume}/#{p.page}
+                        </p:column>
+								<p:column headerText="Nr pronës">
+                            #{p.propertyNo}
+                        </p:column>
+								<p:column headerText="Pronari" >
+                            #{p.owner}
+                        </p:column>
+								<p:column headerText="Indexi Hartës">
+                            #{p.mapIndex}
+                        </p:column>
+								<p:column headerText="Dt Regj" >
+                            #{p.regDate}
+                        </p:column>
+								<p:column headerText="Rrethi" >
+                            #{p.region}
+                        </p:column>
+						<p:column headerText="Adresa" >
+                            #{p.address}
+                        </p:column>
+							
+							</p:dataTable>
+						</div>
+			
+			
+			
+			
+		</div>
+
+
+
+	</h:form>
+
+
+</ui:composition>

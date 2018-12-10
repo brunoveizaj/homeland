@@ -48,20 +48,19 @@
 						<div class="ui-g-12">
 							<p:outputLabel for="username" value="Username" />
 							<p:inputText id="username" value="#{loginBean.username}"
-								style="line-height: 22px; border-radius: 8px;margin: 5px;padding 5px;"
+								style="line-height: 22px; border-radius: 8px;margin: 5px;padding: 5px;"
 								placeholder="Username" />
 						</div>
 						<div class="ui-g-12">
 							<p:outputLabel for="password" value="Password" />
 							<p:password id="password" value="#{loginBean.password}"
-								style="line-height: 22px; border-radius: 8px;margin: 5px;padding 5px;"
+								style="line-height: 22px; border-radius: 8px;margin: 5px; padding: 5px;"
 								placeholder="Password" feedback="false" />
 						</div>
 
 						<div class="ui-g-12 button-container">
-							<p:commandButton actionListener="#{loginBean.login()}" value="Hyr"
-								style="height: 40px; border-radius: 8px; background-color: #337ab7; font-size: 16px; margin: 5px;padding: 5px;"
-								update="@form" />
+							<p:commandButton action="#{loginBean.login()}" value="Hyr"
+								style="height: 40px; border-radius: 8px; background-color: #337ab7; font-size: 16px; margin: 5px;padding: 5px;"/>
 						</div>
 
 						
@@ -82,9 +81,7 @@
                 </f:facet>
     </p:ajaxStatus>
 	
-	<h:outputStylesheet
-							name="css/layout-#{guestPreferences.layout}.css"
-							library="paradise-layout" />
+	<h:outputStylesheet name="css/layout-#{guestPreferences.layout}.css" library="paradise-layout" />
 	
 </h:body>
 
