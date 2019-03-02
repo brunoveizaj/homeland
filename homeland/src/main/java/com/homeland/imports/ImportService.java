@@ -283,8 +283,10 @@ public class ImportService {
 		}catch(org.hibernate.exception.ConstraintViolationException | org.springframework.dao.DataIntegrityViolationException e) {
 			System.err.println("ERR SP... ["+t.getSerialNo()+"]");
 			//update t
-		}catch(Throwable th) {
+		}catch(Exception e) {
+			
 			System.err.println("ERR THROW... ["+t.getSerialNo()+"]");
+			e.printStackTrace();
 		}
 	}
 	

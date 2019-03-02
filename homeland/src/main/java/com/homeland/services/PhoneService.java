@@ -8,7 +8,6 @@ import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -51,7 +50,7 @@ public class PhoneService {
 	
 	//@Async
 	//@Transactional
-	@Scheduled(cron="0 48 22 * * *")
+	//@Scheduled(cron="0 48 22 * * *")
 	public void startUpdateEagle()
 	{
 		int start = 11148619;
