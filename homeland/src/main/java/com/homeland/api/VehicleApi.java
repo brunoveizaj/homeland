@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,8 +30,8 @@ public class VehicleApi {
 	@Autowired 
 	TokenService tokenService;
 	
-	@RequestMapping(value="/searchVehicle", method=RequestMethod.GET, produces={"application/json"})
-	public ResponseEntity<?> searchVehicle(@RequestHeader(value="Authorization") String token, VehicleRequest request)
+	@RequestMapping(value="/searchVehicle", method=RequestMethod.POST, produces={"application/json"})
+	public ResponseEntity<?> searchVehicle(@RequestHeader(value="Authorization") String token,@RequestBody VehicleRequest request)
 	{
 		
 		Integer userId = tokenService.getUserIdFromToken(token);
@@ -46,8 +47,8 @@ public class VehicleApi {
 		
 	}
 	
-	@RequestMapping(value="/searchTicket", method=RequestMethod.GET, produces={"application/json"})
-	public ResponseEntity<?> searchTicket(@RequestHeader(value="Authorization",required=false) String token, TicketRequest req)
+	@RequestMapping(value="/searchTicket", method=RequestMethod.POST, produces={"application/json"})
+	public ResponseEntity<?> searchTicket(@RequestHeader(value="Authorization",required=false) String token,@RequestBody TicketRequest req)
 	{
 		Integer userId = tokenService.getUserIdFromToken(token);
 						

@@ -1,5 +1,6 @@
 package com.homeland.repositories;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -12,6 +13,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import com.homeland.entities.Border;
+import com.homeland.entities.BorderGate;
 import com.homeland.requests.repository.BorderSQL;
 import com.homeland.utils.StringUtil;
 
@@ -42,7 +44,7 @@ public class BorderRepository {
 		
 		if(StringUtil.isValid(criterias.getBcgId()))
 		{
-			sql += "AND b.bcgId=:bcgid ";
+			sql += "AND b.crossingGate=:bcgid ";
 			params.put("bcgid", criterias.getBcgId());
 		}
 		
@@ -54,7 +56,7 @@ public class BorderRepository {
 		
 		if(StringUtil.isValid(criterias.getEvent()))
 		{
-			sql += "AND b.docNo=:event ";
+			sql += "AND b.event=:event ";
 			params.put("event", criterias.getEvent());
 		}
 		
@@ -72,7 +74,7 @@ public class BorderRepository {
 		
 		if(criterias.getTo() != null)
 		{
-			sql += "AND b.crossingDate >= :to ";
+			sql += "AND b.crossingDate <= :to ";
 			params.put("to", criterias.getTo());
 		}
 		
@@ -142,6 +144,30 @@ public class BorderRepository {
 		return q.getResultList();
 		
 	}
+	
+	
+	public Date lastDate(String event,boolean foreign)
+	{
+		return (Date)em.createQuery("SELECT MAX(b.timsRecordDate) FROM Border b where b.event=:event and b.foreign=:for")
+				.setParameter("event", event)
+				.setParameter("for", (foreign?1:0))
+				.getSingleResult();
+	}
+	
+	public Date firstDate(String event,boolean foreign)
+	{
+		return (Date)em.createQuery("SELECT MIN(b.timsRecordDate) FROM Border b where b.event=:event and b.foreign=:for")
+				.setParameter("event", event)
+				.setParameter("for", (foreign?1:0))
+				.getSingleResult();
+	}
+	
+	
+	public List<BorderGate> loadGates()
+	{
+		return em.createQuery("FROM BorderGate bg").getResultList();
+	}
+	
 	
 
 }

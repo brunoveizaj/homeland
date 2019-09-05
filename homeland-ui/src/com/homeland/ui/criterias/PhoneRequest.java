@@ -1,6 +1,11 @@
 package com.homeland.ui.criterias;
 
-public class PhoneRequest {
+import java.io.Serializable;
+
+public class PhoneRequest implements Serializable{
+
+
+	private static final long serialVersionUID = 1L;
 
 	
 	String nid;

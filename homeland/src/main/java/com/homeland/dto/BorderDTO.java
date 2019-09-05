@@ -2,13 +2,13 @@ package com.homeland.dto;
 
 
 
-
 public class BorderDTO {
 	
 	    private int id;
 	    private String docState;
 	    private String docNo;
 	    private String crossingDate;
+	    private String timsRecordDate;
 	    private String citizenType;
 	    private String travel;
 	    private String crossingGate;
@@ -149,10 +149,15 @@ public class BorderDTO {
 		public void setForeign(boolean foreign) {
 			this.foreign = foreign;
 		}
-	    
-	    
-	    
-	    
+		public String getTimsRecordDate() {
+			return timsRecordDate;
+		}
+		public void setTimsRecordDate(String timsRecordDate) {
+			this.timsRecordDate = timsRecordDate;
+		}
+		
+		
+		
 	    
 	
 	

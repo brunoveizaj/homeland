@@ -60,6 +60,9 @@ public class Ticket implements Serializable {
     private Date inserted;
     @Column(name = "rid")
     private Long rid;
+    @Column(name = "tims_rec_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date timsRecDate;
 
     public Ticket() {
     }
@@ -188,5 +191,14 @@ public class Ticket implements Serializable {
 		this.rid = rid;
 	}
 
+	public Date getTimsRecDate() {
+		return timsRecDate;
+	}
+
+	public void setTimsRecDate(Date timsRecDate) {
+		this.timsRecDate = timsRecDate;
+	}
+
+	
     
 }

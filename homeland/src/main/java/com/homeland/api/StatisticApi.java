@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.homeland.dto.ImportDTO;
+import com.homeland.dto.LoginDTO;
 import com.homeland.models.EntityCounter;
 import com.homeland.services.StatisticService;
 
@@ -23,18 +24,26 @@ public class StatisticApi {
 	@Autowired
 	StatisticService statService;
 	
-	@RequestMapping(value="/lastImports/{limit}", method=RequestMethod.GET, produces={"application/json"})
-	public ResponseEntity<?> lastImports(@RequestHeader(value="Authorization") String token, @PathVariable(name="limit") Integer limit)
+	@RequestMapping(value="/listImports/{limit}", method=RequestMethod.GET, produces={"application/json"})
+	public ResponseEntity<?> getListImports(@PathVariable(name="limit") Integer limit)
 	{
 		List<ImportDTO> list = statService.getLastImports(limit);
-		
 		if(list == null || list.isEmpty())
 		{
 			return new ResponseEntity<>("Nuk ka te dhena",HttpStatus.NO_CONTENT);
 		}
-		
 		return new ResponseEntity<>(list,HttpStatus.OK);
-		
+	}
+	
+	@RequestMapping(value="/logins/{limit}", method=RequestMethod.GET, produces={"application/json"})
+	public ResponseEntity<?> getListLogins(@PathVariable(name="limit") Integer limit)
+	{
+		List<LoginDTO> list = statService.logins(limit);
+		if(list == null || list.isEmpty())
+		{
+			return new ResponseEntity<>("Nuk ka te dhena",HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<>(list,HttpStatus.OK);
 	}
 	
 	

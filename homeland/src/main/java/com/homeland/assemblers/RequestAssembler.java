@@ -143,6 +143,7 @@ public class RequestAssembler {
 			sql.setName(req.getName());
 			sql.setSurname(req.getSurname());
 			sql.setNid(req.getNid());
+			sql.setSubject(req.getSubject());
 			sql.setNipt(req.getNipt());
 			sql.setYear(req.getYear());
 			sql.setMonth(req.getMonth());

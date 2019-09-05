@@ -15,7 +15,6 @@ import com.homeland.ui.constants.HttpCode;
 import com.homeland.ui.constants.IApiClient;
 import com.homeland.ui.criterias.SubjectRequest;
 import com.homeland.ui.models.SubjectDTO;
-import com.homeland.ui.utils.StringUtil;
 import com.homeland.ui.utils.Util;
 
 public class SubjectClient {
@@ -45,39 +44,20 @@ public class SubjectClient {
 	
 	public List<SubjectDTO> searchSubject(SubjectRequest req)
 	{
+		
+		
 		final String BASE_URL = IApiClient.SERVER+"/api/subject/searchSubject";		
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(BASE_URL);
-		
-		if(StringUtil.isValid(req.getName()))
-		{
-			builder.queryParam("name", req.getName());
-		}
-		if(StringUtil.isValid(req.getNipt()))
-		{
-			builder.queryParam("nipt", req.getNipt());
-		}
-		if(StringUtil.isValid(req.getManagers()))
-		{
-			builder.queryParam("managers", req.getManagers());
-		}
-		if(req.getFirstResult() != null)
-		{
-			builder.queryParam("firstResult", req.getFirstResult());
-		}
-		if(req.getMaxResult() != null)
-		{
-			builder.queryParam("maxResult", req.getMaxResult());
-		}
 		
 		RestTemplate restTemplate = new RestTemplate();
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
 		headers.set("Authorization", "Bearer "+Util.getToken());
-		HttpEntity<?> entity = new HttpEntity<>(headers);
+		HttpEntity<?> entity = new HttpEntity<>(req,headers);
 		
 		ParameterizedTypeReference<List<SubjectDTO>> typeRef = new ParameterizedTypeReference<List<SubjectDTO>>() {};
 		
-		ResponseEntity<List<SubjectDTO>> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, typeRef);
+		ResponseEntity<List<SubjectDTO>> response = restTemplate.exchange(builder.toUriString(), HttpMethod.POST, entity, typeRef);
 		
 		if(response.getStatusCodeValue() == HttpCode.OK)
 		{

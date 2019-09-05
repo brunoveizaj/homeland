@@ -25,7 +25,6 @@
 									value="#{tatimeBean.request.surname}" />
 								<p:inputText placeholder="Subjekti"
 									value="#{tatimeBean.request.subject}" />
-									
 								<p:inputText placeholder="NIPT"
 									value="#{tatimeBean.request.nipt}" />
 								<p:inputText placeholder="Viti"
@@ -75,13 +74,13 @@
                 </p:column>
                 <p:column headerText="Emri" sortBy="#{t.name}">
                    <p:commandLink value="#{t.name}"
-							action="#{nav.navigate('person_view')}" >
+							action="#{nav.navigate('person_view')}" update=":main" >
 							<f:param name="nid" value="#{t.nid}" />
 					</p:commandLink>
                 </p:column>
                 <p:column headerText="Mbiemri" sortBy="#{t.surname}">
                     <p:commandLink value="#{t.surname}"
-							action="#{nav.navigate('person_view')}" >
+							action="#{nav.navigate('person_view')}" update=":main" >
 							<f:param name="nid" value="#{t.nid}" />
 					</p:commandLink>
                 </p:column>       
@@ -90,7 +89,7 @@
                 </p:column>         
 				<p:column headerText="Subjekti" sortBy="#{t.subject}">
 					<p:commandLink value="#{t.subject}"
-							action="#{nav.navigate('subject_view')}" >
+							action="#{nav.navigate('subject_view')}" update=":main">
 							<f:param name="nipt" value="#{t.nipt}" />
 					</p:commandLink>
 				</p:column>

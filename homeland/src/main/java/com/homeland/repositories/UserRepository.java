@@ -13,6 +13,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import com.homeland.constants.IStatus;
+import com.homeland.entities.Login;
 import com.homeland.entities.User;
 import com.homeland.requests.repository.UserSQL;
 import com.homeland.utils.StringUtil;
@@ -103,9 +104,20 @@ public class UserRepository {
 		return user;
 	}
 	
+	public Login create(Login login)
+	{
+		em.persist(login);
+		em.flush();
+		return login;
+	}
+	
 	public User update(User user)
 	{
 		return em.merge(user);
 	}
+	
+	
+	
+	
 	
 }

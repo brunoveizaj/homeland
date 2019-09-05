@@ -18,7 +18,6 @@ import com.homeland.ui.constants.IApiClient;
 import com.homeland.ui.criterias.PersonRequest;
 import com.homeland.ui.models.PersonDTO;
 import com.homeland.ui.models.PersonRaportDTO;
-import com.homeland.ui.utils.StringUtil;
 import com.homeland.ui.utils.Util;
 
 public class PersonClient {
@@ -29,75 +28,6 @@ public class PersonClient {
 		final String BASE_URL = IApiClient.SERVER+"/api/person/searchPerson";		
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(BASE_URL);
 		
-		if(StringUtil.isValid(req.getDob()))
-		{
-			builder.queryParam("dob", req.getDob());
-		}
-		if(StringUtil.isValid(req.getFatherName()))
-		{
-			builder.queryParam("fatherName", req.getFatherName());
-		}
-		if(StringUtil.isValid(req.getGender()))
-		{
-			builder.queryParam("gender", req.getGender());
-		}
-		if(StringUtil.isValid(req.getMaidenName()))
-		{
-			builder.queryParam("maidenName", req.getMaidenName());
-		}
-		if(StringUtil.isValid(req.getMotherName()))
-		{
-			builder.queryParam("motherName", req.getMotherName());
-		}
-		if(StringUtil.isValid(req.getMunicipality()))
-		{
-			builder.queryParam("municipality", req.getMunicipality());
-		}
-		if(StringUtil.isValid(req.getName()))
-		{
-			builder.queryParam("name", req.getName());
-		}
-		if(StringUtil.isValid(req.getNid()))
-		{
-			builder.queryParam("nid", req.getNid());
-		}
-		if(StringUtil.isValid(req.getPob()))
-		{
-			builder.queryParam("pob", req.getPob());
-		}
-		if(StringUtil.isValid(req.getRegion()))
-		{
-			builder.queryParam("region", req.getRegion());
-		}
-		if(StringUtil.isValid(req.getSurname()))
-		{
-			builder.queryParam("surname", req.getSurname());
-		}
-		if(StringUtil.isValid(req.getUnit()))
-		{
-			builder.queryParam("unit", req.getUnit());
-		}
-		if(req.getFamilyId() != null)
-		{
-			builder.queryParam("familyId", req.getFamilyId());
-		}
-		if(req.getFirstResult() != null)
-		{
-			builder.queryParam("firstResult", req.getFirstResult());
-		}
-		if(req.getFromAge() != null)
-		{
-			builder.queryParam("fromAge", req.getFromAge());
-		}
-		if(req.getToAge() != null)
-		{
-			builder.queryParam("toAge", req.getToAge());
-		}
-		if(req.getMaxResult() != null)
-		{
-			builder.queryParam("maxResult", req.getMaxResult());
-		}
-				
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.setErrorHandler(new ApiErrorHandler());
 		
@@ -105,11 +35,11 @@ public class PersonClient {
 		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);// cfare formati i do te dhenat
 		//headers.set("Content-Type", MediaType.APPLICATION_JSON_VALUE); eshte vetem kur dergon te dhena, tipi i te dhenave. tek get vetem merr
 		headers.set("Authorization", "Bearer "+Util.getToken());
-		HttpEntity<?> entity = new HttpEntity<>(headers);
+		HttpEntity<?> entity = new HttpEntity<>(req,headers);
 		
 		ParameterizedTypeReference<List<PersonDTO>> typeRef = new ParameterizedTypeReference<List<PersonDTO>>() {};
 		
-		ResponseEntity<List<PersonDTO>> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, typeRef);
+		ResponseEntity<List<PersonDTO>> response = restTemplate.exchange(builder.toUriString(), HttpMethod.POST, entity, typeRef);
 		
 		if(response.getStatusCodeValue() == HttpCode.OK)
 		{
@@ -125,7 +55,6 @@ public class PersonClient {
 	    final String BASE_URL = IApiClient.SERVER+"/api/person/personRaport/"+nid;
 	    
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(BASE_URL);
-		System.err.println("API REQ PERSON:personRaport: "+builder.toUriString());
 		/*
 		List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();        
 		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();

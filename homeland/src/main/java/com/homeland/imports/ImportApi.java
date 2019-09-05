@@ -1,5 +1,7 @@
 package com.homeland.imports;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,9 @@ import com.homeland.dto.PhoneDTO;
 import com.homeland.dto.PhotoDTO;
 import com.homeland.dto.TicketDTO;
 import com.homeland.dto.VehicleDTO;
+import com.homeland.models.BorderList;
+import com.homeland.models.TicketList;
+import com.homeland.utils.DateUtil;
 
 
 @RestController
@@ -25,6 +30,9 @@ public class ImportApi {
 	
 	@Autowired
 	ImportService service;
+	
+	
+	
 	
 	@RequestMapping(value="/open", method=RequestMethod.POST, produces={"application/json"})
 	public ResponseEntity<?> openImport(@RequestBody String type)
@@ -40,6 +48,56 @@ public class ImportApi {
 		return new ResponseEntity<>(i,HttpStatus.OK);
 	}
 	
+	@RequestMapping(value="/lastBorderDate/{type}/{foreign}", method=RequestMethod.GET, produces={"application/json"})
+	public ResponseEntity<?> lastBorderDate(@PathVariable(name="type") String type, @PathVariable(name="foreign") boolean foreign)
+	{
+		String dtStr = null;
+		
+		Date date = service.getLastBorderDate(type, foreign);
+		if(date == null) {
+		 dtStr = "14.08.2017";
+		}
+		else {
+		 dtStr = DateUtil.formatDate(date);
+		}
+		
+		return new ResponseEntity<>(dtStr,HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/firstBorderDate/{type}/{foreign}", method=RequestMethod.GET, produces={"application/json"})
+	public ResponseEntity<?> firstBorderDate(@PathVariable(name="type") String type, @PathVariable(name="foreign") boolean foreign)
+	{
+		String dtStr = null;
+		
+		Date date = service.getFirstBorderDate(type, foreign);
+		if(date == null) {
+		 dtStr = "02.01.2017";
+		}
+		else {
+		 dtStr = DateUtil.formatDate(date);
+		}
+		
+		return new ResponseEntity<>(dtStr,HttpStatus.OK);
+	}
+	
+	
+	@RequestMapping(value="/lastTicketDate", method=RequestMethod.GET, produces={"application/json"})
+	public ResponseEntity<?> lastTicketDate()
+	{
+		String dtStr = null;
+		
+		Date date = service.getLastTicketDate();
+		if(date == null) {
+		 dtStr = "31.03.2018";
+		}
+		else {
+		 dtStr = DateUtil.formatDate(date);
+		}
+		
+		return new ResponseEntity<>(dtStr,HttpStatus.OK);
+	}
+	
+	
 	@RequestMapping(value="/lastRid/{type}", method=RequestMethod.GET, produces={"application/json"})
 	public ResponseEntity<?> getLastRid(@PathVariable(name="type") String type)
 	{
@@ -49,6 +107,8 @@ public class ImportApi {
 		
 		return new ResponseEntity<>(rid,HttpStatus.OK);
 	}
+	
+	
 	
 	@RequestMapping(value="/save/card", method=RequestMethod.POST, produces={"application/json"})
 	public ResponseEntity<?> saveCard(@RequestBody CardDTO dto)
@@ -92,8 +152,15 @@ public class ImportApi {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
+	@RequestMapping(value="/save/ticketList", method=RequestMethod.POST, produces={"application/json"})
+	public ResponseEntity<?> saveTicket(@RequestBody TicketList dto)
+	{
+		service.registerTicket(dto);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
 	@RequestMapping(value="/save/phone", method=RequestMethod.POST, produces={"application/json"})
-	public ResponseEntity<?> saveVehicle(@RequestBody PhoneDTO dto)
+	public ResponseEntity<?> savePhone(@RequestBody PhoneDTO dto)
 	{
 		service.registerPhone(dto);
 		return new ResponseEntity<>(HttpStatus.OK);
@@ -101,7 +168,14 @@ public class ImportApi {
 	
 	
 	@RequestMapping(value="/save/border", method=RequestMethod.POST, produces={"application/json"})
-	public ResponseEntity<?> saveVehicle(@RequestBody BorderDTO dto)
+	public ResponseEntity<?> saveBorder(@RequestBody BorderDTO dto)
+	{
+		service.registerBorder(dto);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/save/borderList", method=RequestMethod.POST, produces={"application/json"})
+	public ResponseEntity<?> saveBorderList(@RequestBody BorderList dto)
 	{
 		service.registerBorder(dto);
 		return new ResponseEntity<>(HttpStatus.OK);

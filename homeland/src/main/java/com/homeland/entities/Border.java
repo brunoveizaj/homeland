@@ -72,6 +72,9 @@ public class Border implements Serializable {
     @Column(name = "inserted")
     @Temporal(TemporalType.TIMESTAMP)
     private Date inserted;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "tims_rec_date")
+    private Date timsRecordDate;
 
     public Border() {
     }
@@ -246,6 +249,14 @@ public class Border implements Serializable {
 
 	public void setForeign(Integer foreign) {
 		this.foreign = foreign;
+	}
+
+	public Date getTimsRecordDate() {
+		return timsRecordDate;
+	}
+
+	public void setTimsRecordDate(Date timsRecordDate) {
+		this.timsRecordDate = timsRecordDate;
 	}
 
     

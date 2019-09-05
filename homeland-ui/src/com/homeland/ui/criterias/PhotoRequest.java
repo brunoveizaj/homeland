@@ -1,6 +1,11 @@
 package com.homeland.ui.criterias;
 
-public class PhotoRequest {
+import java.io.Serializable;
+
+public class PhotoRequest implements Serializable{
+
+
+	private static final long serialVersionUID = 1L;
 
 	String nid;
 	String idn;

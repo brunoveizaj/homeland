@@ -1,6 +1,7 @@
 package com.homeland.imports;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -25,6 +26,8 @@ import com.homeland.entities.PhotoCard;
 import com.homeland.entities.PhotoPassport;
 import com.homeland.entities.Ticket;
 import com.homeland.entities.Vehicle;
+import com.homeland.models.BorderList;
+import com.homeland.models.TicketList;
 import com.homeland.repositories.BorderRepository;
 import com.homeland.repositories.CardRepository;
 import com.homeland.repositories.ImportRepository;
@@ -90,13 +93,29 @@ public class ImportService {
 		else if(type.equals(Type.PHONE)) c = Phone.class;
 		else if(type.equals(Type.VEHICLE)) c = Vehicle.class;
 		else if(type.equals(Type.TICKET)) c = Ticket.class;
-		//else if(type.equals(Type.BORDER)) c = Border.class;
 		else if(type.equals(Type.PHOTO_CARD)) c = PhotoCard.class;
 		else if(type.equals(Type.PHOTO_PASSPORT)) c = PhotoPassport.class;
 		
 		return importDAO.getLastRid(c);
 		
 	}
+	
+	
+	public Date getLastBorderDate(String event,boolean foreigner)
+	{
+		return borderDAO.lastDate(event, foreigner);
+	}
+	
+	public Date getFirstBorderDate(String event,boolean foreigner)
+	{
+		return borderDAO.firstDate(event, foreigner);
+	}
+	
+	public Date getLastTicketDate()
+	{
+		return ticketDAO.lastDate();
+	}
+	
 	
 	@Transactional
 	public void registerCard(CardDTO dto)
@@ -254,11 +273,33 @@ public class ImportService {
 		t.setSerialNo(dto.getSerialNo());
 		t.setStatus(dto.getStatus());
 		t.setTicketDate(DateUtil.toTimestamp(dto.getTicketDate()));
+		t.setTimsRecDate(DateUtil.toTimestamp(dto.getTimsRecDate()));
 		t.setTicketPlace(dto.getTicketPlace());
 		t.setViolator(dto.getViolator());
 		t.setViolatorNid(dto.getViolatorNid());
 		
-		ticketDAO.create(t);
+		try {
+			ticketDAO.create(t);
+		}catch(org.hibernate.exception.ConstraintViolationException | org.springframework.dao.DataIntegrityViolationException e) {
+			System.err.println("ERR SP... ["+t.getSerialNo()+"]");
+			//update t
+		}catch(Exception e) {
+			
+			System.err.println("ERR THROW... ["+t.getSerialNo()+"]");
+			e.printStackTrace();
+		}
+	}
+	
+	@Transactional
+	public void registerTicket(TicketList list)
+	{
+		if(list != null && list.getTickets() != null && !list.getTickets().isEmpty())
+		{
+			for(TicketDTO dto : list.getTickets()) {
+					registerTicket(dto);
+			}
+		}
+		
 	}
 	
 	@Transactional
@@ -269,6 +310,7 @@ public class ImportService {
 		b.setBcgId(dto.getBcgId());
 		b.setCitizenType(dto.getCitizenType());
 		b.setCrossingDate(DateUtil.toTimestamp(dto.getCrossingDate()));
+		b.setTimsRecordDate(DateUtil.toTimestamp(dto.getTimsRecordDate()));
 		b.setCrossingGate(dto.getCrossingGate());
 		b.setDob(dto.getDob());
 		b.setDocNo(dto.getDocNo());
@@ -290,6 +332,20 @@ public class ImportService {
 		borderDAO.create(b);
 		
 	}
+	
+	@Transactional
+	public void registerBorder(BorderList list)
+	{
+		if(list != null && list.getBorders() != null && !list.getBorders().isEmpty())
+		{
+			for(BorderDTO dto : list.getBorders()) {
+					registerBorder(dto);
+			}
+		}
+		
+	}
+	
+	
 	
 	
 	

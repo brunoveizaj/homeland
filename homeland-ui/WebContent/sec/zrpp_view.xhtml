@@ -1,0 +1,93 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+	<h:form id="zrpp_view_form">
+		<f:event type="preRenderComponent" listener="#{zrppViewBean.init()}" />
+
+
+		<div class="ui-g">
+
+			<div class="ui-g-12">
+				<p:commandButton action="#{nav.back()}" value="Mbrapa"
+					process="@this" update=":main" styleClass="orange-btn"
+					icon="fa fa-arrow-left" />
+			</div>
+
+
+			<div class="ui-g-12 ui-fluid">
+				<p:messages showDetail="true" closable="true">
+					<p:autoUpdate />
+				</p:messages>
+			</div>
+
+			<div class="ui-g-12 ui-fluid">
+
+				<p:panel header="Të dhënat e pronës" styleClass="blue-pnl">
+
+					<p:panelGrid layout="grid" columns="6"
+						columnClasses="bold,empty,bold,empty,bold,empty"
+						styleClass="ui-panelgrid-blank">
+						
+						<p:outputLabel value="ZK,Vol,Faqe"/>
+						<p:inputText value="#{zrppViewBean.property.zk}/#{zrppViewBean.property.volume}/#{zrppViewBean.property.page}" readonly="true"/>
+						<p:outputLabel value="Nr Pronës"/>
+						<p:inputText value="#{zrppViewBean.property.propertyNo}" readonly="true"/>
+						<p:outputLabel value="Indexi Hartës"/>
+						<p:inputText value="#{zrppViewBean.property.mapIndex}" readonly="true"/>
+
+						<p:outputLabel value="Dt.Regj"/>
+						<p:inputText value="#{zrppViewBean.property.regDate}" readonly="true"/>
+						<p:outputLabel value="Rrethi"/>
+						<p:inputText value="#{zrppViewBean.property.region}" readonly="true"/>		
+						
+						<p:outputLabel/> <p:outputLabel/>
+						
+						<p:outputLabel value="Pronari"/>
+						<p:inputTextarea value="#{zrppViewBean.property.owner}" readonly="true"/>
+						<p:outputLabel value="Adresa"/>
+						<p:inputTextarea value="#{zrppViewBean.property.address}" readonly="true"/>				
+						
+					</p:panelGrid>
+					
+					<p:panelGrid layout="grid" columns="4"
+						columnClasses="bold,empty"
+						styleClass="ui-panelgrid-blank">
+						
+					</p:panelGrid>
+					
+				</p:panel>
+
+			</div>
+
+			<div class="ui-g-12 ui-fluid">
+			
+						<p:tabView id="tab_view">
+						
+							<p:ajax event="tabChange" update="tab_view" />
+						
+							<p:tab title="Kartela Pasurisë">
+								<p:media value="#{pdfBean.pdfCartel}" cache="false" player="pdf" height="600px" width="100%">
+									<f:param value="#{zrppViewBean.property.propertyId}" name="property_id"/>
+								</p:media>
+							</p:tab>
+							
+							<p:tab title="Harta Pasurisë">
+								<p:media value="#{pdfBean.pdfMap}" cache="false" player="pdf" height="600px" width="100%">
+									<f:param value="#{zrppViewBean.property.propertyId}" name="property_id"/>
+								</p:media>
+							</p:tab>
+							
+						</p:tabView>
+			</div>
+			
+			
+		</div>
+
+	</h:form>
+
+
+</ui:composition>

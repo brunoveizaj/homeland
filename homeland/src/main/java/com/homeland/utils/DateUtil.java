@@ -73,7 +73,7 @@ public class DateUtil {
 	{
 		if(date != null && date.trim().length() == 10)
 		{
-			return date.substring(0, 2)+date.substring(3, 5)+date.substring(6, 10);
+			return date.substring(6, 10) + date.substring(3, 5) + date.substring(0, 2);
 		}
 		
 		return null;
@@ -95,6 +95,18 @@ public class DateUtil {
 		return null;
 	}
 	
+	
+	public static Date addDaysToDate(Date date,int days)
+	   {       
+	       if (date == null) {
+	           return null;
+	       }
+	       Calendar calendar = Calendar.getInstance();
+	       calendar.setTime(date);
+	       calendar.add(Calendar.DATE, days);
+
+	       return calendar.getTime();
+	   }
 	
 	
 }

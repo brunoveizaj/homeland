@@ -10,7 +10,10 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.homeland.entities.EaglePhone;
 import com.homeland.entities.Phone;
 import com.homeland.requests.repository.PhoneSQL;
 import com.homeland.utils.StringUtil;
@@ -30,6 +33,27 @@ public class PhoneRepository {
 		em.flush();
 		return p;
 	}
+	
+	@Transactional(propagation=Propagation.REQUIRES_NEW)
+	public Phone createCommit(Phone p)
+	{
+		em.persist(p);
+		em.flush();
+		return p;
+	}
+	
+	public EaglePhone update(EaglePhone p)
+	{
+		return em.merge(p);
+	}
+	
+	
+	@Transactional(propagation=Propagation.REQUIRES_NEW)
+	public EaglePhone updateCommit(EaglePhone p)
+	{
+		return em.merge(p);
+	}
+	
 	
 	@SuppressWarnings("rawtypes")
 	public List<Phone> searchPhone(PhoneSQL criterias)
@@ -56,6 +80,7 @@ public class PhoneRepository {
 		{
 			sql += "AND p.nid LIKE :nid ";
 			params.put("nid", criterias.getNid());
+			order = "ORDER BY p.inserted DESC";
 		}
 		
 		if(StringUtil.isValid(criterias.getSurname()))
@@ -67,7 +92,7 @@ public class PhoneRepository {
 		if(StringUtil.isValid(criterias.getPhoneNo()))
 		{
 			sql += "AND p.phone LIKE :phone ";
-			params.put("phone", criterias.getPhoneNo()+"%");
+			params.put("phone", criterias.getPhoneNo());
 		}
 		
 		
@@ -99,6 +124,15 @@ public class PhoneRepository {
 		return q.getResultList();
 		
 	}
+	
+	
+	public List<EaglePhone> loadEagle(Integer first, Integer limit)
+	{
+		return em.createQuery("FROM EaglePhone e where e.id > :id and e.nid is null ORDER BY e.id") //
+				.setParameter("id", first).setMaxResults(limit)
+				.getResultList();
+	}
+	
 	
 	
 	

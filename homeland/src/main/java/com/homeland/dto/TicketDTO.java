@@ -8,6 +8,7 @@ public class TicketDTO {
 	    private int id;
 	    private String serialNo;
 	    private String ticketDate;
+	    private String timsRecDate;
 	    private String ticketPlace;
 	    private String officer;
 	    private double amount;
@@ -105,6 +106,12 @@ public class TicketDTO {
 		}
 		public void setRid(Long rid) {
 			this.rid = rid;
+		}
+		public String getTimsRecDate() {
+			return timsRecDate;
+		}
+		public void setTimsRecDate(String timsRecDate) {
+			this.timsRecDate = timsRecDate;
 		}
 	
 	

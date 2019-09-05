@@ -2,11 +2,14 @@ package com.homeland.repositories;
 
 
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
+
+import com.homeland.entities.Login;
 
 @Repository
 public class StatisticRepository {
@@ -34,6 +37,12 @@ public class StatisticRepository {
 				.getSingleResult();
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Login> listLogins(Integer limit)
+	{
+		return em.createQuery("FROM Login l order by l.id desc").setMaxResults(limit)
+				.getResultList();
+	}
 	
 
 }

@@ -116,7 +116,7 @@
 			<div class="ui-g-12 ui-fluid">
 				<p:dataTable value="#{vehicleViewBean.tickets}" var="t"
 					rowIndexVar="r" reflow="true" emptyMessage="Nuk ka gjoba"
-					styleClass="blue-tbl">
+					styleClass="blue-tbl" paginator="true" paginatorAlwaysVisible="false" rows="20" rowsPerPageTemplate="5,10,20,30,100">
 
 				<f:facet name="header">
                     Gjobat
@@ -153,8 +153,9 @@
 
 			<div class="ui-g-12 ui-fluid">
 				<p:dataTable value="#{vehicleViewBean.borders}" var="b"
+					rowStyleClass="#{formatBean.formatBCE(b.event)}"
 					rowIndexVar="r" reflow="true" emptyMessage="Nuk ka hyrje-dalje"
-					styleClass="blue-tbl">
+					styleClass="blue-tbl" paginator="true" paginatorAlwaysVisible="false" rows="20" rowsPerPageTemplate="5,10,20,30,100">
 
 				<f:facet name="header">
                     Hyrje - Dalje
@@ -163,7 +164,7 @@
                     #{r+1}
                 </p:column>
 				<p:column headerText="Eventi">
-                    #{b.event}
+                    <h:outputText value="#{b.event}"/>
                 </p:column>
                 <p:column headerText="Personi">
 	                <p:commandLink value="#{b.name} #{b.fatherName} #{b.surname}" action="#{nav.navigate('person_view')}" update=":main">
@@ -171,7 +172,7 @@
 	                </p:commandLink>
                 </p:column>
 					<p:column headerText="Data">
-                    #{b.crossingDate}
+                   <h:outputText value="#{b.crossingDate}" styleClass="bold" />
                 </p:column>
 					<p:column headerText="Pika kufitare">
 					#{b.crossingGate}
@@ -183,13 +184,13 @@
                     #{b.citizenType}
                 </p:column>
 				<p:column headerText="Targa">
-                    #{b.plate}
+                    <h:outputText value="#{b.plate}" styleClass="bold" />
                 </p:column>
 					<p:column headerText="Shofer">
                     #{b.driver}
                 </p:column>
 					<p:column headerText="Qëllimi">
-                    #{b.purpose}
+                    #{b.pupose}
                 </p:column>
 				</p:dataTable>
 			</div>
