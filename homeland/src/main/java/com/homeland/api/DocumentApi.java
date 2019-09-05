@@ -79,7 +79,22 @@ public class DocumentApi {
 		
 	}
 	
-	
+	@RequestMapping(value="/getPersonPhoto", method=RequestMethod.POST, produces={"application/json"})
+	public ResponseEntity<?> getPersonPhoto(@RequestHeader(value="Authorization") String token,@RequestBody PhotoRequest request)
+	{
+		Integer userId = tokenService.getUserIdFromToken(token);		
+		
+		PhotoDTO photo = documentService.getPersonPhoto(request, userId);
+		
+		
+		if(photo == null)
+		{
+			return new ResponseEntity<>("Nuk ka te dhena",HttpStatus.NO_CONTENT);
+		}
+				
+		return new ResponseEntity<>(photo,HttpStatus.OK);
+		
+	}
 	
 	
 	

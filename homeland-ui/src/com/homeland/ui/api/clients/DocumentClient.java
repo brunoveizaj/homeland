@@ -99,6 +99,28 @@ public class DocumentClient {
 
 		return null;
 	}
+
+	public PhotoDTO getPersonPhoto(PhotoRequest req) {
+		final String BASE_URL = IApiClient.SERVER+"/api/document/getPersonPhoto";
+		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(BASE_URL);
+		
+		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.setErrorHandler(new ApiErrorHandler());
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
+		headers.set("Authorization", "Bearer "+Util.getToken());
+		HttpEntity<?> entity = new HttpEntity<>(req,headers);
+
+		ResponseEntity<PhotoDTO> response = restTemplate.exchange(builder.toUriString(), HttpMethod.POST, entity,PhotoDTO.class);
+		
+		if(response.getStatusCodeValue() == HttpCode.OK)
+		{
+			return response.getBody();
+		}
+
+		return null;
+	}
 	
 	
 	

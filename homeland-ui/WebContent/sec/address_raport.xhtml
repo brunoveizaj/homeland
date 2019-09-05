@@ -5,12 +5,12 @@
 	xmlns:p="http://primefaces.org/ui">
 
 
-	<h:form id="phone_raport_form">
+	<h:form id="address_raport_form">
 
 		<div class="ui-g ui-fluid">
 			<div class="ui-g-12">
 				<div class="card card-w-title">
-					<h1>Kërko adresa</h1>
+					<h1>Kërko Adresë</h1>
 					<div class="ui-g">
 						<div class="ui-g-12">
 
@@ -56,7 +56,7 @@
 
 
 			<div class="ui-g-12">
-				<p:dataTable value="#{addressBean.addresses}"
+				<p:dataTable value="#{addressBean.addresses}" rowStyleClass="#{a.id==addressBean.selectedAddress.id?'ui-state-hover':''}"
 					rendered="#{not empty addressBean.addresses}" var="a" reflow="true"
 					rowIndexVar="r" paginator="true" paginatorAlwaysVisible="false"
 					rows="20" rowsPerPageTemplate="10,20,30,50">
@@ -68,7 +68,7 @@
                     #{a.nid}
                 </p:column>
 				<p:column headerText="Emri" sortBy="#{a.name}" filterBy="#{a.name}" filterMatchMode="contains">
-						<p:commandLink disabled="#{formatBean.validString(p.nid) eq false}" value="#{a.name}"
+						<p:commandLink disabled="#{formatBean.validString(a.nid) eq false}" value="#{a.name}"
 							action="#{nav.navigate('person_view')}" update=":main">
 							<f:param name="nid" value="#{a.nid}" />
 						</p:commandLink>
@@ -79,19 +79,20 @@
 				<p:column headerText="Rruga" sortBy="#{a.street}" filterBy="#{a.street}" filterMatchMode="contains">
                     #{a.street}
                 </p:column>
-				<p:column headerText="Ndërtesa/Hyrja" sortBy="#{a.entrance}" filterBy="#{a.entrance}" filterMatchMode="contains">
-                    #{a.entrance}
+				<p:column headerText="Ndërtesa/Hyrja" sortBy="#{a.buildingEntrance}" filterBy="#{a.buildingEntrance}" filterMatchMode="contains">
+                    #{a.buildingEntrance}
                 </p:column>
                 <p:column headerText="Nj.Adm" sortBy="#{a.admUnit}" filterBy="#{a.admUnit}" filterMatchMode="contains">
-                    #{p.nid}
+                    #{a.admUnit}
                 </p:column>
                 
 				<p:column headerText="Qyteti" sortBy="#{a.city}" filterBy="#{a.city}" filterMatchMode="contains">
-                    #{p.nid}
+                    #{a.city}
                 </p:column>
 				<p:column headerText="shiko" >
-					<p:commandLink value="harta" style="color: #ff1300; font-weight: bold;"/>
-					<p:commandLink value="komshinjtë" style="color: #4169e1; font-weight: bold;"/>
+					<p:commandLink value="harta" style="color: #ff1300; font-weight: bold;"/> |
+					<p:commandLink value="komshinjtë" style="color: #4169e1; font-weight: bold;" 
+					action="#{addressBean.viewNeighbors(a)}" update=":ngb_dlg @form" oncomplete="PF('ngbWid').show();"/>
 				</p:column>
 
 				</p:dataTable>
@@ -100,5 +101,49 @@
 		</div>
 
 	</h:form>
+	
+	
+	<p:dialog id="ngb_dlg" widgetVar="ngbWid" header="Banorët e ndërtesës" responsive="true" closeOnEscape="true" modal="true" 
+	appendTo="@(body)" fitViewport="true">
+	<h:form>
+		<div class="ui-g ui-fluid">
+		<div class="ui-g-12">
+			<p:panelGrid layout="grid" styleClass="ui-panelgrid-blank" columns="1">
+			<h3>#{addressBean.selectedAddress.buildingCode}, #{addressBean.selectedAddress.street}, #{addressBean.selectedAddress.admUnit}, #{addressBean.selectedAddress.city}</h3>
+			</p:panelGrid>
+		</div>
+			<div class="ui-g-12">
+				<p:dataTable value="#{addressBean.neighbors}"
+					var="n" reflow="true" styleClass="no-border" 
+					rowIndexVar="r" paginator="true" paginatorAlwaysVisible="false"
+					rows="10" rowsPerPageTemplate="5,10,20,30,50">
+
+				<p:column headerText="#" style="text-align: left">
+                    #{r+1}
+                </p:column>
+                <p:column headerText="Nid/Nipt" sortBy="#{n.nid}" style="text-align: left">
+                    #{n.nid}
+                </p:column>
+				<p:column headerText="Emri" sortBy="#{n.name}" filterBy="#{n.name}" filterMatchMode="contains" style="text-align: left">
+						<p:commandLink disabled="#{formatBean.validString(n.nid) eq false}" value="#{n.name}"
+							action="#{nav.navigate('person_view')}" update=":main" oncomplete="PF('ngbWid').hide();">
+							<f:param name="nid" value="#{n.nid}" />
+						</p:commandLink>
+				</p:column>
+				<p:column headerText="Tipi" sortBy="#{n.subjectType}" filterBy="#{n.subjectType}" filterMatchMode="contains" style="text-align: left">
+                    #{n.subjectType}
+                </p:column>
+				
+				<p:column headerText="Ndërtesa/Hyrja" sortBy="#{n.buildingEntrance}" filterBy="#{n.buildingEntrance}" filterMatchMode="contains" style="text-align: left">
+                    #{n.buildingEntrance}
+                </p:column>
+                
+				</p:dataTable>
+			</div>
+		</div>
+	</h:form>
+	</p:dialog>
+	
+	
 
 </ui:composition>

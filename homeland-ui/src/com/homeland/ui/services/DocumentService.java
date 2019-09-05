@@ -30,6 +30,11 @@ public class DocumentService {
 		return new DocumentClient().getDocumentPhoto(req);
 	}
 	
+	public PhotoDTO getPersonPhoto(PhotoRequest req)
+	{
+		return new DocumentClient().getPersonPhoto(req);
+	}
+	
 	
 	
 	

@@ -664,6 +664,7 @@ public class Assembler {
 		dto.setName(e.getName());
 		dto.setAddressId(e.getAddressId());
 		dto.setAdmUnit(e.getAdmUnit());
+		dto.setBuildingNo(e.getBuildingNo());
 		dto.setBuildingCode(e.getBuildingCode());
 		dto.setBuildingEntrance(e.getBuildingEntrance());
 		dto.setBuildingId(e.getBuildingId());

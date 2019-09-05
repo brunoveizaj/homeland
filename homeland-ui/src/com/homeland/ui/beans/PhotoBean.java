@@ -53,6 +53,37 @@ public class PhotoBean {
 		}
 	}
 	
+	public StreamedContent getPersonImage() throws IOException
+	{
+		FacesContext ctx = FacesContext.getCurrentInstance();
+		
+		if(ctx.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE)
+		{
+			return new DefaultStreamedContent();
+		}
+		
+		String nid = ctx.getExternalContext().getRequestParameterMap().get("p_nid");
+		PhotoRequest req = new PhotoRequest(nid);
+		PhotoDTO image = new DocumentService().getDocumentPhoto(req);
+		byte[] imgByte;
+		if(image == null)
+		{
+			imgByte = Base64.getDecoder().decode(PhotoUtil.NO_IMAGE);
+		}
+		else
+		{
+			imgByte = CalculatorUtil.decodeBASE64(image.getPhoto());
+		}
+		try {
+			return new DefaultStreamedContent(new ByteArrayInputStream(imgByte));
+		}catch(NullPointerException np)
+		{
+			return new DefaultStreamedContent();
+		}
+	}
+	
+	
+	
 	public StreamedContent getPassportImage() throws IOException
 	{
 		FacesContext ctx = FacesContext.getCurrentInstance();

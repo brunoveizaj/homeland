@@ -21,6 +21,7 @@ import com.homeland.ui.models.PhoneDTO;
 import com.homeland.ui.models.SubjectDTO;
 import com.homeland.ui.models.TatimeDTO;
 import com.homeland.ui.models.VehicleDTO;
+import com.homeland.ui.services.AddressService;
 import com.homeland.ui.services.PersonService;
 import com.homeland.ui.services.SubjectService;
 import com.homeland.ui.services.VehicleService;
@@ -46,6 +47,9 @@ public class PersonViewBean implements Serializable {
 	List<OsheeDTO> oshees;
 	List<BorderDTO> borders;
 	List<AddressDTO> addresses;
+	
+	List<AddressDTO> neighbors;
+	AddressDTO selectedAddress;
 	
 	List<SubjectDTO> subjects;
 	List<VehicleDTO> vehicles;
@@ -181,7 +185,28 @@ public class PersonViewBean implements Serializable {
 		this.addresses = addresses;
 	}
 
+	public List<AddressDTO> getNeighbors() {
+		return neighbors;
+	}
 
+
+	public void setNeighbors(List<AddressDTO> neighbors) {
+		this.neighbors = neighbors;
+	}
+
+
+	public AddressDTO getSelectedAddress() {
+		return selectedAddress;
+	}
+
+
+	public void setSelectedAddress(AddressDTO selectedAddress) {
+		this.selectedAddress = selectedAddress;
+	}
+
+
+	
+	
 	public void init()
 	{		
 		String nid = nav.getParam("nid");		
@@ -205,6 +230,8 @@ public class PersonViewBean implements Serializable {
 					this.borders = raport.getBorders();
 					this.oshees = raport.getOshees();
 					this.addresses = raport.getAddresses();
+					this.neighbors = null;
+					this.selectedAddress = null;
 					
 					this.vehicles = null;
 					this.subjects = null;
@@ -252,5 +279,10 @@ public class PersonViewBean implements Serializable {
 		loadPersonRaport(this.familyMember.getNid());
 	}
 	
+	public void viewNeighbors(AddressDTO a)
+	{
+		this.selectedAddress = a;
+		this.neighbors = new AddressService().getAddressByBuildingId(a.getBuildingId());
+	}
 
 }

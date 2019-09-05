@@ -99,6 +99,12 @@ public class DocumentService {
 	{
 		return CompletableFuture.completedFuture(searchPassport(req, userId));
 	}
+
+	public PhotoDTO getPersonPhoto(PhotoRequest req, Integer userId) {
+		
+		return null;
+		
+	}
 	
 	
 	

@@ -28,84 +28,95 @@
 
 				<p:panel header="Gjeneralitetet" styleClass="blue-pnl">
 
-<div class="ui-g nopad">
-<div class="ui-g-12 nopad">
-<p:panelGrid layout="grid" columns="4"
-						columnClasses="bold,empty,bold,empty"
-						styleClass="ui-panelgrid-blank">
-						<p:outputLabel value="Emri" />
-						<p:inputText value="#{personViewBean.person.name}" readonly="true" />
-						<p:outputLabel value="Mbiemri" />
-						<p:inputText value="#{personViewBean.person.surname}"
-							readonly="true" />
-						<p:outputLabel value="Atësia" />
-						<p:inputText value="#{personViewBean.person.fatherName}"
-							readonly="true" />
-						<p:outputLabel value="Mëmësia" />
-						<p:inputText value="#{personViewBean.person.motherName}"
-							readonly="true" />
-						<p:outputLabel value="Datëlindja" />
-						<p:inputText value="#{personViewBean.person.dob}" readonly="true" />
-						<p:outputLabel value="Gjinia" />
-						<p:inputText value="#{personViewBean.person.gender}"
-							readonly="true" />
-						<p:outputLabel value="Vendlindja" />
-						<p:inputText value="#{personViewBean.person.pob}" readonly="true" />
-						<p:outputLabel value="Mbiemri tjetër" />
-						<p:inputText value="#{personViewBean.person.maidenName}"
-							readonly="true" />
-						<p:outputLabel value="NID" />
-						<p:inputText value="#{personViewBean.person.nid}" readonly="true" />
-						<p:outputLabel value="Statusi Civil" />
-						<p:inputText value="#{personViewBean.person.civilStatus}"
-							readonly="true" />
-						<p:outputLabel value="Rrethi" />
-						<p:inputText value="#{personViewBean.person.region}"
-							readonly="true" />
-						<p:outputLabel value="Bashkia" />
-						<p:inputText value="#{personViewBean.person.municipality}"
-							readonly="true" />
-						<p:outputLabel value="Adresa" />
-						<p:inputTextarea
-							value="#{personViewBean.person.unit}-#{personViewBean.person.qv}/#{personViewBean.person.fraction}-#{personViewBean.person.address}-#{personViewBean.person.street}-P:#{personViewBean.person.building}"
-							readonly="true" />
-					</p:panelGrid>
-</div>
-<div class="ui-g-12 nopad">
+						<div class="ui-g nopad">
+							<div class="ui-g-12 nopad">
+								<p:panelGrid layout="grid" columns="4"
+									columnClasses="bold,empty,bold,empty"
+									styleClass="ui-panelgrid-blank">
+									<p:outputLabel value="Emri" />
+									<p:inputText value="#{personViewBean.person.name}"
+										readonly="true" />
+									<p:outputLabel value="Mbiemri" />
+									<p:inputText value="#{personViewBean.person.surname}"
+										readonly="true" />
+									<p:outputLabel value="Atësia" />
+									<p:inputText value="#{personViewBean.person.fatherName}"
+										readonly="true" />
+									<p:outputLabel value="Mëmësia" />
+									<p:inputText value="#{personViewBean.person.motherName}"
+										readonly="true" />
+									<p:outputLabel value="Datëlindja" />
+									<p:inputText value="#{personViewBean.person.dob}"
+										readonly="true" />
+									<p:outputLabel value="Gjinia" />
+									<p:inputText value="#{personViewBean.person.gender}"
+										readonly="true" />
+									<p:outputLabel value="Vendlindja" />
+									<p:inputText value="#{personViewBean.person.pob}"
+										readonly="true" />
+									<p:outputLabel value="Mbiemri tjetër" />
+									<p:inputText value="#{personViewBean.person.maidenName}"
+										readonly="true" />
+									<p:outputLabel value="NID" />
+									<p:inputText value="#{personViewBean.person.nid}"
+										readonly="true" />
+									<p:outputLabel value="Statusi Civil" />
+									<p:inputText value="#{personViewBean.person.civilStatus}"
+										readonly="true" />
+									<p:outputLabel value="Rrethi" />
+									<p:inputText value="#{personViewBean.person.region}"
+										readonly="true" />
+									<p:outputLabel value="Bashkia" />
+									<p:inputText value="#{personViewBean.person.municipality}"
+										readonly="true" />
+									<p:outputLabel value="Adresa Gj.C" />
+									<p:inputTextarea
+										value="#{personViewBean.person.unit}-#{personViewBean.person.qv}/#{personViewBean.person.fraction}-#{personViewBean.person.address}-#{personViewBean.person.street}-P:#{personViewBean.person.building}"
+										readonly="true" />
+								</p:panelGrid>
+							</div>
+							<div class="ui-g-12 nopad">
 
-<p:dataTable value="#{personViewBean.addresses}" var="a" styleClass="no-border" rowIndexVar="r" emptyMessage="Nuk ka adresa" reflow="true">
-<p:column headerText="#" style="text-align: left;">
-#{r+1}
-</p:column>
-<p:column headerText="Emri" style="text-align: left;">
-#{a.name}
-</p:column>
-<p:column headerText="Tipi" style="text-align: left;">
-#{a.subjectType}
-</p:column>
-<p:column headerText="Rruga" style="text-align: left;">
-#{a.street}
-</p:column>
-<p:column headerText="Ndërtesa/Hyrja" style="text-align: left;">
-#{a.entrance}
-</p:column>
-<p:column headerText="Nj adm" style="text-align: left;">
-#{a.admUnit}
-</p:column>
-<p:column headerText="Qyteti" style="text-align: left;">
-#{a.city}
-</p:column>
-<p:column headerText="shiko">
-<p:commandLink value="harta" style="color: #ff1300; font-weight: bold;"/>
-<p:commandLink value="komshinjtë" style="color: #4169e1; font-weight: bold;"/>
-</p:column>
+								<p:dataTable value="#{personViewBean.addresses}" var="a" id="addr_tbl"
+									styleClass="no-border" rowIndexVar="r"
+									rowStyleClass="#{a.id==personViewBean.selectedAddress.id?'ui-state-hover':''}"
+									emptyMessage="Nuk ka adresa" reflow="true">
+									<p:column headerText="#" style="text-align: left;">
+									#{r+1}
+									</p:column>
+									<p:column headerText="Emri" style="text-align: left;">
+									#{a.name}
+									</p:column>
+									<p:column headerText="Tipi" style="text-align: left;">
+									#{a.subjectType}
+									</p:column>
+									<p:column headerText="Rruga" style="text-align: left;">
+									#{a.street}
+									</p:column>
+									<p:column headerText="Ndërtesa/Hyrja" style="text-align: left;">
+									#{a.buildingEntrance}
+									</p:column>
+									<p:column headerText="Nj adm" style="text-align: left;">
+									#{a.admUnit}
+									</p:column>
+									<p:column headerText="Qyteti" style="text-align: left;">
+									#{a.city}
+									</p:column>
+									<p:column headerText="shiko">
+										<p:commandLink value="harta"
+											style="color: #ff1300; font-weight: bold;" /> |
+										<p:commandLink value="komshinjtë"
+											style="color: #4169e1; font-weight: bold;"
+											action="#{personViewBean.viewNeighbors(a)}"
+											update=":ngb_dlg addr_tbl" oncomplete="PF('ngbWid').show();" />
+									</p:column>
 
-</p:dataTable>
+								</p:dataTable>
 
-</div>
-</div>
-					
-				</p:panel>
+							</div>
+						</div>
+
+					</p:panel>
 
 			</div>
 
@@ -525,6 +536,49 @@
 		</div>
 </h:panelGroup>
 	</h:form>
+
+
+<p:dialog id="ngb_dlg" widgetVar="ngbWid" header="Banorët e ndërtesës" responsive="true" closeOnEscape="true" modal="true" 
+	appendTo="@(body)" fitViewport="true">
+	<h:form>
+		<div class="ui-g ui-fluid">
+		<div class="ui-g-12">
+			<p:panelGrid layout="grid" styleClass="ui-panelgrid-blank" columns="1">
+			<h3>#{personViewBean.selectedAddress.buildingCode}, #{personViewBean.selectedAddress.street}, #{personViewBean.selectedAddress.admUnit}, #{personViewBean.selectedAddress.city}</h3>
+			</p:panelGrid>
+		</div>
+			<div class="ui-g-12">
+				<p:dataTable value="#{personViewBean.neighbors}"
+					var="n" reflow="true" styleClass="no-border" 
+					rowIndexVar="r" paginator="true" paginatorAlwaysVisible="false"
+					rows="10" rowsPerPageTemplate="5,10,20,30,50">
+
+				<p:column headerText="#" style="text-align: left">
+                    #{r+1}
+                </p:column>
+                <p:column headerText="Nid/Nipt" sortBy="#{n.nid}" style="text-align: left">
+                    #{n.nid}
+                </p:column>
+				<p:column headerText="Emri" sortBy="#{n.name}" filterBy="#{n.name}" filterMatchMode="contains" style="text-align: left">
+						<p:commandLink disabled="#{formatBean.validString(n.nid) eq false}" value="#{n.name}"
+							action="#{nav.navigate('person_view')}" update=":main" oncomplete="PF('ngbWid').hide();">
+							<f:param name="nid" value="#{n.nid}" />
+						</p:commandLink>
+				</p:column>
+				<p:column headerText="Tipi" sortBy="#{n.subjectType}" filterBy="#{n.subjectType}" filterMatchMode="contains" style="text-align: left">
+                    #{n.subjectType}
+                </p:column>
+				
+				<p:column headerText="Ndërtesa/Hyrja" sortBy="#{n.buildingEntrance}" filterBy="#{n.buildingEntrance}" filterMatchMode="contains" style="text-align: left">
+                    #{n.buildingEntrance}
+                </p:column>
+                
+				</p:dataTable>
+			</div>
+		</div>
+	</h:form>
+	</p:dialog>
+
 
 
 </ui:composition>

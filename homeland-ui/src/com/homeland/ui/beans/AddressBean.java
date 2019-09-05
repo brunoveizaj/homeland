@@ -22,6 +22,8 @@ public class AddressBean implements Serializable {
 	
 	AddressRequest request;
 	List<AddressDTO> addresses;
+	List<AddressDTO> neighbors;
+	AddressDTO selectedAddress;
 	
 	
 	public AddressRequest getRequest() {
@@ -36,6 +38,22 @@ public class AddressBean implements Serializable {
 	public void setAddresses(List<AddressDTO> addresses) {
 		this.addresses = addresses;
 	}
+	public List<AddressDTO> getNeighbors() {
+		return neighbors;
+	}
+	public void setNeighbors(List<AddressDTO> neighbors) {
+		this.neighbors = neighbors;
+	}
+	public AddressDTO getSelectedAddress() {
+		return selectedAddress;
+	}
+	public void setSelectedAddress(AddressDTO selectedAddress) {
+		this.selectedAddress = selectedAddress;
+	}
+	
+	
+	
+	
 	
 	
 	
@@ -51,6 +69,8 @@ public class AddressBean implements Serializable {
 		this.request = new AddressRequest();
 		request.setMaxResult(10000);
 		this.addresses = null;
+		this.neighbors = null;
+		this.selectedAddress = null;
 	}
 	
 	public void clear()
@@ -62,6 +82,8 @@ public class AddressBean implements Serializable {
 	{
 		try {
 			this.addresses = new AddressService().searchAddress(request);
+			this.neighbors = null;
+			this.selectedAddress = null;
 			if(addresses == null || addresses.isEmpty())
 			{
 				Messages.throwFacesMessage("Nuk u gjet asnje adrese", 2);
@@ -72,7 +94,11 @@ public class AddressBean implements Serializable {
 		}
 	}
 
-	
+	public void viewNeighbors(AddressDTO a)
+	{
+		this.selectedAddress = a;
+		this.neighbors = new AddressService().getAddressByBuildingId(a.getBuildingId());
+	}
 	
 	
 	
