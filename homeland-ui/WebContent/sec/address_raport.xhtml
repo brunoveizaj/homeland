@@ -1,0 +1,104 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<h:form id="phone_raport_form">
+
+		<div class="ui-g ui-fluid">
+			<div class="ui-g-12">
+				<div class="card card-w-title">
+					<h1>Kërko adresa</h1>
+					<div class="ui-g">
+						<div class="ui-g-12">
+
+							<p:panelGrid layout="grid" columns="4"
+								styleClass="ui-panelgrid-blank form-group">
+
+								<p:inputText placeholder="Emri i plotë"
+									value="#{addressBean.request.fullName}" />
+								<p:inputText placeholder="Rruga"
+									value="#{addressBean.request.street}" />
+								<p:inputText placeholder="Pallati/Hyrja"
+									value="#{addressBean.request.entrance}" />
+								<p:inputText placeholder="Njësia admin"
+									value="#{addressBean.request.admUnit}" />
+								<p:inputText placeholder="Nid/Nipt"
+									value="#{addressBean.request.nid}" />
+
+							</p:panelGrid>
+						</div>
+
+						<div class="ui-g-12 ui-md-4">
+							<p:panelGrid layout="grid" columns="2"
+								styleClass="ui-panelgrid-blank">
+								<p:commandButton value="Kërko" update="@form" styleClass="blue-btn"
+									action="#{addressBean.search()}" icon="ui-icon-search" />
+								<p:commandButton value="Pastro" update="@form"
+									action="#{addressBean.clear()}" icon="ui-icon-trash"
+									styleClass="green-btn" />
+							</p:panelGrid>
+						</div>
+
+						<div class="ui-g-12">
+							<p:messages showDetail="true" closable="true">
+								<p:autoUpdate />
+							</p:messages>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
+
+
+			<div class="ui-g-12">
+				<p:dataTable value="#{addressBean.addresses}"
+					rendered="#{not empty addressBean.addresses}" var="a" reflow="true"
+					rowIndexVar="r" paginator="true" paginatorAlwaysVisible="false"
+					rows="20" rowsPerPageTemplate="10,20,30,50">
+
+				<p:column headerText="#">
+                    #{r+1}
+                </p:column>
+                <p:column headerText="Nid/Nipt" sortBy="#{a.nid}">
+                    #{a.nid}
+                </p:column>
+				<p:column headerText="Emri" sortBy="#{a.name}" filterBy="#{a.name}" filterMatchMode="contains">
+						<p:commandLink disabled="#{formatBean.validString(p.nid) eq false}" value="#{a.name}"
+							action="#{nav.navigate('person_view')}" update=":main">
+							<f:param name="nid" value="#{a.nid}" />
+						</p:commandLink>
+				</p:column>
+				<p:column headerText="Tipi" sortBy="#{a.subjectType}" filterBy="#{a.subjectType}" filterMatchMode="contains">
+                    #{a.subjectType}
+                </p:column>
+				<p:column headerText="Rruga" sortBy="#{a.street}" filterBy="#{a.street}" filterMatchMode="contains">
+                    #{a.street}
+                </p:column>
+				<p:column headerText="Ndërtesa/Hyrja" sortBy="#{a.entrance}" filterBy="#{a.entrance}" filterMatchMode="contains">
+                    #{a.entrance}
+                </p:column>
+                <p:column headerText="Nj.Adm" sortBy="#{a.admUnit}" filterBy="#{a.admUnit}" filterMatchMode="contains">
+                    #{p.nid}
+                </p:column>
+                
+				<p:column headerText="Qyteti" sortBy="#{a.city}" filterBy="#{a.city}" filterMatchMode="contains">
+                    #{p.nid}
+                </p:column>
+				<p:column headerText="shiko" >
+					<p:commandLink value="harta" style="color: #ff1300; font-weight: bold;"/>
+					<p:commandLink value="komshinjtë" style="color: #4169e1; font-weight: bold;"/>
+				</p:column>
+
+				</p:dataTable>
+			</div>
+
+		</div>
+
+	</h:form>
+
+</ui:composition>

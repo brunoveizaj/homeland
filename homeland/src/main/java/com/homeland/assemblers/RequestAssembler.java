@@ -1,6 +1,7 @@
 package com.homeland.assemblers;
 
 import com.homeland.constants.IStatus;
+import com.homeland.requests.api.AddressRequest;
 import com.homeland.requests.api.BorderRequest;
 import com.homeland.requests.api.DocumentRequest;
 import com.homeland.requests.api.OsheeRequest;
@@ -12,6 +13,7 @@ import com.homeland.requests.api.TatimeRequest;
 import com.homeland.requests.api.TicketRequest;
 import com.homeland.requests.api.UserRequest;
 import com.homeland.requests.api.VehicleRequest;
+import com.homeland.requests.repository.AddressSQL;
 import com.homeland.requests.repository.BorderSQL;
 import com.homeland.requests.repository.DocumentSQL;
 import com.homeland.requests.repository.OsheeSQL;
@@ -272,6 +274,28 @@ public class RequestAssembler {
 			sql.setContractNo(req.getContractNo());
 			sql.setFamilyId(req.getFamilyId());
 			sql.setNid(req.getNid());
+			sql.setFirstResult(req.getFirstResult());
+			sql.setMaxResult(req.getMaxResult());
+			
+		}
+		
+		return sql;
+	}
+	
+	
+	public AddressSQL apiToSql(AddressRequest req)
+	{
+		AddressSQL sql = new AddressSQL();
+		
+		if(req != null)
+		{
+			
+			sql.setEntrance(req.getEntrance());
+			sql.setFullName(req.getFullName());
+			sql.setNid(req.getNid());
+			sql.setMunicipality(req.getMunicipality());
+			sql.setStreet(req.getStreet());
+			sql.setUnitId(req.getUnitId());
 			sql.setFirstResult(req.getFirstResult());
 			sql.setMaxResult(req.getMaxResult());
 			

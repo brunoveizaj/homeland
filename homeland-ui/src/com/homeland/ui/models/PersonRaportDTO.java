@@ -17,6 +17,7 @@ public class PersonRaportDTO implements Serializable {
 	List<TatimeDTO> tatime;
 	List<OsheeDTO> oshees;
 	List<BorderDTO> borders;
+	List<AddressDTO> addresses;
 	
 	
 	public PersonDTO getPerson() {
@@ -66,6 +67,12 @@ public class PersonRaportDTO implements Serializable {
 	}
 	public void setBorders(List<BorderDTO> borders) {
 		this.borders = borders;
+	}
+	public List<AddressDTO> getAddresses() {
+		return addresses;
+	}
+	public void setAddresses(List<AddressDTO> addresses) {
+		this.addresses = addresses;
 	}
 	
 

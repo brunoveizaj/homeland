@@ -67,7 +67,7 @@ public class PhoneBean implements Serializable {
 			this.phones = new PhoneService().searchPhone(request);
 			if(phones == null || phones.isEmpty())
 			{
-				Messages.throwFacesMessage("Nuk u gjet anje telefon", 2);
+				Messages.throwFacesMessage("Nuk u gjet asnje telefon", 2);
 			}
 		}catch(ApiException a) {
 			Messages.throwFacesMessage(a.getMessage(), a.getSeverity());

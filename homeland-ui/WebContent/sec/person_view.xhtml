@@ -28,7 +28,9 @@
 
 				<p:panel header="Gjeneralitetet" styleClass="blue-pnl">
 
-					<p:panelGrid layout="grid" columns="4"
+<div class="ui-g nopad">
+<div class="ui-g-12 nopad">
+<p:panelGrid layout="grid" columns="4"
 						columnClasses="bold,empty,bold,empty"
 						styleClass="ui-panelgrid-blank">
 						<p:outputLabel value="Emri" />
@@ -68,6 +70,41 @@
 							value="#{personViewBean.person.unit}-#{personViewBean.person.qv}/#{personViewBean.person.fraction}-#{personViewBean.person.address}-#{personViewBean.person.street}-P:#{personViewBean.person.building}"
 							readonly="true" />
 					</p:panelGrid>
+</div>
+<div class="ui-g-12 nopad">
+
+<p:dataTable value="#{personViewBean.addresses}" var="a" styleClass="no-border" rowIndexVar="r" emptyMessage="Nuk ka adresa" reflow="true">
+<p:column headerText="#" style="text-align: left;">
+#{r+1}
+</p:column>
+<p:column headerText="Emri" style="text-align: left;">
+#{a.name}
+</p:column>
+<p:column headerText="Tipi" style="text-align: left;">
+#{a.subjectType}
+</p:column>
+<p:column headerText="Rruga" style="text-align: left;">
+#{a.street}
+</p:column>
+<p:column headerText="Ndërtesa/Hyrja" style="text-align: left;">
+#{a.entrance}
+</p:column>
+<p:column headerText="Nj adm" style="text-align: left;">
+#{a.admUnit}
+</p:column>
+<p:column headerText="Qyteti" style="text-align: left;">
+#{a.city}
+</p:column>
+<p:column headerText="shiko">
+<p:commandLink value="harta" style="color: #ff1300; font-weight: bold;"/>
+<p:commandLink value="komshinjtë" style="color: #4169e1; font-weight: bold;"/>
+</p:column>
+
+</p:dataTable>
+
+</div>
+</div>
+					
 				</p:panel>
 
 			</div>
@@ -75,7 +112,7 @@
 			<div class="ui-g-12 ui-md-4 ui-fluid">
 				<p:dataTable value="#{personViewBean.phones}" var="ph"
 					styleClass="blue-tbl" rowIndexVar="r" paginator="true"
-					paginatorAlwaysVisible="false" rows="5"
+					paginatorAlwaysVisible="false" rows="10"
 					rowsPerPageTemplate="5,10,20" pageLinks="2" reflow="true"
 					emptyMessage="Nuk ka kontakte">
 

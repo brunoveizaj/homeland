@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.homeland.constants.IDocument;
 import com.homeland.constants.IStatus;
+import com.homeland.dto.AddressDTO;
 import com.homeland.dto.BorderDTO;
 import com.homeland.dto.BorderGateDTO;
 import com.homeland.dto.CardDTO;
@@ -20,6 +21,7 @@ import com.homeland.dto.TatimeDTO;
 import com.homeland.dto.TicketDTO;
 import com.homeland.dto.UserDTO;
 import com.homeland.dto.VehicleDTO;
+import com.homeland.entities.Address;
 import com.homeland.entities.Border;
 import com.homeland.entities.BorderGate;
 import com.homeland.entities.Card;
@@ -650,6 +652,46 @@ public class Assembler {
 		
 		return list;
 		
+	}
+
+	
+	public AddressDTO toDto(Address e)
+	{
+		if(e == null) return null;
+		
+		AddressDTO dto = new AddressDTO();
+		dto.setId(e.getId());
+		dto.setName(e.getName());
+		dto.setAddressId(e.getAddressId());
+		dto.setAdmUnit(e.getAdmUnit());
+		dto.setBuildingCode(e.getBuildingCode());
+		dto.setBuildingEntrance(e.getBuildingEntrance());
+		dto.setBuildingId(e.getBuildingId());
+		dto.setCity(e.getCity());
+		dto.setEntranceId(e.getEntranceId());
+		dto.setEntranceNo(e.getEntranceNo());
+		dto.setMunicipality(e.getMunicipality());
+		dto.setNid(e.getNid());
+		dto.setStreet(e.getStreet());
+		dto.setSubjectType(e.getSubjectType());
+		dto.setUnitId(e.getUnitId());
+		
+		
+		return dto;
+	}
+
+	public List<AddressDTO> addressListToDto(List<Address> data) {
+		
+       if(data == null || data.isEmpty()) return null;
+		
+		List<AddressDTO> list = new ArrayList<>();
+		
+		for(Address i : data)
+		{
+			list.add(toDto(i));
+		}
+		
+		return list;
 	}
 	
 	

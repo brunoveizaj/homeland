@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.homeland.ui.api.security.ApiErrorHandler;
 import com.homeland.ui.constants.HttpCode;
 import com.homeland.ui.constants.IApiClient;
 import com.homeland.ui.criterias.PhoneRequest;
@@ -26,6 +27,8 @@ public class PhoneClient {
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(BASE_URL);
 		
 		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.setErrorHandler(new ApiErrorHandler());
+		
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
 		headers.set("Authorization", "Bearer "+Util.getToken());

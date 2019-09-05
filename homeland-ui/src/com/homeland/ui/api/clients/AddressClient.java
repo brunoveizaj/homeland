@@ -1,5 +1,6 @@
 package com.homeland.ui.api.clients;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import org.springframework.core.ParameterizedTypeReference;
@@ -14,94 +15,99 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.homeland.ui.api.security.ApiErrorHandler;
 import com.homeland.ui.constants.HttpCode;
 import com.homeland.ui.constants.IApiClient;
-import com.homeland.ui.criterias.TicketRequest;
-import com.homeland.ui.criterias.VehicleRequest;
-import com.homeland.ui.models.TicketDTO;
-import com.homeland.ui.models.VehicleDTO;
-import com.homeland.ui.models.VehicleRaportDTO;
+import com.homeland.ui.criterias.AddressRequest;
+import com.homeland.ui.models.AddressDTO;
 import com.homeland.ui.utils.Util;
 
-public class VehicleClient {
-	
-	
-	public VehicleRaportDTO vehicleRaport(String plate)
-	{
-		final String BASE_URL = IApiClient.SERVER+"/api/vehicle/vehicleRaport/"+plate;
-	    
+public class AddressClient {
+
+	public List<AddressDTO> searchAddress(AddressRequest req) {
+
+
+		final String BASE_URL = IApiClient.SERVER+"/api/address/searchAddress";		
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(BASE_URL);
-	
-		RestTemplate restTemplate = new RestTemplate();		
+		
+		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.setErrorHandler(new ApiErrorHandler());
 		
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
+		headers.set("Authorization", "Bearer "+Util.getToken());
+		HttpEntity<?> entity = new HttpEntity<>(req,headers);
+		
+		ParameterizedTypeReference<List<AddressDTO>> typeRef = new ParameterizedTypeReference<List<AddressDTO>>() {};
+		
+		ResponseEntity<List<AddressDTO>> response = restTemplate.exchange(builder.toUriString(), HttpMethod.POST, entity, typeRef);
+		
+		if(response.getStatusCodeValue() == HttpCode.OK)
+		{
+			return response.getBody();
+		}
+				
+				
+		return null;
+		
+		
+		
+	}
+	
+	public List<AddressDTO> getAddressByNid(String nid) {
+
+
+		final String BASE_URL = IApiClient.SERVER+"/api/address/getByNid/"+nid.trim();		
+		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(BASE_URL);
+		
+		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.setErrorHandler(new ApiErrorHandler());
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
 		headers.set("Authorization", "Bearer "+Util.getToken());
 		HttpEntity<?> entity = new HttpEntity<>(headers);
+		
+		ParameterizedTypeReference<List<AddressDTO>> typeRef = new ParameterizedTypeReference<List<AddressDTO>>() {};
+		
+		ResponseEntity<List<AddressDTO>> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, typeRef);
+		
+		if(response.getStatusCodeValue() == HttpCode.OK)
+		{
+			return response.getBody();
+		}
+				
+				
+		return null;
+		
+		
+		
+	}
+	
+	public List<AddressDTO> getAddressByBuildingId(BigInteger bid) {
 
-		ResponseEntity<VehicleRaportDTO> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity,VehicleRaportDTO.class);
-		
-		if(response.getStatusCodeValue() == HttpCode.OK)
-		{
-			return response.getBody();
-		}
-		
-		
-		return null;
-	}
-	
-	public List<VehicleDTO> searchVehicle(VehicleRequest req)
-	{
-		final String BASE_URL = IApiClient.SERVER+"/api/vehicle/searchVehicle";		
+
+		final String BASE_URL = IApiClient.SERVER+"/api/address/getByBuildingId/"+bid;		
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(BASE_URL);
 		
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.setErrorHandler(new ApiErrorHandler());
 		
-		
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
 		headers.set("Authorization", "Bearer "+Util.getToken());
-		HttpEntity<?> entity = new HttpEntity<>(req,headers);
+		HttpEntity<?> entity = new HttpEntity<>(headers);
 		
-		ParameterizedTypeReference<List<VehicleDTO>> typeRef = new ParameterizedTypeReference<List<VehicleDTO>>() {};
+		ParameterizedTypeReference<List<AddressDTO>> typeRef = new ParameterizedTypeReference<List<AddressDTO>>() {};
 		
-		ResponseEntity<List<VehicleDTO>> response = restTemplate.exchange(builder.toUriString(), HttpMethod.POST, entity, typeRef);
-		
-		if(response.getStatusCodeValue() == HttpCode.OK)
-		{
-			return response.getBody();
-		}	
-				
-		return null;
-		
-	}
-	
-	public List<TicketDTO> searchTicket(TicketRequest req)
-	{
-		final String BASE_URL = IApiClient.SERVER+"/api/vehicle/searchTicket";		
-		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(BASE_URL);
-		
-		
-		RestTemplate restTemplate = new RestTemplate();
-		restTemplate.setErrorHandler(new ApiErrorHandler());
-		
-		
-		HttpHeaders headers = new HttpHeaders();
-		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
-		headers.set("Authorization", "Bearer "+Util.getToken());
-		HttpEntity<?> entity = new HttpEntity<>(req,headers);
-		
-		ParameterizedTypeReference<List<TicketDTO>> typeRef = new ParameterizedTypeReference<List<TicketDTO>>() {};
-		
-		ResponseEntity<List<TicketDTO>> response = restTemplate.exchange(builder.toUriString(), HttpMethod.POST, entity, typeRef);
+		ResponseEntity<List<AddressDTO>> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, typeRef);
 		
 		if(response.getStatusCodeValue() == HttpCode.OK)
 		{
 			return response.getBody();
 		}
 				
+				
 		return null;
+		
+		
 		
 	}
 	

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.homeland.assemblers.Assembler;
 import com.homeland.assemblers.RequestAssembler;
 import com.homeland.constants.IDocument;
+import com.homeland.dto.AddressDTO;
 import com.homeland.dto.BorderDTO;
 import com.homeland.dto.CardDTO;
 import com.homeland.dto.OsheeDTO;
@@ -47,6 +48,8 @@ public class PersonService {
 	PhoneService phoneService;
 	@Autowired
 	OsheeService osheeService;
+	@Autowired
+	AddressService addressService;
 	
 	
 	public List<PersonDTO> searchPerson(PersonRequest req, Integer userId)
@@ -150,7 +153,9 @@ public class PersonService {
 		or.setFamilyId(person.getFamilyId());
 		CompletableFuture<List<OsheeDTO>> oshees = osheeService.searchAsyncOshee(or,userId);
 		
-		CompletableFuture.allOf(family,phones,cards,passports,borders,tatime,oshees).join();
+		CompletableFuture<List<AddressDTO>> addresses = addressService.getAsyncAddressByNid(person.getNid());
+		
+		CompletableFuture.allOf(family,phones,cards,passports,borders,tatime,oshees,addresses).join();
 
 		try {
 			raport.setBorders(borders.get());
@@ -161,6 +166,7 @@ public class PersonService {
 			raport.setPerson(person);
 			raport.setPhones(phones.get());
 			raport.setTatime(tatime.get());
+			raport.setAddresses(addresses.get());
 		} catch (InterruptedException | ExecutionException e) {
 			System.err.println("INTERRUPTION EXCEPTION: PERSON RAPORT");
 			e.printStackTrace();

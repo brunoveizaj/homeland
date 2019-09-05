@@ -3,6 +3,7 @@ package com.homeland.models;
 import java.io.Serializable;
 import java.util.List;
 
+import com.homeland.dto.AddressDTO;
 import com.homeland.dto.BorderDTO;
 import com.homeland.dto.CardDTO;
 import com.homeland.dto.OsheeDTO;
@@ -23,6 +24,7 @@ public class PersonRaportDTO implements Serializable {
 	List<TatimeDTO> tatime;
 	List<OsheeDTO> oshees;
 	List<BorderDTO> borders;
+	List<AddressDTO> addresses;
 	
 	
 	public PersonDTO getPerson() {
@@ -72,6 +74,12 @@ public class PersonRaportDTO implements Serializable {
 	}
 	public void setBorders(List<BorderDTO> borders) {
 		this.borders = borders;
+	}
+	public List<AddressDTO> getAddresses() {
+		return addresses;
+	}
+	public void setAddresses(List<AddressDTO> addresses) {
+		this.addresses = addresses;
 	}
 	
 

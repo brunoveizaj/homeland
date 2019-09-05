@@ -10,6 +10,7 @@ import javax.faces.bean.ViewScoped;
 import com.homeland.ui.api.security.ApiException;
 import com.homeland.ui.criterias.SubjectRequest;
 import com.homeland.ui.criterias.VehicleRequest;
+import com.homeland.ui.models.AddressDTO;
 import com.homeland.ui.models.BorderDTO;
 import com.homeland.ui.models.CardDTO;
 import com.homeland.ui.models.OsheeDTO;
@@ -44,6 +45,7 @@ public class PersonViewBean implements Serializable {
 	List<TatimeDTO> tatime;
 	List<OsheeDTO> oshees;
 	List<BorderDTO> borders;
+	List<AddressDTO> addresses;
 	
 	List<SubjectDTO> subjects;
 	List<VehicleDTO> vehicles;
@@ -171,6 +173,14 @@ public class PersonViewBean implements Serializable {
 		this.familyMember = familyMember;
 	}
 
+	public List<AddressDTO> getAddresses() {
+		return addresses;
+	}
+
+	public void setAddresses(List<AddressDTO> addresses) {
+		this.addresses = addresses;
+	}
+
 
 	public void init()
 	{		
@@ -194,6 +204,7 @@ public class PersonViewBean implements Serializable {
 					this.phones = raport.getPhones();
 					this.borders = raport.getBorders();
 					this.oshees = raport.getOshees();
+					this.addresses = raport.getAddresses();
 					
 					this.vehicles = null;
 					this.subjects = null;
