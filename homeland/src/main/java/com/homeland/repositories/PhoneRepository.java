@@ -92,7 +92,7 @@ public class PhoneRepository {
 		if(StringUtil.isValid(criterias.getPhoneNo()))
 		{
 			sql += "AND p.phone LIKE :phone ";
-			params.put("phone", criterias.getPhoneNo()+"%");
+			params.put("phone", criterias.getPhoneNo());
 		}
 		
 		
