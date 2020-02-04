@@ -90,7 +90,10 @@
                     #{a.city}
                 </p:column>
 				<p:column headerText="shiko" >
-					<p:commandLink value="harta" style="color: #ff1300; font-weight: bold;"/> |
+					<p:commandLink value="harta"
+											style="color: #ff1300; font-weight: bold;" action="#{nav.navigate('map')}" update=":main">
+						                 		  <f:param name="bid" value="#{a.buildingId}"/>
+						                </p:commandLink> |
 					<p:commandLink value="komshinjtë" style="color: #4169e1; font-weight: bold;" 
 					action="#{addressBean.viewNeighbors(a)}" update=":ngb_dlg @form" oncomplete="PF('ngbWid').show();"/>
 				</p:column>

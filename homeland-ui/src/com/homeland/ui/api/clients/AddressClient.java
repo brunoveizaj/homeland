@@ -17,6 +17,7 @@ import com.homeland.ui.constants.HttpCode;
 import com.homeland.ui.constants.IApiClient;
 import com.homeland.ui.criterias.AddressRequest;
 import com.homeland.ui.models.AddressDTO;
+import com.homeland.ui.models.BuildingMAP;
 import com.homeland.ui.utils.Util;
 
 public class AddressClient {
@@ -110,6 +111,80 @@ public class AddressClient {
 		
 		
 	}
+	
+	
+	
+	public BuildingMAP getBuildingMapById(BigInteger bid) {
+
+
+		final String BASE_URL = IApiClient.SERVER+"/api/address/getBuildingMapById/"+bid;		
+		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(BASE_URL);
+		
+		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.setErrorHandler(new ApiErrorHandler());
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
+		headers.set("Authorization", "Bearer "+Util.getToken());
+		HttpEntity<?> entity = new HttpEntity<>(headers);
+		
+		
+		ResponseEntity<BuildingMAP> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, BuildingMAP.class);
+		
+		if(response.getStatusCodeValue() == HttpCode.OK)
+		{
+			return response.getBody();
+		}
+				
+				
+		return null;
+		
+		
+		
+	}
+	
+	
+	
+	public List<BuildingMAP> getBuildingsMapByUnitId(Integer unitId) {
+
+
+		final String BASE_URL = IApiClient.SERVER+"/api/address/getBuildingsMapByUnitId/"+unitId;		
+		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(BASE_URL);
+		
+		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.setErrorHandler(new ApiErrorHandler());
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
+		headers.set("Authorization", "Bearer "+Util.getToken());
+		HttpEntity<?> entity = new HttpEntity<>(headers);
+		
+		ParameterizedTypeReference<List<BuildingMAP>> typeRef = new ParameterizedTypeReference<List<BuildingMAP>>() {};
+		
+		ResponseEntity<List<BuildingMAP>> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, typeRef);
+		
+		if(response.getStatusCodeValue() == HttpCode.OK)
+		{
+			return response.getBody();
+		}
+				
+				
+		return null;
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

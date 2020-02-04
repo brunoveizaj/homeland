@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.homeland.dto.AddressDTO;
+import com.homeland.dto.BuildingMAP;
 import com.homeland.requests.api.AddressRequest;
 import com.homeland.services.AddressService;
 import com.homeland.services.TokenService;
@@ -80,6 +81,35 @@ public class AddressApi {
 	}
 	
 	
+	@RequestMapping(value="/getBuildingMapById/{buildingId}", method=RequestMethod.GET, produces={"application/json"})
+	public ResponseEntity<?> getBuildingMapById(@RequestHeader(value="Authorization",required=false) String token, @PathVariable BigInteger buildingId)
+	{
+						
+		BuildingMAP map = addressService.getBuildingMapById(buildingId);
+				
+		if(map == null)
+		{
+			return new ResponseEntity<>("Nuk ka te dhena",HttpStatus.NO_CONTENT);
+		}
+				
+		return new ResponseEntity<>(map,HttpStatus.OK);
+		
+	}
+	
+	@RequestMapping(value="/getBuildingsMapByUnitId/{unitId}", method=RequestMethod.GET, produces={"application/json"})
+	public ResponseEntity<?> getBuildingsMapByUnitId(@RequestHeader(value="Authorization",required=false) String token, @PathVariable Integer unitId)
+	{
+						
+		List<BuildingMAP> maps = addressService.getBuildingsMapByUnitId(unitId);
+				
+		if(maps == null || maps.isEmpty())
+		{
+			return new ResponseEntity<>("Nuk ka te dhena",HttpStatus.NO_CONTENT);
+		}
+				
+		return new ResponseEntity<>(maps,HttpStatus.OK);
+		
+	}
 	
 	
 	

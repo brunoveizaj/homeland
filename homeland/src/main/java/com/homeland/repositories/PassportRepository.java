@@ -93,8 +93,8 @@ public class PassportRepository {
 			
 			if(StringUtil.isValid(criterias.getIdn()))
 			{
-				sql += "AND p.idc LIKE :idc ";
-				params.put("idc", criterias.getIdn());
+				sql += "AND p.idp LIKE :idp ";
+				params.put("idp", criterias.getIdn());
 			}
 			
 			if(StringUtil.isValid(criterias.getSurname()))

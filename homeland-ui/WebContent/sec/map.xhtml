@@ -1,0 +1,102 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui" >
+
+
+	<h:form id="map_form">
+
+		<f:event type="preRenderComponent" listener="#{mapViewBean.init()}" />
+
+		<h:panelGroup layout="block" id="map_data">
+
+			<div class="ui-g ">
+				<div class="ui-g-12">
+					<p:commandButton rendered="#{mapViewBean.renderBack}"
+						action="#{navBean.back()}" value="Mbrapa" process="@this"
+						update=":main" styleClass="orange-btn" icon="fa fa-arrow-left" />
+				</div>
+
+				
+
+				<div class="ui-g-12 ui-fluid">
+					<div class="card map">
+						<div class="ui-g">
+						<div class="ui-g-12 ui-md-9">
+								<p:messages closable="true" showDetail="true">
+									<p:autoUpdate />
+								</p:messages>
+							</div>
+							<div class="ui-g-12 ui-md-3">
+								<p:commandButton value="Shfaq banesat e njësisë" action="#{mapViewBean.addUnitBuildings()}" update="map_data"
+								style="float: right"/>
+							</div>
+							<div class="ui-g-12">
+
+
+								<p:gmap model="#{mapViewBean.mapModel}"
+									center="#{mapViewBean.centerMap}" zoom="#{mapViewBean.zoomMap}"
+									type="HYBRID" style="width: 100%; height: 600px">
+									<p:ajax event="overlaySelect"
+										listener="#{mapViewBean.onOverlaySelect}" />
+								</p:gmap>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</h:panelGroup>
+	</h:form>
+	
+	
+	<p:dialog header="Banorët e ndërtesës" id="add_dlg" widgetVar="addWid" modal="true" responsive="true" closeOnEscape="true"
+						    draggable="false" resizable="false" height="600px" 
+        				   appendTo="@(body)" fitViewport="true" maximizable="true">
+	
+		<h:form id="addr_form">
+		
+		<div class="ui-g ui-fluid">
+	
+			<div class="ui-g-12">
+				<p:dataTable value="#{mapViewBean.addresses}"
+					var="n" reflow="true" styleClass="no-border" 
+					rowIndexVar="r" paginator="true" paginatorAlwaysVisible="false"
+					rows="10" rowsPerPageTemplate="5,10,20,30,50">
+
+				<p:column headerText="#" style="text-align: left">
+                    #{r+1}
+                </p:column>
+                <p:column headerText="Nid/Nipt" sortBy="#{n.nid}" style="text-align: left">
+                    #{n.nid}
+                </p:column>
+				<p:column headerText="Emri" sortBy="#{n.name}" filterBy="#{n.name}" filterMatchMode="contains" style="text-align: left">
+						<p:commandLink disabled="#{formatBean.validString(n.nid) eq false}" value="#{n.name}"
+							action="#{nav.navigate('person_view')}" update=":main" oncomplete="PF('addWid').hide();">
+							<f:param name="nid" value="#{n.nid}" />
+						</p:commandLink>
+				</p:column>
+				<p:column headerText="Tipi" sortBy="#{n.subjectType}" filterBy="#{n.subjectType}" filterMatchMode="contains" style="text-align: left">
+                    #{n.subjectType}
+                </p:column>
+				
+				<p:column headerText="Ndërtesa/Hyrja" sortBy="#{n.buildingEntrance}" filterBy="#{n.buildingEntrance}" filterMatchMode="contains" style="text-align: left">
+                    #{n.buildingEntrance}
+                </p:column>
+                <p:column headerText="Rruga" style="text-align: left">
+                    #{n.street}
+                </p:column>
+                <p:column headerText="Qyteti" style="text-align: left">
+                    #{n.city}
+                </p:column>
+                
+				</p:dataTable>
+			</div>
+		</div>
+		</h:form>
+	
+	</p:dialog>
+
+</ui:composition>

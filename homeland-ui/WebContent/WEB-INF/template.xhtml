@@ -16,6 +16,7 @@
             <meta name="apple-mobile-web-app-capable" content="yes" />
         </f:facet>
         <title><ui:insert name="title">Homeland</ui:insert></title>
+        <script src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyC9qlw0itonOIN8FsY2LPI1yXlx5ovBHwc" />
         <h:outputScript name="js/nanoscroller.js" library="paradise-layout" />
         <h:outputScript name="js/layout.js" library="paradise-layout" />
         <ui:insert name="head"/>
@@ -32,6 +33,7 @@
 			<p:inputSwitch/>
 			<p:panel/>
 			<p:dataTable/>
+			<p:gmap center="0,0" zoom="1" type="HYBRID"/>
 			</h:form>
 		</h:panelGroup>    
     

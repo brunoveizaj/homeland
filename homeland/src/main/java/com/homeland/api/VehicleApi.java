@@ -68,6 +68,8 @@ public class VehicleApi {
 	public ResponseEntity<?> vehicleRaport(@RequestHeader(value="Authorization",required=false) String token, @PathVariable String plate)
 	{
 		Integer userId = tokenService.getUserIdFromToken(token);
+		
+		System.out.println("VEHICLE RAPORT: "+plate);
 				
 		VehicleRaportDTO raport = vehicleService.getVehicleRaport(plate,userId);
 		

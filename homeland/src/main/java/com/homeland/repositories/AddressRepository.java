@@ -1,6 +1,8 @@
 package com.homeland.repositories;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -12,6 +14,7 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
+import com.homeland.dto.BuildingMAP;
 import com.homeland.entities.Address;
 import com.homeland.requests.repository.AddressSQL;
 import com.homeland.utils.StringUtil;
@@ -117,6 +120,73 @@ public class AddressRepository {
 		return q.getResultList();
 		
 	}
+	
+	
+	
+	public BuildingMAP getBuildingMapById(BigInteger buildingId)
+	{
+		
+		List<Object[]> list = em.createNativeQuery("SELECT building_id,building_no,building_code,unit_id,building_center,building_shape FROM building WHERE building_id="+buildingId)
+				.getResultList();
+		
+		
+		if(list != null && !list.isEmpty())
+		{
+			Object[] o = list.get(0);
+			
+			if(o != null && o.length>0)
+			{
+				BuildingMAP map = new BuildingMAP();
+				map.setBuildingId((BigDecimal)o[0]);
+				map.setBuildingNo((String)o[1]);
+				map.setBuildingCode((String)o[2]);
+				map.setUnitId((String)o[3]);
+				map.setCenter((String)o[4]);
+				map.setShape((String)o[5]);
+				
+				return map;
+			}
+		}
+		
+		return null;
+		
+	}
+	
+	public List<BuildingMAP> getBuildingsMapByUnitId(Integer unitId)
+	{
+		
+		if(unitId == null || unitId==0) return null;
+		
+		List<Object[]> list = em.createNativeQuery("SELECT building_id,building_no,building_code,unit_id,building_center,building_shape FROM building WHERE unit_id='"+unitId+"'")
+				.getResultList();
+		
+		
+		if(list != null && !list.isEmpty())
+		{
+			List<BuildingMAP> maps = new ArrayList<>();
+			for(Object[] o : list)
+			{
+				if(o != null && o.length>0)
+				{
+					BuildingMAP map = new BuildingMAP();
+					map.setBuildingId((BigDecimal)o[0]);
+					map.setBuildingNo((String)o[1]);
+					map.setBuildingCode((String)o[2]);
+					map.setUnitId((String)o[3]);
+					map.setCenter((String)o[4]);
+					map.setShape((String)o[5]);
+					
+					maps.add(map);
+				}
+			}
+			
+			return maps;
+		}
+		
+		return null;
+		
+	}
+	
 	
 	
 

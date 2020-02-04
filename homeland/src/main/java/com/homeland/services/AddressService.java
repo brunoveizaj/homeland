@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.homeland.assemblers.Assembler;
 import com.homeland.assemblers.RequestAssembler;
 import com.homeland.dto.AddressDTO;
+import com.homeland.dto.BuildingMAP;
 import com.homeland.entities.Address;
 import com.homeland.repositories.AddressRepository;
 import com.homeland.requests.api.AddressRequest;
@@ -42,6 +43,17 @@ public class AddressService {
 		AddressSQL criterias = new RequestAssembler().apiToSql(req);
 		List<Address> list = addressDAO.searchAddress(criterias);
 		return new Assembler().addressListToDto(list);
+	}
+	
+	
+	public BuildingMAP getBuildingMapById(BigInteger buildingId)
+	{
+		return addressDAO.getBuildingMapById(buildingId);
+	}
+	
+	public List<BuildingMAP> getBuildingsMapByUnitId(Integer unitId)
+	{
+		return addressDAO.getBuildingsMapByUnitId(unitId);
 	}
 	
 	

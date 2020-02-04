@@ -95,7 +95,7 @@
 			
 			<div class="ui-g-12">
 			<h:panelGroup id="passport_details" layout="block" > 
-				<p:panel header="Të dhënat e Kartës" rendered="#{passportBean.selectedPassport != null}">
+				<p:panel header="Të dhënat e Pasaportës" rendered="#{passportBean.selectedPassport != null}">
 					<div class="ui-g">
 						<div class="ui-g-12 ui-md-2">
 							<p:graphicImage value="#{photoBean.passportImage}" width="95%">
@@ -134,7 +134,7 @@
 
                                     <p:outputLabel value="NID" />
                                     <p:inputText value="#{passportBean.selectedPassport.nid}" readonly="true"/>
-                                    <p:outputLabel value="Nr Kartës" />
+                                    <p:outputLabel value="Nr Pasaportës" />
                                     <p:inputText value="#{passportBean.selectedPassport.idp}" readonly="true"/>
 
                                     <p:outputLabel value="Dt Lëshimit" />
