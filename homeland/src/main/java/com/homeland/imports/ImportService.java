@@ -36,7 +36,6 @@ import com.homeland.repositories.PhoneRepository;
 import com.homeland.repositories.TicketRepository;
 import com.homeland.repositories.VehicleRepository;
 import com.homeland.utils.CalculatorUtil;
-import com.homeland.utils.DateUtil;
 import com.homeland.utils.StringUtil;
 
 
@@ -272,8 +271,8 @@ public class ImportService {
 		t.setRid((long)dto.getId());
 		t.setSerialNo(dto.getSerialNo());
 		t.setStatus(dto.getStatus());
-		t.setTicketDate(DateUtil.toTimestamp(dto.getTicketDate()));
-		t.setTimsRecDate(DateUtil.toTimestamp(dto.getTimsRecDate()));
+		t.setTicketDate(dto.getTicketDate());
+		t.setTimsRecDate(dto.getTimsRecDate());
 		t.setTicketPlace(dto.getTicketPlace());
 		t.setViolator(dto.getViolator());
 		t.setViolatorNid(dto.getViolatorNid());
@@ -309,8 +308,10 @@ public class ImportService {
 		
 		b.setBcgId(dto.getBcgId());
 		b.setCitizenType(dto.getCitizenType());
-		b.setCrossingDate(DateUtil.toTimestamp(dto.getCrossingDate()));
-		b.setTimsRecordDate(DateUtil.toTimestamp(dto.getTimsRecordDate()));
+		//b.setCrossingDate(DateUtil.toTimestamp(dto.getCrossingDate()));
+		//b.setTimsRecordDate(DateUtil.toTimestamp(dto.getTimsRecordDate()));
+		b.setCrossingDate(dto.getCrossingDate());
+		b.setTimsRecordDate(dto.getTimsRecordDate());
 		b.setCrossingGate(dto.getCrossingGate());
 		b.setDob(dto.getDob());
 		b.setDocNo(dto.getDocNo());

@@ -40,6 +40,8 @@ public class TokenUtil {
 		return claims.get("u_id", Integer.class);
 	}
 	
+	
+	
 	public static String generateToken(UserDTO user)
 	{
 		String jws = Jwts.builder()

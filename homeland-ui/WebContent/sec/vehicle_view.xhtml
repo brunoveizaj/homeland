@@ -131,7 +131,7 @@
 					#{t.serialNo}
 				</p:column>
 				<p:column headerText="Data">
-                   <h:outputText value="#{t.ticketDate}" styleClass="bold" />
+                   <h:outputText value="#{formatBean.formatTimestamp(t.ticketDate)}" styleClass="bold" />
                 </p:column>
 				<p:column headerText="Oficeri">
                     #{t.officer}
@@ -172,7 +172,7 @@
 	                </p:commandLink>
                 </p:column>
 					<p:column headerText="Data">
-                   <h:outputText value="#{b.crossingDate}" styleClass="bold" />
+                   <h:outputText value="#{formatBean.formatTimestamp(b.crossingDate)}" styleClass="bold" />
                 </p:column>
 					<p:column headerText="Pika kufitare">
 					#{b.crossingGate}

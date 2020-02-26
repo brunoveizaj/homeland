@@ -10,6 +10,7 @@ import com.homeland.dto.BorderDTO;
 import com.homeland.dto.BorderGateDTO;
 import com.homeland.dto.CardDTO;
 import com.homeland.dto.ImportDTO;
+import com.homeland.dto.LiveRaportDTO;
 import com.homeland.dto.LoginDTO;
 import com.homeland.dto.OsheeDTO;
 import com.homeland.dto.PassportDTO;
@@ -26,6 +27,7 @@ import com.homeland.entities.Border;
 import com.homeland.entities.BorderGate;
 import com.homeland.entities.Card;
 import com.homeland.entities.Imports;
+import com.homeland.entities.LiveRaport;
 import com.homeland.entities.Login;
 import com.homeland.entities.Oshee;
 import com.homeland.entities.Passport;
@@ -104,8 +106,10 @@ public class Assembler {
 		BorderDTO dto = new BorderDTO();
 		
 		dto.setCitizenType(border.getCitizenType());
-		dto.setCrossingDate(DateUtil.formatTimestamp(border.getCrossingDate()));
-		dto.setTimsRecordDate(DateUtil.formatTimestamp(border.getTimsRecordDate()));
+		//dto.setCrossingDate(DateUtil.formatTimestamp(border.getCrossingDate()));
+		//dto.setTimsRecordDate(DateUtil.formatTimestamp(border.getTimsRecordDate()));
+		dto.setCrossingDate(border.getCrossingDate());
+		dto.setTimsRecordDate(border.getTimsRecordDate());
 		dto.setCrossingGate(border.getCrossingGate());
 		dto.setDob(border.getDob());
 		dto.setDocNo(border.getDocNo());
@@ -476,7 +480,7 @@ public class Assembler {
 		dto.setProducer(entity.getProducer());
 		dto.setSerialNo(entity.getSerialNo());
 		dto.setStatus(entity.getStatus());
-		dto.setTicketDate(DateUtil.formatDate(entity.getTicketDate()));
+		dto.setTicketDate(entity.getTicketDate());
 		dto.setTicketPlace(entity.getTicketPlace());
 		dto.setViolator(entity.getViolator());
 		dto.setViolatorNid(entity.getViolatorNid());
@@ -688,6 +692,37 @@ public class Assembler {
 		List<AddressDTO> list = new ArrayList<>();
 		
 		for(Address i : data)
+		{
+			list.add(toDto(i));
+		}
+		
+		return list;
+	}
+
+	
+	public LiveRaportDTO toDto(LiveRaport e)
+	{
+		if(e == null) return null;
+		
+		LiveRaportDTO dto = new LiveRaportDTO();
+		dto.setId(e.getId());
+		dto.setDataJson(e.getDataJson());
+		dto.setResponseTime(e.getResponseTime());
+		dto.setKey(e.getKey());
+		dto.setRequestTime(e.getRequestTime());
+		dto.setStatus(e.getStatus());
+		dto.setType(e.getType());
+		
+		
+		return dto;
+	}
+
+	public List<LiveRaportDTO> liveRaportToDto(List<LiveRaport> data) {
+		if(data == null || data.isEmpty()) return null;
+		
+		List<LiveRaportDTO> list = new ArrayList<>();
+		
+		for(LiveRaport i : data)
 		{
 			list.add(toDto(i));
 		}

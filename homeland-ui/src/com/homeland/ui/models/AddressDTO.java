@@ -3,6 +3,9 @@ package com.homeland.ui.models;
 import java.io.Serializable;
 import java.math.BigInteger;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class AddressDTO implements Serializable {
 	
 	    private static final long serialVersionUID = 1L;

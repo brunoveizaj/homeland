@@ -2,6 +2,8 @@ package com.homeland.ui.models;
 
 import java.io.Serializable;
 
+
+
 public class EntityCounter implements Serializable{
 
 

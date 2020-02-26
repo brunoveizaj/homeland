@@ -3,8 +3,10 @@ package com.homeland.ui.models;
 import java.io.Serializable;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PersonRaportDTO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;

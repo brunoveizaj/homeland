@@ -2,6 +2,10 @@ package com.homeland.ui.models;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Principal implements Serializable{
 
 

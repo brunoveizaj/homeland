@@ -111,7 +111,7 @@
                     #{b.gender}
                 </p:column>
 				<p:column headerText="Data" sortBy="#{b.crosingDate}">
-                    <h:outputText value="#{b.crossingDate}" styleClass="bold" />
+                    <h:outputText value="#{formatBean.formatTimestamp(b.crossingDate)}" styleClass="bold" />
                 </p:column>
 				<p:column headerText="Pika kufitare" sortBy="#{b.crossingGate}">
 					#{b.crossingGate}

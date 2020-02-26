@@ -2,6 +2,10 @@ package com.homeland.ui.models;
 
 import java.math.BigInteger;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class BuildingMAP {
 
 	

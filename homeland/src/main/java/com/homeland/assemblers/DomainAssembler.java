@@ -25,7 +25,8 @@ public class DomainAssembler {
 		}
 		
 		border.setCitizenType(dto.getCitizenType());
-		border.setCrossingDate(DateUtil.toTimestamp(dto.getCrossingDate()));
+		//border.setCrossingDate(DateUtil.toTimestamp(dto.getCrossingDate()));
+		border.setCrossingDate(dto.getCrossingDate());
 		border.setCrossingGate(dto.getCrossingGate());
 		border.setDob(dto.getDob());
 		border.setDocNo(dto.getDocNo());

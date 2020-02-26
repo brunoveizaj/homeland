@@ -25,6 +25,11 @@ public class TokenService {
 		return TokenUtil.getUserId(token);
 	}
 	
+	public String getUsernameFromToken(String token)
+	{
+		return TokenUtil.getUsername(token);
+	}
+	
 	
 	
 	

@@ -1,0 +1,166 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+	<h:form id="live_person_view_form">
+		<f:event type="preRenderComponent"
+			listener="#{livePersonViewBean.init()}" />
+
+		<h:panelGroup layout="block" id="live_person_data">
+			<div class="ui-g">
+
+				<div class="ui-g-12">
+					<p:commandButton action="#{nav.back()}" value="Mbrapa"
+						process="@this" update=":main" styleClass="green-btn"
+						icon="fa fa-arrow-left" />
+				</div>
+
+
+				<div class="ui-g-12 ui-fluid">
+					<p:messages showDetail="true" closable="true">
+						<p:autoUpdate />
+					</p:messages>
+				</div>
+
+				<div class="ui-g-12 ui-fluid">
+					<p:panel header="Statusi i të dhënave" styleClass="yellow-pnl">
+						<p:panelGrid layout="grid" columns="6"
+							columnClasses="empty,bold,empty,bold,empty,bold"
+							styleClass="ui-panelgrid-blank">
+
+							<p:outputLabel value="Data kërkesës" />
+							<p:outputLabel
+								value="#{formatBean.formatTimestamp(livePersonViewBean.liveRaport.lastRequestDate)}" />
+							<p:outputLabel value="Data përgjigjes" />
+							<p:outputLabel
+								value="#{formatBean.formatTimestamp(livePersonViewBean.liveRaport.lastResponseDate)}" />
+
+							<p:commandButton value="Bej kërkesë!"
+								rendered="#{livePersonViewBean.liveRaport.lastRaportStatus != 'P'}"
+								styleClass="green-btn" update="@form"
+								action="#{livePersonViewBean.requestLiveRaport()}" />
+							<p:commandButton value="Anullo kërkesën!"
+								rendered="#{livePersonViewBean.liveRaport.lastRaportStatus == 'P'}"
+								styleClass="red-btn" update="@form"
+								action="#{livePersonViewBean.cancelRequestRaport()}" />
+
+						</p:panelGrid>
+						<p:panelGrid layout="grid" columns="1" columnClasses="bold"
+							styleClass="ui-panelgrid-blank">
+							<p:outputLabel
+								value="#{livePersonViewBean.liveRaport.displayMessage}" />
+						</p:panelGrid>
+					</p:panel>
+				</div>
+
+				<h:panelGroup layout="block"
+					rendered="#{livePersonViewBean.liveRaport.canAskRequest and !livePersonViewBean.liveRaport.hasData}">
+					<p:commandButton update="@form"
+						value="Beni kërkesë për të marrë të dhënat Live...."
+						action="#{livePersonViewBean.requestLiveRaport()}" />
+				</h:panelGroup>
+
+				<h:panelGroup layout="block"
+					rendered="#{livePersonViewBean.liveRaport.hasData}">
+
+					<div class="ui-g-12 ui-fluid">
+
+						<p:panel header="Gjeneralitetet" styleClass="blue-pnl">
+
+							<div class="ui-g nopad">
+								<div class="ui-g-12 nopad">
+									<p:panelGrid layout="grid" columns="4"
+										columnClasses="bold,empty,bold,empty"
+										styleClass="ui-panelgrid-blank">
+										<p:outputLabel value="Emri" />
+										<p:inputText value="#{livePersonViewBean.live.person.name}"
+											readonly="true" />
+										<p:outputLabel value="Mbiemri" />
+										<p:inputText value="#{livePersonViewBean.live.person.surname}"
+											readonly="true" />
+										<p:outputLabel value="Atësia" />
+										<p:inputText
+											value="#{livePersonViewBean.live.person.fatherName}"
+											readonly="true" />
+										<p:outputLabel value="Mëmësia" />
+										<p:inputText
+											value="#{livePersonViewBean.live.person.motherName}"
+											readonly="true" />
+										<p:outputLabel value="Datëlindja" />
+										<p:inputText value="#{livePersonViewBean.live.person.dob}"
+											readonly="true" />
+										<p:outputLabel value="Gjinia" />
+										<p:inputText value="#{livePersonViewBean.live.person.gender}"
+											readonly="true" />
+										<p:outputLabel value="Vendlindja" />
+										<p:inputText value="#{livePersonViewBean.live.person.pob}"
+											readonly="true" />
+										<p:outputLabel value="Mbiemri tjetër" />
+										<p:inputText
+											value="#{livePersonViewBean.live.person.maidenName}"
+											readonly="true" />
+										<p:outputLabel value="NID" />
+										<p:inputText value="#{livePersonViewBean.live.person.nid}"
+											readonly="true" />
+										<p:outputLabel value="Statusi Civil" />
+										<p:inputText
+											value="#{livePersonViewBean.live.person.civilStatus}"
+											readonly="true" />
+										<p:outputLabel value="Rrethi" />
+										<p:inputText value="#{livePersonViewBean.live.person.region}"
+											readonly="true" />
+										<p:outputLabel value="Bashkia" />
+										<p:inputText
+											value="#{livePersonViewBean.live.person.municipality}"
+											readonly="true" />
+
+
+									</p:panelGrid>
+								</div>
+								<div class="ui-g-12 nopad">
+
+									<p:dataTable
+										value="#{livePersonViewBean.live.person.otherNames}" var="o"
+										id="other_names_tbl" styleClass="no-border" rowIndexVar="r"
+										emptyMessage="Nuk ka emra te tjere" reflow="true">
+										<p:column headerText="#" style="text-align: left;">
+									#{r+1}
+									</p:column>
+										<p:column headerText="Emri - Data ndryshimit"
+											style="text-align: left;">
+									#{o}
+									</p:column>
+
+									</p:dataTable>
+
+								</div>
+								<div class="ui-g-12 nopad">
+
+									<p:dataTable
+										value="#{livePersonViewBean.live.person.addresses}" var="a"
+										id="addr_tbl" styleClass="no-border" rowIndexVar="r"
+										emptyMessage="Nuk ka adresa" reflow="true">
+										<p:column headerText="#" style="text-align: left;">
+									#{r+1}
+									</p:column>
+										<p:column headerText="Adresa" style="text-align: left;">
+									#{a}
+									</p:column>
+
+									</p:dataTable>
+
+								</div>
+							</div>
+
+						</p:panel>
+
+					</div>
+
+				</h:panelGroup>
+			</div>
+		</h:panelGroup>
+	</h:form>
+	</ui:composition>

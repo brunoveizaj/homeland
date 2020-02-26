@@ -27,9 +27,13 @@ import com.homeland.ui.services.SubjectService;
 import com.homeland.ui.services.VehicleService;
 import com.homeland.ui.utils.Messages;
 
+import lombok.Getter;
+import lombok.Setter;
+
 
 @ManagedBean
 @ViewScoped
+@Getter @Setter
 public class PersonViewBean implements Serializable {
 
 	private static final long serialVersionUID = 8544975675733910003L;
@@ -59,151 +63,7 @@ public class PersonViewBean implements Serializable {
 	
 	
 	
-	public NavigationBean getNav() {
-		return nav;
-	}
-
-
-	public void setNav(NavigationBean nav) {
-		this.nav = nav;
-	}
-
-
-	public PersonDTO getPerson() {
-		return person;
-	}
-
-
-	public void setPerson(PersonDTO person) {
-		this.person = person;
-	}
-
-
-	public List<PersonDTO> getFamily() {
-		return family;
-	}
-
-
-	public void setFamily(List<PersonDTO> family) {
-		this.family = family;
-	}
-
-
-	public List<CardDTO> getCards() {
-		return cards;
-	}
-
-
-	public void setCards(List<CardDTO> cards) {
-		this.cards = cards;
-	}
-
-
-	public List<PassportDTO> getPassports() {
-		return passports;
-	}
-
-
-	public void setPassports(List<PassportDTO> passports) {
-		this.passports = passports;
-	}
-
-
-	public List<PhoneDTO> getPhones() {
-		return phones;
-	}
-
-
-	public void setPhones(List<PhoneDTO> phones) {
-		this.phones = phones;
-	}
-
-
-	public List<TatimeDTO> getTatime() {
-		return tatime;
-	}
-
-
-	public void setTatime(List<TatimeDTO> tatime) {
-		this.tatime = tatime;
-	}
-
-
-	public List<OsheeDTO> getOshees() {
-		return oshees;
-	}
-
-
-	public void setOshees(List<OsheeDTO> oshees) {
-		this.oshees = oshees;
-	}
-
-
-	public List<BorderDTO> getBorders() {
-		return borders;
-	}
-
-
-	public void setBorders(List<BorderDTO> borders) {
-		this.borders = borders;
-	}
-
-
-	public List<SubjectDTO> getSubjects() {
-		return subjects;
-	}
-
-
-	public void setSubjects(List<SubjectDTO> subjects) {
-		this.subjects = subjects;
-	}
-
-
-	public List<VehicleDTO> getVehicles() {
-		return vehicles;
-	}
-
-
-	public void setVehicles(List<VehicleDTO> vehicles) {
-		this.vehicles = vehicles;
-	}
-
-	public PersonDTO getFamilyMember() {
-		return familyMember;
-	}
-
-
-	public void setFamilyMember(PersonDTO familyMember) {
-		this.familyMember = familyMember;
-	}
-
-	public List<AddressDTO> getAddresses() {
-		return addresses;
-	}
-
-	public void setAddresses(List<AddressDTO> addresses) {
-		this.addresses = addresses;
-	}
-
-	public List<AddressDTO> getNeighbors() {
-		return neighbors;
-	}
-
-
-	public void setNeighbors(List<AddressDTO> neighbors) {
-		this.neighbors = neighbors;
-	}
-
-
-	public AddressDTO getSelectedAddress() {
-		return selectedAddress;
-	}
-
-
-	public void setSelectedAddress(AddressDTO selectedAddress) {
-		this.selectedAddress = selectedAddress;
-	}
-
+	
 
 	
 	

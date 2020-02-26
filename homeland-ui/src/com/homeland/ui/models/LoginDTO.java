@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.homeland.ui.constants.IDate;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class LoginDTO implements Serializable{
 
 
