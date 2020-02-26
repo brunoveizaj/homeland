@@ -22,6 +22,16 @@ public class FormatBean implements Serializable {
 		return event.equals(IBorder.ENTRY)?"green-row":"red-row";
 	}
 	
+	public String cropStr(String value,int size)
+    {
+        if(StringUtil.isValid(value) && value.length()>=size)
+        {
+            return value.substring(0,size)+"...";
+        }
+        
+        return value;
+    }
+	
 	public boolean validString(String value)
 	{
 		return StringUtil.isValid(value);

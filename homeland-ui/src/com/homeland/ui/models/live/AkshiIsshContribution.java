@@ -37,16 +37,6 @@ public class AkshiIsshContribution {
     double supplementContrib;
 
     
-    @Override
-    public String toString() {
-        return "IsshContribution{" + "employeeContrib=" + employeeContrib + ", employerContrib=" + employerContrib + ", name=" + name + ", grossSalary=" + grossSalary + ", grossSalaryContrib=" + grossSalaryContrib + ", healthContrib=" + healthContrib + ", surname=" + surname + ", netSalary=" + netSalary + ", nipt=" + nipt + ", month=" + month + ", year=" + year + ", nid=" + nid + ", schemaName=" + schemaName + ", subjectName=" + subjectName + ", supplementContrib=" + supplementContrib + '}';
-    }
-    
-    
-    
-    
-    
-    
     
     
 }

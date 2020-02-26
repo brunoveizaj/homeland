@@ -64,8 +64,10 @@ public class LivePersonViewBean implements Serializable {
 						}catch(Exception e) 
 						{e.printStackTrace();}
 					
-				   }
+				 }
+				else {
 				System.err.println("NO DATA");
+				}
 		}catch(ApiException a) {
 			Messages.throwFacesMessage(a.getMessage(), a.getSeverity());
 		}

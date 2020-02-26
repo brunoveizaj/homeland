@@ -28,6 +28,8 @@ public class PersonDTO {
     String unit;
     List<String> addresses;
     List<String> otherNames;
+    
+    
 	@Override
 	public String toString() {
 		return "PersonDTO [nid=" + nid + ", name=" + name + ", surname=" + surname + ", fatherName=" + fatherName
