@@ -26,61 +26,57 @@
 				</div>
 
 				<div class="ui-g-12 ui-fluid">
-					<p:panel header="Statusi i të dhënave" styleClass="yellow-pnl">
-						<p:panelGrid layout="grid" columns="6"
-							columnClasses="empty,bold,empty,bold,empty,bold"
-							styleClass="ui-panelgrid-blank">
-
-							<p:outputLabel value="Data kërkesës" />
-							<p:outputLabel
-								value="#{formatBean.formatTimestamp(livePersonViewBean.liveRaport.lastRequestDate)}" />
-							<p:outputLabel value="Data përgjigjes" />
-							<p:outputLabel
-								value="#{formatBean.formatTimestamp(livePersonViewBean.liveRaport.lastResponseDate)}" />
-
-							<p:commandButton value="Bej kërkesë!"
+					<div class="card">
+					<div class="ui-g">
+					  <div class="ui-g-12">
+					  
+					  <div class="alert alert-#{livePersonViewBean.liveRaport.lastRaportStatus != 'P' ? 'success' : 'warning'}">
+					  <div class="ui-g">
+					  <div class="ui-g-12 ui-md-4">
+					  <span>Data kërkesës : </span> <span style="font-weight: bold">#{formatBean.formatTimestamp(livePersonViewBean.liveRaport.lastRequestDate)}</span><br/>
+					  <span>Data përgjigjes : </span> <span style="font-weight: bold">#{formatBean.formatTimestamp(livePersonViewBean.liveRaport.lastResponseDate)}</span><br/>
+					  <span style="font-weight: bold">#{livePersonViewBean.liveRaport.displayMessage}</span><br/>
+					  
+					  
+					  </div>
+					  <div class="ui-g-12 ui-md-3">
+					  <p:commandButton value="Bej kërkesë!"
 								rendered="#{livePersonViewBean.liveRaport.lastRaportStatus != 'P'}"
 								styleClass="green-btn" update="@form"
 								action="#{livePersonViewBean.requestLiveRaport()}" />
-							<p:commandButton value="Anullo kërkesën!"
+					   <p:commandButton value="Anullo kërkesën!"
 								rendered="#{livePersonViewBean.liveRaport.lastRaportStatus == 'P'}"
 								styleClass="red-btn" update="@form"
 								action="#{livePersonViewBean.cancelRequestRaport()}" />
-
-						</p:panelGrid>
-						<p:panelGrid layout="grid" columns="1" columnClasses="bold"
-							styleClass="ui-panelgrid-blank">
-							<p:outputLabel
-								value="#{livePersonViewBean.liveRaport.displayMessage}" />
-						</p:panelGrid>
-					</p:panel>
-				</div>
-
-				<h:panelGroup layout="block"
-					rendered="#{livePersonViewBean.liveRaport.canAskRequest and !livePersonViewBean.liveRaport.hasData}">
-					<p:commandButton update="@form"
-						value="Beni kërkesë për të marrë të dhënat Live...."
-						action="#{livePersonViewBean.requestLiveRaport()}" />
-				</h:panelGroup>
-
+					  </div>
+					  <div class="ui-g-12 ui-md-5">
+					  </div>
+					  </div>
+					  </div>
+					
+					</div>
+						
+					</div>
+				</div>				
+</div>
 				<h:panelGroup layout="block"
 					rendered="#{livePersonViewBean.liveRaport.hasData}">
 
-							
+
 					<div class="ui-g-12 ui-fluid">
 
-						<p:panel header="Gjeneralitetet" styleClass="blue-pnl">
-
+						<div class="card">
 							<div class="ui-g nopad">
-							
-							<div class="ui-g-12 ui-md-2">
-								<p:graphicImage value="#{photoBean.cardImage}" width="95%">
-									<f:param value="#{livePersonViewBean.live.person.nid}" name="p_nid" />
-								</p:graphicImage>
-							</div>
-							
-							
-								<div class="ui-g-12 ui-md-10 nopad">
+
+								<div class="ui-g-12 ui-md-2">
+									<p:graphicImage value="#{photoBean.personImage}" width="70%">
+										<f:param value="#{livePersonViewBean.live.person.nid}"
+											name="p_nid" />
+									</p:graphicImage>
+								</div>
+
+
+								<div class="ui-g-12 ui-md-8 nopad">
 									<p:panelGrid layout="grid" columns="4"
 										columnClasses="bold,empty,bold,empty"
 										styleClass="ui-panelgrid-blank">
@@ -125,30 +121,21 @@
 										<p:inputText
 											value="#{livePersonViewBean.live.person.municipality}"
 											readonly="true" />
-
-
 									</p:panelGrid>
+									<h:panelGroup layout="block"
+										rendered="#{livePersonViewBean.live.person.otherNames.size() gt 0}">
+										<h:outputText value="* Emrat e tjerë" styleClass="bold"
+											style="color: #FF1300" />
+										<br />
+										<p:dataTable
+											value="#{livePersonViewBean.live.person.otherNames}" var="o"
+											styleClass="no-header">
+											<p:column>	#{o}  </p:column>
+										</p:dataTable>
+									</h:panelGroup>
 								</div>
-								<div class="ui-g-12 nopad">
-
-									<p:dataTable
-										value="#{livePersonViewBean.live.person.otherNames}" var="o"
-										id="other_names_tbl" styleClass="no-border" rowIndexVar="r"
-										emptyMessage="Nuk ka emra te tjere" reflow="true">
-										<p:column headerText="#" style="text-align: left;">
-									#{r+1}
-									</p:column>
-										<p:column headerText="Emri - Data ndryshimit"
-											style="text-align: left;">
-									#{o}
-									</p:column>
-
-									</p:dataTable>
-
-								</div>
-								<div class="ui-g-12 nopad">
-
-									<p:dataTable
+								<div class="ui-g-12 ui-md-2 nopad">
+									<p:dataTable scrollable="true" scrollHeight="170"
 										value="#{livePersonViewBean.live.person.addresses}" var="a"
 										id="addr_tbl" styleClass="no-border" rowIndexVar="r"
 										emptyMessage="Nuk ka adresa" reflow="true">
@@ -160,423 +147,738 @@
 									</p:column>
 
 									</p:dataTable>
+								</div>
+
+
+							</div>
+
+						</div>
+
+					</div>
+
+
+					<div class="ui-g-12 ui-fluid">
+
+						<div class="card title">
+							<h1>Familja</h1>
+							<div class="ui-g nopad">
+
+								<div class="ui-g-12 ">
+									<p:dataTable value="#{livePersonViewBean.live.family}" var="f"
+										styleClass="no-border" rowIndexVar="r" reflow="true">
+
+										<p:column headerText="#" style="text-align: left">
+                    #{r+1}
+                </p:column>
+										<p:column headerText="NID" style="text-align: left">
+                    #{f.nid}
+                </p:column>
+										<p:column headerText="Emri/Atësia/Mbiemri"
+											style="text-align: left">
+											<p:commandLink value="#{f.name} #{f.fatherName} #{f.surname}" />
+										</p:column>
+										<p:column headerText="Datëlindja" style="text-align: left">
+                    #{f.dob}
+                </p:column>
+										<p:column headerText="Vendlindja" style="text-align: left">
+                    #{f.pob}
+                </p:column>
+										<p:column headerText="L.F" style="text-align: left">
+                    #{f.familyRelation}
+                </p:column>
+										<p:column headerText="Statusi" style="text-align: left">
+                    #{f.civilStatus}
+                </p:column>
+										<p:column headerText="Gjinia" style="text-align: left">
+                    #{f.gender}
+                </p:column>
+									</p:dataTable>
 
 								</div>
 							</div>
-
-						</p:panel>
+						</div>
 
 					</div>
-					
-					
-		<div class="ui-g-12 ui-fluid">
 
-				<p:panel header="Familja" styleClass="blue-pnl">
-							<p:dataTable value="#{livePersonViewBean.live.family}" var="f"
-					styleClass="blue-tbl" 
-					rowIndexVar="r" 
-					reflow="true">
 
-					<p:column headerText="#">
-                    #{r+1}
-                </p:column>
-					<p:column headerText="NID">
-                    #{f.nid}
-                </p:column>
-					<p:column headerText="Emri">
-                    #{f.name} 
-                </p:column>
-					<p:column headerText="Atësia">
-                    #{f.fatherName}
-                </p:column>
-					<p:column headerText="Mbiemri">
-                    #{f.surname}
-                </p:column>
-					<p:column headerText="Datëlindja">
-                    #{f.dob}
-                </p:column>
-					<p:column headerText="Vendlindja">
-                    #{f.pob}
-                </p:column>
-					<p:column headerText="L.F">
-                    #{f.familyRelation}
-                </p:column>
-					<p:column headerText="Statusi">
-                    #{f.civilStatus}
-                </p:column>
-					<p:column headerText="Gjinia">
-                    #{f.gender}
-                </p:column>
-				</p:dataTable>
-			</p:panel>
-		</div>
-					
-					
-	<div class="ui-g-12 ui-fluid">
-	
-		<p:panel header="Punësimi" styleClass="blue-pnl">
-		
-		<p:dataTable value="#{livePersonViewBean.live.payrolls}" var="prl" 
-                                 rendered="#{livePersonViewBean.live.payrolls.size() gt 0}"
-                                 rowIndexVar="r"
-                                 >
-                        <p:column headerText="#">
+					<div class="ui-g-12 ui-fluid">
+
+						<div class="card title">
+							<h1>Punësimi (Viti i fundit)</h1>
+							<div class="ui-g nopad">
+
+								<div class="ui-g-12 ">
+
+									<p:dataTable value="#{livePersonViewBean.live.payrolls}"
+										var="prl" styleClass="no-border"
+										rendered="#{livePersonViewBean.live.payrolls.size() gt 0}"
+										rowIndexVar="r">
+										<p:column headerText="#" style="text-align: left">
                             #{r+1}
                         </p:column>
-                        <p:column headerText="NIPT">
+										<p:column headerText="NIPT" style="text-align: left">
                             #{prl.taxPayerNipt}
                         </p:column>
-                        <p:column headerText="Subjekti">
-                            <p:commandLink value="#{prl.taxPayerName}" />
+										<p:column headerText="Subjekti" style="text-align: left">
+											<p:commandLink value="#{prl.taxPayerName}" />
 
-                        </p:column>
-                        <p:column headerText="Kategoria">
-                            <p:outputLabel value="#{formatBean.cropStr(prl.insuranceCategoryDescription,15)}" title="#{prl.insuranceCategoryDescription}" />
-                        </p:column>
-                        <p:column headerText="Llog.Pag.Shënd">
+										</p:column>
+										<p:column headerText="Kategoria" style="text-align: left">
+											<p:outputLabel
+												value="#{formatBean.cropStr(prl.insuranceCategoryDescription,15)}"
+												title="#{prl.insuranceCategoryDescription}" />
+										</p:column>
+										<p:column headerText="Llog.Pag.Shënd" style="text-align: left">
                             #{prl.wageForHealthContrib}
                         </p:column>
-                        <p:column headerText="Llog.Pag.Shoq">
+										<p:column headerText="Llog.Pag.Shoq" style="text-align: left">
                             #{prl.wageForSocialContrib}
                         </p:column>
-                        <p:column headerText="Kontr.Total">
+										<p:column headerText="Kontr.Total" style="text-align: left">
                             #{prl.contributionForTotal}
                         </p:column>
-                        <p:column headerText="Kontr.Deklaruara">
+										<p:column headerText="Kontr.Deklaruara"
+											style="text-align: left">
                             #{prl.declaredTotalContributions}
                         </p:column>
-                        <p:column headerText="Periudha">
+										<p:column headerText="Periudha" style="text-align: left">
                             #{prl.period}
                         </p:column>
-                    </p:dataTable>
-				
-		</p:panel>
-	
-	</div>
-	
-	<div class="ui-g-12 ui-fluid">
-	
-		<p:panel header="ISSH - Sigurimet/Kontributet" styleClass="blue-pnl">
-		<p:dataTable value="#{livePersonViewBean.live.contributions}" var="isshc" rowIndexVar="r" rendered="#{livePersonViewBean.live.contributions.size() gt 0}"
-                                 paginator="true" rows="10" rowsPerPageTemplate="5,10,20,50"
-                                 >
+									</p:dataTable>
 
-                        <p:column headerText="#">
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="ui-g-12 ui-fluid">
+						<div class="card title">
+							<h1>ISSH - Sigurimet/Kontributet</h1>
+							<div class="ui-g nopad">
+
+								<div class="ui-g-12 ">
+									<p:dataTable value="#{livePersonViewBean.live.contributions}"
+										var="isshc" rowIndexVar="r"
+										rendered="#{livePersonViewBean.live.contributions.size() gt 0}"
+										paginator="true" rows="10" rowsPerPageTemplate="5,10,20,50"
+										styleClass="no-border">
+
+										<p:column headerText="#" style="text-align: left">
                             #{r+1}
-                        </p:column>                      
-                        <p:column headerText="NIPT">
+                        </p:column>
+										<p:column headerText="NIPT" style="text-align: left">
                             #{isshc.nipt}
                         </p:column>
-                        <p:column headerText="Subjekti">
-                            <p:commandLink value="#{isshc.subjectName}"   />                           
-                        </p:column>
-                        <p:column headerText="Paga Bruto">
+										<p:column headerText="Subjekti" style="text-align: left">
+											<p:commandLink value="#{isshc.subjectName}" />
+										</p:column>
+										<p:column headerText="Paga Bruto" style="text-align: left">
                             #{isshc.grossSalary}
                         </p:column>
-                        <p:column headerText="Paga Neto">
+										<p:column headerText="Paga Neto" style="text-align: left">
                             #{isshc.netSalary}
                         </p:column>
-                        <p:column headerText="Paga Br.Kontr.">
+										<p:column headerText="Paga Br.Kontr." style="text-align: left">
                             #{isshc.grossSalaryContrib}
                         </p:column>
-                        <p:column headerText="Kontr. Shënd">
+										<p:column headerText="Kontr. Shënd" style="text-align: left">
                             #{isshc.healthContrib}
                         </p:column>
-                        <p:column headerText="K.P. Marrësi">
+										<p:column headerText="K.P. Marrësi" style="text-align: left">
                             #{isshc.employeeContrib}
                         </p:column>
-                        <p:column headerText="K.P. Dhënësi">
+										<p:column headerText="K.P. Dhënësi" style="text-align: left">
                             #{isshc.employerContrib}
                         </p:column>
-                        <p:column headerText="Kont.supl">
+										<p:column headerText="Kont.supl" style="text-align: left">
                             #{isshc.supplementContrib}
                         </p:column>
-                        <p:column headerText="Skema">
+										<p:column headerText="Skema" style="text-align: left">
                             #{isshc.schemaName}
                         </p:column>
-                        <p:column headerText="Periudha">
+										<p:column headerText="Periudha" style="text-align: left">
                             #{isshc.year} - #{isshc.month}
                         </p:column>
 
-                    </p:dataTable> 
-		</p:panel>
-	
-	</div>
-	<div class="ui-g-12 ui-fluid">
-	
-		<p:panel header="Pronat/Pasuritë" styleClass="blue-pnl">
-		</p:panel>
-	
-	</div>	
-	<div class="ui-g-12 ui-fluid">
-	
-		<p:panel header="Bizneset" styleClass="blue-pnl">
-		
-		<p:dataTable value="#{livePersonViewBean.live.subjects}" var="sub" rendered="#{livePersonViewBean.live.subjects.size() gt 0}"
-                                 rowIndexVar="r">
+									</p:dataTable>
+								</div>
+							</div>
+						</div>
 
-                        <p:column headerText="#">
+					</div>
+					<div class="ui-g-12 ui-fluid">
+
+						<div class="card title">
+							<h1>Pronat/Pasuritë</h1>
+							<div class="ui-g nopad">
+
+								<div class="ui-g-12 ">
+
+									<div class="alert alert-success">
+										<span>Nuk eshte implementuar akoma</span>
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="ui-g-12 ui-fluid">
+
+						<div class="card title">
+							<h1>Bizneset</h1>
+							<div class="ui-g nopad">
+
+								<div class="ui-g-12 ">
+
+									<p:dataTable value="#{livePersonViewBean.live.subjects}"
+										var="sub"
+										rendered="#{livePersonViewBean.live.subjects.size() gt 0}"
+										rowIndexVar="r" styleClass="no-border">
+
+										<p:column headerText="#" style="text-align: left">
                             #{r+1}
                         </p:column>
-                        <p:column headerText="NIPT">
+										<p:column headerText="NIPT" style="text-align: left">
                             #{sub.nipt}
                         </p:column>
-                        <p:column headerText="Emri Subjektit">
-                            <p:commandLink value="#{sub.subjectName}" />
-                        </p:column>
-                        <p:column headerText="Pronari">
+										<p:column headerText="Emri Subjektit" style="text-align: left">
+											<p:commandLink value="#{sub.subjectName}" />
+										</p:column>
+										<p:column headerText="Pronari" style="text-align: left">
                             #{sub.firstName} #{sub.lastName}
                         </p:column>
-                        <p:column headerText="Forma Ligjore">
+										<p:column headerText="Forma Ligjore" style="text-align: left">
                             #{sub.legalForm}
                         </p:column>
-                        <p:column headerText="Statusi">
+										<p:column headerText="Statusi" style="text-align: left">
                             #{sub.subjectStatus}
                         </p:column>
-                        <p:column headerText="Përshkrimi">
+										<p:column headerText="Përshkrimi" style="text-align: left">
                             #{sub.statusDescription}
                         </p:column>
 
-                    </p:dataTable>
-		
-		</p:panel>
-	
-	</div>
-	<div class="ui-g-12 ui-fluid">
-	
-		<p:panel header="Automjetet" styleClass="blue-pnl">
-		<p:dataTable value="#{livePersonViewBean.live.vehicles}" var="v" rendered="#{livePersonViewBean.live.vehicles.size() gt 0}"
-                                 rowIndexVar="r"
-                                 >
-                        <p:column headerText="#">
-                            <p:outputLabel value="#{r+1}"/>
-                        </p:column>
-                        <p:column headerText="Targa" >
-                            <p:commandLink value="#{v.plate}" />
-                        </p:column>
-                        <p:column headerText="Shasia" >
-                            <p:outputLabel value="#{v.vin}" />
-                        </p:column>
-                        <p:column headerText="Pronari" >
-                            <p:outputLabel value="#{v.owner}" />
-                        </p:column>
-                        <p:column headerText="Tipi" >
-                            <p:outputLabel value="#{v.type}" />
-                        </p:column>
-                        <p:column headerText="Marka" >
-                            <p:outputLabel value="#{v.producerModel}"/>
-                        </p:column>
-                        <p:column headerText="Modeli" >
-                            <p:outputLabel value="#{v.model}"/>
-                        </p:column>
-                        <p:column headerText="Kapaciteti" >
-                            <p:outputLabel value="#{v.capacity}"/>
-                        </p:column>
-                        <p:column headerText="Ngjyra" >
-                            <p:outputLabel value="#{v.color}"/>
-                        </p:column>
-                        <p:column headerText="Viti" >
-                            <p:outputLabel value="#{v.year}"/>
-                        </p:column>
-                        <p:column headerText="Leja Qark." >
-                            <p:outputLabel value="#{v.drivingPermitNo}"/>
-                        </p:column>
+									</p:dataTable>
 
-                    </p:dataTable>
-		</p:panel>
-	
-	</div>
-	<div class="ui-g-12 ui-fluid">
-	
-		<p:panel header="Gjobat (Emër/Mbiemër)" styleClass="blue-pnl">
-		</p:panel>
-	
-	</div>	
-	<div class="ui-g-12 ui-fluid">
-	
-		<p:panel header="Hyrje - Daljet" styleClass="blue-pnl">
-		<p:dataTable value="#{livePersonViewBean.live.borders}" var="b"
-					rowIndexVar="r" reflow="true" emptyMessage="Nuk ka hyrje-dalje"
-					rowStyleClass="#{formatBean.formatBCE(b.event)}"
-					styleClass="blue-tbl" paginator="true" paginatorAlwaysVisible="false" rows="10" rowsPerPageTemplate="5,10,20,30,100">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-fluid">
 
-					<f:facet name="header">
-                    Hyrje - Dalje
-                </f:facet>
-					<p:column headerText="#">
+						<div class="card title">
+							<h1>Automjetet</h1>
+							<div class="ui-g nopad">
+
+								<div class="ui-g-12 ">
+									<p:dataTable value="#{livePersonViewBean.live.vehicles}"
+										var="v"
+										rendered="#{livePersonViewBean.live.vehicles.size() gt 0}"
+										rowIndexVar="r" styleClass="no-border">
+										<p:column headerText="#" style="text-align: left">
+											<p:outputLabel value="#{r+1}" />
+										</p:column>
+										<p:column headerText="Targa" style="text-align: left">
+											<p:commandLink value="#{v.plate}" />
+										</p:column>
+										<p:column headerText="Shasia" style="text-align: left">
+											<p:outputLabel value="#{v.vin}" />
+										</p:column>
+										<p:column headerText="Pronari" style="text-align: left">
+											<p:outputLabel value="#{v.owner}" />
+										</p:column>
+										<p:column headerText="Tipi" style="text-align: left">
+											<p:outputLabel value="#{v.type}" />
+										</p:column>
+										<p:column headerText="Marka" style="text-align: left">
+											<p:outputLabel value="#{v.producerModel}" />
+										</p:column>
+										<p:column headerText="Modeli" style="text-align: left">
+											<p:outputLabel value="#{v.model}" />
+										</p:column>
+										<p:column headerText="Kapaciteti" style="text-align: left">
+											<p:outputLabel value="#{v.capacity}" />
+										</p:column>
+										<p:column headerText="Ngjyra" style="text-align: left">
+											<p:outputLabel value="#{v.color}" />
+										</p:column>
+										<p:column headerText="Viti" style="text-align: left">
+											<p:outputLabel value="#{v.year}" />
+										</p:column>
+										<p:column headerText="Leja Qark." style="text-align: left">
+											<p:outputLabel value="#{v.drivingPermitNo}" />
+										</p:column>
+
+									</p:dataTable>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="ui-g-12 ui-fluid">
+
+						<div class="card title">
+							<h1>Gjobat (Emër/Mbiemër)</h1>
+							<div class="ui-g nopad">
+
+								<div class="ui-g-12 ">
+									<p:dataTable value="#{livePersonViewBean.live.tickets}" var="t"
+										rowIndexVar="r" reflow="true" emptyMessage="Nuk ka gjoba"
+										styleClass="no-border" paginator="true"
+										paginatorAlwaysVisible="false" rows="20"
+										rowsPerPageTemplate="5,10,20,30,100">
+
+										<p:column headerText="#" style="text-align: left">
                     #{r+1}
                 </p:column>
-				<p:column headerText="Eventi">
-                    <h:outputText value="#{b.event}" />
+										<p:column headerText="Targa" style="text-align: left">
+											<p:commandLink value="#{t.plate}" />
+										</p:column>
+										<p:column headerText="Nr serial" style="text-align: left">
+					#{t.serialNo}
+				</p:column>
+										<p:column headerText="Data" style="text-align: left">
+											<h:outputText
+												value="#{formatBean.formatTimestamp(t.ticketDate)}"
+												styleClass="bold" />
+										</p:column>
+										<p:column headerText="Oficeri" style="text-align: left">
+                    #{t.officer}
                 </p:column>
-				<p:column headerText="Data">
-                   <h:outputText value="#{formatBean.formatTimestamp(b.crossingDate)}" styleClass="bold" />
+										<p:column headerText="Vendi gjobës" style="text-align: left">
+                    #{t.ticketPlace}
                 </p:column>
-					<p:column headerText="Pika kufitare">
+										<p:column headerText="Shkelësi" style="text-align: left">
+                    #{t.violator}
+                </p:column>
+										<p:column headerText="Vlera" style="text-align: left">
+											<h:outputText value="#{t.amount}" styleClass="bold" />
+										</p:column>
+										<p:column headerText="Statusi" style="text-align: left">
+                    #{t.status}
+                </p:column>
+									</p:dataTable>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="ui-g-12 ui-fluid">
+
+						<div class="card title">
+							<h1>Hyrje - Dalje</h1>
+							<div class="ui-g nopad">
+
+								<div class="ui-g-12 ">
+									<p:dataTable value="#{livePersonViewBean.live.borders}" var="b"
+										rowIndexVar="r" reflow="true"
+										emptyMessage="Nuk ka hyrje-dalje"
+										rowStyleClass="#{formatBean.formatBCE(b.event)}"
+										styleClass="no-border" paginator="true"
+										paginatorAlwaysVisible="false" rows="10"
+										rowsPerPageTemplate="5,10,20,30,100">
+
+
+										<p:column headerText="#" style="text-align: left">
+                    #{r+1}
+                </p:column>
+										<p:column headerText="Eventi" style="text-align: left">
+											<h:outputText value="#{b.event}" />
+										</p:column>
+										<p:column headerText="Data" style="text-align: left">
+											<h:outputText
+												value="#{formatBean.formatTimestamp(b.crossingDate)}"
+												styleClass="bold" />
+										</p:column>
+										<p:column headerText="Pika kufitare" style="text-align: left">
 					#{b.crossingGate}
 				</p:column>
-					<p:column headerText="Linja">
+										<p:column headerText="Linja" style="text-align: left">
                     #{b.travel}
                 </p:column>
-					<p:column headerText="Dokumenti">
+										<p:column headerText="Dokumenti" style="text-align: left">
                     #{b.docNo} (#{b.docState})
                 </p:column>
-					<p:column headerText="Kategoria">
+										<p:column headerText="Kategoria" style="text-align: left">
                     #{b.citizenType}
                 </p:column>
-				<p:column headerText="Targa">
-					<p:commandLink value=" #{b.plate}" action="#{nav.navigate('vehicle_view')}" update=":main">
-						<f:param name="plate" value="#{b.plate}"/>
-					</p:commandLink>                  
-                </p:column>
-					<p:column headerText="Shofer">
+										<p:column headerText="Targa" style="text-align: left">
+											<p:commandLink value=" #{b.plate}" />
+										</p:column>
+										<p:column headerText="Shofer" style="text-align: left">
                     #{b.driver}
                 </p:column>
-					<p:column headerText="Qëlimi">
+										<p:column headerText="Qëlimi" style="text-align: left">
                     #{b.pupose}
                 </p:column>
-				</p:dataTable>
-		</p:panel>
-	
-	</div>	
-	<div class="ui-g-12 ui-fluid">
-	
-		<p:panel header="Ngjarjet Kriminale TIMS" styleClass="blue-pnl">
-		
-		<h:panelGroup layout="block" rendered="#{livePersonViewBean.live.timsActs.size() gt 0}" style="width: 100%">
+									</p:dataTable>
+								</div>
+							</div>
+						</div>
 
-                        <p:tabView value="#{livePersonViewBean.live.timsActs}" var="at"  >
-                            <p:tab  title="Ngjarja #{formatBean.formatDate(at.reportDate)}"  >
-                                <h:panelGrid columns="2" style="width:100%" columnClasses="topAlign,topAlign">
-                                    <h:panelGrid columns="2" rowClasses="bold,empty" width="100%">
-                                        <p:outputLabel value="Data Ngjarjes"/> 
-                                        <p:outputLabel value="Tipi Ngjarjes"/> 
-                                        <h:inputText disabled="true" value="#{formatBean.formatTimestamp(at.reportDate)}"/>                                        
-                                        <h:inputText disabled="true" value="#{at.reportType}"/>
+					</div>
+					<div class="ui-g-12 ui-fluid">
 
-                                        <p:outputLabel value="Nr Unik"/> 
-                                        <p:outputLabel value="Oficeri"/>
-                                        <h:inputText disabled="true" value="#{at.uniqueNo}"/>
-                                        <h:inputText disabled="true" value="#{at.officer}"/>
+						<div class="card title">
+							<h1>Ngjarjet Kriminale TIMS</h1>
+							<div class="ui-g nopad">
 
-                                        <p:outputLabel value="Viktima"/> 
-
-                                        <p:outputLabel value="Dyshuari"/> 
-                                        <p:commandLink value="#{at.victimFullName}"  />
-                                        <p:commandLink value="#{at.suspectFullName}"  />
+								<div class="ui-g-12 ">
 
 
-                                        <p:outputLabel value="Vendi ngjarjes"/>
-                                        <p:outputLabel value=" "/>
-                                        <h:inputTextarea disabled="true" value="#{at.address}" rows="3"/>
+									<h:panelGroup layout="block"
+										rendered="#{livePersonViewBean.live.timsActs.size() gt 0}"
+										style="width: 100%">
 
-                                    </h:panelGrid>
-                                    <h:panelGrid width="100%" >
-                                        <p:outputLabel value="Shënime" styleClass="bold" />
-                                        <h:inputTextarea disabled="true" value="#{at.narration}" style="width: 100%" rows="10" />
-                                    </h:panelGrid>
+										<p:tabView value="#{livePersonViewBean.live.timsActs}"
+											var="at">
+											<p:tab
+												title="Ngjarja #{formatBean.formatDate(at.reportDate)}">
+												
+									
+												<p:panelGrid layout="grid" columns="6"
+													columnClasses="bold,empty,bold,empty,bold,empty"
+													styleClass="ui-panelgrid-blank">
+												 
+														<p:outputLabel value="Data Ngjarjes" />
+														<p:inputText readonly="true"
+															value="#{formatBean.formatTimestamp(at.reportDate)}" />
+														<p:outputLabel value="Tipi Ngjarjes" />
+														<p:inputText readonly="true" value="#{at.reportType}" />
+														<p:outputLabel value="Dyshuari" />
+														<p:commandLink value="#{at.suspectFullName}" styleClass="bold" style="color: #FF1300" />
 
-                                </h:panelGrid>
+														<p:outputLabel value="Nr Unik" />
+														<p:inputText readonly="true" value="#{at.uniqueNo}" />
+														<p:outputLabel value="Oficeri" />
+														<p:inputText readonly="true" value="#{at.officer}" />
+														<p:outputLabel value="Viktima" />
+														<p:commandLink value="#{at.victimFullName}"  styleClass="bold" style="color: orangered"/>
 
-                            </p:tab>
-                        </p:tabView>
-                    </h:panelGroup>
-		
-		</p:panel>
-	
-	</div>			
-	<div class="ui-g-12 ui-fluid">
-	
-		<p:panel header="Ngjarjet Kriminale 'Menaxhimi Çështjes'" styleClass="blue-pnl">
-		</p:panel>
-	
-	</div>	
-	<div class="ui-g-12 ui-fluid">
-	
-		<p:panel header="Komunikata Ditore (Emër/Mbiemër)" styleClass="blue-pnl">
-		<p:dataTable id="komTbl" value="#{livePersonViewBean.live.dailyCommunications}" var="k" rendered="#{livePersonViewBean.live.dailyCommunications.size() gt 0}"
-                                 rowIndexVar="r">
-                        <p:column headerText="#">
-                            <p:outputLabel value="#{r+1}"/>
-                        </p:column>
-                        <p:column headerText="Emri Atësia Mbiemri" >
+														<p:outputLabel value="Vendi ngjarjes" />
+														<p:inputText readonly="true" value="#{at.address}" />
+
+												</p:panelGrid>
+										
+												<p:panelGrid layout="grid" columns="1" styleClass="ui-panelgrid-blank">
+														<p:outputLabel value="Shënime" styleClass="bold" />
+														<p:inputTextarea readonly="true" value="#{at.narration}"
+															rows="10" />
+													</p:panelGrid>
+												
+												
+												
+											</p:tab>
+										</p:tabView>
+									</h:panelGroup>
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-fluid">
+
+						<div class="card title">
+							<h1>Ngjarjet Kriminale 'Menaxhimi Çështjes'</h1>
+							<div class="ui-g nopad">
+
+								<div class="ui-g-12 "></div>
+							</div>
+						</div>
+
+
+					</div>
+					<div class="ui-g-12 ui-fluid">
+
+						<div class="card title">
+							<h1>Aktet Kriminale 'Menaxhimi Çështjes'</h1>
+							<div class="ui-g nopad">
+
+								<div class="ui-g-12 ">
+									<h:panelGroup layout="block"
+										rendered="#{livePersonViewBean.live.crisActs.size() gt 0}"
+										style="width: 100%">
+
+										<p:tabView value="#{livePersonViewBean.live.crisActs}" var="a">
+											<p:tab title="Ngjarje #{formatBean.formatDate(a.actDate)}">
+												<p:panelGrid layout="grid" columns="4"
+													columnClasses="ui-grid-col-2 bold,ui-grid-col-4,ui-grid-col-2 bold,ui-grid-col-4"
+													styleClass="ui-panelgrid-blank">
+													<p:outputLabel value="Data Ngjarjes" />
+													<p:inputText readonly="true"
+														value="#{formatBean.formatTimestamp(a.actDate)}" />
+													<p:outputLabel value="Tipi Ngjarjes" />
+													<p:inputText readonly="true" value="#{a.actType}" />
+
+													<p:outputLabel value="Nr Unik" />
+													<p:inputText readonly="true" value="#{a.uniqueNo}" />
+													<p:outputLabel value="Oficeri" />
+													<p:inputText readonly="true" value="#{a.officer}" />
+
+													<p:outputLabel value="Organizata" />
+													<p:inputText readonly="true" value="#{a.organization}" />
+													<p:outputLabel value="Adresa" />
+													<p:inputText readonly="true" value="#{a.address}" />
+												</p:panelGrid>
+												<p:panelGrid layout="grid" columns="1"
+													styleClass="ui-panelgrid-blank">
+
+													<p:outputLabel value="Shënime" styleClass="bold" />
+													<p:inputTextarea readonly="true" value="#{a.notes}"
+														rows="10" />
+												</p:panelGrid>
+											</p:tab>
+										</p:tabView>
+									</h:panelGroup>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="ui-g-12 ui-fluid">
+
+						<div class="card title">
+							<h1>Komunikata Ditore (Emër/Mbiemër)</h1>
+							<div class="ui-g nopad">
+
+								<div class="ui-g-12 ">
+									<p:dataTable id="komTbl"
+										value="#{livePersonViewBean.live.dailyCommunications}" var="k"
+										rendered="#{livePersonViewBean.live.dailyCommunications.size() gt 0}"
+										rowIndexVar="r" styleClass="no-border">
+										<p:column headerText="#" style="text-align: left">
+											<p:outputLabel value="#{r+1}" />
+										</p:column>
+										<p:column headerText="Emri Atësia Mbiemri"
+											style="text-align: left">
                             #{k.name} #{k.fatherName} #{k.surname}
                         </p:column>
-                        <p:column headerText="Nr Komunikatës" >
+										<p:column headerText="Nr Komunikatës" style="text-align: left">
                             #{k.communicationNo}
                         </p:column>
-                        <p:column headerText="Nr Unik" >
+										<p:column headerText="Nr Unik" style="text-align: left">
                             #{k.uniqueNo}
                         </p:column>
-                        <p:column headerText="Nr Kartele" >
+										<p:column headerText="Nr Kartele" style="text-align: left">
                             #{k.dossierNo}
                         </p:column>
-                        <p:column headerText="Tip Lidhje" >
+										<p:column headerText="Tip Lidhje" style="text-align: left">
                             #{k.relationType}
                         </p:column>
-                        <p:column headerText="Shënime" >
+										<p:column headerText="Shënime" style="text-align: left">
                             #{k.notes}
-                        </p:column>  
-                        <p:column headerText="Rrethi" >
+                        </p:column>
+										<p:column headerText="Rrethi" style="text-align: left">
                             #{k.region}
                         </p:column>
-                        <p:column headerText="Data Ngjarjes" >
+										<p:column headerText="Data Ngjarjes" style="text-align: left">
                             #{formatBean.formatDate(k.reportDate)}
                         </p:column>
 
 
 
-                    </p:dataTable>
-		</p:panel>
-	
-	</div>	
-	<div class="ui-g-12 ui-fluid">
-	
-		<p:panel header="Shpallje në kërkim" styleClass="blue-pnl">
-		</p:panel>
-	
-	</div>	
-	<div class="ui-g-12 ui-fluid">
-	
-		<p:panel header="Fletë Arresti" styleClass="blue-pnl">
-		</p:panel>
-	
-	</div>	
-	<div class="ui-g-12 ui-fluid">
-	
-		<p:panel header="Shoqërime nga Policia" styleClass="blue-pnl">
-		<p:dataTable id="adamTbl" value="#{livePersonViewBean.live.adams}" var="a" rendered="#{livePersonViewBean.live.adams.size() gt 0}"
-                                 rowIndexVar="r">
-                        <p:column headerText="#">
-                            <p:outputLabel value="#{r+1}"/>
-                        </p:column>
-                        <p:column headerText="Emri Atësia Mbiemri" >
+									</p:dataTable>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-fluid">
+
+						<div class="card title">
+							<h1>Shpallje në kërkim</h1>
+							<div class="ui-g nopad">
+
+								<div class="ui-g-12 ">
+									<h:panelGroup layout="block"
+										rendered="#{livePersonViewBean.live.wantedPersons.size() gt 0}"
+										style="width: 100%">
+
+										<p:tabView value="#{livePersonViewBean.live.wantedPersons}"
+											var="wp">
+											<p:tab title="SH.K #{wp.wpNo}">
+											<div class="ui-g">
+											 <div class="ui-g-12 ui-md-8">
+
+													<p:panelGrid layout="grid" columns="2" columnClasses="ui-grid-col-4 bold,ui-grid-col-8" styleClass="ui-panelgrid-blank">
+
+														<p:outputLabel value="Nr Personit në kërkim" />
+														<p:inputText readonly="true" value="#{wp.wpNo}" />
+														<p:outputLabel value="Nr References" />
+														<p:inputText readonly="true" value="#{wp.refNo}" />
+
+														<p:outputLabel value="Struktura" />
+														<p:inputText readonly="true" value="#{wp.structure}" />
+														<p:outputLabel value="Data References" />
+														<p:inputText readonly="true"
+															value="#{formatBean.formatDate(wp.refDate)}" />
+
+														<p:outputLabel value="Kategoria" />
+														<p:inputText readonly="true" value="#{wp.category}" />
+														<p:outputLabel value="Data Vendimit" />
+														<p:inputText readonly="true"
+															value="#{formatBean.formatDate(wp.sentenceDate)}" />
+													</p:panelGrid>
+												</div>
+												<div class="ui-g-12 ui-md-4">
+														<p:dataTable value="#{wp.wantedStatuses}" var="ws" styleClass="no-border">
+															<p:column headerText="Data Statusit" style="text-align: left">
+                                                #{formatBean.formatTimestamp(ws.statusDate)}
+                                            </p:column>
+															<p:column headerText="Statusi" style="text-align: left">
+                                                #{ws.status}
+                                            </p:column>
+															<p:column headerText="Arsyeja Anullimit" style="text-align: left">
+                                                #{ws.cancelReason}
+                                            </p:column>
+															<p:column headerText="Nr Protokollit" style="text-align: left">
+                                                #{ws.protocolNo}
+                                            </p:column>
+														</p:dataTable>
+											</div>
+
+											<div class="ui-g-12">
+
+												<p:panelGrid layout="grid" columns="1" styleClass="ui-panelgrid-blank">
+													<p:outputLabel value="Shënime" styleClass="bold" />
+													<p:inputTextarea readonly="true" value="#{wp.notes}"
+														rows="4" />
+												</p:panelGrid>
+												</div>
+												</div>
+											</p:tab>
+										</p:tabView>
+									</h:panelGroup>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="ui-g-12 ui-fluid">
+
+						<div class="card title">
+							<h1>Fletë Arresti</h1>
+							<div class="ui-g nopad">
+
+								<div class="ui-g-12 ">
+									<h:panelGroup layout="block"
+										rendered="#{livePersonViewBean.live.arrestWarrants.size() gt 0}"
+										style="width: 100%">
+
+										<p:tabView value="#{livePersonViewBean.live.arrestWarrants}"
+											var="aw">
+											<p:tab title="F.A - #{aw.arrestWarrantNo}">
+											
+											
+											<div class="ui-g">
+											 <div class="ui-g-12">
+											 	<p:panelGrid layout="grid" columns="4" columnClasses="ui-grid-col-2 bold, ui-grid-col-4 empty,ui-grid-col-2 bold,ui-grid-col-4 empty" 
+											 	styleClass="ui-panelgrid-blank">
+											 	  <p:outputLabel value="Nr Fletë Arresti" />
+											 	  <p:inputText readonly="true" value="#{aw.arrestWarrantNo}" />
+													<p:outputLabel value="Gjykata" />
+													<p:inputText readonly="true" value="#{aw.court}" />
+													<p:outputLabel value="Nr Vendimi" />
+													<p:inputText readonly="true" value="#{aw.decisionCourtNo}" />
+													<p:outputLabel value="Datë Vendimi" />													
+													<p:inputText readonly="true"
+														value="#{aw.decisionCourtDate}" />
+
+													<p:outputLabel value="Kategoria" />
+													<p:inputText readonly="true" value="#{aw.category}" />
+													<p:outputLabel value="Struktura kërkuese" />
+													<p:inputText readonly="true" value="#{aw.requestStructure}" />
+													<p:outputLabel value="Tipi Vendimit" />
+													<p:inputText readonly="true" value="#{aw.decisionType}" />
+													<p:outputLabel value="Nr protokollit" />												
+													<p:inputText readonly="true" value="#{aw.protocolNo}" />
+
+													<p:outputLabel value="Masa Sigurise" />
+													<p:inputText readonly="true" value="#{aw.security}" />
+													<p:outputLabel value="Struktura ekzekutuese" />
+													<p:inputText readonly="true" value="#{aw.executiveStructure}" />												
+													
+											 	</p:panelGrid>
+											 </div>
+											 <div class="ui-g-12 ui-md-8">
+											 <p:panelGrid layout="grid" columns="1" styleClass="ui-panelgrid-blank">
+											 <p:outputLabel value="Shënime" styleClass="bold" />
+												<p:inputTextarea readonly="true" value="#{aw.notes}"  rows="4" />
+											 </p:panelGrid>
+											 </div>
+											 <div class="ui-g-12 ui-md-4">
+											   
+											   <br/>
+											   <br/>
+											   
+											   <p:dataTable value="#{aw.arrestStatuses}" var="ws" >
+											<p:column headerText="Data Statusit">
+                                            #{formatBean.formatTimestamp(ws.statusDate)}
+                                        </p:column>
+														<p:column headerText="Statusi">
+                                            #{ws.status}
+                                        </p:column>
+
+													</p:dataTable>
+											   
+											   	
+											   
+											 </div>
+											
+											</div>
+											
+
+											</p:tab>
+										</p:tabView>
+									</h:panelGroup>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-fluid">
+
+						<div class="card title">
+							<h1>Shoqërime nga Policia</h1>
+							<div class="ui-g nopad">
+								<div class="ui-g-12 ">
+									<p:dataTable id="adamTbl"
+										value="#{livePersonViewBean.live.adams}" var="a"
+										rendered="#{livePersonViewBean.live.adams.size() gt 0}"
+										rowIndexVar="r" styleClass="no-border">
+										<p:column headerText="#" style="text-align: left">
+											<p:outputLabel value="#{r+1}" />
+										</p:column>
+										<p:column headerText="Emri Atësia Mbiemri"
+											style="text-align: left">
                             #{a.name} #{a.fatherName} #{a.surname}
                         </p:column>
-                        <p:column headerText="Data" >
+										<p:column headerText="Data" style="text-align: left">
                             #{a.adamDate}
                         </p:column>
-                        <p:column headerText="Vendi ngjarjes" >
+										<p:column headerText="Vendi ngjarjes" style="text-align: left">
                             #{a.adamPlace}
                         </p:column>
-                        <p:column headerText="Oficeri" >
+										<p:column headerText="Oficeri" style="text-align: left">
                             #{a.officer}
                         </p:column>
-                        <p:column headerText="Komenti per ngjarjen" >
+										<p:column headerText="Komenti për ngjarjen"
+											style="text-align: left">
                             #{a.comment}
                         </p:column>
 
 
 
 
-                    </p:dataTable>
-		</p:panel>
-	
-	</div>	
-					
+									</p:dataTable>
+								</div>
+							</div>
+						</div>
+					</div>
+
 
 				</h:panelGroup>
+				
 			</div>
 		</h:panelGroup>
 	</h:form>
-	</ui:composition>
+</ui:composition>

@@ -52,7 +52,20 @@ public class LiveRaportApi {
 	public ResponseEntity<?> pendingRequests()
 	{
 		
-		List<LiveRaportDTO> list = new Assembler().liveRaportToDto(service.getLiveRaportRequests());
+		List<LiveRaportDTO> list = new Assembler().liveRaportToDto(service.getLivePendingRequests());
+		if(list == null || list.isEmpty())
+		{
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<>(list,HttpStatus.OK);
+	}
+	
+	
+	@RequestMapping(value="/lastRequests", method=RequestMethod.GET, produces={"application/json"})
+	public ResponseEntity<?> lastRequests()
+	{
+		
+		List<LiveRaportDTO> list = new Assembler().liveRaportToDto(service.getLastLiveRequests());
 		if(list == null || list.isEmpty())
 		{
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);

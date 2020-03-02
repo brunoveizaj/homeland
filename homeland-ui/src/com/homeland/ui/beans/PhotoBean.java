@@ -64,7 +64,7 @@ public class PhotoBean {
 		
 		String nid = ctx.getExternalContext().getRequestParameterMap().get("p_nid");
 		PhotoRequest req = new PhotoRequest(nid);
-		PhotoDTO image = new DocumentService().getDocumentPhoto(req);
+		PhotoDTO image = new DocumentService().getPersonPhoto(req);
 		byte[] imgByte;
 		if(image == null)
 		{

@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<h:form id="dashboard_form">
+
+		<div class="ui-g dashboard">
+			
+			
+			<div class="ui-g-12">
+			
+				<div class="ui-g ui-fluid">
+				
+					<div class="ui-g-12">
+						<p:dataTable  var="i" rowIndexVar="r" paginator="true" paginatorAlwaysVisible="false"
+						rows="20" rowsPerPageTemplate="5,10,20,50">
+							<f:facet name="header">Kërkesat</f:facet>
+							<p:column headerText="#">#{r+1}</p:column>
+							<p:column headerText="Tipi">
+							<h:outputText value="" styleClass="bold"/></p:column>
+							<p:column headerText="ID Key"></p:column>
+							<p:column headerText="Entiteti"></p:column>
+							<p:column headerText="Kërkesës"></p:column>
+							<p:column headerText="Përgjigja"></p:column>
+							<p:column headerText="User"></p:column>
+							<p:column headerText="Statusi"></p:column>
+						</p:dataTable>
+					</div>
+					
+					
+					
+				
+				</div>
+			
+			</div>
+			
+			
+			
+			
+			
+
+		</div>
+
+	</h:form>
+
+</ui:composition>

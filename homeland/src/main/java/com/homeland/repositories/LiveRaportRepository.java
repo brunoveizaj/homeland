@@ -85,8 +85,13 @@ public class LiveRaportRepository {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<LiveRaport> getLiveRaportRequests() {
+	public List<LiveRaport> getLivePendingRequests() {
 		return em.createQuery("FROM LiveRaport l WHERE l.status=:status ").setParameter("status", ILiveRaport.PENDING).getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<LiveRaport> getLastLiveRaportRequests() {
+		return em.createQuery("FROM LiveRaport l order by l.requestDate DESC ").setMaxResults(200).getResultList();
 	}
 	
 	

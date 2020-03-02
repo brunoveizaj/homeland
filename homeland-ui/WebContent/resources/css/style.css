@@ -10,6 +10,10 @@
 }
 */
 
+.no-header thead {
+    display:none;
+}
+
 body .ui-datatable .ui-datatable-data > tr.ui-state-highlight.ui-state-hover {
    background-color: #3984b8;
 }
@@ -33,10 +37,13 @@ body .ui-panel .ui-panel-content
 	*/
 }
 
-.no-border table tbody tr td, .no-border .ui-widget-content,.no-border table thead th,.no-border table tfoot td, .no-border table tfoot th
+.no-border table tbody tr td, .no-border .ui-widget-content,.no-border table thead th,.no-border table tfoot td, .no-border table tfoot th,
+ .no-border .ui-paginator.ui-paginator-top, .no-border .ui-paginator.ui-paginator-bottom
 {
     border: 0 !important;
 }
+
+
 
 .ui-inputtext:disabled
 {
@@ -167,4 +174,41 @@ body .ui-paginator {
 .green-row
 {
 	background-color: #90e89b !important;
+}
+
+.alert {
+    padding: 15px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+.alert-info {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+}
+.alert-warning {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+}
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+h1 {
+	font-weight: bold !important;
+    border-bottom: 1px solid #57c4d0 !important;
+    /*position: absolute; /* As I've said, adding this allowed me to do so, but the result was far from ideal! */
+}
+
+.title {
+	
+    border-bottom: 1px solid #dedede !important;
 }

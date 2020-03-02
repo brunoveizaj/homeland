@@ -202,5 +202,29 @@ public class CardRepository {
 	}
 	
 	
-	
+	public HashMap<String, String> getPersonLastDocNo(String nid)
+	{
+		String sql = "(Select idc,issue_date,'C' as \"typ\" FROM card where nid='"+StringUtil.formatSQ(nid)+"' order by issue_date desc limit 1) "
+				+ "union "
+				+ "(Select idp,issue_date,'P' as \"typ\" FROM passport where nid='"+StringUtil.formatSQ(nid)+"' order by issue_date desc limit 1) "
+						+ "ORDER BY 2 DESC limit 1";
+		
+		List<Object[]> list = em.createNativeQuery(sql).getResultList();
+		
+		if(list != null && !list.isEmpty())
+		{
+			Object[] obj = list.get(0);
+			
+			HashMap<String,String> map = new HashMap<String, String>();
+			
+			map.put("idn", (String)obj[0]);
+			map.put("type", (String)obj[2]);
+			
+			return map;
+		}
+		
+		return null;
+		
+				
+	}
 }

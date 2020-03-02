@@ -61,7 +61,7 @@ public class ApiExceptionHandler {
     protected ResponseEntity<?> handleException(Exception ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
     	List<String> errors = Collections.singletonList(ex.getMessage());
         
-        System.out.println("********* ASP EXCEPTION (HANDLER) ************\n"+ex.getMessage()+"\n"+errors);
+        System.out.println("********* HL EXCEPTION (HANDLER) ************\n"+ex.getMessage()+"\n"+errors);
         
         return handleExceptionInternal(ex, new ApiException("Gabim i brendshem ",status.value(),4,"HL_EXCEPTION",errors), headers, status, request);
     }

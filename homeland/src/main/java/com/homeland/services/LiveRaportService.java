@@ -96,7 +96,7 @@ public class LiveRaportService {
 			r.setCanAskRequest(false);
 			r.setDataJson(completedRaport == null ? null : completedRaport.getDataJson());
 			r.setDisplayMessage("Kerkesa eshte ne pritje...!");
-			r.setHasData(completedRaport == null);
+			r.setHasData(completedRaport != null);
 			r.setLastRaportId(lastRaport.getId());
 			r.setLastRaportStatus(lastRaport.getStatus());
 			r.setLastRequestDate(lastRaport.getRequestTime());
@@ -129,7 +129,7 @@ public class LiveRaportService {
 			r.setCanAskRequest(true);
 			r.setDataJson(completedRaport == null ? null : completedRaport.getDataJson());
 			r.setDisplayMessage("Kerkesa e fundit eshte anulluar...! Beni kerkese per marrjen e te dhenave LIVE!");
-			r.setHasData(completedRaport == null);
+			r.setHasData(completedRaport != null);
 			r.setLastRaportId(lastRaport.getId());
 			r.setLastRaportStatus(lastRaport.getStatus());
 			r.setLastRequestDate(lastRaport.getRequestTime());
@@ -144,11 +144,15 @@ public class LiveRaportService {
 	
 	
 	
-	public List<LiveRaport> getLiveRaportRequests()
+	public List<LiveRaport> getLivePendingRequests()
 	{
-		return liveRaportDAO.getLiveRaportRequests();
+		return liveRaportDAO.getLivePendingRequests();
 	}
 	
+	public List<LiveRaport> getLastLiveRequests()
+	{
+		return liveRaportDAO.getLastLiveRaportRequests();
+	}
 	
 	
 	

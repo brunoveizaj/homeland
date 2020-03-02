@@ -1,5 +1,6 @@
 package com.homeland.services;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -102,8 +103,23 @@ public class DocumentService {
 
 	public PhotoDTO getPersonPhoto(PhotoRequest req, Integer userId) {
 		
-		return null;
+		HashMap<String, String> map = cardDAO.getPersonLastDocNo(req.getNid());
 		
+		if(map == null) return null;
+		
+		PhotoRequest r = null;
+		if(map.get("type").equals("P"))
+		{
+			r = new PhotoRequest(map.get("idn"), IDocument.PASSPORT);
+		}
+		
+		else if(map.get("type").equals("C"))
+		{
+			r = new PhotoRequest(map.get("idn"), IDocument.CARD);
+		}
+		else return null;
+		
+		return getDocumentPhoto(r, userId);
 	}
 	
 	
