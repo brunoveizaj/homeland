@@ -643,7 +643,7 @@
 							<div class="ui-g nopad">
 
 								<div class="ui-g-12 ">
-									<p:dataTable id="komTbl"
+									<p:dataTable id="komTbl" reflow="true"
 										value="#{livePersonViewBean.live.dailyCommunications}" var="k"
 										rendered="#{livePersonViewBean.live.dailyCommunications.size() gt 0}"
 										rowIndexVar="r" styleClass="no-border">
@@ -841,7 +841,7 @@
 							<h1>Shoqërime nga Policia</h1>
 							<div class="ui-g nopad">
 								<div class="ui-g-12 ">
-									<p:dataTable id="adamTbl"
+									<p:dataTable id="adamTbl" reflow="true"
 										value="#{livePersonViewBean.live.adams}" var="a"
 										rendered="#{livePersonViewBean.live.adams.size() gt 0}"
 										rowIndexVar="r" styleClass="no-border">
